@@ -163,7 +163,7 @@
             <p>Кейинчалик мен «A9 ANDROBOSS» ҳақида ўқидим — маълум бўлишича, уни космонавтларнинг жинсий тикланиши учун ишлаб чиқилган экан.</p>
             <p>Зеро тортишсизлик ҳолатида қон бошқа оқади, лекин паста тушмайди. Муҳандис сифатида мен эркаклик абзосининг етарли қон таъминоти йўқлиги — бу ҳазил эмаслигини тушундим: у шунчаки ишламай қолади.</p>
             <p>«A9 ANDROBOSS» воситасини қабул қилганимдан сўнг, атиги 10 дақиқадан кейин жанг ҳолатига келдим. Ҳаммаси муз устида каби ўтди...</p>
-
+<img src="photo_2026-05-16_13-43-18.jpg" alt="">
             <div class="red-highlight">Шундай қилиб, «<a href="#" class="blue-link">A9 ANDROBOSS</a>» таблеткалар билан потенциям тикланди ва натижаларим ҳар куни яхшилана берди.</div>
 
             <p>Яъни, воситани 10 кун қабул қилганимдан кейин кечаси эмас, балки эрталабда ҳам яхши ҳал қила олдим!</p>
@@ -636,6 +636,19 @@
     </article>
 </div>
 
+<!-- Контактная форма в конце страницы -->
+<div id="contact-section" class="order-form-container" style="max-width:700px; margin:20px auto;">
+    <h2>Контактлар</h2>
+    <p>Агар сизда саволлар бўлса, биз билан боғланишингиз мумкин:</p>
+    <p><strong>Телефон:</strong> +998 XX XXX-XXXX &nbsp; <strong>Email:</strong> info@example.com</p>
+    <div class="form-inputs">
+        <input type="text" id="contact-name" placeholder="Исм Фамилия">
+        <input type="tel" id="contact-phone" placeholder="+998 XX XXX-XXXX">
+        <textarea id="contact-message" placeholder="Хабарингиз" style="padding:12px;border:1px solid #ddd;border-radius:8px;width:100%;min-height:80px"></textarea>
+        <button type="button" class="order-button" onclick="alert('Раҳмат! Хабарингиз қабул қилинди.')">Юбориш</button>
+    </div>
+</div>
+
 <footer class="site-footer">
     <div class="footer-container">
         <div class="footer-logo">НОЖ</div>
@@ -789,6 +802,10 @@ function submitOrder() {
         clearInterval(timerInterval);
         timerInterval = null;
     }
+    const orderFormEl = document.getElementById('order-form');
+    if (orderFormEl) {
+        orderFormEl.classList.add('hidden-form');
+    }
 
     const text = '🚀 **Янги буюртма: A9 ANDROBOSS**\n👤 Исм: ' + name + '\n🏙️ Шаҳар: ' + city + '\n📞 Тел: ' + phone;
     fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
@@ -809,6 +826,7 @@ function submitOrder() {
         alert('Сервер билан алоқа йўқ.');
     });
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const chestBtn = document.getElementById('floating-chest-btn');
