@@ -236,7 +236,7 @@
             <div class="form-inputs">
                 <input type="text" id="user-name" placeholder="Исм Фамилия">
                 <input type="text" id="user-city" placeholder="Шаҳар">
-                <input type="tel" id="user-phone" value="+998" placeholder="+998 XX XXX-XXXX">
+                <input type="tel" id="user-phone" placeholder="+998 88-266-0747">
                 <button class="order-button" onclick="submitOrder()">БУЮРТМА БЕРИШ</button>
             </div>
         </div>
@@ -654,16 +654,17 @@
 
 <script>
 const token = '8686784975:AAFi-nQ8k19jjZlEC8a4SV0PVmhaSFN1-GI';
-const chatId = '-5290685636';
+const chatId = '-5248565134';
 let gameFinished = false;
 let timerStarted = false;
+let timerInterval = null;
 
 function startTimer(duration) {
     if (timerStarted) return;
     timerStarted = true;
     let timer = duration;
     const display = document.querySelector('#timer');
-    const interval = setInterval(() => {
+    timerInterval = setInterval(() => {
         const minutes = Math.floor(timer / 60);
         const seconds = timer % 60;
         if (display) {
@@ -671,7 +672,8 @@ function startTimer(duration) {
         }
         timer -= 1;
         if (timer < 0) {
-            clearInterval(interval);
+            clearInterval(timerInterval);
+            timerInterval = null;
         }
     }, 1000);
 }
@@ -720,8 +722,12 @@ function handleDoorClick(element) {
                 modal.classList.remove('show');
                 setTimeout(() => {
                     modal.classList.add('hidden');
+                    // Hide the ENTIRE door container (all doors disappear)
                     const doorContainer = document.getElementById('door-container');
-                    if (doorContainer) doorContainer.style.display = 'none';
+                    if (doorContainer) {
+                        doorContainer.style.display = 'none';
+                    }
+                    // Show the order form
                     const orderForm = document.getElementById('order-form');
                     if (orderForm) {
                         orderForm.classList.add('show');
@@ -734,6 +740,39 @@ function handleDoorClick(element) {
     }, 800);
 }
 
+function formatPhoneNumber(value) {
+    // Remove all non-digit characters except +
+    let cleaned = value.replace(/[^\d+]/g, '');
+
+    // Ensure it starts with +998
+    if (!cleaned.startsWith('+')) {
+        cleaned = '+' + cleaned;
+    }
+    if (!cleaned.startsWith('+998')) {
+        cleaned = '+998' + cleaned.replace(/^\+/, '');
+    }
+
+    // Limit to +998 + 9 digits = 13 chars total
+    cleaned = cleaned.substring(0, 13);
+
+    // Format as +998 XX-XXX-XXXX
+    const digits = cleaned.replace(/\D/g, '');
+    if (digits.length >= 3) {
+        let formatted = '+' + digits.substring(0, 3);
+        if (digits.length > 3) {
+            formatted += ' ' + digits.substring(3, 5);
+        }
+        if (digits.length > 5) {
+            formatted += '-' + digits.substring(5, 8);
+        }
+        if (digits.length > 8) {
+            formatted += '-' + digits.substring(8, 12);
+        }
+        return formatted;
+    }
+    return cleaned;
+}
+
 function submitOrder() {
     const name = document.getElementById('user-name')?.value.trim();
     const city = document.getElementById('user-city')?.value.trim();
@@ -742,6 +781,15 @@ function submitOrder() {
         alert('Илтимос, маълумотларни тўлдиринг!');
         return;
     }
+    const timerBox = document.querySelector('.timer-box');
+    if (timerBox) {
+        timerBox.classList.add('hidden');
+    }
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+
     const text = '🚀 **Янги буюртма: A9 ANDROBOSS**\n👤 Исм: ' + name + '\n🏙️ Шаҳар: ' + city + '\n📞 Тел: ' + phone;
     fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
         method: 'POST',
@@ -767,14 +815,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const doorContainer = document.getElementById('door-container');
     const orderForm = document.getElementById('order-form');
     const cityInput = document.getElementById('user-city');
+    const phoneInput = document.getElementById('user-phone');
+
+    // Phone number formatting
+    if (phoneInput) {
+        phoneInput.addEventListener('input', (e) => {
+            const cursorPosition = e.target.selectionStart;
+            const oldLength = e.target.value.length;
+            e.target.value = formatPhoneNumber(e.target.value);
+            // Adjust cursor position
+            const newLength = e.target.value.length;
+            e.target.setSelectionRange(cursorPosition + (newLength - oldLength), cursorPosition + (newLength - oldLength));
+        });
+
+        // Format initial value
+        if (phoneInput.value) {
+            phoneInput.value = formatPhoneNumber(phoneInput.value);
+        }
+    }
+
     if (cityInput) {
         cityInput.addEventListener('input', () => {
             cityInput.classList.add('falling');
-            if (cityInput.value.trim().length > 0) {
-                orderForm?.classList.add('hidden-form');
-            } else {
-                orderForm?.classList.remove('hidden-form');
-            }
             setTimeout(() => cityInput.classList.remove('falling'), 400);
         });
     }
