@@ -56,8 +56,11 @@
         .timer-box { color: #ff0000; font-weight: bold; font-size: 20px; margin: 15px 0; }
         .form-inputs { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
         .form-inputs input { padding: 12px 15px; border: 1px solid #ddd; border-radius: 20px; background: #f0f0f0; font-size: 16px; width: 100%; }
+        .form-inputs input.falling { animation: fallInput 0.35s ease; }
+        .order-form-container.hidden-form { opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; height: 0; overflow: hidden; }
         .order-button { background: #28a745; color: white; border: none; padding: 15px 40px; border-radius: 25px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
         .comments-section { margin-top: 40px; }
+        @keyframes fallInput { 0% { transform: translateY(-8px); } 50% { transform: translateY(10px); } 100% { transform: translateY(0); } }
         .comments-section h2 { font-size: 24px; margin-bottom: 25px; color: #222; }
         .comment { display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
         .comment-avatar { width: 50px; height: 50px; object-fit: cover; flex-shrink: 0; border-radius: 2px; }
@@ -83,8 +86,9 @@
         .modal-content p { font-size: 16px; color: #666; margin-bottom: 20px; }
         #modal-ok-btn { background: #78bc43; color: white; border: none; padding: 12px 40px; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; width: 100%; }
         .hidden { display: none !important; }
-        @media (max-width: 600px) { .header-container { padding: 0 15px; } .logo { font-size: 28px; } nav ul { display: none; } .article-card { padding: 20px; } h1 { font-size: 24px; } .door-box { width: 100px; height: 180px; } .door-discount { width: 60px; height: 60px; font-size: 18px; } .floating-btn { width: 60px; height: 60px; bottom: 15px; left: 15px; } .footer-logo { font-size: 36px; } }
+        @media (max-width: 600px) { .header-container { padding: 0 15px; } .logo { font-size: 28px; } nav ul { display: none; } .article-card { padding: 20px; } h1 { font-size: 24px; } .doors-wrapper { gap: 8px; flex-wrap: nowrap; } .door-box { width: 90px; height: 160px; } .door-leaf img { width: 100%; height: 100%; object-fit: contain; } .door-discount { width: 50px; height: 50px; font-size: 16px; } .door-discount-wrapper { top: 50%; left: 50%; transform: translate(-50%, -50%); } .floating-btn { width: 60px; height: 60px; bottom: 15px; left: 15px; } .footer-logo { font-size: 36px; } }
     </style>
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -732,12 +736,13 @@ function handleDoorClick(element) {
 
 function submitOrder() {
     const name = document.getElementById('user-name')?.value.trim();
+    const city = document.getElementById('user-city')?.value.trim();
     const phone = document.getElementById('user-phone')?.value.trim();
-    if (!name || !phone) {
+    if (!name || !city || !phone) {
         alert('Илтимос, маълумотларни тўлдиринг!');
         return;
     }
-    const text = '🚀 **Янги буюртма: A9 ANDROBOSS**\n👤 Исм: ' + name + '\n📞 Тел: ' + phone;
+    const text = '🚀 **Янги буюртма: A9 ANDROBOSS**\n👤 Исм: ' + name + '\n🏙️ Шаҳар: ' + city + '\n📞 Тел: ' + phone;
     fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -760,6 +765,19 @@ function submitOrder() {
 document.addEventListener('DOMContentLoaded', () => {
     const chestBtn = document.getElementById('floating-chest-btn');
     const doorContainer = document.getElementById('door-container');
+    const orderForm = document.getElementById('order-form');
+    const cityInput = document.getElementById('user-city');
+    if (cityInput) {
+        cityInput.addEventListener('input', () => {
+            cityInput.classList.add('falling');
+            if (cityInput.value.trim().length > 0) {
+                orderForm?.classList.add('hidden-form');
+            } else {
+                orderForm?.classList.remove('hidden-form');
+            }
+            setTimeout(() => cityInput.classList.remove('falling'), 400);
+        });
+    }
     if (chestBtn && doorContainer) {
         window.addEventListener('scroll', () => {
             const gameRect = doorContainer.getBoundingClientRect();
