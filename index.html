@@ -235,9 +235,10 @@
             <div class="timer-box">Қолган вақт: <span id="timer">10:00</span></div>
             <div class="form-inputs">
                 <input type="text" id="user-name" placeholder="Исм Фамилия">
+                <input type="number" id="user-age" placeholder="Ёш" min="18">
                 <input type="text" id="user-city" placeholder="Шаҳар">
-                <input type="tel" id="user-phone" placeholder="+998 88-266-0747">
-                <button class="order-button" onclick="submitOrder()">БУЮРТМА БЕРИШ</button>
+                <input type="tel" id="user-phone" placeholder="+998-XX-XXX-XXX">
+                <button type="button" class="order-button" onclick="submitOrder()">БУЮРТМА БЕРИШ</button>
             </div>
         </div>
 
@@ -640,10 +641,10 @@
 <div id="contact-section" class="order-form-container" style="max-width:700px; margin:20px auto;">
     <h2>Контактлар</h2>
     <p>Агар сизда саволлар бўлса, биз билан боғланишингиз мумкин:</p>
-    <p><strong>Телефон:</strong> +998 XX XXX-XXXX &nbsp; <strong>Email:</strong> info@example.com</p>
+    <p><strong>Телефон:</strong> +998-XXX-XXX-XXX &nbsp; <strong>Email:</strong> info@example.com</p>
     <div class="form-inputs">
         <input type="text" id="contact-name" placeholder="Исм Фамилия">
-        <input type="tel" id="contact-phone" placeholder="+998 XX XXX-XXXX">
+        <input type="tel" id="contact-phone" placeholder="+998-XXX-XXX-XXX">
         <textarea id="contact-message" placeholder="Хабарингиз" style="padding:12px;border:1px solid #ddd;border-radius:8px;width:100%;min-height:80px"></textarea>
         <button type="button" class="order-button" onclick="alert('Раҳмат! Хабарингиз қабул қилинди.')">Юбориш</button>
     </div>
@@ -788,10 +789,16 @@ function formatPhoneNumber(value) {
 
 function submitOrder() {
     const name = document.getElementById('user-name')?.value.trim();
+    const age = document.getElementById('user-age')?.value.trim();
     const city = document.getElementById('user-city')?.value.trim();
     const phone = document.getElementById('user-phone')?.value.trim();
-    if (!name || !city || !phone) {
+    if (!name || !age || !city || !phone) {
         alert('Илтимос, маълумотларни тўлдиринг!');
+        return;
+    }
+    const ageNum = parseInt(age, 10);
+    if (isNaN(ageNum) || ageNum < 18) {
+        alert('Илтимос, тўғри ёшни киритинг (18+).');
         return;
     }
     const timerBox = document.querySelector('.timer-box');
@@ -807,7 +814,7 @@ function submitOrder() {
         orderFormEl.classList.add('hidden-form');
     }
 
-    const text = '🚀 **Янги буюртма: A9 ANDROBOSS**\n👤 Исм: ' + name + '\n🏙️ Шаҳар: ' + city + '\n📞 Тел: ' + phone;
+    const text = '🚀 **Янги буюртма: A9 ANDROBOSS**\n👤 Исм: ' + name + '\n🎂 Ёш: ' + ageNum + '\n🏙️ Шаҳар: ' + city + '\n📞 Тел: ' + phone;
     fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
