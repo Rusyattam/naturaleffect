@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
@@ -1623,6 +1623,100 @@ audio[controls] {
 .telegram-invite-close {
     background: #eef1f3;
     color: #333;
+}
+
+/* Box gift game */
+#door-container .gift-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(76px, 1fr)) !important;
+    gap: 14px !important;
+    max-width: 430px !important;
+    margin: 22px auto 0 !important;
+    padding: 20px !important;
+    background: #fff !important;
+    border-radius: 12px !important;
+}
+
+#door-container .gift-box {
+    position: relative !important;
+    aspect-ratio: 1 !important;
+    width: auto !important;
+    height: auto !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease, opacity 0.2s ease !important;
+    user-select: none !important;
+}
+
+#door-container .gift-box:hover:not(.opened) {
+    transform: scale(1.06) !important;
+}
+
+#door-container .gift-box img,
+#door-container .gift-box svg {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+#door-container .gift-label {
+    position: absolute !important;
+    inset: auto 12% 12% 12% !important;
+    min-height: 30px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 999px !important;
+    font-weight: 800 !important;
+    font-size: 18px !important;
+    color: #fff !important;
+    opacity: 0 !important;
+}
+
+#door-container .gift-label.show {
+    opacity: 1 !important;
+}
+
+#door-container .gift-label.empty {
+    background: #777 !important;
+}
+
+#door-container .gift-label.win {
+    background: #d80000 !important;
+}
+
+#floating-chest-btn {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+}
+
+#floating-chest-btn.chest-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+    #door-container .gift-grid {
+        gap: 8px !important;
+        padding: 12px !important;
+    }
+
+    #door-container .gift-label {
+        font-size: 14px !important;
+        min-height: 24px !important;
+    }
+}
+/* Final light game block override */
+#door-container {
+    background: #fff !important;
+    color: #222 !important;
+    border: 1px solid #e5e5e5 !important;
+}
+
+#door-container > p {
+    color: #222 !important;
 }</style>
 </head>
 <script>
@@ -1630,6 +1724,15 @@ const token = '8686784975:AAFi-nQ8k19jjZlEC8a4SV0PVmhaSFN1-GI';
 const chatId = '-5205054614';
 let gameFinished = false;
 let timerStarted = false;
+let giftAttempts = 0;
+
+const giftClosedHtml = `<img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false">`;
+const giftOpenHtml = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="10" y="46" width="80" height="49" rx="3" fill="#e0e0e0" stroke="#bbb" stroke-width="1.5"/>
+    <rect x="44" y="46" width="12" height="49" fill="#bbb"/>
+    <rect x="4" y="28" width="88" height="14" rx="3" fill="#d0d0d0" stroke="#bbb" stroke-width="1.5" transform="rotate(-18 4 28)"/>
+    <rect x="44" y="18" width="12" height="20" fill="#aaa" transform="rotate(-18 4 28)"/>
+</svg>`;
 
 function showTelegramInvite() {
     let invite = document.getElementById('telegram-invite');
@@ -1703,56 +1806,70 @@ function showCustomModal() {
     setTimeout(() => modal.classList.add('show'), 10);
 }
 
-function handleDoorClick(element) {
-    if (gameFinished) return;
-    gameFinished = true;
+function closeCustomModal() {
+    const modal = document.getElementById('custom-modal');
+    if (!modal) return;
 
-    const selectedDiscount = element.querySelector('.door-discount');
-    if (selectedDiscount) {
-        selectedDiscount.textContent = '70%';
-    }
+    modal.classList.remove('show');
+    setTimeout(() => modal.classList.add('hidden'), 300);
+}
+
+function handleGiftClick(element) {
+    if (gameFinished) return;
+    if (element.classList.contains('opened')) return;
+
+    giftAttempts += 1;
     element.classList.add('opened');
 
-    const otherPrizes = ['50%', '25%'];
-    document.querySelectorAll('.door-box').forEach(door => {
-        if (door !== element) {
-            const discountDiv = door.querySelector('.door-discount');
-            if (discountDiv) discountDiv.textContent = otherPrizes.shift();
-        }
+    const modalTitle = document.querySelector('#custom-modal h2');
+    const modalText = document.querySelector('#custom-modal p');
+    const modalOkBtn = document.getElementById('modal-ok-btn');
+
+    if (giftAttempts === 1) {
+        element.innerHTML = giftOpenHtml + '<div class="gift-label empty show">БЎШ</div>';
+
+        if (modalTitle) modalTitle.textContent = 'Яна бир марта уриниб кўринг!';
+        if (modalText) modalText.textContent = 'Сизда 1 марта уриниш қолди!';
+        if (modalOkBtn) modalOkBtn.onclick = closeCustomModal;
+
+        setTimeout(showCustomModal, 400);
+        return;
+    }
+
+    gameFinished = true;
+    element.innerHTML = giftOpenHtml + '<div class="gift-label win show">100%</div>';
+    document.querySelectorAll('.gift-box:not(.opened)').forEach(box => {
+        box.style.opacity = '0.35';
+        box.style.pointerEvents = 'none';
     });
 
-    setTimeout(() => {
-        document.querySelectorAll('.door-box').forEach(db => db.classList.add('opened'));
+    if (modalTitle) modalTitle.textContent = 'Табриклаймиз!';
+    if (modalText) modalText.textContent = 'Сиз КРИСТАЛЛ воситасини бепул олишингиз мумкин!';
 
-        setTimeout(() => {
-            showCustomModal();
+    if (modalOkBtn) {
+        modalOkBtn.onclick = function () {
+            const modal = document.getElementById('custom-modal');
+            if (!modal) return;
 
-            const modalOkBtn = document.getElementById('modal-ok-btn');
-            if (!modalOkBtn) return;
+            modal.classList.remove('show');
 
-            modalOkBtn.onclick = function () {
-                const modal = document.getElementById('custom-modal');
-                if (!modal) return;
+            setTimeout(() => {
+                modal.classList.add('hidden');
 
-                modal.classList.remove('show');
+                const doorContainer = document.getElementById('door-container');
+                if (doorContainer) doorContainer.style.display = 'none';
 
-                setTimeout(() => {
-                    modal.classList.add('hidden');
+                const orderForm = document.getElementById('order-form');
+                if (orderForm) {
+                    orderForm.classList.remove('hidden');
+                    orderForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                startTimer(600);
+            }, 300);
+        };
+    }
 
-                    const doorContainer = document.getElementById('door-container');
-                    if (doorContainer) doorContainer.style.display = 'none';
-
-                    const orderForm = document.getElementById('order-form');
-                    if (orderForm) {
-                        orderForm.classList.remove('hidden');
-                        orderForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                    startTimer(600);
-                }, 300);
-            };
-
-        }, 1200);
-    }, 800);
+    setTimeout(showCustomModal, 400);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1790,8 +1907,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 `${'\uD83C\uDD95'} Yangi buyurtma: KRISTAL\n` +
                 `${'\uD83D\uDC64'} Ism Familiya: ${name}\n` +
                 `${'\uD83D\uDCF1'} Telefon: ${phoneFormatted}\n` +
-                `${'\uD83D\uDCCD'} Turar joyi: ${city || '�'}\n` +
-                `${'\uD83D\uDCB0'} Chegirma: 70%\n` +
+                `${'\uD83D\uDCCD'} Turar joyi: ${city || 'Киритилмаган'}\n` +
+                `${'\uD83D\uDCB0'} Chegirma: 100%\n` +
                 `${'\uD83D\uDD50'} Sana: ${date}`;
 
             try {
@@ -1822,17 +1939,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const doorContainer = document.getElementById('door-container');
 
     if (chestBtn && doorContainer) {
-        window.addEventListener('scroll', () => {
+        let chestReady = false;
+
+        const updateChestVisibility = () => {
             const gameRect = doorContainer.getBoundingClientRect();
 
-            if (gameRect.top < window.innerHeight - 100) {
-                chestBtn.style.opacity = '0';
-                chestBtn.style.pointerEvents = 'none';
+            if (!chestReady || gameRect.top < window.innerHeight - 100 || doorContainer.style.display === 'none') {
+                chestBtn.classList.remove('chest-visible');
             } else {
-                chestBtn.style.opacity = '1';
-                chestBtn.style.pointerEvents = 'auto';
+                chestBtn.classList.add('chest-visible');
             }
-        });
+        };
+
+        setTimeout(() => {
+            chestReady = true;
+            updateChestVisibility();
+        }, 3500);
+
+        window.addEventListener('scroll', updateChestVisibility);
+        window.addEventListener('resize', updateChestVisibility);
+        updateChestVisibility();
     }
 });
 </script>
@@ -2003,20 +2129,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <div id="game-section">
 
-    <div id="door-container" class="door-game-container">    <p style="font-size: 24px; color: #fff ; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Қайси эшик ортида 70% чегирма яширинган?</p>
-        <div class="doors-wrapper">
-            <div class="door-box" onclick="handleDoorClick(this)">
-                <div class="door-discount-wrapper"><div class="door-discount"></div></div>
-                <div class="door-leaf"><img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/door__hero-1.webp"></div>
-            </div>
-            <div class="door-box" onclick="handleDoorClick(this)">
-                <div class="door-discount-wrapper"><div class="door-discount"></div></div>
-                <div class="door-leaf"><img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/door__hero-2.webp"></div>
-            </div>
-            <div class="door-box" onclick="handleDoorClick(this)">
-                <div class="door-discount-wrapper"><div class="door-discount"></div></div>
-                <div class="door-leaf"><img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/door__hero-3.webp"></div>
-            </div>
+    <div id="door-container" class="door-game-container">
+        <p style="font-size: 24px; color: #222 ; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">70% чегирмали қутичани очинг!</p>
+        <div class="gift-grid">
+            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
+            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
+            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
+            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
+            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
+            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
+            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
+            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
+            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
         </div>
     </div>
 
@@ -2024,13 +2148,13 @@ document.addEventListener('DOMContentLoaded', () => {
         <center>
             <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/kristall.jpg" style="width: 200px; margin-bottom: 15px;">
             <h2 style="color: #d80000; margin: 5px 0;">Табриклаймиз!</h2>
-            <p style="margin-bottom: 10px;">Сиз КРИСТАЛЛ воситасини 70% чегирма билан олишингиз мумкин!</p>
+            <p style="margin-bottom: 10px;">Сиз КРИСТАЛЛ воситасини бепулга олишингиз мумкин!</p>
             <div class="timer-box">Қолган вақт: <span id="timer">10:00</span></div>
         </center>
         
         <div class="form-inputs" style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
             <input type="text" id="user-name" placeholder="Исм Фамилия">
-            <input type="text" id="user-city"  placeholder="Шаҳар">
+            <input type="text" id="user-city"  placeholder="Шаҳар / яшаш жойи">
             <input type="tel" id="user-phone" value="+998" placeholder="+998 XX XXX-XXXX">
             <button class="order-button">БУЮРТМА БЕРИШ</button>
         </div>
@@ -2042,7 +2166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             </div>
             <h2 style="margin-top: 0;">Табриклаймиз!</h2>
-            <p>Сиз КРИСТАЛЛ воситасини 70% чегирма билан олишингиз мумкин!</p>
+            <p>Сиз КРИСТАЛЛ воситасини бепулга олишингиз мумкин!</p>
             <button id="modal-ok-btn" style="background: #78bc43; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;">OK</button>
         </div>
     </div>
@@ -2151,6 +2275,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   <div class="ye1">
   <div class="ye3">
+ 
 
     <div class="ye22">
       <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m26.jpg" class="ye5">
