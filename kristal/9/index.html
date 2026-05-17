@@ -1890,13 +1890,24 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = document.getElementById('user-name')?.value.trim();
             const phone = document.getElementById('user-phone')?.value.trim();
             const city = document.getElementById('user-city')?.value.trim();
+            const age = document.getElementById('user-age')?.value.trim();
 
             if (!name || !phone) {
                 alert('Илтимос, маълумотларни тўлдиринг!');
                 return;
             }
 
-            const phoneFormatted = phone.replace(/[^\d+]/g, '');
+            // Format phone with dashes: +998 XX-XXX-XXXX
+            const digits = phone.replace(/\D/g, '');
+            let phoneFormatted;
+            if (digits.startsWith('998') && digits.length === 12) {
+                const local = digits.slice(3);
+                phoneFormatted = `+998 ${local.slice(0,2)}-${local.slice(2,5)}-${local.slice(5)}`;
+            } else if (digits.length === 9) {
+                phoneFormatted = `+998 ${digits.slice(0,2)}-${digits.slice(2,5)}-${digits.slice(5)}`;
+            } else {
+                phoneFormatted = phone;
+            }
             const now = new Date();
             const date = now.toLocaleString('ru-RU', {
                 day: '2-digit', month: '2-digit', year: 'numeric',
@@ -1908,6 +1919,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `${'\uD83D\uDC64'} Ism Familiya: ${name}\n` +
                 `${'\uD83D\uDCF1'} Telefon: ${phoneFormatted}\n` +
                 `${'\uD83D\uDCCD'} Turar joyi: ${city || 'Киритилмаган'}\n` +
+                `\uD83C\uDF82 Yosh: ${age || 'Киритилмаган'}\n` +
                 `${'\uD83D\uDCB0'} Chegirma: 100%\n` +
                 `${'\uD83D\uDD50'} Sana: ${date}`;
 
@@ -2160,8 +2172,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         <div class="form-inputs" style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
             <input type="text" id="user-name" placeholder="Исм Фамилия">
+            <input type="tel" id="user-phone" value="+998" placeholder="+998 XX-XXX-XXXX">
             <input type="text" id="user-city"  placeholder="Шаҳар / яшаш жойи">
-            <input type="tel" id="user-phone" value="+998" placeholder="+998 XX XXX-XXXX">
+            <input type="number" id="user-age" placeholder="Ёшингиз" min="1" max="120">
             <button class="order-button">БУЮРТМА БЕРИШ</button>
         </div>
     </div>
