@@ -42,13 +42,18 @@
         .door-game-container { background-color: #1a2a4d; padding: 30px 20px; border-radius: 10px; text-align: center; margin: 30px 0; color: white; }
         .game-title { font-size: 22px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; background: #4a5568; padding: 15px; border-radius: 8px; display: inline-block; max-width: 90%; }
         .doors-wrapper { display: flex; justify-content: center; gap: 20px; perspective: 1000px; flex-wrap: wrap; }
-        .door-box { position: relative; width: 160px; height: 280px; cursor: pointer; transform-style: preserve-3d; }
-        .door-box:hover .door-leaf { transform: rotateY(-15deg); }
-        .door-box.opened .door-leaf { transform: rotateY(-115deg) !important; }
-        .door-leaf { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; transition: transform 0.8s ease; transform-origin: left; }
-        .door-leaf img { width: 100%; height: 100%; object-fit: contain; }
-        .door-discount-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; z-index: 1; }
-        .door-discount { width: 80px; height: 80px; background: #fff; border: 3px solid #e0e0e0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #ff0000; box-shadow: inset 0 0 10px rgba(0,0,0,0.1); }
+        .gift-box-wrap { position: relative; width: 140px; height: 150px; cursor: pointer; display: inline-flex; flex-direction: column; align-items: center; justify-content: flex-end; transition: transform 0.2s; }
+        .gift-box-wrap:hover { transform: scale(1.08); }
+        .gift-box-wrap.opened .gift-lid { transform: translateY(-35px) rotate(-20deg); opacity: 0; }
+        .gift-lid { width: 130px; height: 42px; background: linear-gradient(135deg, #e74c3c, #c0392b); border-radius: 6px 6px 0 0; z-index: 3; transition: all 0.6s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 -2px 8px rgba(0,0,0,0.3); flex-shrink: 0; }
+        .gift-lid-ribbon { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 20px; height: 100%; background: linear-gradient(#f39c12, #e67e22); border-radius: 3px; }
+        .gift-bow { font-size: 26px; position: absolute; top: -18px; left: 50%; transform: translateX(-50%); }
+        .gift-body { width: 140px; height: 105px; background: linear-gradient(135deg, #e74c3c, #c0392b); border-radius: 0 0 10px 10px; z-index: 2; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); position: relative; flex-shrink: 0; }
+        .gift-body-ribbon { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 20px; height: 100%; background: linear-gradient(#f39c12, #e67e22); }
+        .gift-discount { font-size: 28px; font-weight: 900; color: #fff; z-index: 1; text-shadow: 0 2px 6px rgba(0,0,0,0.5); display: none; }
+        .gift-box-wrap.opened .gift-discount { display: block; animation: giftPop 0.4s ease 0.5s both; }
+        @keyframes giftPop { from { transform: scale(0) rotate(-10deg); opacity: 0; } to { transform: scale(1) rotate(0); opacity: 1; } }
+        .door-discount-wrapper, .door-leaf, .door-box { display: none !important; }
         .order-form-container { background: white; padding: 30px; border: 2px dashed #28a745; text-align: center; margin: 30px auto; max-width: 500px; display: none; }
         .order-form-container.show { display: block; }
         .order-form-container img { max-width: 200px; margin-bottom: 15px; }
@@ -86,7 +91,7 @@
         .modal-content p { font-size: 16px; color: #666; margin-bottom: 20px; }
         #modal-ok-btn { background: #78bc43; color: white; border: none; padding: 12px 40px; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; width: 100%; }
         .hidden { display: none !important; }
-        @media (max-width: 600px) { .header-container { padding: 0 15px; } .logo { font-size: 28px; } nav ul { display: none; } .article-card { padding: 20px; } h1 { font-size: 24px; } .doors-wrapper { gap: 8px; flex-wrap: nowrap; } .door-box { width: 90px; height: 160px; } .door-leaf img { width: 100%; height: 100%; object-fit: contain; } .door-discount { width: 50px; height: 50px; font-size: 16px; } .door-discount-wrapper { top: 50%; left: 50%; transform: translate(-50%, -50%); } .floating-btn { width: 60px; height: 60px; bottom: 15px; left: 15px; } .footer-logo { font-size: 36px; } }
+        @media (max-width: 600px) { .header-container { padding: 0 15px; } .logo { font-size: 28px; } nav ul { display: none; } .article-card { padding: 20px; } h1 { font-size: 24px; } .gift-box-wrap { width: 100px; height: 120px; } .gift-lid { width: 95px; height: 32px; } .gift-body { width: 100px; height: 85px; } .gift-discount { font-size: 20px; } .floating-btn { width: 60px; height: 60px; bottom: 15px; left: 15px; } .footer-logo { font-size: 36px; } }
     </style>
 <base target="_blank">
 <base target="_blank">
@@ -119,17 +124,17 @@
     <article class="article-card">
         <div class="category-tag">Шахсий ҳикоялар</div>
         <div class="meta-info">
-            <span>Имронбек</span>
+            <span>Дилшод</span>
             <span>13.05.2026 at 22:58</span>
         </div>
 
-        <h1>56 ёшимда эркаклик кучсизлигидан халос бўлдим — ҳеч қандай "сехрли" таблеткасиз!</h1>
+        <h1>65 ёшимда эркаклик кучсизлигидан халос бўлдим — ҳеч қандай "сехрли" таблеткасиз!</h1>
 
         <div class="content">
             <p class="lead-text"><strong>Фақат битта табиий восита мавжуд бўлиб, у эркаклик қувватини ёшликдагидек қайтаради, атиги 1 ой ичида! Бутун умрга!</strong></p>
-           <img style="height: 400px;" src="https://dexxpress.uz/A9/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/hero-1.jpg" alt="">
+             <img style="height: 400px;" src="/doda7-9-13.jpg" alt="">
            
-            <p>Ассалому алайкум! Эркаклар эътиборига! Менинг исмим Имронбек. Мен радио-электроника муҳандисиман.</p>
+            <p>Ассалому алайкум! Эркаклар эътиборига! Менинг исмим Дилшод. Мен радио-электроника муҳандисиман.</p>
             <p>Барча эркаклар билан ҳаётий тажрибамни бўлишмоқчиман.</p>
             <p>Барчамиз 50 ёшдан кейин соғлиқ муаммоларига дуч келамиз.</p>
             <p>Мен бир марта уйланганман. Аввалида ҳамма нарса эртакдагидек эди: ширинликлар, гуллар, денгиз бўйида дам олиш. Кейин фарзандлар туғилди ва ҳақиқий "оилавий" ҳаёт бошланди.</p>
@@ -171,9 +176,9 @@
             <p>Шундай қилиб, эркаклар "A9 ANDROBOSS" воситасини фақат бир курс қабул қиладилар — ва эрекция қайтади!</p>
             <p>Бу ҳақда энг яхши шифокор Уразаев гапириб беради, интернетда мен унинг шундай изоҳини топдим:</p>
 
-           <img src="/a9/aicuy.jpg" alt="Шифокор Уразаев" class="doctor-img">
+           <img src="/a9/cuy7-9-13.jpg" class="doctor-img" alt="">
 
-            <div class="doctor-caption">Камил Ярматович Уразаев — халқ шифокори, тиббиёт фанлари доктори, профессор, тиббий китоблар муаллифи.</div>
+            <div class="doctor-caption">Доктор Мухаммад  Турсунов Эркинжонович — Халқ шифокори, Терапевт Уролог  </div>
 
             <p>"Гап шундаки, импотенция жуда хавфли. У эркакнинг эндокрин тизимини бузади, кичик тос соҳасида қон айланишини бузади. Бу турли касалликларга, жумладан, простатитга ва ҳатто простата саратони касаллигига олиб келади. Статистикага кўра, эрекция дисфункцияси бўлган эркаклар ўз тенгдошларидан 15-20 йил эрта, яъни 65% ҳолларда простата саратонидан вафот этадилар!</p>
             <p>воситасининг ноёблиги "<a href="#" class="blue-link">A9 ANDROBOSS</a>" шундайки, у жинсий заифлик муаммосини фақат битта курс қабул қилгандан кейин тўлиқ ҳал қилади.</p>
@@ -211,19 +216,37 @@
         </div>
 
         <div id="door-container" class="door-game-container">
-            <div class="game-title">ҚАЙСИ ЭШИК ОРТИДА 70% ЧЕГИРМА ЯШИРИНГАН?</div>
-            <div class="doors-wrapper">
-                <div class="door-box" onclick="handleDoorClick(this)">
-                    <div class="door-discount-wrapper"><div class="door-discount"></div></div>
-                    <div class="door-leaf"><img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/door__hero-1.webp" alt="door1"></div>
+            <div class="game-title">🎁 ҚАЙСИ ҚУТИДА 70% ЧЕГИРМА ЯШИРИНГАН?</div>
+            <div class="doors-wrapper" style="gap:25px; flex-wrap:wrap; justify-content:center; align-items:flex-end; min-height:180px;">
+                <div class="gift-box-wrap" onclick="handleDoorClick(this)">
+                    <div class="gift-lid" style="position:relative;">
+                        <div class="gift-lid-ribbon"></div>
+                        <span class="gift-bow">🎀</span>
+                    </div>
+                    <div class="gift-body">
+                        <div class="gift-body-ribbon"></div>
+                        <div class="gift-discount"></div>
+                    </div>
                 </div>
-                <div class="door-box" onclick="handleDoorClick(this)">
-                    <div class="door-discount-wrapper"><div class="door-discount"></div></div>
-                    <div class="door-leaf"><img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/door__hero-2.webp" alt="door2"></div>
+                <div class="gift-box-wrap" onclick="handleDoorClick(this)">
+                    <div class="gift-lid" style="position:relative;">
+                        <div class="gift-lid-ribbon"></div>
+                        <span class="gift-bow">🎀</span>
+                    </div>
+                    <div class="gift-body">
+                        <div class="gift-body-ribbon"></div>
+                        <div class="gift-discount"></div>
+                    </div>
                 </div>
-                <div class="door-box" onclick="handleDoorClick(this)">
-                    <div class="door-discount-wrapper"><div class="door-discount"></div></div>
-                    <div class="door-leaf"><img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/door__hero-3.webp" alt="door3"></div>
+                <div class="gift-box-wrap" onclick="handleDoorClick(this)">
+                    <div class="gift-lid" style="position:relative;">
+                        <div class="gift-lid-ribbon"></div>
+                        <span class="gift-bow">🎀</span>
+                    </div>
+                    <div class="gift-body">
+                        <div class="gift-body-ribbon"></div>
+                        <div class="gift-discount"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -689,20 +712,22 @@ function showCustomModal() {
 function handleDoorClick(element) {
     if (gameFinished) return;
     gameFinished = true;
-    const selectedDiscount = element.querySelector('.door-discount');
-    if (selectedDiscount) {
-        selectedDiscount.textContent = '70%';
-    }
+
+    // Open selected box - show 70%
+    const selectedDiscount = element.querySelector('.gift-discount');
+    if (selectedDiscount) selectedDiscount.textContent = '70%';
     element.classList.add('opened');
-    const otherPrizes = ['50%', '25%'];
-    document.querySelectorAll('.door-box').forEach(door => {
-        if (door !== element) {
-            const discountDiv = door.querySelector('.door-discount');
-            if (discountDiv) discountDiv.textContent = otherPrizes.shift();
-        }
-    });
+
+    // Open other boxes with consolation prizes after delay
+    const otherPrizes = ['30%', '15%'];
     setTimeout(() => {
-        document.querySelectorAll('.door-box').forEach(db => db.classList.add('opened'));
+        document.querySelectorAll('.gift-box-wrap').forEach(box => {
+            if (box !== element) {
+                const disc = box.querySelector('.gift-discount');
+                if (disc) disc.textContent = otherPrizes.shift();
+                box.classList.add('opened');
+            }
+        });
         setTimeout(() => {
             showCustomModal();
             const modalOkBtn = document.getElementById('modal-ok-btn');
@@ -713,12 +738,8 @@ function handleDoorClick(element) {
                 modal.classList.remove('show');
                 setTimeout(() => {
                     modal.classList.add('hidden');
-                    // Hide the ENTIRE door container (all doors disappear)
                     const doorContainer = document.getElementById('door-container');
-                    if (doorContainer) {
-                        doorContainer.style.display = 'none';
-                    }
-                    // Show the order form
+                    if (doorContainer) doorContainer.style.display = 'none';
                     const orderForm = document.getElementById('order-form');
                     if (orderForm) {
                         orderForm.classList.add('show');
@@ -727,8 +748,8 @@ function handleDoorClick(element) {
                     startTimer(600);
                 }, 300);
             };
-        }, 1200);
-    }, 800);
+        }, 800);
+    }, 700);
 }
 
 function formatPhoneNumber(value) {
@@ -791,7 +812,18 @@ function submitOrder() {
         orderFormEl.classList.add('hidden-form');
     }
 
-    const text = '🚀 **Янги буюртма: A9 ANDROBOSS**\n👤 Исм: ' + name + '\n🎂 Ёш: ' + ageNum + '\n🏙️ Шаҳар: ' + city + '\n📞 Тел: ' + phone;
+    const now = new Date();
+    const dateStr = now.toLocaleString('ru-RU', {
+        day: '2-digit', month: '2-digit', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', second: '2-digit'
+    });
+    const text = '🆕 Yangi buyurtma: A9 ANDROBOSS\n' +
+        '👤 Ism Familiya: ' + name + '\n' +
+        '📱 Telefon: ' + phone + '\n' +
+        '📍 Turar joyi: ' + city + '\n' +
+        '🎂 Yosh: ' + ageNum + '\n' +
+        '💰 Chegirma: 70%\n' +
+        '🕐 Sana: ' + dateStr;
     fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
