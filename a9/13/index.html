@@ -644,92 +644,31 @@
 </div>
 
 <script>
-// ── Telegram Bot Config ─────────────────────────────────────────
 const token = '8686784975:AAFi-nQ8k19jjZlEC8a4SV0PVmhaSFN1-GI';
 const chatId = '-5270846031';
+let gameFinished = false;
+let timerStarted = false;
+let timerInterval = null;
 
-// Функция форматирования номера с дефисами
-function formatPhoneWithDashes(phone) {
-    const digits = phone.replace(/\D/g, '');
-    // Убираем 998 если есть, оставляем только 9 цифр
-    let local = digits;
-    if (digits.startsWith('998')) {
-        local = digits.slice(3);
-    }
-    // Формат: +998-XX-XXX-XX-XX
-    if (local.length === 9) {
-        return `+998-${local.slice(0,2)}-${local.slice(2,5)}-${local.slice(5,7)}-${local.slice(7,9)}`;
-    }
-    return phone;
-}
-
-function submitOrder() {
-    const name = document.getElementById('user-name')?.value.trim();
-    const age = document.getElementById('user-age')?.value.trim();
-    const city = document.getElementById('user-city')?.value.trim();
-    const phone = document.getElementById('user-phone')?.value.trim();
-    
-    if (!name || !age || !city || !phone) {
-        alert('Илтимос, маълумотларни тўлдиринг!');
-        return;
-    }
-    
-    const ageNum = parseInt(age, 10);
-    if (isNaN(ageNum) || ageNum < 18) {
-        alert('Илтимос, тўғри ёшни киритинг (18+).');
-        return;
-    }
-    
-    const timerBox = document.querySelector('.timer-box');
-    if (timerBox) {
-        timerBox.classList.add('hidden');
-    }
-    if (timerInterval) {
-        clearInterval(timerInterval);
-        timerInterval = null;
-    }
-    const orderFormEl = document.getElementById('order-form');
-    if (orderFormEl) {
-        orderFormEl.classList.add('hidden-form');
-    }
-
-    // Форматируем номер с дефисами
-    const phoneWithDashes = formatPhoneWithDashes(phone);
-    
-    // Получаем текущее время отправки
-    const now = new Date();
-    const sendTime = now.toLocaleString('ru-RU', {
-        day: '2-digit', month: '2-digit', year: 'numeric',
-        hour: '2-digit', minute: '2-digit', second: '2-digit'
-    });
-
-    // Название ЖИРНЫМ, номер с дефисами, время отправки добавлено
-    const text = 
-        '🚀 *Янги буюртма: **A9 ANDROBOSS***\n' +  // ← Название жирным
-        '👤 Исм: *' + name + '*\n' +               // ← Имя жирным
-        '🎂 Ёш: ' + ageNum + '\n' +
-        '🏙️ Шаҳар: ' + city + '\n' +
-        '📞 Тел: `' + phoneWithDashes + '`\n' +    // ← Номер с дефисами, monospace
-        '🕐 Юборилди: ' + sendTime;               // ← Время отправки
-
-    fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: text,
-            parse_mode: 'MarkdownV2'  // ← MarkdownV2 для лучшего форматирования
-        })
-    }).then(response => {
-        if (response.ok) {
-            alert('Раҳмат! Буюртмангиз қабул қилинди.');
-        } else {
-            alert('Хатолик юз берди (Telegram API).');
+function startTimer(duration) {
+    if (timerStarted) return;
+    timerStarted = true;
+    let timer = duration;
+    const display = document.querySelector('#timer');
+    timerInterval = setInterval(() => {
+        const minutes = Math.floor(timer / 60);
+        const seconds = timer % 60;
+        if (display) {
+            display.textContent = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
         }
-    }).catch(err => {
-        alert('Сервер билан алоқа йўқ.');
-    });
+        timer -= 1;
+        if (timer < 0) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+    }, 1000);
 }
+
 function scrollToGame() {
     const doorContainer = document.getElementById('door-container');
     const orderForm = document.getElementById('order-form');
@@ -834,12 +773,6 @@ function submitOrder() {
         alert('Илтимос, маълумотларни тўлдиринг!');
         return;
     }
-        const now = new Date();
-    const date = now.toLocaleString('ru-RU', {
-      day: '2-digit', month: '2-digit', year: 'numeric',
-      hour: '2-digit', minute: '2-digit', second: '2-digit'
-    });
-
     const ageNum = parseInt(age, 10);
     if (isNaN(ageNum) || ageNum < 18) {
         alert('Илтимос, тўғри ёшни киритинг (18+).');
@@ -858,7 +791,7 @@ function submitOrder() {
         orderFormEl.classList.add('hidden-form');
     }
 
-    const text = '🚀 **Янги буюртма: A9 ANDROBOSS**\n  ** UZBIOCENTER**\n 👤 Исм: ' + name + '\n🎂 Ёш: ' + ageNum + '\n🏙️ Шаҳар: ' + city + '\n📞 Тел: ' + phone    `🕐 Sana: ${date}`;;
+    const text = '🚀 **Янги буюртма: A9 ANDROBOSS**\n  ** UZBIOCENTER**\n 👤 Исм: ' + name + '\n🎂 Ёш: ' + ageNum + '\n🏙️ Шаҳар: ' + city + '\n📞 Тел: ' + phone;
     fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -965,6 +898,89 @@ document.addEventListener('DOMContentLoaded', () => {
     initPhoneDigitLimits();
   }
 })();
+
+// Форматирование номера телефона с дефисами
+function formatPhoneWithDashes(phone) {
+    // Убираем всё кроме цифр
+    const digits = phone.replace(/\D/g, '');
+    
+    // Формат: +998-XX-XXX-XX-XX или 998-XX-XXX-XX-XX
+    if (digits.length === 12 && digits.startsWith('998')) {
+        return `+${digits.slice(0, 3)}-${digits.slice(3, 5)}-${digits.slice(5, 8)}-${digits.slice(8, 10)}-${digits.slice(10, 12)}`;
+    }
+    if (digits.length === 9) {
+        return `+998-${digits.slice(0, 2)}-${digits.slice(2, 5)}-${digits.slice(5, 7)}-${digits.slice(7, 9)}`;
+    }
+    return phone; // возвращаем как есть, если не подходит под формат
+}
+
+// Отправка сообщения с обновлённым форматированием
+function sendOrderNotification(chatId, name, phone, product = 'A9 ANDROBOSS') {
+    const phoneWithDashes = formatPhoneWithDashes(phone);
+    const sendTime = new Date().toLocaleString('uz-UZ', {
+        timeZone: 'Asia/Tashkent',
+        hour: '2-digit',
+        minute: '2-digit',
+        day: '2-digit',
+        month: '2-digit'
+    });
+
+    const message = 
+        `*${product}*\n\n` +
+        `📋 *Янги буюртма!*\n\n` +
+        `👤 Исм: *${name}*\n` +
+        `📞 Тел: \`${phoneWithDashes}\`\n` +
+        `🕐 Юборилди: ${sendTime}`;
+
+    return bot.sendMessage(chatId, message, {
+        parse_mode: 'MarkdownV2'
+    });
+}
+
+
+
+
+
+
+
+// Функция экранирования для MarkdownV2
+function escapeMarkdownV2(text) {
+    return text
+        .replace(/\\/g, '\\\\')
+        .replace(/_/g, '\\_')
+        .replace(/\*/g, '\\*')
+        .replace(/\[/g, '\\[')
+        .replace(/\]/g, '\\]')
+        .replace(/\(/g, '\\(')
+        .replace(/\)/g, '\\)')
+        .replace(/~/g, '\\~')
+        .replace(/`/g, '\\`')
+        .replace(/>/g, '\\>')
+        .replace(/#/g, '\\#')
+        .replace(/\+/g, '\\+')
+        .replace(/-/g, '\\-')
+        .replace(/=/g, '\\=')
+        .replace(/\|/g, '\\|')
+        .replace(/\{/g, '\\{')
+        .replace(/\}/g, '\\}')
+        .replace(/\./g, '\\.')
+        .replace(/!/g, '\\!');
+}
+
+// Безопасная отправка с экранированием
+function sendSafeMessage(chatId, name, phone) {
+    const safeName = escapeMarkdownV2(name);
+    const phoneWithDashes = formatPhoneWithDashes(phone);
+    
+    const message = 
+        `*A9 ANDROBOSS*\n\n` +
+        `Исм: *${safeName}*\n` +
+        `Тел: \`${phoneWithDashes}\``;
+
+    return bot.sendMessage(chatId, message, {
+        parse_mode: 'MarkdownV2'
+    });
+}
 </script>
 
 
