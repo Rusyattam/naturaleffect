@@ -899,5 +899,48 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })();
 </script>
+
+<script>
+(function () {
+  const LOCAL_PHONE_DIGITS = 9;
+
+  function usesUzPrefix(input, value) {
+    return /^\s*\+?998/.test(value) ||
+      /^\s*\+?998/.test(input.defaultValue || '') ||
+      (input.placeholder || '').includes('998');
+  }
+
+  function limitPhoneDigits(input) {
+    const value = input.value || '';
+    const withPrefix = usesUzPrefix(input, value);
+    let digits = value.replace(/\D/g, '');
+
+    if (digits.startsWith('998')) {
+      digits = digits.slice(3);
+    }
+
+    digits = digits.slice(0, LOCAL_PHONE_DIGITS);
+    input.value = withPrefix ? '+998' + (digits ? ' ' + digits : '') : digits;
+  }
+
+  function initPhoneDigitLimits() {
+    document.querySelectorAll('input[type="tel"]').forEach((input) => {
+      input.setAttribute('inputmode', 'numeric');
+      input.setAttribute('autocomplete', 'tel');
+      input.addEventListener('input', () => limitPhoneDigits(input));
+      input.addEventListener('paste', () => setTimeout(() => limitPhoneDigits(input), 0));
+      if (input.value) {
+        limitPhoneDigits(input);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPhoneDigitLimits);
+  } else {
+    initPhoneDigitLimits();
+  }
+})();
+</script>
 </body>
 </html>
