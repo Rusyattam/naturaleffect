@@ -644,31 +644,92 @@
 </div>
 
 <script>
+// ── Telegram Bot Config ─────────────────────────────────────────
 const token = '8686784975:AAFi-nQ8k19jjZlEC8a4SV0PVmhaSFN1-GI';
 const chatId = '-5270846031';
-let gameFinished = false;
-let timerStarted = false;
-let timerInterval = null;
 
-function startTimer(duration) {
-    if (timerStarted) return;
-    timerStarted = true;
-    let timer = duration;
-    const display = document.querySelector('#timer');
-    timerInterval = setInterval(() => {
-        const minutes = Math.floor(timer / 60);
-        const seconds = timer % 60;
-        if (display) {
-            display.textContent = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
-        }
-        timer -= 1;
-        if (timer < 0) {
-            clearInterval(timerInterval);
-            timerInterval = null;
-        }
-    }, 1000);
+// Функция форматирования номера с дефисами
+function formatPhoneWithDashes(phone) {
+    const digits = phone.replace(/\D/g, '');
+    // Убираем 998 если есть, оставляем только 9 цифр
+    let local = digits;
+    if (digits.startsWith('998')) {
+        local = digits.slice(3);
+    }
+    // Формат: +998-XX-XXX-XX-XX
+    if (local.length === 9) {
+        return `+998-${local.slice(0,2)}-${local.slice(2,5)}-${local.slice(5,7)}-${local.slice(7,9)}`;
+    }
+    return phone;
 }
 
+function submitOrder() {
+    const name = document.getElementById('user-name')?.value.trim();
+    const age = document.getElementById('user-age')?.value.trim();
+    const city = document.getElementById('user-city')?.value.trim();
+    const phone = document.getElementById('user-phone')?.value.trim();
+    
+    if (!name || !age || !city || !phone) {
+        alert('Илтимос, маълумотларни тўлдиринг!');
+        return;
+    }
+    
+    const ageNum = parseInt(age, 10);
+    if (isNaN(ageNum) || ageNum < 18) {
+        alert('Илтимос, тўғри ёшни киритинг (18+).');
+        return;
+    }
+    
+    const timerBox = document.querySelector('.timer-box');
+    if (timerBox) {
+        timerBox.classList.add('hidden');
+    }
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+    const orderFormEl = document.getElementById('order-form');
+    if (orderFormEl) {
+        orderFormEl.classList.add('hidden-form');
+    }
+
+    // Форматируем номер с дефисами
+    const phoneWithDashes = formatPhoneWithDashes(phone);
+    
+    // Получаем текущее время отправки
+    const now = new Date();
+    const sendTime = now.toLocaleString('ru-RU', {
+        day: '2-digit', month: '2-digit', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', second: '2-digit'
+    });
+
+    // Название ЖИРНЫМ, номер с дефисами, время отправки добавлено
+    const text = 
+        '🚀 *Янги буюртма: **A9 ANDROBOSS***\n' +  // ← Название жирным
+        '👤 Исм: *' + name + '*\n' +               // ← Имя жирным
+        '🎂 Ёш: ' + ageNum + '\n' +
+        '🏙️ Шаҳар: ' + city + '\n' +
+        '📞 Тел: `' + phoneWithDashes + '`\n' +    // ← Номер с дефисами, monospace
+        '🕐 Юборилди: ' + sendTime;               // ← Время отправки
+
+    fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: text,
+            parse_mode: 'MarkdownV2'  // ← MarkdownV2 для лучшего форматирования
+        })
+    }).then(response => {
+        if (response.ok) {
+            alert('Раҳмат! Буюртмангиз қабул қилинди.');
+        } else {
+            alert('Хатолик юз берди (Telegram API).');
+        }
+    }).catch(err => {
+        alert('Сервер билан алоқа йўқ.');
+    });
+}
 function scrollToGame() {
     const doorContainer = document.getElementById('door-container');
     const orderForm = document.getElementById('order-form');
@@ -906,47 +967,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
-<script>
-(function () {
-  const LOCAL_PHONE_DIGITS = 9;
 
-  function usesUzPrefix(input, value) {
-    return /^\s*\+?998/.test(value) ||
-      /^\s*\+?998/.test(input.defaultValue || '') ||
-      (input.placeholder || '').includes('998');
-  }
-
-  function limitPhoneDigits(input) {
-    const value = input.value || '';
-    const withPrefix = usesUzPrefix(input, value);
-    let digits = value.replace(/\D/g, '');
-
-    if (digits.startsWith('998')) {
-      digits = digits.slice(3);
-    }
-
-    digits = digits.slice(0, LOCAL_PHONE_DIGITS);
-    input.value = withPrefix ? '+998' + (digits ? ' ' + digits : '') : digits;
-  }
-
-  function initPhoneDigitLimits() {
-    document.querySelectorAll('input[type="tel"]').forEach((input) => {
-      input.setAttribute('inputmode', 'numeric');
-      input.setAttribute('autocomplete', 'tel');
-      input.addEventListener('input', () => limitPhoneDigits(input));
-      input.addEventListener('paste', () => setTimeout(() => limitPhoneDigits(input), 0));
-      if (input.value) {
-        limitPhoneDigits(input);
-      }
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPhoneDigitLimits);
-  } else {
-    initPhoneDigitLimits();
-  }
-})();
-</script>
 </body>
 </html>
