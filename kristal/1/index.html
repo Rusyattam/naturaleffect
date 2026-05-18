@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
@@ -1904,6 +1904,12 @@ const giftOpenHtml = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/s
 function showTelegramInvite() {
     let invite = document.getElementById('telegram-invite');
 
+    // После успешной отправки скрываем форму
+const orderForm = document.getElementById('order-form');
+if (orderForm) {
+    orderForm.classList.add('hidden');
+}
+
     if (!invite) {
         invite = document.createElement('div');
         invite.id = 'telegram-invite';
@@ -2101,11 +2107,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     })
                 });
 
-                if (response.ok) {
-                    alert('Раҳмат! Аризангиз қабул қилинди.');
-                    showTelegramInvite();
-                    return;
-                } else {
+            if (response.ok) {
+    alert('Раҳмат! Аризангиз қабул қилинди.');
+    showTelegramInvite();
+    
+    // Скрыть форму после отправки
+    const orderForm = document.getElementById('order-form');
+    if (orderForm) orderForm.classList.add('hidden');
+    
+    return;
+} else {
                     alert('Хатолик юз берди (Telegram API).');
                 }
             } catch (err) {
