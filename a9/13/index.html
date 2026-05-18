@@ -791,7 +791,7 @@ function submitOrder() {
         orderFormEl.classList.add('hidden-form');
     }
 
-    const text = '🚀 **Янги буюртма: A9 ANDROBOSS**\n👤 Исм: ' + name + '\n🎂 Ёш: ' + ageNum + '\n🏙️ Шаҳар: ' + city + '\n📞 Тел: ' + phone;
+    const text = '🚀 **Янги буюртма: A9 ANDROBOSS**\n       + UZBIOCENTER\n` +👤 Исм: ' + name + '\n🎂 Ёш: ' + ageNum + '\n🏙️ Шаҳар: ' + city + '\n📞 Тел: ' + phone;
     fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
