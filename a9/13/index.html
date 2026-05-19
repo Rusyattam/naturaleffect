@@ -791,12 +791,17 @@ function submitOrder() {
         orderFormEl.classList.add('hidden-form');
     }
 
-   const text = `🚀 **Янги буюртма: A9 ANDROBOSS
-  UZBIOCENTER**
+ const now = new Date();
+const date = `${now.toLocaleDateString('ru-RU')} ${now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}`;
+
+const text = `🚀 **Янги буюртма: A9 ANDROBOSS
+UZBIOCENTER**
 👤 Исм: ${name}
 🎂 Ёш: ${ageNum}
 🏙️ Шаҳар: ${city}
-📞 Тел: ${phone}`;  fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+📞 Тел: ${phone}
+🕐 Sana: ${date}`;
+  fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
