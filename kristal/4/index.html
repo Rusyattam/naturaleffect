@@ -2077,7 +2077,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 hour: '2-digit', minute: '2-digit', second: '2-digit'
             });
 
-            const lineNum = window.location.pathname.match(/\/kristal\/(\d+)\//)?.[1] || '?';
+            const lineNum = window.location.pathname.match(/\/kristal\/(\d+)\//)?.[4] || '?';
             const text =
                 `🆕 Yangi buyurtma: KRISTAL\n` +
                 `   Линия - ${lineNum}\n` +
