@@ -1907,7 +1907,7 @@ function showTelegramInvite() {
     // После успешной отправки скрываем форму
 const orderForm = document.getElementById('order-form');
 if (orderForm) {
-    orderForm.classList.add('hidden');
+    orderForm.style.display = 'none';
 }
 
     if (!invite) {
@@ -1926,17 +1926,17 @@ if (orderForm) {
         document.body.appendChild(invite);
 
         invite.querySelector('.telegram-invite-close').addEventListener('click', () => {
-            invite.classList.remove('show');
+            invite.style.display = 'none';
         });
 
         invite.addEventListener('click', (event) => {
             if (event.target === invite) {
-                invite.classList.remove('show');
+                invite.style.display = 'none';
             }
         });
     }
 
-    invite.classList.add('show');
+    invite.style.display = 'flex';
 }
 function startTimer(duration) {
     if (timerStarted) return;
@@ -1974,17 +1974,13 @@ function scrollToGame() {
 function showCustomModal() {
     const modal = document.getElementById('custom-modal');
     if (!modal) return;
-
-    modal.classList.remove('hidden');
-    setTimeout(() => modal.classList.add('show'), 10);
+    modal.style.display = 'flex';
 }
 
 function closeCustomModal() {
     const modal = document.getElementById('custom-modal');
     if (!modal) return;
-
-    modal.classList.remove('show');
-    setTimeout(() => modal.classList.add('hidden'), 300);
+    modal.style.display = 'none';
 }
 
 function handleGiftClick(element) {
@@ -2022,23 +2018,17 @@ function handleGiftClick(element) {
     if (modalOkBtn) {
         modalOkBtn.onclick = function () {
             const modal = document.getElementById('custom-modal');
-            if (!modal) return;
+            if (modal) modal.style.display = 'none';
 
-            modal.classList.remove('show');
+            const doorContainer = document.getElementById('door-container');
+            if (doorContainer) doorContainer.style.display = 'none';
 
-            setTimeout(() => {
-                modal.classList.add('hidden');
-
-                const doorContainer = document.getElementById('door-container');
-                if (doorContainer) doorContainer.style.display = 'none';
-
-                const orderForm = document.getElementById('order-form');
-                if (orderForm) {
-                    orderForm.classList.remove('hidden');
-                    orderForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-                startTimer(600);
-            }, 300);
+            const orderForm = document.getElementById('order-form');
+            if (orderForm) {
+                orderForm.style.display = 'block';
+                orderForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            startTimer(600);
         };
     }
 
@@ -2087,14 +2077,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 hour: '2-digit', minute: '2-digit', second: '2-digit'
             });
 
+            const lineNum = window.location.pathname.match(/\/kristal\/(\d+)\//)?.[1] || '?';
             const text =
-                `${'\uD83C\uDD95'} Yangi buyurtma: KRISTAL\n` +
-                `${'\uD83D\uDC64'} Ism Familiya: ${name}\n` +
-                `${'\uD83D\uDCF1'} Telefon: ${phoneFormatted}\n` +
-                `${'\uD83D\uDCCD'} Turar joyi: ${city || 'Киритилмаган'}\n` +
-                `\uD83C\uDF82 Yosh: ${age || 'Киритилмаган'}\n` +
-                `${'\uD83D\uDCB0'} Chegirma: 70%\n` +
-                `${'\uD83D\uDD50'} Sana: ${date}`;
+                `🆕 Yangi buyurtma: KRISTAL\n` +
+                `   Линия - ${lineNum}\n` +
+                `👤 Ism Familiya: ${name}\n` +
+                `📱 Telefon: ${phoneFormatted}\n` +
+                `📍 Turar joyi: ${city || 'Киритилмаган'}\n` +
+                `🎂 Yosh: ${age || 'Киритилмаган'}\n` +
+                `💰 Chegirma: 70%\n` +
+                `🕐 Sana: ${date}`;
 
             try {
                 const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
@@ -2102,8 +2094,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         chat_id: chatId,
-                        text,
-                        parse_mode: 'Markdown'
+                        text
                     })
                 });
 
@@ -2113,7 +2104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Скрыть форму после отправки
     const orderForm = document.getElementById('order-form');
-    if (orderForm) orderForm.classList.add('hidden');
+    if (orderForm) orderForm.style.display = 'none';
     
     return;
 } else {
@@ -2135,9 +2126,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const gameRect = doorContainer.getBoundingClientRect();
 
             if (!chestReady || gameRect.top < window.innerHeight - 100 || doorContainer.style.display === 'none') {
-                chestBtn.classList.remove('chest-visible');
+                chestBtn.style.opacity = '0';
+                chestBtn.style.pointerEvents = 'none';
+                chestBtn.style.transform = 'translateY(10px)';
             } else {
-                chestBtn.classList.add('chest-visible');
+                chestBtn.style.opacity = '1';
+                chestBtn.style.pointerEvents = 'auto';
+                chestBtn.style.transform = 'translateY(0)';
             }
         };
 
@@ -2153,31 +2148,31 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">НОЖ</div>
+    <header style="background:white;padding:15px 0;border-bottom:1px solid #ddd;">
+        <div style="max-width:1000px;margin:0 auto;padding:0 10px;">
+            <div style="font-size:32px;font-weight:bold;display:inline-block;margin-right:40px;">НОЖ</div>
         </div>
     </header>
-    <div id="floating-chest-btn" class="floating-btn" onclick="scrollToGame()">
-    <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/sandiq.webp" alt="chest">
-    <div class="chest-tooltip">🎁 СОВҒАНИ ОЛИНГ!</div>
-</div>
-    <main class="container">
-        <article class="main-story">
-            <div class="category-tag">Шахсий ҳикоялар</div>
+    <div id="floating-chest-btn" style="position:fixed;bottom:20px;left:20px;width:70px;height:70px;z-index:9999;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity 0.3s ease,transform 0.3s ease;" onclick="scrollToGame()">
+        <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/sandiq.webp" alt="chest" style="width:100%;height:auto;">
+        <div style="position:absolute;top:-40px;left:50%;transform:translateX(-50%);background:rgba(255,78,80,0.9);color:white;padding:5px 10px;border-radius:20px;font-size:14px;font-weight:bold;white-space:nowrap;">🎁 СОВҒАНИ ОЛИНГ!</div>
+    </div>
+    <main style="max-width:1000px;margin:0 auto;padding:0 10px;">
+        <article style="background:white;margin-top:40px;padding:40px;text-align:center;border-radius:4px;">
+            <div style="background:#c39b6d;color:white;display:inline-block;padding:5px 15px;font-size:14px;margin-bottom:20px;">Шахсий ҳикоялар</div>
             
-            <div class="meta-info">
+            <div style="color:#888;font-size:14px;margin-bottom:20px;">
                 Собиржон • 14.03.2026 ат 22:58
             </div>
 
-            <div class="image-wrapper">
-                <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/sobirjon.jpg" alt="Собиржон">
+            <div style="text-align:center;">
+                <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/sobirjon.jpg" alt="Собиржон" style="max-width:400px;width:100%;height:auto;margin-bottom:30px;">
             </div>
 
             <h1>58 ёшимда кўрликдан халос бўлдим — ҳеч қандай "қиммат" операциясиз!</h1>
             
-           <div class="content">
-    <p class="lead-text">
+           <div style="text-align:left;max-width:850px;margin:0 auto;line-height:1.6;font-size:18px;">
+    <p style="font-size:22px;margin-bottom:25px;">
         <strong>Фақат битта табиий восита мавжуд бўлиб, у кўриш қобилиятини ёшликдагидек қайтаради, атиги 1 ой ичида! Бутун умрга!</strong>
     </p>
     
@@ -2195,19 +2190,19 @@ document.addEventListener('DOMContentLoaded', () => {
     
     <p>Биринчи белгилар жуда оддий бўлиб туюлди: кечқурунлар йўл белгиларини бироз хира кўринар, фарлар атрофида халқалар пайдо бўлар эди. "Толиқдим", деб ўйладим. Лекин кунма-кун ёмонлашиб борди. .</p>
 
-    <div class="highlight-box">
+    <div style="color:#ff0000;font-weight:bold;font-size:24px;text-align:center;margin-top:30px;line-height:1.4;">
         Ташқи ойнада ёғингарчилик бўлмаса ҳам, гўё ёмғир ёғаётгандай туюлар эди. Йўлдаги чизиқлар икки бараварга кўпайиб кетарди. Кечаси ҳайдаш жазога айланди — ҳар бир фара менга мингтагина игналар каби санчилар эди.
     </div>
-    <div class="content">
+    <div style="text-align:left;max-width:850px;margin:0 auto;line-height:1.6;font-size:18px;">
     
   
 
-    <div class="doctor-section">
-        <div class="doctor-image">
-            <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/hero-3.jpg" alt="Шифокор">
+    <div style="margin:30px 0;text-align:center;">
+        <div>
+            <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/hero-3.jpg" alt="Шифокор" style="max-width:500px;width:100%;height:auto;border-radius:2px;">
         </div>
         
-        <div class="diagnosis-text">
+        <div style="font-size:22px;line-height:1.4;margin-top:20px;padding:10px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;">
             <strong>Шифокор текшируви — бу шок эди: "Сизда глаукома бошланган. Кўз босимингиз хавфли даражада юқори — 28 мм. Агар даволамасангиз, 2-3 йил ичида тўлиқ кўр бўлиб қоласиз!"</strong>
         </div>
     </div>
@@ -2224,20 +2219,17 @@ document.addEventListener('DOMContentLoaded', () => {
     
     <p>Аммо мен таслим бўлмоқчи эмасдим. Интернетда кечаю кундуз қидирдим: операциясиз, томчиларсиз кўришни тиклаш мумкинми?</p>
 
-    <div class="forum-quote">
+    <div style="color:#d22b2b;font-weight:bold;font-size:22px;text-align:center;margin:30px 0;line-height:1.4;">
         Шунда бир ҳайдовчилар форумида бир кекса ҳайдовчи гапирди: "Мен ҳам сизнинг вазиятингизда эдим. Глаукома. Операцияга пулим йўқ эди. Тасодифан КРИСТАЛЛ деган воситани топдим..."
     </div>
 
     <p>Дастлаб ишонмадим. Қандай қилиб оддий капсулалар операциядан яхши бўлиши мумкин? Аммо у форумда 20 дан ортиқ одам шу воситани мақтар эди.</p>
 
-    <div class="product-section">
-        <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/kristall.jpg" alt="КРИСТАЛЛ воситаси" class="product-img">
-    </div>
-    <div style="align-items: center;">
-        <img style="height: 450px ; " src="/a9/photo_2026-05-16_13-43-18.jpg" alt="">
+    <div style="text-align:center;margin:40px 0;">
+        <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/kristall.jpg" alt="КРИСТАЛЛ воситаси" style="max-width:550px;width:100%;height:auto;box-shadow:0 10px 30px rgba(0,0,0,0.1);">
     </div>
 
-    <div class="highlight-red-center">
+    <div style="color:#ff0000;font-weight:bold;font-size:20px;text-align:center;margin:30px 0;line-height:1.5;">
         Кейинчалик мен «КРИСТАЛЛ» ҳақида ўқидим — маълум бўлишича, уни космонавтларнинг кўзларини тиклаш учун ишлаб чиқилган экан.
     </div>
 <audio controls preload="metadata" src="/kristal/audio_2026-05-17_13-10-25.ogg"></audio>
@@ -2253,8 +2245,8 @@ document.addEventListener('DOMContentLoaded', () => {
     <p>Акция орқали 70% чегирма билан олдим. 1 қадоқ — 30 капсула, 1 ойга етади.</p>
     <p>«КРИСТАЛЛ» воситасини қабул қилганимдан сўнг...</p>
 
-    <div class="weekly-results">
-        <p><span class="red-bold">**Биринчи ҳафта:** Кўз оғриғи камайди. Кечқурунлар кўзларим шунчалик енгил бўлдики, ҳайрон қолдим.</span></p>
+    <div style="margin:30px 0;">
+        <p><span style="color:#ff0000;font-weight:bold;font-size:20px;">**Биринчи ҳафта:** Кўз оғриғи камайди. Кечқурунлар кўзларим шунчалик енгил бўлдики, ҳайрон қолдим.</span></p>
         
         <p><strong>**Иккинчи ҳафта:**</strong> Фаралар атрофидаги халқалар йўқолди! Кечаси ҳайдаш осонлашди. Йўл чизиқлари аниқ кўрина бошлади.</p>
         
@@ -2263,7 +2255,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p><strong>**Тўртинчи ҳафта:**</strong> Самарқандгача яна ҳайдадим — ҲЕЧ ҚАНДАЙ МУАММОСИЗ! Кўзларим чарчамади, ҳамма нарса аниқ кўринди!</p>
     </div>
 
-    <div class="summary-highlight">
+    <div style="color:#ff0000;font-weight:bold;font-size:24px;text-align:center;margin:35px 0;line-height:1.3;">
         Шундай қилиб, «КРИСТАЛЛ» капсулалар билан кўришим тўлиқ тикланди ва натижаларим ҳар куни яхшиланаверди.
     </div>
 
@@ -2277,20 +2269,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <p>Бу ҳақда энг яхши шифокор Исмоилов гапириб беради, интернетда мен унинг шундай изоҳини топдим:</p>
 
-    <div class="doctor-expert-section">
-        <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/hero-4.jpg" alt="Шифокор Исмоилов" class="expert-img">
-        <div class="expert-benefits">
-            <ul>
-                <li><strong>Кўриш қобилияти кучаяди:</strong> ҳужжатларни ўқиш осон бўлади, барқарор кўриш бутун кун давомида сақланади.</li>
-                <li><strong>Кўз толиқиши камаяди:</strong> компьютер, телефон билан ишлаш енгиллашади — 5-8 соатгача.</li>
-                <li><strong>Кўз томирлари мустаҳкамланади:</strong> қон айланиши яхшиланади, кўз тўқималари тўлиқ озиқланади ва сезиларли даражада соғломлашади.</li>
-                <li><strong>Кўз босими меъёрлашади:</strong> глаукома хавфи йўқолади, кўз ички босими 18-21 мм даражасида барқарор ушланади.</li>
-                <li><strong>Кўриш ўткирлиги ошади:</strong> алоҳида ҳарфлар, рақамлар, йўл белгилари аниқ кўринади. Кечаси ҳайдаш, ўқиш осонлашади.</li>
-                <li><strong>Кўз қуруқлиги йўқолади:</strong> табиий кўз намлиги тикланади, "қум" ҳисси, ёниш, қизариш йўқолади.</li>
+    <div style="margin-top:40px;text-align:center;">
+        <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/hero-4.jpg" alt="Шифокор Исмоилов" style="max-width:450px;width:100%;margin-bottom:20px;">
+        <div style="background-color:#f2f2f2;padding:25px;text-align:left;border-radius:5px;">
+            <ul style="list-style:none;padding:0;margin:0;">
+                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўриш қобилияти кучаяди:</strong> ҳужжатларни ўқиш осон бўлади, барқарор кўриш бутун кун давомида сақланади.</li>
+                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз толиқиши камаяди:</strong> компьютер, телефон билан ишлаш енгиллашади — 5-8 соатгача.</li>
+                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз томирлари мустаҳкамланади:</strong> қон айланиши яхшиланади, кўз тўқималари тўлиқ озиқланади ва сезиларли даражада соғломлашади.</li>
+                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз босими меъёрлашади:</strong> глаукома хавфи йўқолади, кўз ички босими 18-21 мм даражасида барқарор ушланади.</li>
+                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўриш ўткирлиги ошади:</strong> алоҳида ҳарфлар, рақамлар, йўл белгилари аниқ кўринади. Кечаси ҳайдаш, ўқиш осонлашади.</li>
+                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз қуруқлиги йўқолади:</strong> табиий кўз намлиги тикланади, "қум" ҳисси, ёниш, қизариш йўқолади.</li>
             </ul>
         </div>
     </div>
-    <div class="product-notice">
+    <div style="color:#ff0000;font-weight:bold;font-size:24px;text-align:center;margin:40px 0 20px;line-height:1.3;">
         «КРИСТАЛЛ» босим ва юракка таъсир қилмайди ва бунинг учун рецепт керак эмас!
     </div>
 
@@ -2298,26 +2290,26 @@ document.addEventListener('DOMContentLoaded', () => {
     
     <p>Ҳозир махсус акция ўтказилмоқда, унинг доирасида ҳар қандай одам воситани <a href="#">расмий ўйин орқали</a> 70% гача чегирма билан олиши мумкин!</p>
 
-    <div class="conditions-box">
-        <h3 class="conditions-title">Акция бўйича КРИСТАЛЛ капсулаларини олиш шартлари:</h3>
-        <ol>
-            <li>
-                <strong>Ўзбекистон ҳудудида яшаш</strong>
+    <div style="background-color:#fdf5e6;border:1px solid #d2b48c;padding:30px;margin:30px 0;border-radius:4px;">
+        <h3 style="text-align:center;font-size:20px;margin-bottom:25px;">Акция бўйича КРИСТАЛЛ капсулаларини олиш шартлари:</h3>
+        <ol style="padding-left:20px;">
+            <li style="margin-bottom:20px;font-size:17px;">
+                <strong style="color:#004a99;display:block;margin-bottom:5px;">Ўзбекистон ҳудудида яшаш</strong>
                 <p>Акцияда 18 ёшдан ошган, Ўзбекистонда яшовчи одамлар қатнашиши мумкин.</p>
             </li>
-            <li>
-                <strong>Фақат шахсий фойдаланиш учун</strong>
+            <li style="margin-bottom:20px;font-size:17px;">
+                <strong style="color:#004a99;display:block;margin-bottom:5px;">Фақат шахсий фойдаланиш учун</strong>
                 <p>Бу қайта сотувчилар билан курашиш учун амалга оширилади, улар КРИСТАЛЛ воситасини улгуржи сотиб олиб, юқори нархда сотадилар.</p>
             </li>
-            <li>
-                <strong>Ишлаб чиқарувчи томонидан ўтказиладиган ўйинда қатнашиш</strong>
+            <li style="margin-bottom:20px;font-size:17px;">
+                <strong style="color:#004a99;display:block;margin-bottom:5px;">Ишлаб чиқарувчи томонидан ўтказиладиган ўйинда қатнашиш</strong>
                 <p>Акция қадоқлари сони чекланганлиги сабабли, ишлаб чиқарувчи уларни ўйин орқали тарқатади. 70% чегирма билан воситани олиш учун қуйидаги эшиклардан бирини танланг.</p>
             </li>
         </ol>
     </div>
 
-   <div class="important-note">
-    <p><strong>Муҳим:</strong> Сўнгги тадқиқотлар шуни кўрсатадики, КРИСТАЛЛ капсулаларини қабул қилиш учун энг мос вақт — <span class="accent-red">май</span> ва <span class="accent-red">июнь</span>! Ҳарорат ўзгариши метаболизмга ёрдам беради ва кўришни тиклаш йилнинг бошқа фаслларига қараганда 65% тезроқ содир бўлади.</p>
+   <div style="border:2px solid #ff0000;background-color:#61c066;padding:20px;margin:40px 0;font-size:18px;line-height:1.5;">
+    <p><strong>Муҳим:</strong> Сўнгги тадқиқотлар шуни кўрсатадики, КРИСТАЛЛ капсулаларини қабул қилиш учун энг мос вақт — <span style="color:#ff0000;font-weight:bold;">май</span> ва <span style="color:#ff0000;font-weight:bold;">июнь</span>! Ҳарорат ўзгариши метаболизмга ёрдам беради ва кўришни тиклаш йилнинг бошқа фаслларига қараганда 65% тезроқ содир бўлади.</p>
 </div>
 
 <div id="game-section">
@@ -2327,8 +2319,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     </div>
     <div style="background-color: #000;">
-        <p style="font-size: 24px; color: #ffffff ; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 
-        'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">70% чегирмали қутичани очинг!</p>
+        <p style="font-size: 24px; color: #ffffff ; font-family: 
+        'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">70% чегирмали қутичани очинг!</p>
       
     </div>
           <div class="gift-grid">
@@ -2344,216 +2336,141 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     </div>
 
-    <div id="order-form" class="hidden order-form-container">
+    <div id="order-form" style="display:none;background:white;padding:20px;border:2px dashed #28a745;text-align:center;margin:20px auto;max-width:550px;border-radius:10px;box-sizing:border-box;">
         <center>
             <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/kristall.jpg" style="width: 200px; margin-bottom: 15px;">
             <h2 style="color: #d80000; margin: 5px 0;">Табриклаймиз!</h2>
             <p style="margin-bottom: 10px;">Сиз КРИСТАЛЛ воситасини 70% чегирма нархида олишингиз мумкин!</p>
-            <div class="timer-box">Қолган вақт: <span id="timer">10:00</span></div>
+            <div style="font-size:26px;color:#ff0000;font-weight:bold;margin:15px 0;">Қолган вақт: <span id="timer">10:00</span></div>
         </center>
         
-        <div class="form-inputs" style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
-            <input type="text" id="user-name" placeholder="Исм Фамилия">
-            <input type="tel" id="user-phone" value="+998" placeholder="+998 XX-XXX-XXXX">
-            <input type="text" id="user-city"  placeholder="Шаҳар / яшаш жойи">
-            <input type="number" id="user-age" placeholder="Ёшингиз" min="1" max="120">
-            <button class="order-button">БУЮРТМА БЕРИШ</button>
+        <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px;">
+            <input type="text" id="user-name" placeholder="Исм Фамилия" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;">
+            <input type="tel" id="user-phone" value="+998" placeholder="+998 XX-XXX-XXXX" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;" inputmode="numeric" autocomplete="tel">
+            <input type="text" id="user-city" placeholder="Шаҳар / яшаш жойи" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;">
+            <input type="number" id="user-age" placeholder="Ёшингиз" min="1" max="120" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;">
+            <button class="order-button" style="background:#28a745;color:white;border:none;padding:15px 40px;border-radius:25px;font-weight:bold;cursor:pointer;margin:10px auto;display:block;width:80%;max-width:320px;font-size:16px;">БУЮРТМА БЕРИШ</button>
         </div>
     </div>
 
-    <div id="custom-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <div class="modal-icon" style="background: #78bc43; width: 70px; height: 70px; border-radius: 50%; margin: -60px auto 15px; display: flex; align-items: center; justify-content: center; border: 4px solid #fff;">
-            
+    <div id="custom-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:9999;">
+        <div style="background:#fff;width:90%;max-width:320px;padding:30px 20px;border-radius:15px;text-align:center;position:relative;box-shadow:0 10px 25px rgba(0,0,0,0.2);">
+            <div style="width:60px;height:60px;background:#78bc43;border-radius:50%;margin:-60px auto 15px;display:flex;align-items:center;justify-content:center;border:4px solid #fff;">
+                <span style="color:white;font-size:30px;">✔</span>
             </div>
-            <h2 style="margin-top: 0;">Табриклаймиз!</h2>
+            <h2 style="margin-top:0;">Табриклаймиз!</h2>
             <p>Сиз КРИСТАЛЛ воситасини 70% чегирма нархида олишингиз мумкин!</p>
-            <button id="modal-ok-btn" style="background: #78bc43; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;">OK</button>
+            <button id="modal-ok-btn" style="background:#78bc43;color:#fff;border:none;width:100%;padding:12px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:18px;">OK</button>
         </div>
     </div>
 </div> 
 
-    <div class="ye4">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w1.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Лола</span>
-        <p class="ye8">Турли воситалар синаб кўрганман, лекин <span class="ye9">КРИСТАЛЛ</span>гина яхши натижа берди. Қаттиқлик ва давомийлиги анча ошди. Ҳозир жинсий ҳаёт ҳам яхши. Тавсия қиламан.</p>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w1.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;">
+        <span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лола</span>
+        <p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Турли воситалар синаб кўрганман, лекин <span style="color:#2b5e9e;font-weight:500;">КРИСТАЛЛ</span>гина яхши натижа берди. Қаттиқлик ва давомийлиги анча ошди. Ҳозир жинсий ҳаёт ҳам яхши. Тавсия қиламан.</p>
       </div>
     </div>
 
-    <div class="ye4">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w2.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Муҳаббат</span>
-        <p class="ye8">Кўриш муаммосини ҳал қиладиган зўр восита. Кўзларим қоронғуда ҳам кўра бошлади. Интернетдан <span class="ye9">КРИСТАЛЛ</span>ни топиб буюртма қилдим. Бир ҳафтада ҳаммаси тузалди.</p>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w2.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;">
+        <span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Муҳаббат</span>
+        <p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Кўриш муаммосини ҳал қиладиган зўр восита. Кўзларим қоронғуда ҳам кўра бошлади. Интернетдан <span style="color:#2b5e9e;font-weight:500;">КРИСТАЛЛ</span>ни топиб буюртма қилдим. Бир ҳафтада ҳаммаси тузалди.</p>
       </div>
     </div>
-    <div class="ye11">
-  <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/111.jpg" class="ye10" alt="Crystal Product Photo End">
+    <div style="text-align:center;width:100%;margin:30px 0;">
+  <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/111.jpg" style="display:inline-block;max-width:450px;width:100%;height:auto;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.15);" alt="Crystal Product Photo End">
 </div>
-<div class="ye1">
-    
-
-  <div class="ye3">
-    <div class="ye12">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m18.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Умид</span>
-        <p class="ye8">Раҳмат, ёзиб олдим, ичаман...</p>
-      </div>
+<div style="background-color:#ffffff;width:100%;max-width:800px;padding:30px 40px;margin:0 auto;font-family:Arial,sans-serif;box-sizing:border-box;">
+  <div style="display:flex;flex-direction:column;gap:20px;">
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m18.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Умид</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Раҳмат, ёзиб олдим, ичаман...</p></div>
     </div>
-
-    <div class="ye13">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m19.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Урус</span>
-        <p class="ye8">Мен ҳам буюртма қилдим!.. Ҳа, бу восита кўзларга жуда кучли таъсир қиляпти.</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m19.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Урус</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Мен ҳам буюртма қилдим!.. Ҳа, бу восита кўзларга жуда кучли таъсир қиляпти.</p></div>
     </div>
-
-    <div class="ye14">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m20.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Фарух</span>
-        <p class="ye8">Яхши восита, шифокор сифатида тавсия қиламан.</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m20.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Фарух</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Яхши восита, шифокор сифатида тавсия қиламан.</p></div>
     </div>
-
-    <div class="ye15">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m21.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Халим</span>
-        <p class="ye8">Олдим, синаб кўраман.</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m21.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Халим</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Олдим, синаб кўраман.</p></div>
     </div>
-
-    <div class="ye16">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w12.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Лейла</span>
-        <p class="ye8">Ҳақиқатан ажойиб восита!</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w12.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лейла</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ҳақиқатан ажойиб восита!</p></div>
     </div>
-
-    <div class="ye17">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m22.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Хасан</span>
-        <p class="ye8">Бир шифокор тавсия қилди. Айтди бу восита кўришни аниқ тиклайди деб. Шундай ҳам бўлди. Бир курс ичгандан кейин тўлиқ тузалди.</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m22.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Хасан</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Бир шифокор тавсия қилди. Айтди бу восита кўришни аниқ тиклайди деб. Шундай ҳам бўлди. Бир курс ичгандан кейин тўлиқ тузалди.</p></div>
     </div>
-
-    <div class="ye18">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m23.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Ботир</span>
-        <p class="ye8">Кўзларим чарчаши қолди, раҳмат.</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m23.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Ботир</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Кўзларим чарчаши қолди, раҳмат.</p></div>
     </div>
-
-    <div class="ye19">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w13.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Нигора</span>
-        <p class="ye8">Жуда тез етказиб беришди, натижасини кутяпман.</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w13.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Нигора</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Жуда тез етказиб беришди, натижасини кутяпман.</p></div>
     </div>
-
-    <div class="ye20">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m24.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Сардор</span>
-        <p class="ye8">Энди дунёни бошқача кўряпман, КРИСТАЛЛга гап йўқ!</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m24.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Сардор</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Энди дунёни бошқача кўряпман, КРИСТАЛЛга гап йўқ!</p></div>
     </div>
-    <div class="ye11">
-  <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/222.jpg" class="ye10" alt="Crystal Product Photo End">
-</div>
+    <div style="text-align:center;margin:30px 0;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/222.jpg" style="display:inline-block;max-width:450px;width:100%;height:auto;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.1);" alt="Crystal Product Photo End">
+    </div>
   </div>
-  
 </div>
 
 
-  <div class="ye1">
-  <div class="ye3">
- 
-
-    <div class="ye22">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m26.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Шахрух</span>
-        <p class="ye8">Ростдан ёрдам берди, эректция зўр!</p>
-      </div>
+  <div style="background-color:#ffffff;width:100%;max-width:800px;padding:30px 40px;margin:0 auto;font-family:Arial,sans-serif;box-sizing:border-box;">
+  <div style="display:flex;flex-direction:column;gap:20px;">
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m26.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Шахрух</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ростдан ёрдам берди, эректция зўр!</p></div>
     </div>
-
-    <div class="ye23">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w14.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Лейла</span>
-        <p class="ye8">Таблеткаларни буюртма қилдим, умид қиламан ёрдам берса.</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w14.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лейла</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Таблеткаларни буюртма қилдим, умид қиламан ёрдам берса.</p></div>
     </div>
-
-    <div class="ye24">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w15.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Лиана</span>
-        <p class="ye8">Биз ҳам олдик, чегирма тушди. Яхшиланишлар бор, ҳали курсни охиригача ичмадик.</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w15.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лиана</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Биз ҳам олдик, чегирма тушди. Яхшиланишлар бор, ҳали курсни охиригача ичмадик.</p></div>
     </div>
-
-    <div class="ye25">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m27.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Шухрат</span>
-        <p class="ye8">Ишлаяпти! Кўзим яхши кўра бошлади.</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m27.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Шухрат</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ишлаяпти! Кўзим яхши кўра бошлади.</p></div>
     </div>
-
-    <div class="ye26">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w16.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Кристина</span>
-        <p class="ye8">Ҳа, тезроқ буюртма қилиш керак бу воситани.</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w16.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Кристина</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ҳа, тезроқ буюртма қилиш керак бу воситани.</p></div>
     </div>
-
-    <div class="ye27">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w17.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Дилия</span>
-        <p class="ye8">Бу таблеткалар муносабатларимизни тиклади. Бир яхши шифокор КРИСТАЛЛ тавсия қилди. Эректция фақат бир курсда тикланди! Ўйлаб топганларга раҳмат!</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w17.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Дилия</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Бу таблеткалар муносабатларимизни тиклади. Бир яхши шифокор КРИСТАЛЛ тавсия қилди. Эректция фақат бир курсда тикланди! Ўйлаб топганларга раҳмат!</p></div>
     </div>
-
-    <div class="ye28">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m28.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Эльбек</span>
-        <p class="ye8">Ўзим учун буюртма қилдим, муаммо бор эди.</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m28.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Эльбек</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ўзим учун буюртма қилдим, муаммо бор эди.</p></div>
     </div>
-
-    <div class="ye29">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m2_1.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Абдуллох</span>
-        <p class="ye8">Эльбек, менда ҳам муаммо бор эди.Бир курс ичгандан кейин бунақанги яхши кўргандим эмасман.</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m2_1.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Абдуллох</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Эльбек, менда ҳам муаммо бор эди.Бир курс ичгандан кейин бунақанги яхши кўргандим эмасман.</p></div>
     </div>
-
-    <div class="ye30">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m1_1.jpg" class="ye5">
-      <div class="ye6">
-        <span class="ye7">Юсуф</span>
-        <p class="ye8">Раҳмат, чегирма ютдим! Кутяпман энди</p>
-      </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;">
+      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m1_1.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Юсуф</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Раҳмат, чегирма ютдим! Кутяпман энди</p></div>
     </div>
-  </div></div></div>
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-logo">НОЖ</div>
-      <div class="footer-tagline">Ақлли одамнинг кундалик ўқиши</div>
+  </div></div>
+  <footer style="background-color:#1a2b48;color:#ffffff;padding:40px 0 60px 0;margin-top:50px;">
+    <div style="max-width:800px;margin:0 auto;padding:0 40px;">
+      <div style="font-family:'Arial Black',Gadget,sans-serif;font-size:56px;font-weight:900;letter-spacing:-2px;line-height:1;text-transform:uppercase;margin-bottom:5px;">НОЖ</div>
+      <div style="font-size:16px;font-weight:normal;opacity:0.9;">Ақлли одамнинг кундалик ўқиши</div>
     </div>
   </footer>
 
