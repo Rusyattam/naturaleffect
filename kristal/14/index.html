@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
@@ -2317,10 +2317,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <div id="game-section">
 
-    <div id="door-container" class="door-game-container"><div style="background-color: #fffb02;">
-        <p style="font-size: 23px; color: #d80000;">Марафон 14.05.2026 йилгача (шу кун ҳам киради) узайтирилди!</p>
+   <div id="gift-game-wrap">
+  <div id="marathon-banner" style="position:relative; background-color: #f5e600;  text-align:center; margin:25px auto; max-width:100%;">
+  <div style="position:relative; display:inline-block; background:#f5e600; ">
+    <p id="marathon-text" style="color:#c00; font-weight:900; font-size:22px; font-family:'Arial Black',sans-serif; margin:0; line-height:1.4;"></p>
+  </div>
+  <div style="background-color: #333;">
+  <p style="color:#fff; font-size:20px; font-weight:bold; margin:12px 0 0; font-family:Arial,sans-serif;">70% чегирмали<br>қутичани очинг!</p>
+  
+  </div>
+  </div>
 
-    </div>
+<script>
+(function() {
+  var months = ["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"];
+  var d = new Date();
+  // Устанавливаем дату на завтра для эффекта срочности
+  d.setDate(d.getDate() + 1);
+  var day = d.getDate();
+  var month = d.getMonth() + 1;
+  var year = d.getFullYear();
+  var pad = function(n){ return n < 10 ? "0" + n : n; };
+  var dateStr = pad(day) + "." + pad(month) + "." + year;
+  var el = document.getElementById("marathon-text");
+  if (el) {
+    el.innerHTML = "Марафон " + dateStr + " йилгача (шу кун ҳам киради) узайтирилди!";
+  }
+})();
+</script>
     <div style="background-color: #000;">
         <p style="font-size: 24px; color: #ffffff ; font-family: 
         'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">70% чегирмали қутичани очинг!</p>
