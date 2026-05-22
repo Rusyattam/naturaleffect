@@ -23,13 +23,12 @@ body {
 .navbar {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 2.5rem;
     align-items: center;
     padding: 1.2rem 2rem;
     background-color: #1e242b;
     width: 100%;
-    position: sticky;
-    top: 0;
     z-index: 100;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
@@ -119,6 +118,17 @@ h2 {
     font-style: italic;
 }
 
+.audio-list {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+}
+
+.audio-list audio {
+    display: block;
+    width: 100%;
+}
+
 .text-block p {
     margin-bottom: 1rem;
     font-size: 1.05rem;
@@ -195,9 +205,23 @@ h2 {
 /* Адаптивность */
 @media (max-width: 768px) {
     .navbar {
-        flex-direction: column;
-        gap: 0.8rem;
-        padding: 1rem;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        gap: 1rem;
+        padding: 0.85rem 1rem;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .navbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-a {
+        flex: 0 0 auto;
+        font-size: 0.78rem;
     }
 
     .container {
@@ -621,9 +645,21 @@ h2 {
     const timerSec = document.getElementById("timerSec");
     const phoneInput = document.getElementById("userPhone");
     const orderForm = document.getElementById("orderForm");
+    const audioPlayers = document.querySelectorAll(".audio-list audio");
     
     let isGameOver = false;
     let countdownInterval;
+
+    audioPlayers.forEach(currentAudio => {
+        currentAudio.addEventListener("play", () => {
+            audioPlayers.forEach(otherAudio => {
+                if (otherAudio !== currentAudio) {
+                    otherAudio.pause();
+                    otherAudio.currentTime = 0;
+                }
+            });
+        });
+    });
 
     // Контроль ввода телефона: не даем удалить "+998"
     if (phoneInput) {
@@ -772,7 +808,17 @@ h2 {
                     <!-- Раунд 5 -->
                     <p><strong>Мухбир:</strong> Расмий сертификатлаш ва текширувлар вақтида қийинчиликлар бўлдими?</p>
                     <p><strong>Илья Резаков:</strong> Бу алоҳида синов бўлди. Ҳужжатлар чўзилди, турли баҳоналар айтилди. Аммо мустақил мутахассислар иштирокчиларнинг катта қисмида ижобий натижа қайд этилганини кўргач, ҳужжатлар тасдиқланди. Натижаларни яшириш қийин эди.</p>
-
+                    <div class="audio-list">
+                        <audio controls preload="none">
+                            <source src="./audio_2026-05-22_14-56-24.ogg" type="audio/ogg">
+                        </audio>
+                        <audio controls preload="none">
+                            <source src="./audio_2026-05-22_14-56-42.ogg" type="audio/ogg">
+                        </audio>
+                        <audio controls preload="none">
+                            <source src="./audio_2026-05-22_14-56-49.ogg" type="audio/ogg">
+                        </audio>
+                    </div>
                     <!-- КАРТИНКА 6 -->
                     <div class="image-wrapper">
                         <img src="/a9/photo_2026-05-16_13-43-18.jpg" alt="Сертификат качества">
@@ -950,6 +996,13 @@ h2 {
                         <p class="comment-author">Михаил, 36 ёш</p>
                         <p class="comment-text">Телефон ва компьютердан кейин кўзларим тез чарчарди. Ҳозир иш куни охирида ҳам ўзимни енгилроқ ҳис қиламан.</p>
                     </div>
+                </div>
+                  <div class="comment-card text-only-review">
+                    <div>
+
+                        <p class="comment-author">Гулнора, 29 ёш</p>
+                      
+                  </div>
                 </div>
             </section>
 
