@@ -1,0 +1,1157 @@
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+        <title>Тиббиёт хабарномаси — сенсацион кашфиёт</title>
+        <style>/* Обнуление и базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333333;
+    background-color: #f7f9fa;
+}
+
+/* Навигация */
+.navbar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    background-color: #1e242b;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-a {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.nav-a:hover {
+    opacity: 1; 
+    color: #3498db;
+}
+
+/* Главный контейнер */
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #ffffff;
+    padding: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-radius: 8px;
+}
+
+/* Заголовки и тексты */
+.main-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.badge {
+    display: inline-block;
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.2rem;
+    color: #c0392b;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.6rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+}
+
+.lead-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+/* Секция контента */
+.content-section {
+    margin-top: 2rem;
+}
+
+.image-wrapper {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.image-wrapper img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.image-caption {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.audio-list {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+}
+
+.audio-list audio {
+    display: block;
+    width: 100%;
+}
+
+.text-block p {
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+    text-align: justify;
+}
+
+/* Разделитель */
+.separator {
+    border: 0;
+    height: 1px;
+    background: #e2e8f0;
+    margin: 2.5rem 0;
+}
+
+/* Секция интервью */
+.interview-section .quote-block {
+    background-color: #f8fafc;
+    border-left: 4px solid #3498db;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0 6px 6px 0;
+}
+
+.quote-block p {
+    margin-bottom: 0.5rem;
+}
+
+.quote-block p:last-child {
+    margin-bottom: 0;
+}
+
+/* Списки */
+.styled-list {
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+}
+
+.styled-list li {
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+}
+
+/* Отзывы */
+.review-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    padding: 1.2rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.review-author {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+}
+
+.review-text {
+    font-style: italic;
+    color: #555;
+}
+
+/* Подвал */
+.main-footer {
+    text-align: center;
+    padding: 2rem;
+    color: #7f8c8d;
+    font-size: 0.85rem;
+    background-color: #1e242b;
+    margin-top: 4rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .navbar {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        gap: 1rem;
+        padding: 0.85rem 1rem;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .navbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-a {
+        flex: 0 0 auto;
+        font-size: 0.78rem;
+    }
+
+    .container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.7rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .matreshka-container {
+        gap: 0.4rem;
+    }
+
+    .matreshka {
+        font-size: 5.4rem;
+    }
+}
+
+/* Стили для мини-игры */
+.game-section {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.game-title {
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+}
+
+/* Контейнер для матрёшек */
+.matreshka-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Сама матрёшка */
+.matreshka {
+    position: relative;
+    cursor: pointer;
+    font-size: 6rem; /* Размер эмодзи матрёшки */
+    transition: transform 0.3s ease;
+    user-select: none;
+    flex: 1;
+}
+
+.matreshka:hover:not(.opened) {
+    transform: scale(1.1) translateY(-5px);
+}
+
+/* Скрытый блок с процентом внутри матрёшки */
+.discount-value {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #7f8c8d;
+    background: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Когда матрёшка открывается */
+.matreshka.opened .matreshka-img {
+    transform: translateY(-20px);
+    opacity: 0.6;
+    filter: grayscale(1);
+    transition: all 0.4s ease;
+}
+
+.matreshka.opened .discount-value {
+    transform: translateX(-50%) scale(1);
+}
+
+/* Стили для победителя */
+.matreshka.winner .matreshka-img {
+    filter: none;
+    opacity: 1;
+    transform: translateY(-30px) rotate(10deg);
+}
+
+.matreshka.winner .discount-value {
+    color: #fff;
+    background: #e74c3c;
+    border-color: #e74c3c;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+}
+
+/* Обновленный блок плашки акции */
+.game-promo {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    background-color: #fef2f2;
+    border: 2px solid #ef4444;
+    border-radius: 12px;
+    margin-bottom: 0;
+    transition: all 0.5s ease;
+    box-shadow: 0 10px 25px rgba(239, 68, 68, 0.15);
+}
+
+/* Анимация плавного развертывания */
+.game-promo.show-promo {
+    max-height: 1500px;
+    opacity: 1;
+    margin-bottom: 2.5rem;
+}
+
+/* Сетка контента внутри баннера */
+.promo-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem;
+    text-align: left;
+}
+
+/* Стили для миниатюры лекарства */
+.promo-product {
+    position: relative;
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 5px;
+    border: 1px solid #fee2e2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.promo-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+/* Красный ярлык со скидкой поверх фото */
+.promo-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #dc2626;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3);
+}
+
+/* Текстовая зона */
+.promo-info {
+    flex-grow: 1;
+}
+
+.promo-info h3 {
+    color: #991b1b;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.promo-info p {
+    color: #7f1d1d;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+/* Блок таймера */
+.timer-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #fecaca;
+    display: inline-flex;
+}
+
+.timer-label {
+    font-size: 0.9rem;
+    color: #991b1b;
+    font-weight: 600;
+}
+
+/* Цифровые часы */
+.timer-clock {
+    font-family: monospace;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #dc2626;
+    background: #fee2e2;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+}
+
+/* Адаптивность для мобильных телефонов */
+@media (max-width: 600px) {
+    .promo-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .promo-product {
+        margin: 0 auto;
+    }
+
+    .timer-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        width: 100%;
+    }
+}
+
+
+/* ==========================================================================
+   СТИЛИ ДЛЯ ФОРМЫ ЗАКАЗА (УЗБЕКИСТАН)
+   ========================================================================== */
+
+.order-form-container {
+    background: #ffffff;
+    border-top: 1px dashed #fecaca;
+    padding: 2rem 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.form-title {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.3rem;
+}
+
+.form-subtitle {
+    color: #64748b;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.order-form {
+    max-width: 550px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #334155;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background-color: #f8fafc;
+    color: #334155;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Фокус на полях ввода */
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+    background-color: #ffffff;
+}
+
+/* Кнопка отправки */
+.submit-btn {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: #ffffff;
+    border: none;
+    padding: 1.1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+    transition: transform 0.1s ease, box-shadow 0.2s ease;
+    margin-top: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+    box-shadow: 0 6px 20px rgba(22, 163, 74, 0.4);
+}
+
+.submit-btn:active {
+    transform: scale(0.98);
+}
+
+/* Адаптивность для мобилок */
+@media (max-width: 480px) {
+    .order-form-container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .form-title {
+        font-size: 1.15rem;
+    }
+    
+    .submit-btn {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+}
+
+/* Комментарии с фото */
+.comments-section {
+    margin-top: 2rem;
+}
+
+.comment-card {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+}
+
+.comment-card > div {
+    min-width: 0;
+}
+
+.comment-photo {
+    width: 96px;
+    height: 76px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.comment-author {
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.25rem;
+    line-height: 1.25;
+}
+
+.comment-text {
+    color: #475569;
+    font-size: 0.98rem;
+    line-height: 1.55;
+}
+
+/* Локальные AI-картинки */
+.image-wrapper img,
+.promo-img,
+.comment-photo {
+    background: #f8fafc;
+}
+
+@media (max-width: 600px) {
+    .comments-section {
+        margin-top: 1.5rem;
+    }
+
+    .bottom-reviews h2 {
+        margin-bottom: 1rem;
+    }
+
+    .comment-card {
+        flex-direction: row;
+        gap: 0.75rem;
+        align-items: flex-start;
+        padding: 0.85rem;
+        border-radius: 10px;
+        margin-bottom: 0.8rem;
+        box-shadow: 0 3px 12px rgba(15, 23, 42, 0.06);
+    }
+
+    .comment-photo {
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        border: 2px solid #e2e8f0;
+        object-fit: cover;
+    }
+
+    .comment-author {
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .comment-text {
+        font-size: 0.93rem;
+        line-height: 1.45;
+    }
+
+    .text-only-review {
+        padding-left: 0.85rem;
+    }
+}
+
+
+.bottom-reviews {
+    margin-top: 2.5rem;
+}
+
+.bottom-reviews h2 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+.text-only-review {
+    padding-left: 1.2rem;
+}
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const matreshkas = document.querySelectorAll(".matreshka");
+    const gamePromo = document.getElementById("gamePromo");
+    const timerMin = document.getElementById("timerMin");
+    const timerSec = document.getElementById("timerSec");
+    const phoneInput = document.getElementById("userPhone");
+    const orderForm = document.getElementById("orderForm");
+    const audioPlayers = document.querySelectorAll(".audio-list audio");
+    
+    let isGameOver = false;
+    let countdownInterval;
+
+    audioPlayers.forEach(currentAudio => {
+        currentAudio.addEventListener("play", () => {
+            audioPlayers.forEach(otherAudio => {
+                if (otherAudio !== currentAudio) {
+                    otherAudio.pause();
+                    otherAudio.currentTime = 0;
+                }
+            });
+        });
+    });
+
+    // Контроль ввода телефона: не даем удалить "+998"
+    if (phoneInput) {
+        phoneInput.addEventListener("input", () => {
+            if (!phoneInput.value.startsWith("+998")) {
+                phoneInput.value = "+998";
+            }
+        });
+    }
+
+    // Функция запуска обратного отсчета
+    function startTimer(durationSeconds) {
+        let timeRemaining = durationSeconds;
+
+        countdownInterval = setInterval(() => {
+            let minutes = Math.floor(timeRemaining / 60);
+            let seconds = timeRemaining % 60;
+
+            if (timerMin) timerMin.textContent = minutes < 10 ? "0" + minutes : minutes;
+            if (timerSec) timerSec.textContent = seconds < 10 ? "0" + seconds : seconds;
+
+            if (timeRemaining <= 0) {
+                clearInterval(countdownInterval);
+                gamePromo.classList.remove("show-promo");
+                setTimeout(() => {
+                    gamePromo.style.display = "none"; // Исправлено: убрали дублирующийся .style
+                }, 500); 
+            }
+
+            timeRemaining--;
+        }, 1000);
+    }
+
+    // Логика клика по матрёшкам
+    matreshkas.forEach(clickedMatreshka => {
+        clickedMatreshka.addEventListener("click", () => {
+            if (isGameOver) return;
+            isGameOver = true;
+
+            const mainDiscount = clickedMatreshka.querySelector(".discount-value");
+            if (mainDiscount) mainDiscount.textContent = "70%";
+            clickedMatreshka.classList.add("opened", "winner");
+
+            matreshkas.forEach(otherMatreshka => {
+                if (otherMatreshka !== clickedMatreshka) {
+                    const randomPercent = Math.floor(Math.random() * 20) + 10;
+                    const otherDiscount = otherMatreshka.querySelector(".discount-value");
+                    if (otherDiscount) otherDiscount.textContent = randomPercent + "%";
+                    otherMatreshka.classList.add("opened");
+                }
+            });
+
+            // Показываем плашку акции и форму
+            setTimeout(() => {
+                if (gamePromo) {
+                    gamePromo.classList.add("show-promo");
+                    startTimer(600);
+                    gamePromo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 400);
+        });
+    });
+
+    // Проверка формы перед отправкой
+    if (orderForm && phoneInput) {
+        orderForm.addEventListener("submit", (e) => {
+            const cleanPhone = phoneInput.value.replace(/\s+/g, '');
+            if (cleanPhone.length !== 13) {
+                e.preventDefault();
+                alert("Илтимос, Ўзбекистон телефон рақамини тўғри киритинг: +998XXXXXXXXX (коддан кейин 9 та рақам).");
+            }
+        });
+    }
+});
+</script>
+    </head>
+    <body>
+        
+        <!-- Навигация -->
+        <nav class="navbar">
+            <a href="#" class="nav-a">ЯНГИЛИКЛАР</a>
+            <a href="#" class="nav-a">СОҒЛИҚ</a>
+            <a href="#" class="nav-a">ФАОЛИЯТ</a>
+            <a href="#" class="nav-a">ҲУЖЖАТЛАР</a>
+            <a href="#" class="nav-a">МАТБУОТ МАРКАЗИ</a>
+        </nav>
+
+        <!-- Асосий контейнер -->
+        <main class="container">
+            
+            <!-- Сарлавҳа -->
+            <header class="main-header">
+                <span class="badge">ЭКСКЛЮЗИВ ИНТЕРВЬЮ</span>
+                <h1>ЁШ ТИББИЁТ ХОДИМИ ИМКОНИ ЙЎҚДЕК КЎРИНГАН НАРСАНИ УДДАЛАДИ!</h1>
+                <p class="lead-text">Узоқ Шарқдан ажойиб усул: офтальмолог талаба операция, лазер ва қиммат кўзойнакларсиз кўришни тиклаш йўлини топди!</p>
+            </header>
+
+            <!-- Блок ИНТЕРВЬЮ -->
+            <section class="content-section">
+                <div class="image-wrapper">
+                    <img src="./ChatGPT Image 22 мая 2026 г., 02_34_07.png" alt="Илья Резаков">
+                    <p class="image-caption">Илья Резаков тиббиёт портали бош муҳарририга интервью бермоқда</p>
+                </div>
+                
+                <div class="text-block">
+                    <!-- Раунд 1 -->
+                    <p><strong>Мухбир:</strong> Илья, сизнинг «Кристал» лойиҳангиз катта шов-шувга сабаб бўлди. Аммо йирик фармкомпаниялар одамлар бу ҳақда билишини истамаяпти. Нега формулангиз атрофида шунча баҳслар бор?</p>
+                    <p><strong>Илья Резаков:</strong> Ҳаммаси оддий — бугун кўз операциялари жуда қиммат, оддий томчилар савдоси эса миллиардлаб даромад келтиради. Арзон ва самарали воситанинг пайдо бўлиши бутун оптика бизнесига таҳдид солади. Уларга инсоннинг бир мартада муаммодан халос бўлиши фойдали эмас, уларга одамлар умр бўйи дорихонага қатнаши керак.</p>
+                    
+                    <!-- КАРТИНКА 2 -->
+                    <div class="image-wrapper">
+                        <img src="./ChatGPT Image 22 мая 2026 г., 02_37_10.png" alt="Лаборатория разработки препарата">
+                        <p class="image-caption">Препаратнинг илк намуналари ишлаб чиқилган лабораториядан фото</p>
+                    </div>
+
+                    <!-- Раунд 2 -->
+                    <p><strong>Мухбир:</strong> Воситани яратишга шахсий воқеа сабаб бўлгани ростми?</p>
+                    <p><strong>Илья Резаков:</strong> Ҳа, мен тиббиёт университетининг энг яхши талабаларидан бири эдим. Аммо онамда катаракта сабаб кўриш тез ёмонлаша бошлаганда, ҳатто профессорларим ҳам чора топа олмади. Операция жуда қиммат ва хавфли эди. Шунда мен уч йил лабораторияда изландим. Ёввойи қушлар қаригунча қандай қилиб ўткир кўришни сақлашини ўргандим. Натижада онам операция ва кўзойнаксиз яна равшан кўра бошлади. «Кристал» формуласи — юзлаб синовлар натижаси.</p>
+
+                    <!-- КАРТИНКА 3 -->
+                    <div class="image-wrapper">
+                        <img src="./ChatGPT Image 22 мая 2026 г., 02_39_23.png  " alt="История восстановления зрения">
+                        <p class="image-caption">Илья Резаковнинг онаси кўришни тиклаш курсидан сўнг</p>
+                    </div>
+
+                    <!-- Раунд 3 -->
+                    <p><strong>Мухбир:</strong> Фармгигантлар патентингизни сотиб олишга уриндими?</p>
+                    <p><strong>Илья Резаков:</strong> Университет йўлагидаёқ менга миллионлар таклиф қилишди. Шарт битта эди — формулани йўқ қилиш ёки нархни 100 баравар ошириш. Мен рад этдим. Мақсадим — пенсионер ҳам, талаба ҳам яхши кўриш имконига эга бўлсин.</p>
+
+                    <!-- КАРТИНКА 4 -->
+                    <div class="image-wrapper">
+                        <img src="./ChatGPT Image 22 мая 2026 г., 02_45_45.png" alt="Документы и сертификаты">
+                        <p class="image-caption">Фармкомпания вакиллари сотиб олмоқчи бўлган ҳужжатлар ва патентлар</p>
+                    </div>
+
+                    <!-- Раунд 4 -->
+                    <p><strong>Мухбир:</strong> «Кристал» кўзларга қандай таъсир қилади? У оддий томчилардан нимаси билан фарқ қилади?</p>
+                    <p><strong>Илья Резаков:</strong> Оддий дорихона томчилари фақат қисқа вақтга қизаришни камайтиради ва муаммони яширади. «Кристал» эса ичкаридан таъсир қилади: таркибий қисмлар гавҳарни тозалашга, кўз тубида қон айланишини яхшилашга ва фокусланишни қўллаб-қувватлашга ёрдам беради.</p>
+
+                    <!-- КАРТИНКА 5 -->
+                    <div class="image-wrapper">
+                        <img src="./ChatGPT Image 22 мая 2026 г., 02_46_23.png" alt="График улучшения зрения">
+                        <p class="image-caption">Мустақил синовлар натижасига кўра кўриш ўткирлиги яхшиланиши графиги</p>
+                    </div>
+
+                    <!-- Раунд 5 -->
+                    <p><strong>Мухбир:</strong> Расмий сертификатлаш ва текширувлар вақтида қийинчиликлар бўлдими?</p>
+                    <p><strong>Илья Резаков:</strong> Бу алоҳида синов бўлди. Ҳужжатлар чўзилди, турли баҳоналар айтилди. Аммо мустақил мутахассислар иштирокчиларнинг катта қисмида ижобий натижа қайд этилганини кўргач, ҳужжатлар тасдиқланди. Натижаларни яшириш қийин эди.</p>
+                    <div class="audio-list">
+                        <audio controls preload="none">
+                            <source src="./audio_2026-05-22_14-56-24.ogg" type="audio/ogg">
+                        </audio>
+                        <audio controls preload="none">
+                            <source src="./audio_2026-05-22_14-56-42.ogg" type="audio/ogg">
+                        </audio>
+                        <audio controls preload="none">
+                            <source src="./audio_2026-05-22_14-56-49.ogg" type="audio/ogg">
+                        </audio>
+                    </div>
+                    <!-- КАРТИНКА 6 -->
+                    <div class="image-wrapper">
+                        <img src="/a9/photo_2026-05-16_13-43-18.jpg" alt="Сертификат качества">
+                        <p class="image-caption">«Кристал» комплекси сифати бўйича расмий сертификат</p>
+                    </div>
+
+                    <!-- Раунд 6 -->
+                    <p><strong>Мухбир:</strong> Бу комплексни ҳозир қаердан олиш мумкин? У оддий дорихоналарга чиқадими?</p>
+                    <p><strong>Илья Резаков:</strong> У дорихоналарга чиқмайди, чунки нархни дарҳол бир неча баравар оширишади. «Кристал» расмий сайт орқали тўғридан-тўғри тарқатилади. Ҳозир одамлар комплексни имтиёзли дастур орқали арзонроқ буюртма қилиши мумкин.</p>
+                </div>
+            </section>
+
+            <hr class="separator">
+
+            <!-- Блок СОСТАВА -->
+            <section class="interview-section">
+                <h2>ФОРМУЛАНИНГ АСОСИЙ КОМПОНЕНТЛАРИ</h2>
+                <p style="margin-bottom: 1.5rem; color: #555;">Иккита кучли био-комплекс максимал натижани таъминлашга ёрдам беради:</p>
+                
+                <div class="quote-block">
+                    <p><strong>1. Узоқ Шарқ черникаси экстракти ва антоцианлар</strong></p>
+                    <p>Кўз чарчоғини камайтириш, майда капиллярларни қўллаб-қувватлаш ва тўр пардани ҳимоя қилишга ёрдам беради.</p>
+                </div>
+
+                <div class="quote-block">
+                    <p><strong>2. Лютеин, зеаксантин ва витаминлар концентрати (A, B, рух)</strong></p>
+                    <p>Кўриш нервини озиқлантириш, гавҳар эластиклигини қўллаб-қувватлаш ва экран нурланишидан ҳимоя қилишга ёрдам беради.</p>
+                </div>
+            </section>
+
+            <hr class="separator">
+
+            <!-- Информационный блок про действие препарата -->
+            <section class="product-info">
+                <h2>«Кристал» комплекси нима?</h2>
+                <p>Бу комплекс таъсирга эга сертификатланган ўсимлик концентрати:</p>
+                <ul class="styled-list">
+                    <li>Кўз зўриқиши ва чарчоғини камайтиришга ёрдам беради;</li>
+                    <li>Тўр пардани табиий қўллаб-қувватлашга ёрдам беради;</li>
+                    <li>Компьютер ва телефонда узоқ ишлаганда кўзларни қўллаб-қувватлайди;</li>
+                    <li>Қоронғида кўриш равшанлигини қўллаб-қувватлайди.</li>
+                </ul>
+            </section>
+            <hr class="separator">
+
+            <!-- МАТРЁШКА ЎЙИНИ ВА БУЮРТМА ФОРМАСИ -->
+            <section class="game-section">
+                <!-- Динамический блок акции с таймером и формой -->
+                <div class="game-promo" id="gamePromo">
+                    <div class="promo-content">
+                        <div class="promo-product">
+                            <img src="./assets/ai-product.jpg" alt="Комплекс Кристал" class="promo-img">
+                            <span class="promo-badge">-70%</span>
+                        </div>
+                        <div class="promo-info">
+                            <h3>ТАБРИКЛАЙМИЗ! СИЗ 70% ЧЕГИРМА ЮТДИНГИЗ!</h3>
+                            <p>«Кристал» имтиёзли комплекси сизнинг рақамингиз учун брон қилинди. Акция тугамасидан буюртма беринг!</p>
+                            <div class="timer-container">
+                                <span class="timer-label">Акция тугашига қолди:</span>
+                                <div class="timer-clock">
+                                    <span id="timerMin">10</span>:<span id="timerSec">00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ЎЗБЕКИСТОН БЎЙИЧА БУЮРТМА ФОРМАСИ -->
+                    <div class="order-form-container">
+                        <h4 class="form-title">Имтиёзли дастур бўйича расмий буюртма шакли</h4>
+                        <p class="form-subtitle">Етказиб бериш бутун Ўзбекистон бўйлаб курьер ёки почта орқали амалга оширилади.</p>
+                        
+                        <form action="#" method="POST" class="order-form" id="orderForm">
+                            <div class="form-group">
+                                <label for="userName">Исмингиз:</label>
+                                <input type="text" id="userName" name="name" placeholder="Масалан: Анвар" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="userAge">Ёшингиз:</label>
+                                <input type="number" id="userAge" name="age" min="12" max="120" placeholder="Масалан: 45" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="userCity">Ўзбекистон шаҳри / вилояти:</label>
+                                <select id="userCity" name="city" required>
+                                    <option value="" disabled selected>-- Шаҳрингизни танланг --</option>
+                                    <option value="Tashkent">Ташкент (Toshkent)</option>
+                                    <option value="Samarkand">Самарканд (Samarqand)</option>
+                                    <option value="Bukhara">Бухара (Buxoro)</option>
+                                    <option value="Andijan">Андижан (Andijon)</option>
+                                    <option value="Namangan">Наманган (Namangan)</option>
+                                    <option value="Fergana">Фергана (Farg'ona)</option>
+                                    <option value="Nukus">Нукус (Nukus / Qoraqalpog'iston)</option>
+                                    <option value="Karshi">Карши (Qarshi)</option>
+                                    <option value="Khiva">Хива / Ургенч (Xorazm)</option>
+                                    <option value="Navoi">Навои (Navoiy)</option>
+                                    <option value="Jizzakh">Джизак (Jizzax)</option>
+                                    <option value="Gulistan">Гулистан (Sirdaryo)</option>
+                                    <option value="Termez">Термез (Surxondaryo)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="userAddress">Аниқ манзил (кўча, уй, хонадон):</label>
+                                <input type="text" id="userAddress" name="address" placeholder="Амир Темур кўчаси, 12-уй, 4-хонадон" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="userPhone">Телефон рақами:</label>
+                                <input type="tel" id="userPhone" name="phone" value="+998" placeholder="+998 (XX) XXX-XX-XX" required>
+                            </div>
+
+                            <button type="submit" class="submit-btn">АКЦИЯ БЎЙИЧА ОЛИШ</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <h2 class="game-title">Учта матрёшкадан бирини танланг ва чегирмани олинг:</h2>
+                
+                <div class="matreshka-container">
+                    <div class="matreshka" data-id="1">
+                        <div class="matreshka-img">🪆</div>
+                        <div class="discount-value"></div>
+                    </div>
+                    <div class="matreshka" data-id="2">
+                        <div class="matreshka-img">🪆</div>
+                        <div class="discount-value"></div>
+                    </div>
+                    <div class="matreshka" data-id="3">
+                        <div class="matreshka-img">🪆</div>
+                        <div class="discount-value"></div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="separator">
+
+            <!-- Пастдаги отзывлар -->
+            <section class="comments-section bottom-reviews">
+                <h2>Отзывлар</h2>
+
+                <div class="comment-card">
+                    <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m2_1.jpg" alt="Отзыв" class="comment-photo">
+                    <div>
+                        <p class="comment-author">Дилшод, 41 ёш</p>
+                        <p class="comment-text">Отам учун буюртма қилгандим. Оператор тез қўнғироқ қилди, ҳаммасини тушунтирди. Курсдан кейин кўзлари камроқ чарчайди, газета ўқиши осонлашди.</p>
+                    </div>
+                </div>
+
+                <div class="comment-card">
+                    <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m18.jpg" alt="Отзыв" class="comment-photo">
+                    <div>
+                        <p class="comment-author">Алексей, 32 ёш</p>
+                        <p class="comment-text">Куни бўйи монитор олдида ишлайман. Кечқурун кўздаги қизариш ва “қум бордек” ҳис анча камайди.</p>
+                    </div>
+                </div>
+
+                <div class="comment-card">
+                    <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w2.jpg" alt="Отзыв" class="comment-photo">
+                    <div>
+                        <p class="comment-author">Малика, 58 ёш</p>
+                        <p class="comment-text">Аввалига ишонмагандим, лекин акция бўйича синаб кўрдим. Буюртма сайтда осон тўлдирилади, дорихонама-дорихона юриш шарт эмас.</p>
+                    </div>
+                </div>
+
+                <div class="comment-card text-only-review">
+                    <div>
+                        <p class="comment-author">Валентина Петровна, 64 ёш</p>
+                        <p class="comment-text">Кўриш йилдан-йилга пасайиб бораётганди. Бир ойдан кейин майда ёзувларни ўқиш анча қулайлашди.</p>
+                    </div>
+                </div>
+
+                <div class="comment-card text-only-review">
+                    <div>
+                        <p class="comment-author">Михаил, 36 ёш</p>
+                        <p class="comment-text">Телефон ва компьютердан кейин кўзларим тез чарчарди. Ҳозир иш куни охирида ҳам ўзимни енгилроқ ҳис қиламан.</p>
+                    </div>
+                </div>
+                  <div class="comment-card text-only-review">
+                    <div>
+
+                        <p class="comment-author">Гулнора, 29 ёш</p>
+                      
+                  </div>
+                </div>
+            </section>
+
+
+        </main>
+
+        <!-- Сайт пастки қисми -->
+        <footer class="main-footer">
+            <p>&copy; 2026 Тиббиёт хабарномаси. Барча ҳуқуқлар ҳимояланган. Маълумот танишиш мақсадида берилган.</p>
+        </footer>
+
+        <!-- Скрипт охирида уланади -->
+ 
+    <script id="uz-phone-validation-v1">
+(function () {
+    const UZ_PREFIX = '998';
+    const LOCAL_DIGITS = 9;
+
+    function getDigits(value) {
+        return String(value || '').replace(/\D/g, '');
+    }
+
+    function getLocalDigits(value) {
+        let digits = getDigits(value);
+        if (digits.startsWith(UZ_PREFIX)) {
+            digits = digits.slice(UZ_PREFIX.length);
+        }
+        return digits.slice(0, LOCAL_DIGITS);
+    }
+
+    function phoneMessage(count) {
+        if (count <= 0) {
+            return '\u0423 \u0432\u0430\u0441 \u043d\u0435 \u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d \u043d\u043e\u043c\u0435\u0440 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430. \u0412\u0432\u0435\u0434\u0438\u0442\u0435 9 \u0446\u0438\u0444\u0440 \u043f\u043e\u0441\u043b\u0435 +998.';
+        }
+        const missing = LOCAL_DIGITS - count;
+        if (missing === 1) {
+            return '\u0423 \u0432\u0430\u0441 \u043d\u0435 \u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d\u043e 1 \u0446\u0438\u0444\u0440\u0430 \u0432 \u043d\u043e\u043c\u0435\u0440\u0435 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430. \u0412\u0432\u0435\u0434\u0438\u0442\u0435 9 \u0446\u0438\u0444\u0440 \u043f\u043e\u0441\u043b\u0435 +998.';
+        }
+        if (missing > 1 && missing < 5) {
+            return '\u0423 \u0432\u0430\u0441 \u043d\u0435 \u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d\u043e ' + missing + ' \u0446\u0438\u0444\u0440\u044b \u0432 \u043d\u043e\u043c\u0435\u0440\u0435 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430. \u0412\u0432\u0435\u0434\u0438\u0442\u0435 9 \u0446\u0438\u0444\u0440 \u043f\u043e\u0441\u043b\u0435 +998.';
+        }
+        return '\u0423 \u0432\u0430\u0441 \u043d\u0435 \u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d\u043e ' + missing + ' \u0446\u0438\u0444\u0440 \u0432 \u043d\u043e\u043c\u0435\u0440\u0435 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430. \u0412\u0432\u0435\u0434\u0438\u0442\u0435 9 \u0446\u0438\u0444\u0440 \u043f\u043e\u0441\u043b\u0435 +998.';
+    }
+
+    function formatPhone(input) {
+        const local = getLocalDigits(input.value);
+        input.value = '+998' + (local ? ' ' + local : '');
+    }
+
+    function validatePhoneInput(input) {
+        const local = getLocalDigits(input.value);
+        if (local.length !== LOCAL_DIGITS) {
+            alert(phoneMessage(local.length));
+            input.focus();
+            return false;
+        }
+        formatPhone(input);
+        return true;
+    }
+
+    function getVisiblePhoneInputs(scope) {
+        const root = scope && scope.querySelectorAll ? scope : document;
+        return Array.from(root.querySelectorAll('input[type="tel"]')).filter((input) => {
+            return !input.disabled && input.offsetParent !== null;
+        });
+    }
+
+    function validatePhones(scope) {
+        const phones = getVisiblePhoneInputs(scope);
+        for (const phone of phones) {
+            if (!validatePhoneInput(phone)) return false;
+        }
+        return true;
+    }
+
+    function initPhoneValidation() {
+        document.querySelectorAll('input[type="tel"]').forEach((input) => {
+            input.setAttribute('inputmode', 'numeric');
+            input.setAttribute('autocomplete', 'tel');
+            if (!input.value) input.value = '+998';
+            input.addEventListener('input', () => {
+                const local = getLocalDigits(input.value);
+                input.value = '+998' + (local ? ' ' + local : '');
+            });
+            input.addEventListener('paste', () => setTimeout(() => formatPhone(input), 0));
+        });
+
+        document.addEventListener('submit', (event) => {
+            if (!validatePhones(event.target)) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
+        }, true);
+
+        document.addEventListener('click', (event) => {
+            const button = event.target.closest('button, input[type="button"], input[type="submit"]');
+            if (!button) return;
+            const scope = button.closest('form, .order-form-container, .form-inputs, .contact-form') || document;
+            const hasPhone = getVisiblePhoneInputs(scope).length > 0;
+            const looksLikeSubmit = button.type === 'submit' || button.classList.contains('order-button') || /submit|order|buy|buyurtma/i.test(button.getAttribute('onclick') || button.textContent || '');
+            if (hasPhone && looksLikeSubmit && !validatePhones(scope)) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
+        }, true);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPhoneValidation);
+    } else {
+        initPhoneValidation();
+    }
+})();
+</script>
+</body>
+    </html>
