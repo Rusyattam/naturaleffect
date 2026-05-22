@@ -585,6 +585,10 @@ h2 {
     box-shadow: 0 4px 14px rgba(0,0,0,0.04);
 }
 
+.comment-card > div {
+    min-width: 0;
+}
+
 .comment-photo {
     width: 96px;
     height: 76px;
@@ -597,11 +601,13 @@ h2 {
     font-weight: 700;
     color: #1e293b;
     margin-bottom: 0.25rem;
+    line-height: 1.25;
 }
 
 .comment-text {
     color: #475569;
     font-size: 0.98rem;
+    line-height: 1.55;
 }
 
 /* Локальные AI-картинки */
@@ -612,14 +618,44 @@ h2 {
 }
 
 @media (max-width: 600px) {
+    .comments-section {
+        margin-top: 1.5rem;
+    }
+
+    .bottom-reviews h2 {
+        margin-bottom: 1rem;
+    }
+
     .comment-card {
-        flex-direction: column;
+        flex-direction: row;
+        gap: 0.75rem;
+        align-items: flex-start;
+        padding: 0.85rem;
+        border-radius: 10px;
+        margin-bottom: 0.8rem;
+        box-shadow: 0 3px 12px rgba(15, 23, 42, 0.06);
     }
 
     .comment-photo {
-        width: 100%;
-        height: auto;
-        max-height: 220px;
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        border: 2px solid #e2e8f0;
+        object-fit: cover;
+    }
+
+    .comment-author {
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .comment-text {
+        font-size: 0.93rem;
+        line-height: 1.45;
+    }
+
+    .text-only-review {
+        padding-left: 0.85rem;
     }
 }
 
