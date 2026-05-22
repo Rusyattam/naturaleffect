@@ -242,7 +242,20 @@ h2 {
     }
 
     .matreshka {
-        font-size: 5.4rem;
+        font-size: 0;
+    }
+
+    .matreshka-img {
+        width: clamp(70px, 25vw, 92px);
+    }
+
+    .discount-value {
+        bottom: -4px;
+        font-size: 0.95rem;
+    }
+
+    .matreshka.winner .discount-value {
+        font-size: 1.1rem;
     }
 }
 
@@ -265,16 +278,30 @@ h2 {
     gap: 1rem;
     max-width: 500px;
     margin: 0 auto;
+    --matreshka-image: url("./matreshka-photo.jpg");
 }
 
 /* Сама матрёшка */
 .matreshka {
     position: relative;
     cursor: pointer;
-    font-size: 6rem; /* Размер эмодзи матрёшки */
+    font-size: 0;
     transition: transform 0.3s ease;
     user-select: none;
     flex: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+}
+
+.matreshka-img {
+    width: 118px;
+    aspect-ratio: 202 / 249;
+    background-image: var(--matreshka-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: all 0.4s ease;
 }
 
 .matreshka:hover:not(.opened) {
@@ -302,7 +329,6 @@ h2 {
     transform: translateY(-20px);
     opacity: 0.6;
     filter: grayscale(1);
-    transition: all 0.4s ease;
 }
 
 .matreshka.opened .discount-value {
@@ -762,11 +788,13 @@ h2 {
     // Проверка формы перед отправкой
     if (orderForm && phoneInput) {
         orderForm.addEventListener("submit", (e) => {
-            const cleanPhone = phoneInput.value.replace(/\s+/g, '');
+            e.preventDefault();
+            const cleanPhone = phoneInput.value.replace(/\D/g, '');
             if (cleanPhone.length !== 13) {
-                e.preventDefault();
                 alert("Илтимос, Ўзбекистон телефон рақамини тўғри киритинг: +998XXXXXXXXX (коддан кейин 9 та рақам).");
+                return;
             }
+            alert("Раҳмат! Буюртмангиз қабул қилинди. Оператор тез орада сиз билан боғланади.");
         });
     }
 });
@@ -976,15 +1004,15 @@ h2 {
                 
                 <div class="matreshka-container">
                     <div class="matreshka" data-id="1">
-                        <div class="matreshka-img">🪆</div>
+                        <div class="matreshka-img" aria-label="Матрёшка"></div>
                         <div class="discount-value"></div>
                     </div>
                     <div class="matreshka" data-id="2">
-                        <div class="matreshka-img">🪆</div>
+                        <div class="matreshka-img" aria-label="Матрёшка"></div>
                         <div class="discount-value"></div>
                     </div>
                     <div class="matreshka" data-id="3">
-                        <div class="matreshka-img">🪆</div>
+                        <div class="matreshka-img" aria-label="Матрёшка"></div>
                         <div class="discount-value"></div>
                     </div>
                 </div>
