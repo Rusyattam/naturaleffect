@@ -852,19 +852,36 @@ h2 {
 }
 
 .telegram-invite {
-    display: none;
-    max-width: 560px;
-    margin: 1.5rem auto 0;
-    padding: 1.7rem 1.25rem;
+    max-width: 420px;
+    width: calc(100% - 2rem);
+    padding: 1.7rem 1.25rem 1.25rem;
     text-align: center;
     background: linear-gradient(180deg, #ffffff 0%, #effdf5 100%);
     border: 2px solid #22c55e;
-    border-radius: 12px;
-    box-shadow: 0 16px 34px rgba(22, 163, 74, 0.18);
+    border-radius: 24px;
+    box-shadow: 0 22px 60px rgba(15, 23, 42, 0.28);
+    transform: translateY(18px) scale(0.96);
+    transition: transform 0.25s ease;
 }
 
-.telegram-invite.show {
-    display: block;
+.telegram-invite-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(15, 23, 42, 0.38);
+    backdrop-filter: blur(4px);
+}
+
+.telegram-invite-overlay.show {
+    display: flex;
+}
+
+.telegram-invite-overlay.show .telegram-invite {
+    transform: translateY(0) scale(1);
 }
 
 .telegram-invite-title {
@@ -883,14 +900,21 @@ h2 {
     margin: 0 auto 1.15rem;
 }
 
+.telegram-invite-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+}
+
 .telegram-invite-link {
-    display: inline-block;
+    display: block;
     padding: 0.95rem 1.35rem;
     color: #ffffff;
     background: linear-gradient(135deg, #229ed9 0%, #168ac2 100%);
-    border-radius: 7px;
+    border-radius: 999px;
     font-size: 1rem;
     font-weight: 800;
+    text-align: center;
     text-decoration: none;
     box-shadow: 0 5px 16px rgba(34, 158, 217, 0.28);
     transition: transform 0.15s ease, background 0.2s ease;
@@ -898,6 +922,22 @@ h2 {
 
 .telegram-invite-link:hover {
     transform: translateY(-1px);
+}
+
+.telegram-invite-cancel {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    color: #64748b;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.98rem;
+    font-weight: 800;
+}
+
+.telegram-invite-cancel:hover {
+    background: #f8fafc;
 }
 
 .telegram-invite-mark {
@@ -936,6 +976,7 @@ h2 {
     const stockAlertCard = document.querySelector(".stock-alert-card");
     const matreshkaGameCard = document.querySelector(".matreshka-game-card");
     const telegramInvite = document.getElementById("telegramInvite");
+    const telegramInviteClose = document.getElementById("telegramInviteClose");
     const audioPlayers = document.querySelectorAll(".audio-list audio");
     let isGameOver = false;
     
@@ -1075,6 +1116,12 @@ h2 {
         });
     }
 
+    if (telegramInviteClose && telegramInvite) {
+        telegramInviteClose.addEventListener("click", () => {
+            telegramInvite.classList.remove("show");
+        });
+    }
+
     matreshkas.forEach(clickedMatreshka => {
         clickedMatreshka.addEventListener("click", () => {
             if (isGameOver) return;
@@ -1166,7 +1213,6 @@ h2 {
                     if (gamePromo) gamePromo.style.display = "none";
                     if (telegramInvite) {
                         telegramInvite.classList.add("show");
-                        telegramInvite.scrollIntoView({ behavior: "smooth", block: "center" });
                     }
                 } else {
                     alert("Хатолик юз берди (Telegram API).");
@@ -1383,11 +1429,16 @@ h2 {
                         </form>
                     </div>
                 </div>
-                <div class="telegram-invite" id="telegramInvite">
-                    <div class="telegram-invite-mark">✓</div>
-                    <div class="telegram-invite-title">Раҳмат! Буюртмангиз қабул қилинди</div>
-                    <p class="telegram-invite-text">Оператор тез орада сиз билан боғланади. Янги акциялар ва фойдали маълумотлар учун Telegram каналимизга ўтинг.</p>
-                    <a class="telegram-invite-link" href="https://t.me/naturaleffect_kristall" target="_blank" rel="noopener">Telegram каналга ўтиш</a>
+                <div class="telegram-invite-overlay" id="telegramInvite">
+                    <div class="telegram-invite" role="dialog" aria-modal="true" aria-labelledby="telegramInviteTitle">
+                        <div class="telegram-invite-mark">✓</div>
+                        <div class="telegram-invite-title" id="telegramInviteTitle">Раҳмат! Буюртмангиз қабул қилинди</div>
+                        <p class="telegram-invite-text">Оператор тез орада сиз билан боғланади. Янги акциялар ва фойдали маълумотлар учун Telegram каналимизга ўтишни хоҳлайсизми?</p>
+                        <div class="telegram-invite-actions">
+                            <a class="telegram-invite-link" href="https://t.me/naturaleffect_kristall" target="_blank" rel="noopener">Telegram каналга ўтиш</a>
+                            <button type="button" class="telegram-invite-cancel" id="telegramInviteClose">Йўқ, раҳмат</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="stock-alert-card">
                     <div class="stock-alert-title">Акциядаги товар тугаб бормоқда</div>
