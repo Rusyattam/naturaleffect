@@ -855,12 +855,12 @@ h2 {
     display: none;
     max-width: 560px;
     margin: 1.5rem auto 0;
-    padding: 1.5rem;
+    padding: 1.7rem 1.25rem;
     text-align: center;
-    background: #ffffff;
+    background: linear-gradient(180deg, #ffffff 0%, #effdf5 100%);
     border: 2px solid #22c55e;
-    border-radius: 10px;
-    box-shadow: 0 12px 28px rgba(22, 163, 74, 0.14);
+    border-radius: 12px;
+    box-shadow: 0 16px 34px rgba(22, 163, 74, 0.18);
 }
 
 .telegram-invite.show {
@@ -869,7 +869,7 @@ h2 {
 
 .telegram-invite-title {
     color: #15803d;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     font-weight: 800;
     line-height: 1.25;
     margin-bottom: 0.6rem;
@@ -877,16 +877,17 @@ h2 {
 
 .telegram-invite-text {
     color: #475569;
-    font-size: 0.98rem;
+    font-size: 1rem;
     line-height: 1.45;
-    margin-bottom: 1rem;
+    max-width: 420px;
+    margin: 0 auto 1.15rem;
 }
 
 .telegram-invite-link {
     display: inline-block;
-    padding: 0.85rem 1.2rem;
+    padding: 0.95rem 1.35rem;
     color: #ffffff;
-    background: #229ed9;
+    background: linear-gradient(135deg, #229ed9 0%, #168ac2 100%);
     border-radius: 7px;
     font-size: 1rem;
     font-weight: 800;
@@ -896,8 +897,22 @@ h2 {
 }
 
 .telegram-invite-link:hover {
-    background: #168ac2;
     transform: translateY(-1px);
+}
+
+.telegram-invite-mark {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+    border-radius: 50%;
+    font-size: 1.8rem;
+    font-weight: 900;
+    box-shadow: 0 8px 20px rgba(22, 163, 74, 0.26);
 }
 </style>
 <script>
@@ -1023,6 +1038,43 @@ h2 {
         return rawValue;
     }
 
+    function formatPhoneInput(value) {
+        let digits = value.replace(/\D/g, "");
+
+        if (digits.startsWith("998")) {
+            digits = digits.slice(3);
+        } else if (digits.length === 10 && (digits.startsWith("0") || digits.startsWith("8"))) {
+            digits = digits.slice(1);
+        }
+
+        digits = digits.slice(0, 9);
+
+        let result = "+998";
+        if (digits.length > 0) result += ` ${digits.slice(0, 2)}`;
+        if (digits.length > 2) result += `-${digits.slice(2, 5)}`;
+        if (digits.length > 5) result += `-${digits.slice(5, 9)}`;
+
+        return result + (digits.length === 0 ? " " : "");
+    }
+
+    function hasFullPhoneNumber(value) {
+        const digits = value.replace(/\D/g, "");
+        const localNumber = digits.startsWith("998") ? digits.slice(3) : digits;
+        return localNumber.length >= 9;
+    }
+
+    if (phoneInput) {
+        phoneInput.value = "+998 ";
+
+        phoneInput.addEventListener("focus", () => {
+            if (!phoneInput.value.trim()) phoneInput.value = "+998 ";
+        });
+
+        phoneInput.addEventListener("input", () => {
+            phoneInput.value = formatPhoneInput(phoneInput.value);
+        });
+    }
+
     matreshkas.forEach(clickedMatreshka => {
         clickedMatreshka.addEventListener("click", () => {
             if (isGameOver) return;
@@ -1064,12 +1116,12 @@ h2 {
             const phone = phoneInput.value.trim();
             const formattedPhone = formatPhoneNumber(phone);
 
-            if (!name || !age || !citySelect?.value || !address || !phone) {
+            if (!name || !age || !citySelect?.value || !address || !hasFullPhoneNumber(phone)) {
                 alert("Илтимос, маълумотларни тўлдиринг.");
                 return;
             }
 
-            if (!phone) {
+            if (!hasFullPhoneNumber(phone)) {
                 alert("Илтимос, телефон рақамини киритинг.");
                 return;
             }
@@ -1109,8 +1161,8 @@ h2 {
                 });
 
                 if (response.ok) {
-                    alert("Раҳмат! Буюртмангиз қабул қилинди. Оператор тез орада сиз билан боғланади.");
                     orderForm.reset();
+                    phoneInput.value = "+998 ";
                     if (gamePromo) gamePromo.style.display = "none";
                     if (telegramInvite) {
                         telegramInvite.classList.add("show");
@@ -1324,7 +1376,7 @@ h2 {
 
                             <div class="form-group">
                                 <label for="userPhone">Телефон рақами:</label>
-                                <input type="tel" id="userPhone" name="phone" placeholder="+998 90-333-6554" maxlength="99" inputmode="tel" autocomplete="tel" required>
+                                <input type="tel" id="userPhone" name="phone" value="+998 " placeholder="+998 90-333-6554" maxlength="17" inputmode="tel" autocomplete="tel" required>
                             </div>
 
                             <button type="submit" class="submit-btn">АКЦИЯ БЎЙИЧА ОЛИШ</button>
@@ -1332,8 +1384,9 @@ h2 {
                     </div>
                 </div>
                 <div class="telegram-invite" id="telegramInvite">
-                    <div class="telegram-invite-title">Буюртмангиз қабул қилинди!</div>
-                    <p class="telegram-invite-text">Янгиликлар, акциялар ва фойдали маълумотларни Telegram каналимизда кузатиб боринг.</p>
+                    <div class="telegram-invite-mark">✓</div>
+                    <div class="telegram-invite-title">Раҳмат! Буюртмангиз қабул қилинди</div>
+                    <p class="telegram-invite-text">Оператор тез орада сиз билан боғланади. Янги акциялар ва фойдали маълумотлар учун Telegram каналимизга ўтинг.</p>
                     <a class="telegram-invite-link" href="https://t.me/naturaleffect_kristall" target="_blank" rel="noopener">Telegram каналга ўтиш</a>
                 </div>
                 <div class="stock-alert-card">
