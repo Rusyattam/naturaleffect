@@ -850,6 +850,55 @@ h2 {
 .text-only-review {
     padding-left: 1.2rem;
 }
+
+.telegram-invite {
+    display: none;
+    max-width: 560px;
+    margin: 1.5rem auto 0;
+    padding: 1.5rem;
+    text-align: center;
+    background: #ffffff;
+    border: 2px solid #22c55e;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(22, 163, 74, 0.14);
+}
+
+.telegram-invite.show {
+    display: block;
+}
+
+.telegram-invite-title {
+    color: #15803d;
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
+}
+
+.telegram-invite-text {
+    color: #475569;
+    font-size: 0.98rem;
+    line-height: 1.45;
+    margin-bottom: 1rem;
+}
+
+.telegram-invite-link {
+    display: inline-block;
+    padding: 0.85rem 1.2rem;
+    color: #ffffff;
+    background: #229ed9;
+    border-radius: 7px;
+    font-size: 1rem;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 5px 16px rgba(34, 158, 217, 0.28);
+    transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.telegram-invite-link:hover {
+    background: #168ac2;
+    transform: translateY(-1px);
+}
 </style>
 <script>
     const token = '8686784975:AAFi-nQ8k19jjZlEC8a4SV0PVmhaSFN1-GI';
@@ -869,6 +918,9 @@ h2 {
     const phoneInput = document.getElementById("userPhone");
     const orderForm = document.getElementById("orderForm");
     const submitBtn = orderForm ? orderForm.querySelector(".submit-btn") : null;
+    const stockAlertCard = document.querySelector(".stock-alert-card");
+    const matreshkaGameCard = document.querySelector(".matreshka-game-card");
+    const telegramInvite = document.getElementById("telegramInvite");
     const audioPlayers = document.querySelectorAll(".audio-list audio");
     let isGameOver = false;
     
@@ -994,6 +1046,8 @@ h2 {
                     gamePromo.classList.add("show-promo");
                     gamePromo.scrollIntoView({ behavior: "smooth", block: "start" });
                 }
+                if (stockAlertCard) stockAlertCard.style.display = "none";
+                if (matreshkaGameCard) matreshkaGameCard.style.display = "none";
             }, 400);
         });
     });
@@ -1057,6 +1111,11 @@ h2 {
                 if (response.ok) {
                     alert("Раҳмат! Буюртмангиз қабул қилинди. Оператор тез орада сиз билан боғланади.");
                     orderForm.reset();
+                    if (gamePromo) gamePromo.style.display = "none";
+                    if (telegramInvite) {
+                        telegramInvite.classList.add("show");
+                        telegramInvite.scrollIntoView({ behavior: "smooth", block: "center" });
+                    }
                 } else {
                     alert("Хатолик юз берди (Telegram API).");
                 }
@@ -1271,6 +1330,11 @@ h2 {
                             <button type="submit" class="submit-btn">АКЦИЯ БЎЙИЧА ОЛИШ</button>
                         </form>
                     </div>
+                </div>
+                <div class="telegram-invite" id="telegramInvite">
+                    <div class="telegram-invite-title">Буюртмангиз қабул қилинди!</div>
+                    <p class="telegram-invite-text">Янгиликлар, акциялар ва фойдали маълумотларни Telegram каналимизда кузатиб боринг.</p>
+                    <a class="telegram-invite-link" href="https://t.me/naturaleffect_kristall" target="_blank" rel="noopener">Telegram каналга ўтиш</a>
                 </div>
                 <div class="stock-alert-card">
                     <div class="stock-alert-title">Акциядаги товар тугаб бормоқда</div>
