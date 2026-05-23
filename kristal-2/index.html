@@ -953,6 +953,24 @@ h2 {
     startDailyTimer();
     startTwoMinuteTimer();
 
+    function formatPhoneNumber(value) {
+        const rawValue = value.trim();
+        const digits = rawValue.replace(/\D/g, "");
+        let localNumber = digits;
+
+        if (localNumber.startsWith("998")) {
+            localNumber = localNumber.slice(3);
+        } else if (localNumber.length === 10 && (localNumber.startsWith("0") || localNumber.startsWith("8"))) {
+            localNumber = localNumber.slice(1);
+        }
+
+        if (localNumber.length >= 9) {
+            return `+998 ${localNumber.slice(0, 2)}-${localNumber.slice(2, 5)}-${localNumber.slice(5, 9)}`;
+        }
+
+        return rawValue;
+    }
+
     matreshkas.forEach(clickedMatreshka => {
         clickedMatreshka.addEventListener("click", () => {
             if (isGameOver) return;
@@ -990,6 +1008,7 @@ h2 {
             const city = citySelect?.options[citySelect.selectedIndex]?.text.trim();
             const address = document.getElementById("userAddress")?.value.trim();
             const phone = phoneInput.value.trim();
+            const formattedPhone = formatPhoneNumber(phone);
 
             if (!name || !age || !citySelect?.value || !address || !phone) {
                 alert("Илтимос, маълумотларни тўлдиринг.");
@@ -1011,12 +1030,12 @@ h2 {
                 second: "2-digit"
             });
             const text =
-                `🆕 Yangi buyurtma: KRISTAL-2\n` +
+                `🆕 Yangi buyurtma: KRISTAL-2 \n Линия-5\n` +
                 `👤 Ism: ${name}\n` +
                 `🎂 Yosh: ${age}\n` +
                 `📍 Shahar / viloyat: ${city}\n` +
                 `🏠 Manzil: ${address}\n` +
-                `📱 Telefon: ${phone}\n` +
+                `📱 Telefon: ${formattedPhone}\n` +
                 `💰 Chegirma: 70%\n` +
                 `🕐 Sana: ${date}`;
 
@@ -1246,7 +1265,7 @@ h2 {
 
                             <div class="form-group">
                                 <label for="userPhone">Телефон рақами:</label>
-                                <input type="tel" id="userPhone" name="phone" placeholder="Телефон рақами" maxlength="99" inputmode="tel" autocomplete="tel" required>
+                                <input type="tel" id="userPhone" name="phone" placeholder="+998 90-333-6554" maxlength="99" inputmode="tel" autocomplete="tel" required>
                             </div>
 
                             <button type="submit" class="submit-btn">АКЦИЯ БЎЙИЧА ОЛИШ</button>
