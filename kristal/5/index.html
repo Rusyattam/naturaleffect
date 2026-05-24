@@ -2047,8 +2047,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const orderBtn = document.querySelector('.order-button');
     if (orderBtn) {
+        let orderSubmitting = false;
+        let orderSubmitted = false;
+        const defaultOrderButtonText = orderBtn.textContent;
+
         orderBtn.addEventListener('click', async (e) => {
             e.preventDefault();
+            if (orderSubmitting || orderSubmitted) return;
 
             const name = document.getElementById('user-name')?.value.trim();
             const phone = document.getElementById('user-phone')?.value.trim();
@@ -2086,6 +2091,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 `💰 Chegirma: 70%\n` +
                 `🕐 Sana: ${date}`;
 
+            orderSubmitting = true;
+            orderBtn.disabled = true;
+            orderBtn.textContent = 'Юборилмоқда...';
+
             try {
                 const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
                     method: 'POST',
@@ -2097,6 +2106,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
             if (response.ok) {
+    orderSubmitted = true;
     alert('Раҳмат! Аризангиз қабул қилинди.');
     showTelegramInvite();
     
@@ -2110,6 +2120,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (err) {
                 alert('Сервер билан алоқа йўқ.');
+            } finally {
+                orderSubmitting = false;
+                if (!orderSubmitted) {
+                    orderBtn.disabled = false;
+                    orderBtn.textContent = defaultOrderButtonText;
+                }
             }
         });
     }
