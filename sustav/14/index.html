@@ -1,0 +1,783 @@
+﻿<!DOCTYPE html>
+<html lang="uz-Cyrl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sustav Pro Max</title>
+<style>
+* {
+  box-sizing:border-box;
+}
+html {
+  scroll-behavior:smooth;
+}
+body {
+  margin:0;
+  background:#e9e9e9;
+  color:#252525;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:18px;
+  line-height:1.55;
+}
+a {
+  color:inherit;
+  text-decoration:none;
+}
+.top {
+  background:#0d568f;
+  color:#fff;
+}
+.topline {
+  max-width:1160px;
+  margin:0 auto;
+  padding:15px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo {
+  font-size:31px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+.logo small {
+  font-size:15px;
+  font-weight:400;
+  margin-left:9px;
+}
+.login {
+  border:1px solid rgba(255,255,255,.7);
+  padding:6px 18px;
+  border-radius:3px;
+  font-size:15px;
+}
+.nav {
+  background:#fff;
+  border-bottom:1px solid #cacaca;
+  box-shadow:0 2px 5px rgba(0,0,0,.05);
+}
+.navin {
+  max-width:1160px;
+  margin:auto;
+  display:flex;
+  gap:25px;
+  align-items:center;
+  padding:12px 14px;
+  font-weight:700;
+  font-size:16px;
+  white-space:nowrap;
+}
+.wrap {
+  max-width:1160px;
+  margin:18px auto;
+  display:grid;
+  grid-template-columns:minmax(0,780px) 320px;
+  gap:20px;
+  padding:0 12px;
+}
+.article,.side {
+  background:#fff;
+  border:1px solid #d6d6d6;
+}
+.article {
+  padding:24px 28px;
+}
+.side {
+  height:max-content;
+  padding:18px;
+  position:sticky;
+  top:12px;
+}
+h1 {
+  font-size:40px;
+  line-height:1.08;
+  margin:0 0 18px;
+  font-weight:900;
+  color:#111;
+}
+h2 {
+  font-size:30px;
+  line-height:1.18;
+  margin:34px 0 14px;
+  color:#111;
+}
+h3 {
+  font-size:24px;
+  margin:26px 0 10px;
+}
+.lead {
+  font-size:20px;
+  font-weight:700;
+  color:#222;
+}
+.img {
+  width:100%;
+  min-height:260px;
+  background:linear-gradient(135deg,#d4e9fa,#f7f7f7 55%,#ddd);
+  border:1px solid #ddd;
+  margin:18px 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#225273;
+  font-weight:900;
+  font-size:22px;
+  position:relative;
+  overflow:hidden;
+}
+.img.photo {
+  background:#f7f7f7;
+  min-height:0;
+  aspect-ratio:16 / 9;
+}
+.img.photo:before {
+  display:none;
+}
+.img.photo img {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
+.img.diagram {
+  background:#fff;
+}
+.img.diagram img {
+  object-fit:contain;
+  padding:10px;
+}
+.img:before {
+  content:"";
+  position:absolute;
+  inset:auto -30px -70px auto;
+  width:190px;
+  height:190px;
+  border-radius:50%;
+  background:rgba(13,86,143,.12);
+}
+.img.small {
+  min-height:185px;
+}
+.img.tall {
+  min-height:340px;
+}
+.img.tall.photo {
+  aspect-ratio:4 / 3;
+}
+.comment .img.photo {
+  aspect-ratio:4 / 3;
+}
+.note {
+  background:#eef7ff;
+  border-left:6px solid #0d568f;
+  padding:15px 20px;
+  margin:20px 0;
+}
+.dialog {
+  margin:18px 0;
+}
+.q {
+  font-weight:900;
+  color:#111;
+  margin:22px 0 6px;
+}
+.a b,.q b {
+  color:#0d568f;
+}
+.button,.order button {
+  display:inline-block;
+  background:#c91515;
+  color:#fff;
+  text-transform:uppercase;
+  font-weight:900;
+  border:0;
+  border-radius:4px;
+  padding:14px 22px;
+  box-shadow:0 3px 0 #850808;
+  cursor:pointer;
+}
+.product {
+  display:grid;
+  grid-template-columns:210px 1fr;
+  gap:20px;
+  align-items:center;
+  background:#fff8df;
+  border:2px solid #e2b23b;
+  padding:18px;
+  margin:24px 0;
+}
+.pack {
+  height:210px;
+  border-radius:12px;
+  background:radial-gradient(circle at 50% 24%,#fff 0 23%,#ffe994 24% 42%,#d7a200 43% 69%,#8a6100 70%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:28px;
+  font-weight:900;
+  color:#4a3100;
+  text-shadow:0 1px #fff;
+}
+.product-img {
+  width:100%;
+  max-width:230px;
+  height:auto;
+  display:block;
+  margin:18px auto;
+}
+.benefits {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin:18px 0;
+}
+.card {
+  border:1px solid #ddd;
+  background:#fbfbfb;
+  padding:16px;
+  border-radius:6px;
+}
+.card b {
+  color:#0d568f;
+}
+.warn {
+  background:#fff1ce;
+  border:2px solid #e5ae36;
+  padding:18px;
+  margin:24px 0;
+}
+.red {
+  color:#b60000;
+  font-weight:900;
+}
+.certs {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.cert {
+  min-height:185px;
+  background:#f7f7f7;
+  border:2px solid #bbb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-weight:900;
+  color:#777;
+}
+.cert img {
+  width:100%;
+  height:100%;
+  max-height:360px;
+  object-fit:contain;
+  display:block;
+}
+.countries {
+  columns:2;
+}
+.stockbox {
+  text-align:center;
+  background:#fff7d8;
+  border:3px solid #d9ae36;
+  padding:22px;
+  margin:28px 0;
+}
+.stock {
+  font-size:36px;
+  color:#b60000;
+  font-weight:900;
+}
+.timer {
+  display:inline-block;
+  background:#fff;
+  border:1px solid #ccc;
+  border-radius:8px;
+  padding:8px 18px;
+  font-size:36px;
+  font-weight:900;
+  color:#b60000;
+  letter-spacing:1px;
+}
+.discount-list {
+  border:1px solid #ddd;
+  margin:18px 0;
+}
+.discount-list div {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  padding:10px 14px;
+  border-bottom:1px solid #eee;
+}
+.discount-list div:first-child {
+  font-weight:900;
+  background:#f1f1f1;
+}
+.order {
+  max-width:470px;
+  margin:24px auto;
+  padding:20px;
+  border:1px solid #ccc;
+  border-radius:10px;
+  background:#fff;
+  box-shadow:0 8px 28px rgba(0,0,0,.17);
+  text-align:center;
+}
+.price {
+  display:flex;
+  justify-content:center;
+  align-items:end;
+  gap:22px;
+  margin:12px 0;
+}
+.old {
+  text-decoration:line-through;
+  color:#777;
+  font-size:21px;
+}
+.new {
+  font-size:36px;
+  color:#c40000;
+  font-weight:900;
+}
+.order input {
+  width:100%;
+  padding:15px;
+  border:1px solid #bbb;
+  border-radius:5px;
+  margin:8px 0;
+  font-size:17px;
+}
+.legal {
+  font-size:12px;
+  color:#777;
+  background:#f7f7f7;
+  padding:10px;
+  margin-top:12px;
+}
+.comments {
+  margin-top:25px;
+}
+.comment {
+  display:grid;
+  grid-template-columns:56px 1fr;
+  gap:12px;
+  border-top:1px solid #ddd;
+  padding:16px 0;
+  align-items:start;
+}
+.avatar {
+  width:56px;
+  height:56px;
+  min-width:56px;
+  max-width:56px;
+  min-height:56px;
+  max-height:56px;
+  border-radius:50%;
+  background:#d9e8f5;
+  color:#315d80;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  overflow:hidden;
+}
+.avatar img {
+  width:56px;
+  height:56px;
+  min-width:56px;
+  max-width:56px;
+  min-height:56px;
+  max-height:56px;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
+  flex:0 0 56px;
+}
+.comment b {
+  color:#0d568f;
+}
+.side-title {
+  font-size:21px;
+  font-weight:900;
+  border-bottom:4px solid #0d568f;
+  padding-bottom:9px;
+}
+.side-item {
+  border-bottom:1px solid #ddd;
+  padding:13px 0;
+  font-size:16px;
+}
+.foot {
+  background:#2b2b2b;
+  color:#ddd;
+  margin-top:30px;
+}
+.footin {
+  max-width:1160px;
+  margin:auto;
+  padding:25px 12px;
+}
+.footnav {
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  font-size:14px;
+}
+.fixed {
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  background:#c91515;
+  color:#fff;
+  padding:14px 19px;
+  border-radius:6px;
+  font-weight:900;
+  box-shadow:0 8px 24px rgba(0,0,0,.25);
+  z-index:5;
+}
+.modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.58);
+  z-index:10;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.modalbox {
+  background:#fff;
+  max-width:560px;
+  border-radius:8px;
+  padding:24px;
+  position:relative;
+}
+.x {
+  position:absolute;
+  right:14px;
+  top:10px;
+  font-size:28px;
+  cursor:pointer;
+}
+.modal:target {
+  display:flex;
+}
+@media(max-width:900px) {
+  body {
+    font-size:17px;
+  }
+  .wrap {
+    display:block;
+  }
+  .side {
+    position:static;
+    margin-top:16px;
+  }
+  .article {
+    padding:18px;
+  }
+  .navin {
+    overflow:auto;
+  }
+  h1 {
+    font-size:29px;
+  }
+  .product,.benefits,.certs {
+    grid-template-columns:1fr;
+  }
+  .product {
+    text-align:center;
+    gap:10px;
+    padding:22px 16px;
+  }
+  .product .product-img {
+    max-width:min(76vw,360px);
+    margin:4px auto 12px;
+  }
+  .product h2 {
+    text-align:center;
+    font-size:34px;
+    line-height:1.12;
+    margin-bottom:12px;
+  }
+  .product p {
+    text-align:left;
+  }
+  .product .button {
+    display:block;
+    width:min(100%,340px);
+    margin:20px auto 0;
+    text-align:center;
+  }
+  .order button[type="submit"] {
+    display:block;
+    width:100%;
+    max-width:520px;
+    min-height:68px;
+    margin:24px auto 0;
+    padding:20px 26px;
+    font-size:22px;
+    line-height:1.15;
+    border-radius:7px;
+  }
+  .countries {
+    columns:1;
+  }
+  .fixed {
+    left:12px;
+    right:12px;
+    text-align:center;
+  }
+  .logo small {
+    display:none;
+  }
+  .img {
+    min-height:220px;
+  }
+  .img.small {
+    min-height:170px;
+  }
+  .img.tall {
+    min-height:260px;
+  }
+  .img.photo,
+  .img.small.photo,
+  .img.tall.photo {
+    min-height:0;
+  }
+  .img.photo,
+  .img.small.photo {
+    aspect-ratio:4 / 3;
+  }
+  .img.tall.photo {
+    aspect-ratio:4 / 3;
+  }
+  .comment .img.photo {
+    aspect-ratio:4 / 3;
+  }
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="topline"><div class="logo">Sustav Pro Max <small>Бўғим саломатлиги</small></div><a class="login" href="#order">Ариза</a></div></header>
+<nav class="nav"><div class="navin"><a>Эфир</a><a>Янгиликлар</a><a>Шоулар</a><a>Подкастлар</a><a>Спорт</a><a>Саломатлик</a><a>Ҳужжатли фильмлар</a><a>Тадбирлар</a><a>Концертлар</a><a>Барча видеолар</a></div></nav>
+<div class="wrap">
+<main class="article">
+<h1>«Бўғимларимдаги бу оғриқ мени ногиронлар аравачасига ўтқазиб қўяй деганди, фақат битта восита ёрдам берди» — Виктор Сомов</h1>
+<div class="img tall photo"><img src="../photo/review-man-1200.jpg" srcset="../photo/review-man-700.jpg 700w, ../photo/review-man-1200.jpg 1200w" sizes="(max-width: 900px) calc(100vw - 60px), 780px" alt="Виктор Сомов" fetchpriority="high" decoding="async"></div>
+<p class="lead">Виктор Сомовнинг мухбиримизга очиқ интервьюси: бўғим оғриғи, ташхис, ногиронлар аравачасида қолиб кетиш қўрқуви ва кутилмаган нажот ҳақида.</p>
+<p>Хитларини кўпчилик биладиган тирик афсона — Виктор Сомов йиллар давомида очиқ интервьюлардан қочиб келган. Гўё гитарали бу инсон доим сир бўлиб қоладигандек эди. Аммо бугун, узоқ танаффусдан сўнг, артист илк бор уни ҳақиқатан нима ташвишлантириши ҳақида батафсил гапирди: нафақат ижод, балки артроз билан сокин кураш ва унга ҳаракатчанликни қайтарган восита ҳақида.</p>
+<div class="note"><b>Қуйидаги мақолани ўқиб, билиб оласиз:</b><ul><li>Артрозга қарши ўз вақтида кураш бошланмаса, организмда нима содир бўлади?</li><li>Нега бўғим оғриғига қарши воситалар кўпинча иш бермайди?</li><li>Қайси замонавий восита тоғай тўқимасини тиклашга ёрдам беради?</li><li>Виктор Сомовни артроздан нима қутқарди?</li></ul></div>
+<div class="img small photo"><img src="../photo/interview-main-1200.jpg" srcset="../photo/interview-main-700.jpg 700w, ../photo/interview-main-1200.jpg 1200w" sizes="(max-width: 900px) calc(100vw - 60px), 780px" alt="Виктор Сомов билан интервью" loading="lazy" decoding="async"></div>
+<section class="dialog">
+<p class="q">Мухбир: Виктор Алексеевич, ассалому алайкум! Сизни сукутни бузишга нима мажбур қилди?</p>
+<p class="a"><b>Виктор Сомов:</b> Ассалому алайкум! Балки, жим юришдан чарчагандирман. Бутун умр мени гоҳ гитарали қувноқ йигит, гоҳ ғамгин якка одам қилиб кўрсатишади. Аслида мен шунчаки чарчаган инсонман.</p>
+<div class="img small photo"><img src="../photo/young-artist-stage-1200.jpg" srcset="../photo/young-artist-stage-700.jpg 700w, ../photo/young-artist-stage-1200.jpg 1200w" sizes="(max-width: 900px) calc(100vw - 60px), 780px" alt="Ёш артист саҳнада гитара билан" loading="lazy" decoding="async"></div>
+<p class="q">Мухбир: Бу сўнгги пайтларда матбуотда ёзилаётган гаплар билан боғлиқми? Бўғимларингизда муаммо борлиги ҳақида?</p>
+<p class="a"><b>Виктор Сомов:</b> Саҳнага чиқиш — ҳар сафар ўзингни қайта йиғиш дегани. Ёшинг олтмишдан ошганда организм ўзича яшай бошлайди. Бўғимларим тез-тез зирқирайдиган бўлди: гоҳ об-ҳавога, гоҳ ўз-ўзидан. Лекин энг қўрқинчлиси — уйғониб, тура олмаслигингни англаш. Оёқлар гўё бетондай.</p>
+<div class="img small photo"><img src="../photo/doctor-joints-1200.jpg" srcset="../photo/doctor-joints-700.jpg 700w, ../photo/doctor-joints-1200.jpg 1200w" sizes="(max-width: 900px) calc(100vw - 60px), 780px" alt="Виктор Сомов интервьюда гапирмоқда" loading="lazy" decoding="async"></div>
+<p class="q">Мухбир: Бу кескин бошландими?</p>
+<p class="a"><b>Виктор Сомов:</b> Аста-секин, ҳийлакорона. Тиззада ғирчиллаш — эътибор бермайсан. Зинадан чиққанда оғриқ — юкламага йўясан. Кейин бир пайт келиб, оёқни ёза олмай қоласан. Репетицияларда аллақачон тик тура олмасдим, доим ўтириб олардим.</p>
+<div class="img small photo"><img src="../photo/consultation-1200.jpg" srcset="../photo/consultation-700.jpg 700w, ../photo/consultation-1200.jpg 1200w" sizes="(max-width: 900px) calc(100vw - 60px), 780px" alt="Виктор Сомов оғриқ ҳақида гапирмоқда" loading="lazy" decoding="async"></div>
+<p class="q">Мухбир: Ва дарҳол мутахассисларга бордингизми?</p>
+<p class="a"><b>Виктор Сомов:</b> Йўқ. Чидадим. Эркакча гап: «Ўзи ўтиб кетади». Аммо ундай бўлмади. Бир ҳафтадан кейин машинагача ҳам қийналиб борардим. Зинадан чиқиш — Эльбрусга кўтарилишдек. Кечаси уйғониб: «Тамом, энди доим шундайми?» деб ўйлайсан.</p>
+<p class="q">Мухбир: Бу қўрқинчли. Айниқса сизнинг касбингиздаги инсон учун.</p>
+<p class="a"><b>Виктор Сомов:</b> Худди шундай! Саҳнада бор кучим билан чиқиш қила олмасдим. Куч йўқ эди. Концерт бекор қилинди. Маъмур залга маэстро бетоблигини эълон қилган пайтдаги ҳиссиётни ҳалигача эслайман.</p>
+<div class="img small photo"><img src="../photo/somov-studio-1200.jpg" srcset="../photo/somov-studio-700.jpg 700w, ../photo/somov-studio-1200.jpg 1200w" sizes="(max-width: 900px) calc(100vw - 60px), 780px" alt="Виктор Сомов интервьюда" loading="lazy" decoding="async"></div>
+<p class="q">Мухбир: Кейин нима бўлди? Текширувга боришга қарор қилдингизми?</p>
+<p class="a"><b>Виктор Сомов:</b> Тез ёрдам келганда қарор қилдим. Кечаси оғриқдан уйғондим — умуман тура олмадим. Шифохонага олиб боришди, суратга туширишди. Шифокор: «Сизда артроз. Ўтиб кетган ҳолат», деди. Ва шундай давом этса, ногиронлар аравачасида қолиш мумкинлигини қўшиб қўйди.</p>
+<div class="img small photo"><img src="../photo/somov-studio-1200.jpg" srcset="../photo/somov-studio-700.jpg 700w, ../photo/somov-studio-1200.jpg 1200w" sizes="(max-width: 900px) calc(100vw - 60px), 780px" alt="Виктор Сомов интервьюда" loading="lazy" decoding="async"></div>
+<p class="q">Мухбир: Ногиронлар аравачаси?..</p>
+<p class="a"><b>Виктор Сомов:</b> Ҳа. Бўғим емирилаётган, тоғайлар ейилган, яллиғланиш ёш билан қўшилиб кетган. Ётарканман, тушундим: на саҳна, на репетиция, на қўшиқ. Бу шунчаки жисмоний оғриқ эмас, бу касбимнинг оғриғи.</p>
+<p class="q">Мухбир: Лекин ҳозир яна фаолсиз. Нимадир ёрдам бердими?</p>
+<p class="a"><b>Виктор Сомов:</b> Ҳа. Менинг олдимга мутахассис Дмитрий Иванович Парамонов келди. У суратларни кўриб: «Оғриқни босишни бас қилинг. Бўғимни оғриқсизлантириш эмас, тиклаш керак», деди. Ва менга капсулалар берди. Мунтазам ичишни айтди.</p>
+<div class="product"><img class="product-img" src="../photo/photo_2026-05-26_16-19-52-no-bg-preview (carve.photos).jpg" sizes="(max-width: 900px) 76vw, 230px" alt="Sustav Pro Max қадоғи" loading="lazy" decoding="async"><div><h2>Sustav Pro Max</h2><p>Кимёвий моддаларсиз, гормонларсиз — экстрактлар ва табиий компонентлар: хитозан, йирик гулли горянка, соя изофлавонлари, кальций ва хондронутриентлар.</p><a class="button" href="#order">Батафсил билиш</a></div></div>
+<p class="q">Мухбир: Бу қандай восита эди?</p>
+<p class="a"><b>Виктор Сомов:</b> У Sustav Pro Max деб аталади. Аввал икки ҳафта, кейин бир ой, шу тарзда аста-секин. Бўғим ҳаракатлана бошлади. Ғирчиллаш йўқолди. Оғриқ кетди. Кейин ҳаракатчанлик ҳам қайтди. Мен яна репетиция қила олдим. Куйлай олдим. Яшай олдим.</p>
+<p class="q">Мухбир: Операцияларсизми?</p>
+<p class="a"><b>Виктор Сомов:</b> Бирорта ҳам. Ҳолбуки, операцияни деярли тайинлаб қўйишганди. Агар ўша мутахассисни учратмаганимда, ҳозир сиз мен билан ногиронлар аравачасидан туриб гаплашган бўлардинглар.</p>
+<p class="q">Мухбир: Нега одамлар азоб чекишда давом этади?</p>
+<p class="a"><b>Виктор Сомов:</b> Чунки биз симптомларни тез ва ҳозироқ босишга ўрганганмиз. Бўғимлар эса тумов эмас. Бу ерда сабр ва тўғри курс керак.</p>
+</section>
+<div class="note"><ul><li>«Sustav Pro Max» рецептсиз берилади.</li><li>Восита табиий, шунинг учун қарши кўрсатмалар одатда ҳомиладорлик, лактация ва компонентларга индивидуал тоқатсизлик билан боғлиқ.</li></ul></div>
+<div class="img small photo"><img src="../photo/reporter-interview-1200.jpg" srcset="../photo/reporter-interview-700.jpg 700w, ../photo/reporter-interview-1200.jpg 1200w" sizes="(max-width: 900px) calc(100vw - 60px), 780px" alt="Мухбир интервью олмоқда" loading="lazy" decoding="async"></div>
+<p>Ҳозир бизнес учун одамларни вақтинчалик ечимларнинг янги порциясига қайтариш муҳим. Бу восита эса ҳар бурчакда реклама қилинмайди. У дорихонада эмас, ишлаб чиқарувчилар ва етказиб берувчилар орқали келади.</p>
+<p class="q">Мухбир: Ҳозир аҳволингиз жойидами?</p>
+<p class="a"><b>Виктор Сомов:</b> Жойида — руҳан ҳам, жисмонан ҳам. Мен яна ўзимни ўзимдек ҳис қиляпман. Эркак, мусиқачи, инсон сифатида, хароба каби эмас.</p>
+<div class="img small photo"><img src="../photo/somov-pets-1200.jpg" srcset="../photo/somov-pets-700.jpg 700w, ../photo/somov-pets-1200.jpg 1200w" sizes="(max-width: 900px) calc(100vw - 60px), 780px" alt="Виктор Сомов уй ҳайвонлари билан" loading="lazy" decoding="async"></div>
+<h2>Таҳририят қўшимчаси</h2>
+<p>Таҳририятимиз Виктор Сомовнинг ҳикоясидан ҳайратда қолди ва кўпроқ билишни истади. Биз Виктор Сомовга оёққа туришда ёрдам берган мутахассис Дмитрий Иванович Парамонов билан видео орқали боғландик ва ундан интервью олдик.</p>
+<div class="img small photo"><img src="../photo/paramonov-1200.jpg" srcset="../photo/paramonov-700.jpg 700w, ../photo/paramonov-1200.jpg 1200w" sizes="(max-width: 900px) calc(100vw - 60px), 780px" alt="Дмитрий Иванович Парамонов" loading="lazy" decoding="async"></div>
+<p><b>Дмитрий Иванович Парамонов</b>, 30 йилдан ортиқ тажрибага эга мутахассис. Бўғимлар ва тоғайларни тиклаш соҳаси эксперти.</p>
+<p class="q">Таҳририят: Дмитрий Иванович, бугун бўғим касалликлари муаммоси қанчалик жиддий?</p>
+<p class="a"><b>Дмитрий Парамонов:</b> Аслида, жуда жиддий. Кўплар ҳатто қанчалик эканини тушунмайди. Эрталабки қотишишдан тўлиқ ҳаракатсизликкача бўлган йўл атиги бир-икки йилни олиши мумкин. Оғриқлар доимийлашади, инсон нормал ухлаш, ҳаракат қилиш ва яшаш имкониятини йўқотади.</p>
+<div class="img small photo diagram"><img src="../photo/ChatGPT Image 26 мая 2026 г., 16_39_35.jpg" alt="Бўғим касалликлари диагностикаси бўйича график" loading="lazy" decoding="async"></div>
+<p class="q">Таҳририят: Виктор Сомовни айнан сиз тиклаганингиз қандай бўлди?</p>
+<p class="a"><b>Дмитрий Парамонов:</b> Биз умумий дўстлар орқали танишдик. Унга ҳақиқатан оғир эди. Турли воситалар курсини кетма-кет ўтар, оғриқ эса қайта-қайта қайтарди. Протезлаш ҳам муҳокама қилинаётганди. Мен келдим, кўрикдан ўтказдим ва тушундим: агар тўғри бошланса, операциясиз ҳаракат қилиб кўриш мумкин.</p>
+<div class="img small photo diagram"><img src="../photo/ChatGPT Image 26 мая 2026 г., 16_52_54.jpg" alt="Соғлом бўғим ва артрозли бўғим таққосланиши" loading="lazy" decoding="async"></div>
+<p class="q">Таҳририят: Айнан нимани таклиф қилдингиз?</p>
+<p class="a"><b>Дмитрий Парамонов:</b> Биз Sustav Pro Max комплекси — бўғимларни озиқлантириш ва қўллаб-қувватлаш учун ишлаб чиқилган табиий восита ёрдамида тикланиш курсини бошладик.</p>
+<div class="img small photo diagram"><img src="../photo/photo_2026-05-26_16-19-52-no-bg-preview (carve.photos).jpg" sizes="(max-width: 900px) calc(100vw - 60px), 780px" alt="Sustav Pro Max қадоғи" loading="lazy" decoding="async"></div>
+<p>Бу восита шунчаки оғриқни олиб ташламайди, балки бўғимни ичкаридан қўллаб-қувватлашга ёрдам беради. Сири — таркиб ва тўғри танланган шаклда.</p>
+<h2>Таркибида фақат табиий ингредиентлар</h2>
+<div class="benefits"><div class="card"><b>Хитозан</b><br>Бўғимлар функционаллигини оширади, тоғайлар емирилишини секинлаштиради, бўғим тўқималари тузилишини яхшилайди.</div><div class="card"><b>Хондронутриентлар</b><br>Тоғайлардаги дегенератив ўзгаришларни тўхтатади, тоғай, мушак ва бўғим тўқималари регенерациясини ишга туширади.</div><div class="card"><b>Йирик гулли горянка</b><br>Тоғай тўқимасидаги дегенератив жараёнлар келтириб чиқарган ноқулайликни камайтиради.</div><div class="card"><b>Соя изофлавонлари</b><br>Қон айланишини яхшилайди, гиалурон кислотаси ишлаб чиқарилишини рағбатлантиради, яллиғланиш жараёнларини камайтиради.</div><div class="card"><b>Биомавжуд кальций</b><br>Эластин ишлаб чиқарилишини рағбатлантиради, суяклар ва тоғайлар учун зарур кальцийни тўлдиради.</div><div class="card"><b>Капсулалар</b><br>Курс давомида қўллаш учун қулай чиқарилиш шакли.</div></div>
+<p class="q">Таҳририят: Уни қандай тўғри қўллаш керак?</p>
+<p class="a"><b>Дмитрий Парамонов:</b> Жуда оддий. Капсулаларни кунига 2 марта овқат вақтида ичиш керак. Мунтазамлик — натижанинг калити. Айниқса ўтказиб юбормаслик муҳим: таъсири йиғилиб боради.</p>
+<h2>Таъсир босқичма-босқич кечади</h2>
+<div class="benefits"><div class="card"><b>1–2 ҳафта</b><br>Оғриқ тинчийди, мунтазам қўлланганда оғриқ жараёнларининг ривожланиши тўхтайди.</div><div class="card"><b>3–4 ҳафта</b><br>Тузларни чиқариш жараёнлари бошланади, ғирчиллаш тўхтайди, регенерация бошланади.</div><div class="card"><b>5–6 ҳафта</b><br>Суяк ва тоғай тўқималарининг регенерация жараёни ишга тушади, бойламлар эластиклиги тикланади.</div><div class="card"><b>7–8 ҳафта ва кейин</b><br>Қон айланиши ва моддалар алмашинуви меъёрлашади, бўғимлар тузилиши мустаҳкамланади.</div></div>
+<p>Буларнинг барчаси кимёвий моддаларсиз, уколларсиз, операцияларсиз.</p>
+<p class="q">Таҳририят: Шунча хусусияти бўла туриб, нега воситани оддий дорихонадан сотиб олиб бўлмайди?</p>
+<p class="a"><b>Дмитрий Парамонов:</b> Чунки Sustav Pro Max — кўп миллиардлик фарминдустрия учун таҳдид. Тизим таблетка, гель ва инъекциялар учун қайта-қайта келадиган сурункали беморлардан даромад қилади.</p>
+<div class="img small photo"><img src="../photo/paramonov-table-1200.jpg" srcset="../photo/paramonov-table-700.jpg 700w, ../photo/paramonov-table-1200.jpg 1200w" sizes="(max-width: 900px) calc(100vw - 60px), 780px" alt="Дмитрий Парамонов интервьюда" loading="lazy" decoding="async"></div>
+<p>Шунинг учун Sustav Pro Maxни олишнинг ягона йўли — расмий буюртма формаси орқали ариза қолдириш. Воситачиларсиз, дорихона устамаларисиз.</p>
+<h2>Восита барча зарур сифат ва хавфсизлик сертификатларига эга</h2>
+<div class="certs"><a class="cert" href="../photo/--_инстр_Sustav Pro Max новый --1.jpg"><img src="../photo/sustav-instruction-uz-900.jpg" alt="Sustav Pro Max фойдаланиш йўриқномаси"></a></div>
+<div class="warn"><h2 class="red">ЖУДА МУҲИМ!</h2><p>Тадқиқотлар натижасида баҳор даври бўғимларни даволашни бошлаш учун энг яхши вақт экани исботланган. Бу даврда ҳаракат фаоллиги ортади, қон микроциркуляцияси яхшиланади, моддалар алмашинуви эса фаол регенерацияга ёрдам беради.</p><p>Оғриқ симптомларини босиб қўйманг, бўғим муаммоларининг сабабини ҳал қилинг. Энг муҳими — иш қайтмас жараёнларгача бориб етмасидан кечиктирманг.</p></div>
+<h2>Таҳририят изоҳи | 12 соат олдин қўшилди</h2>
+<p>Биз тўғридан-тўғри етказиб берувчи билан боғландик ва ҳозир Sustav Pro Max бўйича махсус акция амал қилаётганини билдик. Савдога атиги 2000 та қадоқ чиқарилган. Дастур чекланган вақт давомида ёки партия тугагунча амал қилади.</p>
+<div class="img small photo"><img src="../photo/sustav-product-editorial-1200.jpg" srcset="../photo/sustav-product-editorial-700.jpg 700w, ../photo/sustav-product-editorial-1200.jpg 1200w" sizes="(max-width: 900px) calc(100vw - 60px), 780px" alt="Sustav Pro Max қадоқлари" loading="lazy" decoding="async"></div>
+<p>Таклиф чеклангани сабабли, сиз Sustav Pro Max воситасини расмий форма орқали сезиларли чегирма билан олишингиз мумкин. Қулайлик учун форма қуйида жойлаштирилган — исм ва телефон рақамингизни кўрсатиб, ариза қолдиринг.</p>
+<p><b>Sustav Pro Max воситасини чегирма билан қуйидаги мамлакатларнинг ҳар қандай фуқароси олиши мумкин:</b></p>
+<ul class="countries"><li>Молдова</li><li>Исроил</li><li>Россия</li><li>Беларусь</li><li>Қозоғистон</li><li>Ўзбекистон</li><li>Латвия</li><li>Литва</li><li>Эстония</li></ul>
+<p>Махсус акцияда иштирок этиш учун маълумотномалар керак эмас — қуйидаги формада ариза қолдириш кифоя. Етказиб бериш имкон қадар тез амалга оширилади.</p>
+<div class="img small photo diagram"><img src="../photo/photo_2026-05-26_16-19-52-no-bg-preview (carve.photos).jpg" sizes="(max-width: 900px) calc(100vw - 60px), 780px" alt="Sustav Pro Max қадоғи" loading="lazy" decoding="async"></div>
+<div id="order" class="stockbox"><h2 class="red">АКЦИЯДАГИ ТОВАР ТУГАБ БОРМОҚДА</h2><p><span id="city"></span> шаҳри учун қолдиқ:</p><div class="stock">27 дона</div><p>Акция тугашига:</p><div class="timer" id="timer">07:00:00</div><p class="red">⚠️ Диққат: Бу йил бошқа акциялар бўлмайди. Охирги қадоқларни олиб қолишга улгуринг!</p><img class="product-img" src="../photo/photo_2026-05-26_16-19-52-no-bg-preview (carve.photos).jpg" sizes="(max-width: 900px) 76vw, 230px" alt="Sustav Pro Max қадоғи" loading="lazy" decoding="async"></div>
+<h2>Мутахассиснинг бепул маслаҳати учун ариза қолдиринг!</h2>
+<p>«Sustav Pro Max»ни махсус нархда, фойдали чегирма билан олинг!</p>
+<p>Акция <span id="date1"></span> дан <span id="date2"></span> гача, шу сана ҳам қўшилган ҳолда ўтказилади.</p>
+<h3>Улар аллақачон чегирма олди, сиз ҳам олишингиз мумкин!</h3>
+<div class="discount-list"><div><span>Исм</span><span>Чегирма</span></div><div><span>Мария П.</span><span>Чегирма олди</span></div><div><span>Ангелина В.</span><span>Чегирма олди</span></div><div><span>Елена Д.</span><span>Чегирма олди</span></div><div><span>Надежда И.</span><span>Чегирма олди</span></div></div>
+<form class="order" onsubmit="submitOrder(event)">
+<h3>«Sustav Pro Max» воситасини махсус нархда қандай олишни билиб олинг!</h3>
+<img class="product-img" src="../photo/photo_2026-05-26_16-19-52-no-bg-preview (carve.photos).jpg" sizes="(max-width: 900px) 76vw, 230px" alt="Sustav Pro Max қадоғи" loading="lazy" decoding="async">
+<div class="price"><span class="old">оддий нарх</span><span class="new">ЧЕГИРМА</span></div>
+<p>«Sustav Pro Max»ни махсус нархда қандай олишни билиш учун бепул маслаҳатга ариза тўлдиринг.</p>
+<input required id="user-name" name="name" type="text" placeholder="Исмингиз"><input required id="user-age" name="age" type="number" min="1" max="120" placeholder="Ёшингиз"><input required id="user-city" name="city" type="text" placeholder="Шаҳар ёки вилоят"><input required id="user-phone" name="phone" type="tel" placeholder="+998 __ ___ __ __"><p>Шошилинг! Сизда қолган вақт: <b id="mini">10 : 00</b></p><button type="submit">→ Чегирма олиш</button><div id="thanks" style="display:none;background:#e8ffe8;border:1px solid #80c783;padding:12px;margin-top:12px">Аризангиз учун раҳмат! Контакт маркази мутахассиси яқин вақт ичида сизга қўнғироқ қилади.</div><p class="legal">Ариза қолдириш орқали сиз шахсий маълумотларни қайта ишлашга розилигингизни тасдиқлайсиз. Маълумотларингиз хавфсизлигини таъминлаш учун SSL-шифрлаш қўлланилади. <a href="#consent">Батафсил</a></p>
+</form>
+<h2 class="comments">Изоҳлар</h2>
+<div class="comment"><div class="avatar"><img src="../photo/avatar-58.jpg" alt=""></div><div><b>Наталья Фандорина</b><p>Бундай ижобий интервьюни ўқиш жуда ёқимли. Сомов — барчамиз учун намуна! Жуда очиқ ва самимий.</p></div></div>
+<div class="comment"><div class="avatar"><img src="../photo/avatar-59.jpg" alt=""></div><div><b>Вячеслав Рябов</b><p>Бу «Sustav Pro Max» мени қизиқтирди. 10 йилдан бери артрит ва артрозга ўхшаш ташхислар бор. Кимдир ҳақиқатдан синаб кўрганми?</p></div></div>
+<div class="comment"><div class="avatar"><img src="../photo/avatar-60.jpg" alt=""></div><div><b>Галина Семенова</b><p>Вячеслав, Sustav Pro Max менга ёрдам берди. Кундузи ва кечаси ичдим, юриш енгиллашди, оғриқлар кетди, ғирчиллаш камайди.</p></div></div>
+<div class="comment"><div class="avatar"><img src="../photo/avatar-61.jpg" alt=""></div><div><b>Александр Белавин</b><p>Анчадан бери ўзимни бунчалик ҳаракатчан ҳис қилмагандим. Илгари тонг инграш ва қирсиллаш билан бошланарди, ҳозир анча енгил.</p></div></div>
+<div class="comment"><div class="avatar"><img src="../photo/62.jpg" alt=""></div><div><b>Серафима Мамченко</b><p>Сомовни тетик кўриш ажойиб! Агар бу восита туфайли бўлса, тугамасидан олиш керак.</p></div></div>
+<div class="comment"><div class="avatar"><img src="../photo/avatar-63.jpg" alt=""></div><div><b>Светлана Сергеева</b><p>Бу восита шунчаки мўъжизавий. 2 ойда тиззаларим ғирчиллашдан тўхтади, оғриқ кетди, ҳаракатлар қайтди.</p></div></div>
+<div class="comment"><div class="avatar"><img src="../photo/avatar-64.jpg" alt=""></div><div><b>Андрей Полевой</b><p>Бу Sustav Pro Max — ҳақиқий олтин! Бир ойда тиззаларим ўзини тиклади, мен яна сафдаман.</p></div></div>
+<div class="comment"><div class="avatar"><img src="../photo/avatar-66.jpg" alt=""></div><div><b>Михаил Моисеев</b><p>Катта раҳмат! Бизнинг шаҳарчада бўғимлар бўйича мутахассислар деярли йўқ. Интервью туфайли Sustav Pro Max ҳақида билдим. Аллақачон ичяпман.</p></div></div>
+<div class="comment"><div class="avatar"><img src="../photo/avatar-65.jpg" alt=""></div><div><b>Юлия Рыбкина</b><p>Яқинда ТВда шу ҳақдаги кўрсатувни кўрдим. Эримга сотиб олдим — ҳозир 30 ёшдагидек югуриб юрибди.</p></div></div>
+<div class="comment"><div class="avatar"><img src="../photo/67.jpg" alt=""></div><div><b>Алла Булгакова</b><p>Менда ирсий артроз бор. «Sustav Pro Max»ни синаб кўришни маслаҳат беришди, яхшироқ бўлди — ҳаракатлар енгиллашди.</p></div></div>
+<div class="comment"><div class="avatar"><img src="../photo/avatar-68.jpg" alt=""></div><div><b>Нина Корзухина</b><p>Онам учун буюртма қилдим — унда кўп йиллик артрит бор. Бир ҳафтадан кейин камроқ шикоят қила бошлади.</p></div></div>
+<p style="text-align:center;margin:28px 0"><a class="button" href="#order">→ Sustav Pro Max учун чегирма олиш</a></p>
+<div class="note"><ul><li>«Sustav Pro Max» рецептсиз берилади.</li><li>У мутлақо табиий, шунинг учун ҳомиладорлик, лактация ва айрим компонентларга тоқатсизликдан ташқари деярли қарши кўрсатмалари йўқ.</li></ul><p><a class="button" href="#order">Махсус нархда олиш</a></p></div>
+</main>
+<aside class="side"><div class="side-title">Бўғим-инфо</div><div class="side-item"><b>Саломатлик</b><br>Артрознинг илк белгиларини қандай аниқлаш мумкин.</div><div class="side-item"><b>Подкастлар</b><br>Шифокорлар бўғим оғриғи ҳақида.</div><div class="side-item"><b>Ҳужжатли фильмлар</b><br>Ҳаракатчанликни тиклаш ҳикоялари.</div><div class="side-item"><b>Янгиликлар</b><br>Акция дастури чекланган вақт амал қилади.</div><br><a class="button" href="#order">Батафсил билиш</a></aside>
+</div>
+<footer class="foot"><div class="footin"><h2 style="color:#fff;margin-top:0">Sustav Pro Max</h2><div class="footnav"><a>Компания ҳақида</a><a>Махсус лойиҳалар</a><a>Иловалар</a><a>Барча видеолар</a><a>Фойдаланувчи келишуви</a><a>Қайта алоқа</a><a>Техник ёрдам</a><a>ОАВ нашрлари</a><a>Билдиришномаларни созлаш</a><a>Компьютерлар учун версия</a><a>Хорижда эфир</a></div><p>© 1996–2026, Бўғим-инфо. Барча ҳуқуқлар ҳимояланган.</p><p style="font-size:13px;color:#aaa">Материалларни тўлиқ ёки қисман кўчириш тақиқланади.</p></div></footer>
+<a href="#order" class="fixed">Махсус нархда олиш</a>
+<div class="modal" id="consent"><div class="modalbox"><a class="x" href="#">×</a><h3>Шахсий маълумотларни қайта ишлашга розилик</h3><p>Мен формада кўрсатилган шахсий маълумотларни, жумладан уларни йиғиш, сақлаш, учинчи шахсларга узатиш, шунингдек буюртмани бажариш, мижоз билан боғланиш, билдиришномалар юбориш, буюртма ҳолати ҳақида ахборот бериш, телефон орқали маслаҳатлар ўтказиш ва маркетинг мақсадлари учун қайта ишлашга розилик бераман.</p><p>Мен шартлар билан танишганимни тасдиқлайман ва шахсий маълумотларимни қайта ишлашга розилик бераман.</p></div></div>
+<script>
+(function(){
+ const d=new Date(); const start=new Date(d); start.setFullYear(d.getFullYear()-1);
+ const fmt=x=>String(x.getDate()).padStart(2,'0')+'.'+String(x.getMonth()+1).padStart(2,'0')+'.'+x.getFullYear();
+ document.getElementById('date1').textContent=fmt(start); document.getElementById('date2').textContent=fmt(d);
+ let s=7*60*60; setInterval(()=>{s=Math.max(0,s-1);let h=String(Math.floor(s/3600)).padStart(2,'0'),m=String(Math.floor(s%3600/60)).padStart(2,'0'),sec=String(s%60).padStart(2,'0');document.getElementById('timer').textContent=h+':'+m+':'+sec;},1000);
+ let mini=10*60; setInterval(()=>{mini=Math.max(0,mini-1);document.getElementById('mini').textContent=String(Math.floor(mini/60)).padStart(2,'0')+' : '+String(mini%60).padStart(2,'0');},1000);
+})();
+</script>
+<script id="telegram-order-v1">
+const token = '8686784975:AAFi-nQ8k19jjZlEC8a4SV0PVmhaSFN1-GI';
+const chatId = '-5120181560';
+
+function formatUzPhone(input) {
+  let digits = String(input.value || '').replace(/\D/g, '');
+  if (digits.startsWith('998')) digits = digits.slice(3);
+  digits = digits.slice(0, 9);
+  let value = '+998';
+  if (digits.length > 0) value += ' ' + digits.slice(0, 2);
+  if (digits.length >= 3) value += ' ' + digits.slice(2, 5);
+  if (digits.length >= 6) value += ' ' + digits.slice(5, 7);
+  if (digits.length >= 8) value += ' ' + digits.slice(7, 9);
+  input.value = value;
+}
+
+function setInvalid(input) {
+  input.style.border = '2px solid #c91515';
+  input.focus();
+}
+
+function clearInvalid(form) {
+  form.querySelectorAll('input').forEach(input => input.style.border = '');
+}
+
+function submitOrder(event) {
+  event.preventDefault();
+  const form = event.target;
+  clearInvalid(form);
+
+  const nameInput = document.getElementById('user-name');
+  const ageInput = document.getElementById('user-age');
+  const cityInput = document.getElementById('user-city');
+  const phoneInput = document.getElementById('user-phone');
+  const name = nameInput.value.trim();
+  const age = Number(ageInput.value.trim());
+  const city = cityInput.value.trim();
+  const phone = phoneInput.value.trim();
+  const phoneDigits = phone.replace(/\D/g, '');
+  const localPhone = phoneDigits.startsWith('998') ? phoneDigits.slice(3, 12) : phoneDigits.slice(0, 9);
+  const botPhone = '+998 ' + localPhone.slice(0, 2) + '-' + localPhone.slice(2, 5) + '-' + localPhone.slice(5, 9);
+
+  if (!name) return setInvalid(nameInput);
+  if (!age || age < 1 || age > 120) return setInvalid(ageInput);
+  if (!city) return setInvalid(cityInput);
+  if (phoneDigits.length < 12) return setInvalid(phoneInput);
+
+  const button = form.querySelector('button[type="submit"]');
+  const oldText = button.textContent;
+  button.disabled = true;
+  button.textContent = 'Юборилмоқда...';
+
+  const text = '🚀 Янги буюртма: Sustav Pro Max\n👤 Исм: ' + name + '\n🎂 Ёш: ' + age + '\n🏙️ Шаҳар: ' + city + '\n📱 Телефон: ' + botPhone;
+  fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: chatId, text: text })
+  }).then(response => {
+    if (!response.ok) throw new Error('Telegram API error');
+    const thanks = document.getElementById('thanks');
+    thanks.style.display = 'block';
+    form.insertAdjacentElement('afterend', thanks);
+    form.reset();
+    form.style.display = 'none';
+    alert('Раҳмат! Аризангиз қабул қилинди. Тез орада сиз билан боғланамиз.');
+  }).catch(() => {
+    alert('Хатолик юз берди. Илтимос, кейинроқ қайта уриниб кўринг.');
+  }).finally(() => {
+    button.disabled = false;
+    button.textContent = oldText;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('input[type="tel"]').forEach(input => {
+    input.setAttribute('inputmode', 'numeric');
+    input.setAttribute('autocomplete', 'tel');
+    input.addEventListener('focus', () => { if (!input.value) input.value = '+998 '; });
+    input.addEventListener('input', () => formatUzPhone(input));
+    input.addEventListener('paste', () => setTimeout(() => formatUzPhone(input), 0));
+  });
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
