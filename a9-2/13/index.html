@@ -1,0 +1,1011 @@
+﻿<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>A9-2</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#111;background:#e6e6e6}a{text-decoration:none}.top-title{background:#fff;text-align:center;font-weight:900;font-size:34px;padding:16px 10px 10px}.red-strip{background:#df2400;color:#fff;text-align:center;font-weight:800;text-transform:uppercase;line-height:1.7;padding:10px}.navbtn{position:sticky;top:0;z-index:50;text-align:center;background:rgba(255,255,255,.96);padding:10px}.navbtn a{display:inline-block;background:#388e3c;color:#fff;border-radius:20px;padding:8px 55px;font-weight:800}.hero,.dark{position:relative;background:#0d1024;color:#fff;overflow:hidden}.hero{min-height:640px;background:radial-gradient(circle at 75% 45%,#3b2e46 0,#13152a 35%,#090b1d 100%)}.sparks:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#ff8d14 2px,transparent 4px),radial-gradient(#fff 1px,transparent 3px);background-size:95px 80px,140px 120px;opacity:.55;animation:float 12s linear infinite}@keyframes float{to{background-position:0 300px,0 220px}}.wrap{width:1180px;max-width:96%;margin:auto;position:relative;z-index:2}.hero .wrap{display:flex;gap:35px;align-items:center;padding:28px 0}.order-card{position:relative;z-index:3;width:345px;min-width:330px;background:#fff;color:#000;border-radius:120px;padding:70px 28px 36px;box-shadow:0 4px 18px #0008;text-align:center}.small-red{color:red;font-weight:800;text-decoration:underline}.timer{display:flex;justify-content:center;gap:10px;margin:20px 0}.timebox{border:3px dotted red;border-radius:9px;width:78px;padding:8px 4px;color:red;font-weight:900;font-size:30px}.timebox span{display:block;color:#111;font-size:12px;margin-top:4px}.price{display:flex;justify-content:space-between;align-items:end;margin:12px 0}.price strong{font-size:34px}.price del{color:#aaa;font-weight:800}.discount-badge{margin:14px 0 16px;padding:14px 18px;border:3px dotted #f51b29;border-radius:18px;color:#f51b29;background:#fff5f5;font-weight:900;font-size:30px;text-transform:uppercase}input{display:block;width:100%;border:1px solid #cfd3d8;border-radius:25px;font-size:18px;padding:14px;margin:9px 0;box-shadow:inset 0 1px 4px #0002}.btn{display:inline-block;background:#f51b29;color:#fff;font-weight:900;border-radius:32px;padding:19px 48px;font-size:18px;box-shadow:0 7px 14px #f51b2966;text-transform:uppercase}.hero-text{position:relative;z-index:3;flex:1}.brand{font-size:43px;color:#ff8c12;font-weight:900}.hero h1{font-size:34px;line-height:1.05;margin:0 0 25px}.hero p{font-size:18px;font-weight:700;max-width:510px}.bullets{margin-top:25px}.bullets div{display:flex;gap:12px;margin:16px 0;font-weight:800}.icon{color:#ffa000;font-size:30px}.couple{position:absolute;z-index:1;left:330px;right:0;top:0;bottom:0;width:auto;height:auto;background:linear-gradient(90deg,rgba(9,11,29,.42),rgba(9,11,29,.12)),url("../assets/hero-couple-optimized.jpg") center right/cover no-repeat;opacity:.95;pointer-events:none}.white{background:#fff}.problem{display:flex;align-items:center;gap:40px;padding:70px 0 45px}.problem .txt{width:48%}.problem h2{font-size:42px;line-height:1.25;color:#222}.problem h2 span{color:#d94c3b}.problem li{list-style:none;margin:16px 0;font-size:18px;font-weight:800}.problem li b{color:#e33825}.man{flex:1;height:430px;background:url("../assets/problem-man-optimized.jpg") center/cover no-repeat;border-radius:0;position:relative}.man:after{content:none}.choice{padding:80px 0;background:linear-gradient(90deg,rgba(16,19,38,.2),rgba(16,19,38,.45)),url("../assets/choice-bg-optimized.jpg") center/cover no-repeat;color:#fff;position:relative;overflow:hidden}.choice .wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center}.woman{height:540px;background:transparent;border-radius:0;position:relative;overflow:visible}.woman:after{content:none}.choice h2{font-size:40px;line-height:1.12}.orange{color:#ff8c12}.features{display:flex;justify-content:space-around;text-align:center;margin:35px 0}.features div{font-size:26px;font-weight:900}.cards{display:flex;gap:55px;justify-content:center}.card{background:#69a95e;color:#fff;width:250px;min-height:160px;border-radius:8px;text-align:center;padding:44px 20px 20px;position:relative;font-weight:700}.card:nth-child(2){background:#fff;color:#111}.leaf{position:absolute;left:50%;top:-48px;transform:translateX(-50%);width:118px;height:90px;background:center/contain no-repeat;border-radius:0}.card:nth-child(1) .leaf{background-image:url("../assets/description-composition-1.png")}.card:nth-child(2) .leaf{background-image:url("../assets/description-composition-2.png")}.card:nth-child(3) .leaf{background-image:url("../assets/description-composition-3.png")}.widebtn{display:block;max-width:920px;margin:50px auto 0;text-align:center}.causes{padding:70px 0;background:#030303;color:#fff}.causes h2{text-align:center;font-size:36px}.cause-grid{display:grid;grid-template-columns:repeat(5,minmax(130px,1fr));gap:70px 34px;text-align:center;margin:62px auto 50px;max-width:1040px}.round{width:90px;height:90px;margin:auto;border:3px solid #e43;border-radius:50%;background:radial-gradient(circle,#eee,#555)}.cause-grid .round{width:96px;height:96px;overflow:hidden;background:#111}.cause-grid .round img{display:block;width:100%;height:100%;object-fit:cover}.cause-grid b{display:block;margin-top:10px;font-size:18px;line-height:1.15;text-shadow:0 2px 4px #000;font-weight:900}.promo{border:2px solid #ffd400;border-radius:12px;background:#101326;margin:auto;max-width:1000px;display:flex;align-items:center;justify-content:space-between;gap:28px;padding:35px 45px;font-size:30px;font-weight:800}.expert{padding:70px 0;background:#e5e5e5}.expert h2{font-size:35px}.doctor{float:left;width:230px;height:260px;background:linear-gradient(#eee,#cfd8dc);border:8px solid #fff;margin:0 30px 20px 0}.expert p{font-size:18px;line-height:1.55}.black-section{background:#030303;color:#fff;padding:70px 0}.danger-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px;max-width:900px;margin:auto}.danger{display:flex;align-items:center;gap:25px}.danger h3{color:#e73b28;font-size:22px}.reviews{padding:60px 0;background:#ddd}.reviews h2{text-align:center;font-size:38px}.review{background:#fff;border-radius:8px;box-shadow:0 3px 12px #0002;margin:35px auto;padding:35px;max-width:980px;display:flex;gap:28px}.avatar{width:100px;height:100px;border-radius:50%;background:linear-gradient(#ffd0bf,#555);flex:none}.review h3{font-style:italic;font-size:23px}.bottom{background:#101326;color:#fff;padding:60px 0}.bottom h2{text-align:center;font-size:42px}.bottom-box{display:flex;align-items:center;justify-content:center;gap:60px}.bottom .order-card{border-radius:80px;width:620px;display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:left}.phone{position:fixed;right:28px;bottom:28px;width:70px;height:70px;background:#77c6f4;border-radius:50%;box-shadow:0 0 0 12px #77c6f433;z-index:100;display:grid;place-items:center;color:#fff;font-size:34px}.warn{font-size:13px;color:#777;text-align:center;background:#fff;padding:18px}@media(max-width:900px){.hero .wrap,.problem,.choice .wrap,.bottom-box{display:block}.order-card,.bottom .order-card{width:94%;min-width:auto;margin:auto;display:block}.couple{opacity:.25}.problem .txt{width:auto}.cause-grid,.danger-grid{grid-template-columns:1fr 1fr}.cards,.features{flex-direction:column;display:flex;gap:55px}.top-title{font-size:26px}.hero h1,.choice h2,.bottom h2{font-size:30px}}
+
+/* ===== MOBILE OPTIMIZATION ===== */
+html{scroll-behavior:smooth}
+img,svg,video{max-width:100%;height:auto}
+input,.btn,.navbtn a{touch-action:manipulation}
+
+@media (max-width: 768px){
+  body{overflow-x:hidden;background:#fff}
+  .wrap{width:100%;max-width:100%;padding-left:16px;padding-right:16px}
+  .top-title{font-size:24px;padding:12px 8px}
+  .red-strip{font-size:12px;line-height:1.45;padding:10px 12px}
+  .navbtn{padding:8px 10px}
+  .navbtn a{width:100%;max-width:320px;padding:10px 16px;border-radius:22px;font-size:15px}
+
+  .hero{min-height:auto}
+  .hero .wrap{display:flex;flex-direction:column;gap:18px;padding:18px 16px 34px}
+  .hero-text{order:1;text-align:center;width:100%}
+  .order-card{order:2;width:100%;max-width:390px;min-width:0;border-radius:34px;padding:26px 18px 22px;margin:0 auto}
+  .brand{font-size:34px}
+  .hero h1{font-size:28px;line-height:1.1;margin-bottom:14px}
+  .hero p{font-size:16px;margin-left:auto;margin-right:auto}
+  .bullets{margin-top:16px;text-align:left}
+  .bullets div{font-size:14px;margin:12px 0;align-items:flex-start}
+  .icon{font-size:22px;line-height:1}
+  .couple{display:none}
+
+  .timer{gap:7px;margin:14px 0;flex-wrap:nowrap}
+  .timebox{width:30%;max-width:86px;font-size:24px;padding:7px 2px}
+  .timebox span{font-size:10px}
+  .price strong{font-size:28px}
+  input{font-size:16px;padding:13px 15px;border-radius:24px}
+  .btn{width:100%;text-align:center;padding:16px 18px;font-size:16px;border-radius:28px}
+
+  .problem{display:flex;flex-direction:column;padding:40px 16px 28px;gap:20px}
+  .problem .txt{width:100%;text-align:left}
+  .problem h2{font-size:30px;line-height:1.15;text-align:center}
+  .problem li{font-size:15px;margin:13px 0}
+  .man{width:100%;height:230px;flex:none}
+  .man:after{content:none}
+
+  .choice{padding:42px 0}
+  .choice .wrap{display:flex;flex-direction:column;gap:24px}
+  .woman{height:270px;width:100%}
+  .choice h2{font-size:28px;text-align:center}
+  .choice p{text-align:center;font-size:15px}
+  .features{display:grid;grid-template-columns:1fr;gap:18px;margin:25px 0}
+  .features div{font-size:22px}
+  .cards{display:grid;grid-template-columns:1fr;gap:52px;padding-top:20px}
+  .card{width:100%;max-width:330px;margin:0 auto;min-height:auto}
+  .widebtn{margin-top:28px}
+
+  .causes{padding:42px 0}
+  .causes h2{font-size:28px;line-height:1.2}
+  .cause-grid{grid-template-columns:1fr 1fr;gap:22px 12px;margin:30px 0}
+  .cause-grid .round{width:76px;height:76px}
+  .round{width:72px;height:72px}
+  .cause-grid b{display:block;font-size:13px;line-height:1.25;margin-top:8px}
+  .promo{display:block;padding:22px 16px;font-size:22px;text-align:center}
+  .promo .btn{margin-top:18px}
+
+  .expert{padding:42px 0}
+  .expert h2{font-size:28px;text-align:center}
+  .doctor{float:none;width:170px;height:190px;margin:0 auto 18px}
+  .expert p{font-size:15px;line-height:1.5}
+
+  .black-section{padding:42px 0}
+  .black-section h2{font-size:28px!important;line-height:1.2}
+  .danger-grid{grid-template-columns:1fr;gap:24px}
+  .danger{gap:14px;align-items:flex-start}
+  .danger h3{font-size:19px;margin:0 0 6px}
+  .danger p{font-size:14px;margin:0}
+
+  .reviews{padding:42px 0}
+  .reviews h2{font-size:28px;line-height:1.2}
+  .review{display:block;margin:22px auto;padding:22px 16px;text-align:left}
+  .avatar{width:76px;height:76px;margin:0 auto 12px}
+  .review h3{font-size:19px}
+  .review p{font-size:15px;line-height:1.45}
+
+  .bottom{padding:42px 0}
+  .bottom h2{font-size:28px;line-height:1.2}
+  .bottom-box{display:block}
+  .bottom .order-card{width:100%;max-width:390px;display:block;border-radius:34px;padding:24px 18px;text-align:center}
+  .phone{width:56px;height:56px;right:14px;bottom:14px;font-size:28px;box-shadow:0 0 0 8px #77c6f433}
+}
+
+@media (max-width: 420px){
+  .top-title{font-size:22px}
+  .red-strip{font-size:11px}
+  .brand{font-size:31px}
+  .hero h1,.choice h2,.problem h2,.causes h2,.expert h2,.reviews h2,.bottom h2{font-size:25px}
+  .order-card{border-radius:28px;padding-left:14px;padding-right:14px}
+  .timebox{font-size:21px}
+  .cause-grid{grid-template-columns:1fr}
+}
+
+.causes .promo{
+  position:relative;
+  min-height:460px;
+  overflow:hidden;
+  border:3px solid #ffd400;
+  border-radius:18px;
+  background:
+    linear-gradient(90deg,#101326 0 48%,rgba(16,19,38,.82) 62%,rgba(16,19,38,.12) 100%),
+    url("../assets/hero-couple-optimized.jpg") center right/cover no-repeat;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:36px;
+  max-width:1140px;
+  padding:42px 48px;
+}
+.promo-main{
+  position:relative;
+  z-index:2;
+  display:flex;
+  min-height:360px;
+  flex-direction:column;
+  justify-content:space-between;
+  max-width:520px;
+}
+.promo-copy{
+  color:#fff;
+  font-size:32px;
+  line-height:1.28;
+  font-weight:500;
+}
+.promo-copy span{
+  color:#ff8c12;
+  font-weight:900;
+}
+.promo-note{
+  position:relative;
+  z-index:2;
+  max-width:350px;
+  border-radius:14px;
+  background:#ffd21a;
+  color:#050505;
+  padding:48px 34px;
+  font-size:20px;
+  line-height:1.3;
+  font-weight:900;
+}
+.promo-note span{
+  color:#e33425;
+}
+.causes .promo .btn{
+  width:420px;
+  max-width:100%;
+  text-align:center;
+  padding:24px 32px;
+  border-radius:36px;
+}
+
+@media (max-width: 900px){
+  .causes .promo{
+    min-height:auto;
+    display:block;
+    padding:28px 18px;
+    background:
+      linear-gradient(rgba(16,19,38,.88),rgba(16,19,38,.72)),
+      url("../assets/hero-couple-optimized.jpg") center/cover no-repeat;
+  }
+  .promo-main{
+    min-height:0;
+    max-width:none;
+  }
+  .promo-copy{
+    font-size:24px;
+    text-align:left;
+  }
+  .promo-note{
+    max-width:none;
+    margin:24px 0;
+    padding:22px 18px;
+    font-size:18px;
+  }
+  .causes .promo .btn{
+    width:100%;
+  }
+}
+
+.expert{
+  background:#e5e5e5;
+  padding:74px 0 68px;
+}
+.expert .wrap{
+  max-width:1040px;
+}
+.expert h2{
+  margin:0 0 34px;
+  color:#050505;
+  font-size:36px;
+  line-height:1.25;
+  font-weight:900;
+}
+.expert h2 .orange{
+  display:inline-block;
+  margin-bottom:4px;
+  color:#ff8c12;
+  font-size:38px;
+}
+.expert-body{
+  display:grid;
+  grid-template-columns:240px 1fr;
+  gap:28px;
+  align-items:start;
+}
+.doctor{
+  float:none;
+  width:240px;
+  height:auto;
+  margin:0;
+  border:5px solid #fff;
+  background:#fff;
+  box-shadow:0 8px 22px #0002;
+}
+.doctor img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.expert-copy p{
+  margin:0 0 18px;
+  font-size:18px;
+  line-height:1.55;
+}
+.expert-copy h3{
+  margin:34px 0 0;
+  color:#06102b;
+  font-size:20px;
+  line-height:1.35;
+  font-weight:900;
+}
+
+@media (max-width: 900px){
+  .expert{
+    padding:44px 0;
+  }
+  .expert h2{
+    font-size:27px;
+    text-align:left;
+  }
+  .expert h2 .orange{
+    font-size:30px;
+  }
+  .expert-body{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+  .doctor{
+    width:220px;
+    margin:0 auto;
+  }
+  .expert-copy p{
+    font-size:15px;
+  }
+}
+
+.black-section{
+  position:relative;
+  overflow:hidden;
+  background:#020202;
+  padding:86px 0 94px;
+}
+.black-section .wrap{
+  max-width:1180px;
+}
+.danger-title{
+  margin:0 0 82px;
+  text-align:center;
+  color:#fff;
+  font-size:44px;
+  line-height:1.12;
+  font-weight:900;
+}
+.danger-title span{
+  color:#e73b28;
+}
+.danger-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:72px 120px;
+  max-width:1060px;
+  margin:0 auto;
+}
+.danger{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  gap:28px;
+  align-items:center;
+}
+.danger-center{
+  grid-column:1 / -1;
+  width:560px;
+  justify-self:center;
+}
+.danger .round{
+  width:138px;
+  height:138px;
+  margin:0;
+  overflow:hidden;
+  border:0;
+  border-radius:50%;
+  background:#111;
+}
+.danger .round img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.danger h3{
+  margin:0 0 14px;
+  color:#e73b28;
+  font-size:24px;
+  line-height:1.15;
+  font-weight:900;
+}
+.danger p{
+  margin:0;
+  color:#fff;
+  font-size:20px;
+  line-height:1.32;
+  font-weight:700;
+}
+
+@media (max-width: 900px){
+  .black-section{
+    padding:50px 0;
+  }
+  .danger-title{
+    margin-bottom:36px;
+    font-size:29px!important;
+  }
+  .danger-grid{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+  .danger,
+  .danger-center{
+    width:auto;
+    grid-column:auto;
+    grid-template-columns:92px 1fr;
+    gap:16px;
+  }
+  .danger .round{
+    width:86px;
+    height:86px;
+  }
+  .danger h3{
+    font-size:20px;
+  }
+  .danger p{
+    font-size:15px;
+  }
+}
+
+.confidence{
+  position:relative;
+  overflow:hidden;
+  background:#101326;
+  color:#fff;
+}
+.confidence:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:-1px;
+  width:100%;
+  height:58px;
+  background:#020202;
+  border-radius:0 0 50% 50%/0 0 100% 100%;
+}
+.confidence .wrap{
+  min-height:560px;
+  display:grid;
+  grid-template-columns:1fr 360px;
+  gap:84px;
+  align-items:center;
+  padding-top:70px;
+  padding-bottom:54px;
+}
+.confidence-bg{
+  position:absolute;
+  inset:0 auto 0 0;
+  width:58%;
+  background:
+    linear-gradient(90deg,rgba(16,19,38,.62),rgba(16,19,38,.82)),
+    url("../assets/hero-couple-optimized.jpg") center/cover no-repeat;
+  opacity:.8;
+}
+.confidence-copy{
+  position:relative;
+  z-index:2;
+  max-width:620px;
+  padding-left:18px;
+}
+.confidence-copy h2{
+  margin:0 0 56px;
+  font-size:42px;
+  line-height:1.35;
+  font-weight:500;
+}
+.confidence-copy h2 span{
+  color:#ff8c12;
+  font-weight:900;
+}
+.confidence-copy .btn{
+  min-width:390px;
+  text-align:center;
+}
+.certificate{
+  position:relative;
+  z-index:2;
+  width:272px;
+  min-height:342px;
+  justify-self:center;
+  background:#fff;
+  color:#111;
+  padding:24px 18px;
+  box-shadow:0 18px 35px #0007;
+}
+.certificate:before{
+  content:"EAC";
+  display:block;
+  margin-bottom:10px;
+  font-size:28px;
+  font-weight:900;
+}
+.certificate h3{
+  margin:0 0 14px;
+  text-align:center;
+  font-size:10px;
+  line-height:1.2;
+}
+.cert-lines{
+  display:grid;
+  gap:5px;
+}
+.cert-lines span{
+  height:5px;
+  background:#222;
+  opacity:.55;
+}
+.cert-lines span:nth-child(3n){
+  width:72%;
+}
+.cert-lines span:nth-child(4n){
+  width:86%;
+}
+.cert-stamp{
+  position:absolute;
+  left:28px;
+  bottom:24px;
+  width:62px;
+  height:62px;
+  border:4px solid #294fa5;
+  border-radius:50%;
+  opacity:.72;
+}
+.certificate{padding:0;overflow:hidden;min-height:0;aspect-ratio:920/1280}
+.certificate:before{display:none}
+.certificate img{display:block;width:100%;height:100%;object-fit:cover}
+
+
+@media (max-width: 900px){
+  .confidence .wrap{
+    min-height:auto;
+    display:block;
+    padding-top:76px;
+    padding-bottom:38px;
+  }
+  .confidence-bg{
+    width:100%;
+    opacity:.45;
+  }
+  .confidence-copy{
+    padding-left:0;
+  }
+  .confidence-copy h2{
+    margin-bottom:28px;
+    font-size:30px;
+  }
+  .confidence-copy .btn{
+    min-width:0;
+    width:100%;
+  }
+  .certificate{
+    margin:34px auto 0;
+  }
+}
+
+.reviews{
+  background:#e5e5e5;
+  padding:70px 0 78px;
+}
+.reviews .wrap{
+  max-width:1170px;
+}
+.reviews h2{
+  margin:0 0 42px;
+  color:#050505;
+  text-align:center;
+  font-size:44px;
+  line-height:1.2;
+  font-weight:400;
+}
+.reviews h2 .orange{
+  display:block;
+  color:#ff8c12;
+  font-size:42px;
+  font-weight:900;
+}
+.review{
+  display:grid;
+  grid-template-columns:132px 1fr;
+  gap:36px;
+  max-width:1170px;
+  min-height:270px;
+  margin:30px auto;
+  padding:56px 64px;
+  background:#fff;
+  border-radius:8px;
+  box-shadow:0 8px 22px #0002;
+}
+.avatar{
+  width:138px;
+  height:138px;
+  border-radius:50%;
+  overflow:hidden;
+  background:#ddd;
+  flex:none;
+  align-self:start;
+}
+.avatar img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.review h3{
+  margin:0 0 20px;
+  color:#000;
+  font-size:26px;
+  line-height:1.25;
+  font-style:italic;
+  font-weight:900;
+}
+.review p{
+  margin:0 0 20px;
+  color:#000;
+  font-size:20px;
+  line-height:1.35;
+}
+.review h4{
+  margin:0;
+  color:#000;
+  font-size:26px;
+  line-height:1.25;
+  font-weight:900;
+}
+
+@media (max-width: 900px){
+  .reviews{
+    padding:44px 0;
+  }
+  .reviews h2{
+    font-size:28px;
+  }
+  .reviews h2 .orange{
+    font-size:30px;
+  }
+  .review{
+    display:block;
+    min-height:0;
+    padding:24px 18px;
+  }
+  .avatar{
+    width:96px;
+    height:96px;
+    margin:0 auto 16px;
+  }
+  .review h3{
+    font-size:20px;
+  }
+  .review p{
+    font-size:15px;
+  }
+  .review h4{
+    font-size:20px;
+  }
+}
+
+.bottom{
+  position:relative;
+  overflow:hidden;
+  min-height:800px;
+  background:
+    linear-gradient(90deg,#101326 0 48%,rgba(16,19,38,.56) 70%,rgba(16,19,38,.18) 100%),
+    url("../assets/images.jpg") right center/auto 100% no-repeat,
+    #101326;
+  padding:52px 0 86px;
+}
+.bottom:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(#ff8d14 3px,transparent 6px),radial-gradient(#fff 1px,transparent 3px);
+  background-size:95px 80px,140px 120px;
+  opacity:.38;
+  animation:float 12s linear infinite;
+  pointer-events:none;
+}
+.bottom .wrap{
+  position:relative;
+  z-index:2;
+}
+.bottom h2{
+  margin:0 auto 44px;
+  max-width:880px;
+  text-align:center;
+  color:#fff;
+  font-size:42px;
+  line-height:1.25;
+}
+.bottom h2 .orange{
+  color:#ff8c12;
+  font-size:48px;
+}
+.bottom-box{
+  display:flex;
+  justify-content:center;
+}
+.bottom .order-card{
+  width:850px;
+  min-height:430px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:38px;
+  align-items:center;
+  border-radius:96px;
+  background:#f2f2f2;
+  color:#000;
+  padding:42px 58px;
+  text-align:left;
+  box-shadow:0 0 48px rgba(245,27,41,.28);
+}
+.bottom .order-card .price{
+  align-items:center;
+  margin-bottom:10px;
+}
+.bottom .order-card .price strong{
+  font-size:38px;
+}
+.bottom .order-card input{
+  max-width:290px;
+}
+.order-card input{
+  background:#f3f3f3;
+  border-color:#d8d8d8;
+}
+.order-card input::placeholder{
+  color:#777;
+}
+.bottom .order-card .btn{
+  max-width:290px;
+  width:100%;
+  text-align:center;
+}
+.bottom .order-card .timer{
+  justify-content:flex-start;
+}
+.bottom .order-card .timebox{
+  background:#fff;
+  box-shadow:0 3px 12px #f51b2933;
+}
+.bottom .order-card p{
+  font-weight:700;
+}
+
+@media (max-width: 900px){
+  .bottom{
+    min-height:auto;
+    background:
+      linear-gradient(rgba(16,19,38,.74),rgba(16,19,38,.9)),
+      url("../assets/images.jpg") center top/cover no-repeat,
+      #101326;
+    padding:44px 0;
+  }
+  .bottom h2{
+    font-size:28px;
+  }
+  .bottom h2 .orange{
+    font-size:31px;
+  }
+  .bottom .order-card{
+    width:100%;
+    display:block;
+    border-radius:34px;
+    padding:24px 18px;
+    text-align:center;
+  }
+  .bottom .order-card input,
+  .bottom .order-card .btn{
+    max-width:none;
+  }
+  .bottom .order-card .timer{
+    justify-content:center;
+  }
+}
+
+.problem,
+.choice,
+.causes,
+.expert,
+.black-section,
+.confidence,
+.reviews,
+.bottom{
+  content-visibility:auto;
+  contain-intrinsic-size:800px;
+}
+
+@media (max-width: 900px){
+  .problem,
+  .choice,
+  .causes,
+  .expert,
+  .black-section,
+  .confidence,
+  .reviews,
+  .bottom{
+    contain-intrinsic-size:620px;
+  }
+  .man{
+    background-position:center top;
+  }
+  .choice{
+    background-position:center top;
+  }
+}
+
+.white{
+  background:#fff;
+}
+.problem .man{
+  display:block;
+  height:520px;
+  background:url("../assets/problem-man-optimized.jpg") center/contain no-repeat;
+}
+
+@media (max-width: 900px){
+  .problem .txt{
+    width:100%;
+  }
+  .problem .man{
+    display:block;
+    width:100%;
+    height:360px;
+    background:url("../assets/problem-man-optimized.jpg") center/contain no-repeat;
+  }
+}
+
+.price{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  align-items:end;
+  justify-content:center;
+  gap:18px;
+  width:100%;
+  text-align:center;
+}
+.price-item{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.price-label{
+  display:block;
+  width:100%;
+  margin-bottom:5px;
+  color:#777;
+  font-size:12px;
+  line-height:1.15;
+  font-weight:900;
+  text-align:center;
+  text-transform:uppercase;
+}
+.price-special .price-label{
+  color:#f51b29;
+}
+.price .price-special strong{
+  display:block;
+  color:#000;
+  font-size:40px;
+  line-height:1;
+  text-align:center;
+  white-space:nowrap;
+}
+.price .price-regular del{
+  display:block;
+  color:#9a9a9a;
+  font-size:24px;
+  line-height:1.15;
+  font-weight:900;
+  text-align:center;
+  white-space:nowrap;
+}
+
+@media (max-width: 420px){
+  .price{
+    gap:8px;
+  }
+  .price-label{
+    font-size:11px;
+  }
+  .price .price-special strong{
+    font-size:34px;
+  }
+  .price .price-regular del{
+    font-size:19px;
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="top-title">ТАБРИКЛАЙМИЗ!</div>
+<div class="red-strip">СИЗ СОҒЛОМ ЎЗБЕКИСТОН FEDERAL ДАСТУРИ ИШТИРОКЧИСИГА АЙЛАНДИНГИЗ!<br>ДАСТУРНИНГ ҲАР БИР ИШТИРОКЧИСИ ПОТЕНЦИАЛЛИКНИ 0 СЎМГА ОШИРИШИ МУМКИН!</div>
+<section class="hero sparks"><div class="wrap"><div class="order-card"><p><i>Махсус нархларда фақатгина <span class="small-red">120 упаковок</span> ўрам қолди!</i></p><h3>Акция тугагунча:</h3><div class="timer"><div class="timebox">23<span>Соат</span></div><div class="timebox">23<span>Дақиқа</span></div><div class="timebox">45<span>Қолди</span></div></div><div class="discount-badge">70% чегирмада</div><input name="name" type="text" placeholder="Исм Фамилия"><input name="age" type="number" min="1" max="120" placeholder="Ёш"><input name="city" type="text" placeholder="Шаҳар"><input name="phone" type="tel" placeholder="+998"><a class="btn" href="">ХАРИД КИЛИШ</a></div><div class="hero-text"><div class="brand">A9 ANDROBOSS</div><h1>Чинакам секс машинасига айлан!</h1><p>Бир неча соат мобайнида михдек туриши энди ҳақиқий воқелик!</p><div class="bullets"><div><span class="icon">♂</span>барқарор эрекцияни бир неча соат давомида таъминлайди</div><div><span class="icon">⚡</span>шаҳвоний майлни кучайтиради ва потенцияни оширади</div><div><span class="icon">✹</span>оргазм пайтидаги сезги таъсирчанлигини оширади</div><div><span class="icon">♜</span>простатитдан халос бўлишга кўмаклашади</div></div></div><div class="couple"></div></div></section>
+<div class="navbtn"><a href="#order">Маслаҳат олинг</a></div>
+<section class="white"><div class="wrap problem"><div class="txt"><h2><span>Чинакамига<br>турмаслигидан</span><br>ЧАРЧАДИНГМИ?</h2><ul><li><b>Тез тугаб</b> қолаётган бўлсанг.</li><li><b>Простатит</b> азоб бераётган бўлса.</li><li><b>Доимий хорғинлик</b> ва чарчашни ҳис қилсанг.</li><li><b>Тунга бир маҳал</b> нормага айланса.</li><li>Ўзингга <b>ишончсизлик</b> борми.</li></ul><h3>Унда A9 ANDROBOSSни синаб кўр ва ўзингда қонмайдиган эркакни уйғот!</h3></div><div class="man"></div></div></section>
+<section class="choice sparks"><div class="wrap"><div class="woman"></div><div><h2><span class="orange">Нима учун юзлаб</span><br>эркаклар бу A9 ANDROBOSSни танладилар?</h2><p><b class="orange">A9 ANDROBOSS</b><br>Бу табиий моддалар ва ўсимлик экстрактлари асосида яратилган қўшимча.</p></div></div><div class="wrap"><div class="features"><div>☘<br>Табиий таркиб</div><div>♂<br>Самарадорлик</div><div>🛡<br>Хавфсизлилик</div></div><div class="cards"><div class="card"><div class="leaf"></div><b>Rhodiola rosea</b><br><br>қайта тикловчи хусусиятга эга.</div><div class="card"><div class="leaf"></div><b>Thymus serpyllum</b><br><br>антиоксидант хусусиятли ўсимлик.</div><div class="card"><div class="leaf"></div><b>Fructus rosae</b><br><br>умумий тетиклаштирувчи таркиб.</div></div><a class="btn widebtn" href="#order">СЕКС ҚИРОЛИ БЎЛИШНИ ИСТАЙМАН</a></div></section>
+<section class="causes sparks"><div class="wrap"><h2><span style="color:#e43">Нима сабаб тез-тез</span><br>секс пайтида сенда отилмай қоляпти?</h2><div class="cause-grid"><div><div class="round"><img loading="lazy" decoding="async" src="../assets/why-img-1-opt.jpg" alt=""></div><b>Иммунитетнинг пасайиши</b></div><div><div class="round"><img loading="lazy" decoding="async" src="../assets/why-img-2-opt.jpg" alt=""></div><b>Камҳаракат ҳаёт тарзи</b></div><div><div class="round"><img loading="lazy" decoding="async" src="../assets/why-img-3-opt.jpg" alt=""></div><b>Кичик тос суяги совуқлигининг жароҳатланиши</b></div><div><div class="round"><img loading="lazy" decoding="async" src="../assets/why-img-4-opt.jpg" alt=""></div><b>Ҳаддан ташқари совуқ қотиш</b></div><div><div class="round"><img loading="lazy" decoding="async" src="../assets/why-img-5-opt.jpg" alt=""></div><b>Зарарли одатлар</b></div><div><div class="round"><img loading="lazy" decoding="async" src="../assets/why-img-6-opt.jpg" alt=""></div><b>Керагидан ортиқ жинсий фаоллик</b></div><div><div class="round"><img loading="lazy" decoding="async" src="../assets/why-img-7-opt.jpg" alt=""></div><b>Ортиқча вазн</b></div><div><div class="round"><img loading="lazy" decoding="async" src="../assets/why-img-9-opt.jpg" alt=""></div><b>Жинсий йўллар билан юқадиган инфекциялар</b></div><div><div class="round"><img loading="lazy" decoding="async" src="../assets/why-img-10-opt.jpg" alt=""></div><b>Гормонал бузилишлар</b></div><div><div class="round"><img loading="lazy" decoding="async" src="../assets/why-img-11-opt.jpg" alt=""></div><b>Узоқ вақт жинси алоқадан тийилиш</b></div></div><div class="promo"><div class="promo-main"><div class="promo-copy">Соатлаб жинсий алоқага кириша оладиган омадли альфа-эркакларга ҳавас фақат қилиш етар энди!<br><span>A9 ANDROBOSS ёрдамида улардан бирига айлан!</span></div><a class="btn" href="#order">70 фоизли чегирма билан сотиб олиш!</a></div><div class="promo-note">Алоқа учун маълумотларингизни қолдиринг ва A9 ANDROBOSSни <span>70 фоиз чегирма билан</span> қўлга киритинг</div></div></div></section>
+<section class="expert"><div class="wrap"><h2><span class="orange">A9 ANDROBOSSнинг</span><br>самарадорлиги ҳақида мутахассис нима дейди?</h2><div class="expert-body"><div class="doctor"><img loading="lazy" decoding="async" src="../assets/doctor-muhammad-optimized.jpg" alt="Доктор Мухаммад Турсунов Эркинжонович"></div><div class="expert-copy"><p><b style="color:#e43">Эрекция фаолиятининг бузилиши ва простата яллиғланиши</b> — эркаклар орасида кенг тарқалган муаммолардан бўлиб, бундай муаммони вақтида тан олиш ва ҳаракатни бошлаш муҳим. Сабаблар турлича бўлиши мумкин: иммунитет пасайиши, камҳаракат ҳаёт тарзи, ортиқча вазн, зарарли одатлар ва совуқ қотиш.</p><p><b>A9 ANDROBOSS</b> умумий муолажа таркибидаги қўшимча сифатида кўрсатилиши мумкин. Табиий таркиб эркаклар саломатлигини қўллаб-қувватлашга ёрдам беради, натижа эса ҳар бир инсонда индивидуал бўлади. Жиддий белгилар бўлса, албатта мутахассисга мурожаат қилиш керак.</p><p>Шунинг учун муаммони кечиктирмасдан ҳал қилиш, профилактикага эътибор бериш ва организмни қўллаб-қувватлаш тавсия этилади.</p><h3>Доктор Мухаммад  Турсунов Эркинжонович — Терапевт Уролог</h3></div></div></div></section>
+<section class="black-section sparks"><div class="wrap"><h2 class="danger-title"><span>Агар зудлик билан ҳаракат</span><br>бошланмаса нима бўлади?</h2><div class="danger-grid"><div class="danger"><div class="round"><img loading="lazy" decoding="async" src="../assets/what-happen-img-1-opt.jpg" alt=""></div><div><h3>Простата аденомаси</h3><p>Уни фақат жарроҳлик йўли билан даволаш мумкин</p></div></div><div class="danger"><div class="round"><img loading="lazy" decoding="async" src="../assets/what-happen-img-2-opt.jpg" alt=""></div><div><h3>Бепуштлик</h3><p>Простатит билан оғриган 40 фоиз эркакларда кузатилади</p></div></div><div class="danger"><div class="round"><img loading="lazy" decoding="async" src="../assets/what-happen-img-3-opt.jpg" alt=""></div><div><h3>Импотенция</h3><p>Даволанмаган тақдирда у эркак кишида ўзига бўлган ишончни сусайтириб юборади</p></div></div><div class="danger"><div class="round"><img loading="lazy" decoding="async" src="../assets/what-happen-img-4-opt.jpg" alt=""></div><div><h3>Простата склерози</h3><p>Фақат жарроҳлик йўли билан даволаш мумкин</p></div></div><div class="danger danger-center"><div class="round"><img loading="lazy" decoding="async" src="../assets/what-happen-img-5-opt.jpg" alt=""></div><div><h3>Руҳий касалликлар</h3><p>Ўзига ишончсизликдан ва аёл кишини тўшакда қондира олмасликдан келиб чиқади</p></div></div></div></div></section>
+<section class="confidence"><div class="confidence-bg"></div><div class="wrap"><div class="confidence-copy"><h2><span>Бугун A9 ANDROBOSSга</span> буюртма бер,<br>эртага эса<br>аёлнинг оргазмдан<br>тинкаси қурисин!</h2><a class="btn" href="#order">Мақсадга ўтиш</a></div><div class="certificate"><img loading="lazy" decoding="async" src="../assets/certificate-optimized.jpg" alt="Сертификат соответствия"></div></div></section>
+<section class="reviews"><div class="wrap"><h2><span class="orange">A9 ANDROBOSSни</span><br>аллақачон баҳолаб кўрганлар нима дейди?</h2><div class="review"><div class="avatar"><img loading="lazy" decoding="async" src="../assets/reviews-img-1-opt.jpg" alt=""></div><div><h3>«Михдек қотиб туриши ҳеч қачон ортиқчалик қилмайди!»</h3><p>40 ёшдан кейин турмуш ўртоғим билан жинсий алоқалар пайтида менда тез-тез муаммолар пайдо бўла бошлади. Бундан жуда кўп сиқилдим, лекин A9 ANDROBOSS буюртма беришга қарор қилдим. Фойдаси тегди! Ҳозир ўзимни анча ишончли ҳис қиламан.</p><h4>Хўжаев Абдулло, 43 ёш</h4></div></div><div class="review"><div class="avatar"><img loading="lazy" decoding="async" src="../assets/reviews-img-2-opt.jpg" alt=""></div><div><h3>«Энди менинг жинсий аъзойим чиндан ҳам СОҒЛОМ!»</h3><p>Жуда кўп вақтимни ишда ўтказаман, баъзан чарчоқ ҳам таъсир қиларди. Дўстим тавсияси билан A9 ANDROBOSSни синаб кўрдим. Биринчи курсдан кейин ўзимни кучлироқ ва анча ишончли ҳис қилдим.</p><h4>Хафизов Шерали, 37 ёш, Бухоро шаҳри</h4></div></div><div class="review"><div class="avatar"><img loading="lazy" decoding="async" src="../assets/reviews-img-3-opt.jpg" alt=""></div><div><h3>«Бир тунда бешта оргазм — фойдаланишдаги биринчи тажриба айнан шундай бўлди!»</h3><p>Охирги пайтларда муносабатлар зерикарли тус ола бошлаганди. A9 ANDROBOSSни олиб, натижасини биринчи кечанинг ўзидаёқ сездим. Турмуш ўртоғим ҳам ўзгаришни дарҳол пайқади.</p><h4>Рахманов Феруз, 41 ёш, Тошкент шаҳри</h4></div></div></div></section>
+<section class="bottom sparks" id="order"><div class="wrap"><h2><span class="orange">Жинсий аъзойингни букилмасга айлантир!</span><br>A9 ANDROBOSSга ҳозироқ буюртма бер!</h2><div class="bottom-box"><div class="order-card"><div><div class="discount-badge">70% чегирмада</div><input name="name" type="text" placeholder="Исм Фамилия"><input name="age" type="number" min="1" max="120" placeholder="Ёш"><input name="city" type="text" placeholder="Шаҳар"><input name="phone" type="tel" placeholder="+998"><a class="btn" href="#">ХАРИД КИЛИШ</a></div><div><p><i>Махсус нархларда <span class="small-red">фақат 120 ўрам</span> қолди!</i></p><h3>Акция тугагунча:</h3><div class="timer"><div class="timebox">23<span>соат</span></div><div class="timebox">22<span>дақиқа</span></div><div class="timebox">44<span>қолди</span></div></div><p>♜ тош каби эрекция<br>☺ ёрқин ҳис этиш<br>◴ 3 соатлик секс<br>👍 ўзига ишонч</p></div></div></div></div></section>
+<div class="warn">Макет демонстрация учун. Саломатлик билан боғлиқ муаммоларда шифокорга мурожаат қилинг.</div><div class="phone">☎</div>
+<script>
+(function(){
+  var duration = 24 * 60 * 60;
+  var storageKey = "a9AndrobossTimerEnd";
+  var endTime = Number(localStorage.getItem(storageKey));
+
+  if (!endTime || endTime <= Date.now()) {
+    endTime = Date.now() + duration * 1000;
+    localStorage.setItem(storageKey, String(endTime));
+  }
+
+  function setBoxValue(box, value) {
+    var textNode = Array.prototype.find.call(box.childNodes, function(node) {
+      return node.nodeType === Node.TEXT_NODE && node.nodeValue.trim();
+    });
+
+    if (textNode) {
+      textNode.nodeValue = value;
+    } else {
+      box.insertBefore(document.createTextNode(value), box.firstChild);
+    }
+  }
+
+  function updateTimer() {
+    var secondsLeft = Math.max(0, Math.floor((endTime - Date.now()) / 1000));
+    var hours = Math.floor(secondsLeft / 3600);
+    var minutes = Math.floor((secondsLeft % 3600) / 60);
+    var seconds = secondsLeft % 60;
+    var values = [hours, minutes, seconds].map(function(value) {
+      return String(value).padStart(2, "0");
+    });
+
+    document.querySelectorAll(".timer").forEach(function(timer) {
+      timer.querySelectorAll(".timebox").forEach(function(box, index) {
+        setBoxValue(box, values[index] || "00");
+      });
+    });
+
+    if (secondsLeft === 0) {
+      endTime = Date.now() + duration * 1000;
+      localStorage.setItem(storageKey, String(endTime));
+    }
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+})();
+</script>
+<script id="telegram-order-v1">
+const token = '8686784975:AAFi-nQ8k19jjZlEC8a4SV0PVmhaSFN1-GI';
+const chatIds = {
+  '1': '-5248565134',
+  '4': '-5257561951',
+  '5': '-5122655400',
+  '7': '-5180715578',
+  '8': '-5263039363',
+  '9': '-5205054614',
+  '10': '-5007803479',
+  '11': '-5226417176',
+  '12': '-5051286860',
+  '13': '-5270846031',
+  '14': '-5120181560',
+  '17': '-5172424709',
+  '19': '-5178944065'
+};
+
+function getPageNumber() {
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  const last = parts[parts.length - 1];
+  if (last && last.toLowerCase() !== 'index.html') return last;
+  return parts[parts.length - 2] || '1';
+}
+
+function formatUzPhone(input) {
+  let digits = input.value.replace(/\D/g, '');
+  if (digits.startsWith('998')) digits = digits.slice(3);
+  digits = digits.slice(0, 9);
+  let formatted = '+998';
+  if (digits.length > 0) formatted += ' ' + digits.slice(0, 2);
+  if (digits.length > 2) formatted += '-' + digits.slice(2, 5);
+  if (digits.length > 5) formatted += '-' + digits.slice(5, 9);
+  input.value = formatted;
+}
+
+function markInvalid(input) {
+  input.style.borderColor = '#f51b29';
+  input.focus();
+}
+
+async function submitTelegramOrder(event) {
+  event.preventDefault();
+  const button = event.currentTarget;
+  const card = button.closest('.order-card');
+  if (!card) return;
+
+  const nameInput = card.querySelector('input[name="name"]');
+  const ageInput = card.querySelector('input[name="age"]');
+  const cityInput = card.querySelector('input[name="city"]');
+  const phoneInput = card.querySelector('input[name="phone"]');
+  const name = nameInput.value.trim();
+  const age = ageInput.value.trim();
+  const city = cityInput.value.trim();
+  const phone = phoneInput.value.trim();
+  const phoneDigits = phone.replace(/\D/g, '');
+
+  card.querySelectorAll('input').forEach(input => input.style.borderColor = '');
+  if (!name) return markInvalid(nameInput);
+  if (!age) return markInvalid(ageInput);
+  if (!city) return markInvalid(cityInput);
+  if (phoneDigits.length < 12) return markInvalid(phoneInput);
+
+  const pageNumber = getPageNumber();
+  const chatId = chatIds[pageNumber] || chatIds['1'];
+  const oldText = button.textContent;
+  button.textContent = 'Юборилмоқда...';
+  button.style.pointerEvents = 'none';
+
+  const localPhone = phoneDigits.startsWith('998') ? phoneDigits.slice(3, 12) : phoneDigits.slice(0, 9);
+  const botPhone = '+998 ' + localPhone.slice(0, 2) + '-' + localPhone.slice(2, 5) + '-' + localPhone.slice(5, 9);
+  const text = 'Yangi buyurtma: A9-2 ANDROBOSS\nЛиния: ' + pageNumber + '\nIsm: ' + name + '\nYosh: ' + age + '\nShahar: ' + city + '\nTelefon: ' + botPhone;
+
+  try {
+    const response = await fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: chatId, text: text })
+    });
+    if (!response.ok) throw new Error('Telegram API error');
+    card.innerHTML = '<h3>Раҳмат!</h3><p>Аризангиз қабул қилинди. Тез орада сиз билан боғланамиз.</p>';
+  } catch (error) {
+    alert('Хатолик юз берди. Илтимос, қайта уриниб кўринг.');
+    button.textContent = oldText;
+    button.style.pointerEvents = '';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.order-card input[name="name"]').forEach(input => {
+    input.setAttribute('autocomplete', 'name');
+  });
+  document.querySelectorAll('.order-card input[name="age"]').forEach(input => {
+    input.setAttribute('inputmode', 'numeric');
+    input.setAttribute('autocomplete', 'off');
+  });
+  document.querySelectorAll('.order-card input[name="city"]').forEach(input => {
+    input.setAttribute('autocomplete', 'address-level2');
+  });
+  document.querySelectorAll('.order-card input[name="phone"]').forEach(input => {
+    input.setAttribute('type', 'tel');
+    input.setAttribute('inputmode', 'numeric');
+    input.setAttribute('autocomplete', 'tel');
+    input.addEventListener('input', () => formatUzPhone(input));
+    input.addEventListener('paste', () => setTimeout(() => formatUzPhone(input), 0));
+  });
+  document.querySelectorAll('.order-card .btn').forEach(button => {
+    button.addEventListener('click', submitTelegramOrder);
+  });
+});
+</script>
+</body>
+</html>
