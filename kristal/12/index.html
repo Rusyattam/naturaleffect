@@ -1902,41 +1902,10 @@ const giftOpenHtml = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/s
 </svg>`;
 
 function showTelegramInvite() {
-    let invite = document.getElementById('telegram-invite');
-
-    // После успешной отправки скрываем форму
-const orderForm = document.getElementById('order-form');
-if (orderForm) {
-    orderForm.style.display = 'none';
-}
-
-    if (!invite) {
-        invite = document.createElement('div');
-        invite.id = 'telegram-invite';
-        invite.className = 'telegram-invite-overlay';
-        invite.innerHTML = `
-            <div class="telegram-invite-card">
-                <h3>Фикр-мулоҳазаларни кўринг</h3>
-                <p>Telegram-каналимизда КРИСТАЛЛ ҳақидаги ҳақиқий фикр-мулоҳазалар бор. Каналга ўтиб, натижаларни кўришингиз мумкин.</p>
-                <div class="telegram-invite-actions">
-                    <a class="telegram-invite-button" href="https://t.me/naturaleffect_kristall">Telegram-каналга ўтиш</a>
-                    <button class="telegram-invite-close" type="button">Кейинроқ</button>
-                </div>
-            </div>`;
-        document.body.appendChild(invite);
-
-        invite.querySelector('.telegram-invite-close').addEventListener('click', () => {
-            invite.style.display = 'none';
-        });
-
-        invite.addEventListener('click', (event) => {
-            if (event.target === invite) {
-                invite.style.display = 'none';
-            }
-        });
+    const orderForm = document.getElementById('order-form');
+    if (orderForm) {
+        orderForm.style.display = 'none';
     }
-
-    invite.style.display = 'flex';
 }
 function startTimer(duration) {
     if (timerStarted) return;
