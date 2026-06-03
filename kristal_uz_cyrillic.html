@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="uz-Cyrl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kristal — кўзлар учун кундалик қўллаб-қувватлаш</title>
+  <style>
+    :root {
+      --green: #16a36b;
+      --green-dark: #087246;
+      --lime: #e9fff4;
+      --yellow: #ffd95a;
+      --orange: #ff8a00;
+      --red: #e74848;
+      --blue: #2a7fff;
+      --text: #17201b;
+      --muted: #66736b;
+      --bg: #f6fbf8;
+      --card: #ffffff;
+      --shadow: 0 18px 45px rgba(7, 86, 52, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    .top-line {
+      background: #0f7a4c;
+      color: white;
+      text-align: center;
+      font-size: 14px;
+      padding: 9px 12px;
+      font-weight: 800;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: 0.4px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff 0 12%, #8ef0bd 13% 35%, #17a36a 36% 100%);
+      box-shadow: 0 8px 22px rgba(22, 163, 107, 0.25);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .nav-links a { text-decoration: none; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px 0 62px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 86% 15%, rgba(255, 217, 90, 0.35), transparent 24%),
+        radial-gradient(circle at 10% 20%, rgba(22, 163, 107, 0.15), transparent 26%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: var(--green-dark);
+      border: 1px solid rgba(22, 163, 107, 0.18);
+      box-shadow: 0 8px 24px rgba(7, 86, 52, 0.08);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 0.98;
+      margin: 18px 0 18px;
+      letter-spacing: -1.8px;
+    }
+
+    .hero h1 span { color: var(--green); }
+
+    .lead {
+      color: #425047;
+      font-size: clamp(17px, 2.1vw, 22px);
+      max-width: 650px;
+      margin-bottom: 22px;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .point {
+      background: white;
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 10px 28px rgba(7, 86, 52, 0.08);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .point small {
+      display: block;
+      color: var(--muted);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 16px;
+      padding: 17px 23px;
+      min-height: 56px;
+      font-weight: 900;
+      font-size: 16px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--orange), #ffbd21);
+      color: #1b1203;
+      box-shadow: 0 14px 26px rgba(255, 138, 0, 0.28);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: var(--green-dark);
+      box-shadow: 0 10px 24px rgba(7, 86, 52, 0.09);
+      border: 1px solid rgba(22, 163, 107, 0.16);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .trust-note {
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 330px;
+    }
+
+    .product-card {
+      position: relative;
+      background: linear-gradient(160deg, #ffffff 0%, #effff6 100%);
+      border-radius: 34px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .product-card::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(22, 163, 107, 0.24), transparent 65%);
+      border-radius: 50%;
+      top: 35px;
+      right: -90px;
+    }
+
+    .product-box {
+      position: relative;
+      width: min(340px, 82vw);
+      min-height: 420px;
+      border-radius: 28px;
+      padding: 28px 24px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.72), rgba(255,255,255,0.2)),
+        linear-gradient(160deg, #18a96f, #e9fff4 54%, #ffffff);
+      box-shadow: 0 24px 55px rgba(7, 86, 52, 0.28);
+      border: 1px solid rgba(255,255,255,0.85);
+      transform: rotate(-4deg);
+    }
+
+    .product-box::after {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border-radius: 22px;
+      border: 2px solid rgba(255,255,255,0.55);
+      pointer-events: none;
+    }
+
+    .box-label {
+      position: relative;
+      z-index: 2;
+      background: white;
+      border-radius: 22px;
+      padding: 24px 18px;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    .box-label .eye {
+      width: 128px;
+      height: 76px;
+      margin: 12px auto;
+      border-radius: 50%;
+      background: radial-gradient(circle, #111 0 12%, #38c987 13% 30%, #e7fff2 31% 100%);
+      border: 5px solid #dbf8e9;
+      box-shadow: 0 0 0 10px rgba(22, 163, 107, 0.08);
+    }
+
+    .box-label h2 {
+      margin: 0;
+      color: var(--green-dark);
+      font-size: 40px;
+      letter-spacing: -1px;
+    }
+
+    .box-label p {
+      margin: 0;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .floating-discount {
+      position: absolute;
+      right: 22px;
+      top: 22px;
+      z-index: 3;
+      background: var(--red);
+      color: white;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 900;
+      line-height: 1.05;
+      box-shadow: 0 14px 30px rgba(231, 72, 72, 0.28);
+    }
+
+    section { padding: 62px 0; }
+
+    .section-title {
+      text-align: center;
+      max-width: 790px;
+      margin: 0 auto 36px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.05;
+      margin: 0 0 12px;
+      letter-spacing: -1px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: 0 12px 34px rgba(7, 86, 52, 0.08);
+      border: 1px solid rgba(22, 163, 107, 0.1);
+    }
+
+    .icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: var(--lime);
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .card h3 { margin: 0 0 8px; font-size: 21px; }
+    .card p { margin: 0; color: var(--muted); }
+
+    .problem-band {
+      background: #10251b;
+      color: white;
+      border-radius: 36px;
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      align-items: center;
+      box-shadow: 0 22px 50px rgba(16, 37, 27, 0.22);
+    }
+
+    .problem-band h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.06;
+      margin: 0 0 12px;
+    }
+
+    .problem-band p { color: rgba(255,255,255,0.76); margin: 0; }
+
+    .problem-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .problem-item {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 18px;
+      padding: 15px;
+      font-weight: 800;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .soft-panel {
+      background: linear-gradient(145deg, #ffffff, #edfff5);
+      border-radius: 34px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .soft-panel h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.08;
+      margin: 16px 0;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 14px;
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      background: rgba(255,255,255,0.78);
+      border-radius: 16px;
+      padding: 13px 14px;
+      color: #3b4a41;
+      font-weight: 800;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      color: white;
+      background: var(--green);
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 16px;
+    }
+
+    .step {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 14px;
+      align-items: start;
+      background: white;
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 10px 28px rgba(7, 86, 52, 0.07);
+    }
+
+    .step::before {
+      content: counter(step);
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: #17201b;
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 24px;
+    }
+
+    .step h3 { margin: 2px 0 5px; }
+    .step p { margin: 0; color: var(--muted); }
+
+    .ingredients {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .ingredient {
+      background: white;
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 12px 34px rgba(7, 86, 52, 0.08);
+      border: 1px solid rgba(22, 163, 107, 0.1);
+    }
+
+    .ingredient .circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff, #c8f8df 46%, #20ae72 100%);
+      display: grid;
+      place-items: center;
+      font-size: 30px;
+      margin-bottom: 14px;
+    }
+
+    .ingredient h3 { margin: 0 0 8px; }
+    .ingredient p { margin: 0; color: var(--muted); }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .compare-card {
+      background: white;
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: 0 12px 34px rgba(7, 86, 52, 0.08);
+      border: 1px solid rgba(22, 163, 107, 0.1);
+    }
+
+    .compare-card.bad { border-color: rgba(231, 72, 72, 0.18); }
+    .compare-card.good { border-color: rgba(22, 163, 107, 0.24); }
+    .compare-card h3 { margin: 0 0 14px; font-size: 24px; }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .mini-list li {
+      border-radius: 15px;
+      background: #f7fbf8;
+      padding: 12px;
+      color: #435147;
+      font-weight: 700;
+    }
+
+    .offer {
+      background: #10251b;
+      color: white;
+      border-radius: 36px;
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1fr 390px;
+      gap: 24px;
+      align-items: center;
+      box-shadow: 0 22px 50px rgba(16, 37, 27, 0.22);
+    }
+
+    .offer h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.05;
+      margin: 0 0 12px;
+    }
+
+    .offer p { color: rgba(255,255,255,0.78); margin: 0 0 18px; }
+
+    .price-box {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .old-price {
+      color: rgba(255,255,255,0.48);
+      text-decoration: line-through;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .new-price {
+      color: var(--yellow);
+      font-size: 44px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .form-card {
+      background: white;
+      color: var(--text);
+      border-radius: 28px;
+      padding: 24px;
+    }
+
+    .form-card h3 { margin: 0 0 8px; font-size: 24px; }
+    .form-card p { color: var(--muted); margin: 0 0 16px; font-size: 14px; }
+
+    .field {
+      width: 100%;
+      border: 1px solid #dce8e1;
+      border-radius: 15px;
+      padding: 16px;
+      margin-bottom: 11px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .field:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(22, 163, 107, 0.12);
+    }
+
+    .form-card .btn { width: 100%; }
+
+    .timer {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 18px 0;
+    }
+
+    .time-cell {
+      background: rgba(255,255,255,0.11);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      min-width: 82px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .time-cell strong { display: block; font-size: 25px; }
+    .time-cell span { color: rgba(255,255,255,0.62); font-size: 12px; }
+
+    .reviews {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .review {
+      background: white;
+      border-radius: 26px;
+      padding: 22px;
+      box-shadow: 0 12px 34px rgba(7, 86, 52, 0.08);
+    }
+
+    .review-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #d8fae8, #8bdcac);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: var(--green-dark);
+    }
+
+    .stars { color: #ffb700; letter-spacing: 1px; }
+    .review p { color: #4f5f55; margin: 8px 0 0; }
+
+    .comments-wrap {
+      background: linear-gradient(145deg, #ffffff, #effff6);
+      border-radius: 36px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .comments-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 20px;
+    }
+
+    .comments-head h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.05;
+    }
+
+    .comments-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 430px;
+    }
+
+    .comment-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .comment {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 12px;
+      background: white;
+      border: 1px solid rgba(22, 163, 107, 0.1);
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow: 0 8px 22px rgba(7, 86, 52, 0.06);
+    }
+
+    .comment-body strong {
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    .comment-date {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .comment-body p {
+      margin: 5px 0 0;
+      color: #46554b;
+    }
+
+    .comment-actions {
+      display: flex;
+      gap: 14px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .delivery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .delivery-card {
+      background: white;
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: 0 12px 34px rgba(7, 86, 52, 0.08);
+      border: 1px solid rgba(22, 163, 107, 0.1);
+    }
+
+    .delivery-card h3 { margin: 10px 0 8px; }
+    .delivery-card p { margin: 0; color: var(--muted); }
+
+    .faq {
+      display: grid;
+      gap: 12px;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    details {
+      background: white;
+      border-radius: 20px;
+      padding: 18px 20px;
+      box-shadow: 0 10px 28px rgba(7, 86, 52, 0.06);
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    details p { color: var(--muted); margin-bottom: 0; }
+
+    .final-cta {
+      background: linear-gradient(145deg, #18a96f, #086f45);
+      color: white;
+      border-radius: 36px;
+      padding: 36px;
+      text-align: center;
+      box-shadow: 0 22px 50px rgba(7, 86, 52, 0.22);
+    }
+
+    .final-cta h2 {
+      margin: 0 0 12px;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.04;
+    }
+
+    .final-cta p {
+      color: rgba(255,255,255,0.82);
+      max-width: 720px;
+      margin: 0 auto 22px;
+      font-size: 18px;
+    }
+
+    .footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 30px 0 44px;
+      font-size: 13px;
+    }
+
+    .sticky-mobile {
+      display: none;
+      position: fixed;
+      z-index: 50;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      background: white;
+      border-radius: 20px;
+      padding: 10px;
+      box-shadow: 0 12px 34px rgba(0,0,0,0.18);
+      gap: 10px;
+      align-items: center;
+    }
+
+    .sticky-mobile strong { display: block; font-size: 15px; }
+    .sticky-mobile span { color: var(--muted); font-size: 12px; }
+    .sticky-mobile .btn { padding: 12px 14px; min-height: auto; font-size: 14px; margin-left: auto; }
+
+    @media (max-width: 1000px) {
+      .ingredients { grid-template-columns: repeat(2, 1fr); }
+      .hero-grid,
+      .split,
+      .offer,
+      .problem-band { grid-template-columns: 1fr; }
+      .offer { padding: 26px; }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 18px; }
+      .product-card { min-height: 470px; }
+      .cards,
+      .reviews,
+      .delivery-grid,
+      .comparison,
+      .ingredients { grid-template-columns: 1fr; }
+      .hero-points { grid-template-columns: 1fr; }
+      .comments-head { display: block; }
+      .comment { grid-template-columns: 44px 1fr; }
+      .comments-wrap { padding: 18px; border-radius: 26px; }
+      .problem-band, .final-cta { padding: 24px; }
+      .sticky-mobile { display: flex; }
+      body { padding-bottom: 86px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-line">Махсус таклиф: ариза орқали маслаҳат ва курс танлаш</div>
+
+  <header class="container nav">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div>NATURALL EFFECT</div>
+    </div>
+    <nav class="nav-links">
+      <a href="#benefits">Афзалликлар</a>
+      <a href="#composition">Таркиб</a>
+      <a href="#comments">Изоҳлар</a>
+      <a href="#order">Буюртма бериш</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge">🌿 Кўзлар учун кундалик қўллаб-қувватловчи табиий комплекс</div>
+          <h1>Кўзларингиз ҳар куни <span>қулайроқ</span> ҳис қилишига ёрдам беринг</h1>
+          <p class="lead">Kristal — телефон, компьютер, ўқиш ёки ҳужжатлар билан кўп ишлайдиган ва кечга бориб кўз чарчоғини сезадиган инсонлар учун қулай комплекс.</p>
+
+          <div class="hero-points">
+            <div class="point">Кундалик парвариш учун<small>Уй шароитида курс учун мос</small></div>
+            <div class="point">Қулай буюртма<small>30 сонияда ариза</small></div>
+            <div class="point">Менежер ёрдами<small>Қандай қабул қилишни тушунтирамиз</small></div>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#order">Таклифни олиш</a>
+            <a class="btn btn-secondary" href="#comments">Изоҳларни кўриш</a>
+            <div class="trust-note">Рақамингизни қолдиринг — менежер боғланади, саволларга жавоб беради ва мавжудлигини аниқлайди.</div>
+          </div>
+        </div>
+
+        <div class="product-card" aria-label="Kristal маҳсулоти тасвири">
+          <div class="floating-discount">50%<br>гача<br>фойда</div>
+          <div class="product-box">
+            <div class="box-label">
+              <div>
+                <h2>Kristal</h2>
+                <p>Eye Support Formula</p>
+              </div>
+              <div class="eye"></div>
+              <p>Кўзлар қулайлигини қўллаб-қувватлаш комплекси</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="benefits">
+      <div class="container">
+        <div class="section-title">
+          <h2>Нега мижоз ариза қолдиришни хоҳлайди?</h2>
+          <p>Лендингда маҳсулот фойдаси, буюртма жараёни ва ишонч уйғотувчи маълумотлар содда кўрсатилади.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="icon">👁️</div>
+            <h3>Муаммога эътибор</h3>
+            <p>Экрандан чарчаш, қуруқлик, зўриқиш ва кечки ноқулайлик — кўп харидорларга таниш ҳолат.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🌱</div>
+            <h3>Табиий образ</h3>
+            <p>Яшил услуб, тоза дизайн ва тартибли қадоқ маҳсулотни кундалик парваришдек кўрсатади.</p>
+          </article>
+          <article class="card">
+            <div class="icon">📞</div>
+            <h3>Тез ҳаракат</h3>
+            <p>Тугмалар, форма, нарх ва фойда бир жойда — мижоз қандай сотиб олишни узоқ қидирмайди.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container problem-band">
+        <div>
+          <div class="badge">⚡ Реклама учун муҳим блок</div>
+          <h2>Кўзлар сиз ўйлагандан ҳам тезроқ чарчайди</h2>
+          <p>Телефон, ноутбук, ёрқин экран, майда матн ва уйқусизлик кўзларда зўриқиш ҳиссини кучайтириши мумкин. Шунинг учун мижозга кундалик парвариш учун оддий ечим таклиф қилиш муҳим.</p>
+        </div>
+        <div class="problem-list">
+          <div class="problem-item">😣 Кечга бориб экранга қараш қийинлашади</div>
+          <div class="problem-item">💻 Иш ёки ўқиш доим монитор олдида</div>
+          <div class="problem-item">📱 Телефонда кўп вақт ўтказасиз</div>
+          <div class="problem-item">🌙 Узоқ кундан кейин кўзлар чарчайди</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container split">
+        <div class="soft-panel">
+          <div class="badge">✨ Кимлар учун мос</div>
+          <h2>Кўзларини ҳар куни зўриқтирадиганлар учун айниқса долзарб</h2>
+          <ul class="check-list">
+            <li>Смартфон ёки компьютер қаршисида кўп вақт ўтказасиз</li>
+            <li>Кўп ўқийсиз, ҳужжатлар ёки майда матн билан ишлайсиз</li>
+            <li>Кечга бориб чарчоқ ва зўриқиш ҳисси пайдо бўлади</li>
+            <li>Кўз парваришини кундалик одатга айлантирмоқчисиз</li>
+          </ul>
+        </div>
+
+        <div class="steps" id="how">
+          <div class="step">
+            <div>
+              <h3>Ариза қолдиринг</h3>
+              <p>Исм ва телефон рақамингизни ёзинг — бу бир дақиқадан кам вақт олади.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Менежер маълумотларни аниқлайди</h3>
+              <p>Маҳсулот, мавжудлик, нарх ва олиш усули ҳақида тушунтиради.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Буюртмани қабул қилинг</h3>
+              <p>Тасдиқдан кейин етказиб беришни қулай усулда расмийлаштириш мумкин.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="composition">
+      <div class="container">
+        <div class="section-title">
+          <h2>Таркиб блокида нимани кўрсатиш мумкин?</h2>
+          <p>Бу жойларни маҳсулотингизнинг ҳақиқий таркибига алмаштиринг. Бундай блок мижозга нима учун пул тўлаётганини тушунишга ёрдам беради.</p>
+        </div>
+
+        <div class="ingredients">
+          <article class="ingredient">
+            <div class="circle">🫐</div>
+            <h3>Черника</h3>
+            <p>Кўзлар учун маҳсулотларда кўп ишлатиладиган машҳур табиий компонент.</p>
+          </article>
+          <article class="ingredient">
+            <div class="circle">🥕</div>
+            <h3>Витамин комплекси</h3>
+            <p>Таркиб фойдасини содда сўзлар билан ёзинг, даволаш ваъдасисиз.</p>
+          </article>
+          <article class="ingredient">
+            <div class="circle">🌼</div>
+            <h3>Ўсимлик экстрактлари</h3>
+            <p>Табиийлик ва юмшоқ кундалик парвариш ҳиссини кучайтиради.</p>
+          </article>
+          <article class="ingredient">
+            <div class="circle">💧</div>
+            <h3>Қулай курс</h3>
+            <p>Маҳсулотни кундалик режимга қўшиш осон эканини тушунтиринг.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <h2>Нега парваришни кейинга қолдирмаслик керак?</h2>
+          <p>Бу блок мижозни ҳозир ариза қолдиришга ундайди.</p>
+        </div>
+
+        <div class="comparison">
+          <article class="compare-card bad">
+            <h3>Агар ҳеч нарса қилмасангиз</h3>
+            <ul class="mini-list">
+              <li>Кўз чарчоғи иш ва ўқишга халақит бериши мумкин</li>
+              <li>Экрандан кейинги ноқулайлик одатий ҳолга айланади</li>
+              <li>Инсон парваришни доим “кейинроқ”қа қолдиради</li>
+            </ul>
+          </article>
+          <article class="compare-card good">
+            <h3>Агар ҳозир парваришни бошласангиз</h3>
+            <ul class="mini-list">
+              <li>Кундалик оддий одат пайдо бўлади</li>
+              <li>Мижоз ўз режими устидан назоратни ҳис қилади</li>
+              <li>Буюртмани тез ва қулай расмийлаштириш мумкин</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="order">
+      <div class="container">
+        <div class="offer">
+          <div>
+            <div class="badge">🔥 Кун таклифи</div>
+            <h2>Kristal маҳсулотини махсус нархда буюртма қилинг</h2>
+            <p>Ҳозир ариза қолдиринг — менежер мавжудликни текширади ва сиз учун актуал таклифни сақлаб қўяди.</p>
+            <div class="price-box">
+              <div class="old-price">390 000 сўм</div>
+              <div class="new-price">195 000 сўм</div>
+            </div>
+            <div class="timer" aria-label="Таклиф таймери">
+              <div class="time-cell"><strong id="hours">00</strong><span>соат</span></div>
+              <div class="time-cell"><strong id="minutes">00</strong><span>дақиқа</span></div>
+              <div class="time-cell"><strong id="seconds">00</strong><span>сония</span></div>
+            </div>
+            <p style="font-size:13px;">Рекламага чиқишдан олдин нарх, чегирма ва мавжудликни ҳақиқий маълумотларга алмаштиринг.</p>
+          </div>
+
+          <form class="form-card" onsubmit="event.preventDefault(); alert('Ариза юборилди! Ўз CRM ёки форма хизматингизни уланг.');">
+            <h3>Ариза қолдириш</h3>
+            <p>Маълумотларингизни киритинг, мутахассис тез орада сиз билан боғланади.</p>
+            <input class="field" type="text" name="name" placeholder="Исмингиз" required />
+            <input class="field" type="tel" name="phone" placeholder="Телефон рақамингиз" required />
+            <button class="btn btn-primary" type="submit">Чегирма билан буюртма бериш</button>
+            <p style="margin-top:12px;font-size:12px;">Тугмани босиш орқали сиз ариза бўйича алоқа қилиш учун маълумотларни қайта ишлашга рози бўласиз.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews">
+      <div class="container">
+        <div class="section-title">
+          <h2>Харидорлар фикри</h2>
+          <p>Ишга туширишдан олдин бу фикрларни ҳақиқий мижоз хабарларига алмаштиринг.</p>
+        </div>
+
+        <div class="reviews">
+          <article class="review">
+            <div class="review-top">
+              <div class="avatar">А</div>
+              <div><strong>Анна, 42</strong><div class="stars">★★★★★</div></div>
+            </div>
+            <p>«Менежер ҳаммасини тушунтириб, буюртма беришга ёрдам бергани қулай бўлди. Маҳсулотни кундалик парваришга қўшдим.»</p>
+          </article>
+          <article class="review">
+            <div class="review-top">
+              <div class="avatar">М</div>
+              <div><strong>Марат, 36</strong><div class="stars">★★★★★</div></div>
+            </div>
+            <p>«Кун бўйи ноутбукда ишлайман. Буюртма тез ва ортиқча қадамларсиз расмийлаштирилиши ёқди.»</p>
+          </article>
+          <article class="review">
+            <div class="review-top">
+              <div class="avatar">С</div>
+              <div><strong>Сабина, 51</strong><div class="stars">★★★★★</div></div>
+            </div>
+            <p>«Қадоқ яхши, йўриқнома тушунарли, маслаҳат ҳам хушмуомала бўлди. Курс натижасини кузатаман.»</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="comments">
+      <div class="container">
+        <div class="comments-wrap">
+          <div class="comments-head">
+            <h2>Мижозлар изоҳлари</h2>
+            <p>Бу бўлим мақола остидаги жонли муҳокамадек кўринади. У диққатни ушлаб туради ва ишончни оширади.</p>
+          </div>
+
+          <div class="comment-list">
+            <article class="comment">
+              <div class="avatar">Н</div>
+              <div class="comment-body">
+                <strong>Нодира</strong><span class="comment-date">бугун, 10:24</span>
+                <p>Ким буюртма қилиб кўрди? Аризадан кейин қўнғироқни одатда қанча кутасизлар?</p>
+                <div class="comment-actions"><span>Жавоб бериш</span><span>👍 12</span></div>
+              </div>
+            </article>
+
+            <article class="comment">
+              <div class="avatar">Д</div>
+              <div class="comment-body">
+                <strong>Дилшод</strong><span class="comment-date">бугун, 10:41</span>
+                <p>Менга тахминан 15 дақиқада қўнғироқ қилишди. Нарх ва етказиб беришни тушунтиришди, ҳаммаси яхши.</p>
+                <div class="comment-actions"><span>Жавоб бериш</span><span>👍 21</span></div>
+              </div>
+            </article>
+
+            <article class="comment">
+              <div class="avatar">М</div>
+              <div class="comment-body">
+                <strong>Малика</strong><span class="comment-date">бугун, 11:03</span>
+                <p>Компьютерда кўп ишлайман, шунинг учун кўзлар учун парвариш воситаси қидираётгандим. Буюртма тез расмийлашди.</p>
+                <div class="comment-actions"><span>Жавоб бериш</span><span>👍 18</span></div>
+              </div>
+            </article>
+
+            <article class="comment">
+              <div class="avatar">Р</div>
+              <div class="comment-body">
+                <strong>Рустам</strong><span class="comment-date">бугун, 11:37</span>
+                <p>Асосийси, узоқ рўйхатдан ўтиш йўқ. Рақамни қолдирдим, кейин ҳаммасини телефонда аниқлаштиришди.</p>
+                <div class="comment-actions"><span>Жавоб бериш</span><span>👍 9</span></div>
+              </div>
+            </article>
+
+            <article class="comment">
+              <div class="avatar">З</div>
+              <div class="comment-body">
+                <strong>Зарина</strong><span class="comment-date">бугун, 12:12</span>
+                <p>Чегирмали нархи яхши. Фақат шаҳарингизда бор-йўқлигини менежердан дарҳол сўраган маъқул.</p>
+                <div class="comment-actions"><span>Жавоб бериш</span><span>👍 16</span></div>
+              </div>
+            </article>
+
+            <article class="comment">
+              <div class="avatar">О</div>
+              <div class="comment-body">
+                <strong>Оператор</strong><span class="comment-date">бугун, 12:30</span>
+                <p>Саволларингиз учун раҳмат. Нарх ва мавжудликни аниқлаш учун формада ариза қолдиринг — мутахассис сиз билан боғланади.</p>
+                <div class="comment-actions"><span>Жавоб бериш</span><span>👍 32</span></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <h2>Тўлов ва етказиб бериш</h2>
+          <p>Бундай блок мижознинг буюртма олдидан қўрқувини камайтиради.</p>
+        </div>
+
+        <div class="delivery-grid">
+          <article class="delivery-card">
+            <div class="icon">📦</div>
+            <h3>Етказиб бериш</h3>
+            <p>Менежер манзилни аниқлайди ва буюртмани олишнинг қулай усулини танлашга ёрдам беради.</p>
+          </article>
+          <article class="delivery-card">
+            <div class="icon">💬</div>
+            <h3>Маслаҳат</h3>
+            <p>Расмийлаштиришдан олдин маҳсулот, нарх ва мавжудлик бўйича савол бериш мумкин.</p>
+          </article>
+          <article class="delivery-card">
+            <div class="icon">✅</div>
+            <h3>Тасдиқлаш</h3>
+            <p>Буюртма фақат қўнғироқ ва маълумотлар тасдиғидан кейин расмийлаштирилади.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <h2>Кўп бериладиган саволлар</h2>
+          <p>Мижоз саҳифани ёпишидан олдин эътирозларини камайтиринг.</p>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>Бу дори воситасими?</summary>
+            <p>Йўқ. Маҳсулотингизнинг ҳақиқий тоифасини кўрсатинг. Агар бу БАД ёки парвариш маҳсулоти бўлса, касалликларни даволашни ваъда қилманг.</p>
+          </details>
+          <details>
+            <summary>Нарх ва мавжудликни қандай билиш мумкин?</summary>
+            <p>Формада ариза қолдиринг — менежер шаҳар, мавжудлик ва актуал нархни аниқлайди.</p>
+          </details>
+          <details>
+            <summary>Телефон орқали буюртма бериш мумкинми?</summary>
+            <p>Ҳа, аризадан кейин мутахассис қўнғироқ қилади ва буюртма беришга ёрдам беради.</p>
+          </details>
+          <details>
+            <summary>Маҳсулот расмини алмаштириш мумкинми?</summary>
+            <p>Ҳа. Биринчи экрандаги чизилган қути ўрнига маҳсулотнинг ҳақиқий фотосини қўйиш мумкин.</p>
+          </details>
+          <details>
+            <summary>Реклама олдидан нимани алмаштириш керак?</summary>
+            <p>Ҳақиқий фото, нарх, таркиб, фикрлар, етказиб бериш шартлари ва ишлайдиган ариза формасини қўйинг.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container final-cta">
+        <h2>Буюртма беришга тайёрмисиз?</h2>
+        <p>Махсус таклиф амал қилаётганда ариза қолдиринг. Менежер сиз билан боғланиб, барча маълумотларни тушунтиради.</p>
+        <a class="btn btn-primary" href="#order">Буюртма формасига ўтиш</a>
+      </div>
+    </section>
+  </main>
+
+  <div class="sticky-mobile">
+    <div>
+      <strong>Kristal чегирма билан</strong>
+      <span>Ҳозир ариза қолдиринг</span>
+    </div>
+    <a class="btn btn-primary" href="#order">Буюртма</a>
+  </div>
+
+  <footer class="footer container">
+    <p>© 2026 NATURALL EFFECT. Сайтдаги маълумот тиббий тавсия ҳисобланмайди. Қўллашдан олдин йўриқномани ўқинг ва зарур бўлса мутахассис билан маслаҳатлашинг.</p>
+  </footer>
+
+  <script>
+    function updateTimer() {
+      const now = new Date();
+      const end = new Date();
+      end.setHours(23, 59, 59, 999);
+      const diff = Math.max(0, end - now);
+      const hours = Math.floor(diff / 1000 / 60 / 60);
+      const minutes = Math.floor(diff / 1000 / 60) % 60;
+      const seconds = Math.floor(diff / 1000) % 60;
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  </script>
+</body>
+</html>
