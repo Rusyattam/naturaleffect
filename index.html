@@ -1,79 +1,85 @@
 <!DOCTYPE html>
-<html lang="uz-Cyrl">
+<html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NATURALL EFFECT - сайтни танланг</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      color: #f8fbff;
-      background: radial-gradient(circle at 15% 15%, rgba(92,173,255,.22), transparent 28%), linear-gradient(145deg, #14233d 0%, #0f1b30 55%, #0a1424 100%);
-      padding: 32px 18px;
-    }
-    .page { width: min(1120px, 100%); margin: 0 auto; }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 18px;
-      padding: 22px 0 34px;
-      border-bottom: 1px solid rgba(255,255,255,.12);
-    }
-    .logo { font-size: clamp(34px, 6vw, 64px); line-height: .95; font-weight: 900; letter-spacing: 0; text-transform: uppercase; }
-    .tagline { max-width: 360px; color: rgba(248,251,255,.72); font-size: 15px; line-height: 1.45; text-align: right; }
-    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding: 34px 0; }
-    .site-card {
-      min-height: 148px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 18px;
-      color: #172029;
-      background: #fff;
-      border: 1px solid rgba(255,255,255,.16);
-      border-radius: 8px;
-      padding: 20px;
-      text-decoration: none;
-      box-shadow: 0 18px 36px rgba(0,0,0,.18);
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .site-card:hover { transform: translateY(-3px); box-shadow: 0 24px 44px rgba(0,0,0,.24); }
-    .num { color: #0b65c2; font-size: 34px; font-weight: 900; line-height: 1; }
-    .name { font-size: 18px; font-weight: 900; line-height: 1.2; }
-    .url { color: #667384; font-size: 13px; word-break: break-word; }
-    .primary { background: linear-gradient(135deg, #0b65c2, #17a37a); color: #fff; }
-    .primary .num, .primary .url { color: rgba(255,255,255,.78); }
-    @media (max-width: 920px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (max-width: 560px) {
-      body { padding: 18px 10px 26px; }
-      .header { display: block; padding: 14px 0 22px; }
-      .tagline { margin-top: 10px; text-align: left; }
-      .grid { grid-template-columns: 1fr; gap: 12px; padding: 22px 0; }
-      .site-card { min-height: 124px; padding: 17px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>НОЖ</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Georgia, serif; background: #1a2b48; color: white; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px 16px; }
+        .logo { font-family: "Arial Black", sans-serif; font-size: 72px; font-weight: 900; letter-spacing: -4px; text-transform: uppercase; color: white; margin-bottom: 10px; }
+        .tagline { font-size: 16px; opacity: 0.6; margin-bottom: 60px; letter-spacing: 2px; text-transform: uppercase; text-align: center; }
+        .sites { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; width: min(1180px, 100%); }
+        .site-card { background: white; color: #222; padding: 40px 50px; border-radius: 4px; text-align: center; text-decoration: none; transition: transform 0.2s; min-width: 220px; }
+        .site-card:hover { transform: translateY(-4px); }
+        .site-card .num { font-size: 48px; font-weight: 900; color: #c39b6d; font-family: "Arial Black", sans-serif; }
+        .site-card .name { font-size: 18px; font-weight: bold; margin-top: 8px; }
+        .site-card .url { font-size: 13px; color: #888; margin-top: 6px; font-family: Arial, sans-serif; word-break: break-word; }
+        @media (max-width: 600px) {
+            .logo { font-size: 46px; letter-spacing: -2px; }
+            .tagline { margin-bottom: 28px; }
+            .sites { gap: 14px; }
+            .site-card { width: 100%; min-width: 0; padding: 28px 24px; }
+        }
+    </style>
 </head>
 <body>
-  <main class="page">
-    <header class="header">
-      <div class="logo">NATURALL EFFECT</div>
-      <p class="tagline">Керакли сайтни танланг. Асосий ишчи версиялар пастда алоҳида кўрсатилган.</p>
-    </header>
-    <section class="grid" aria-label="Сайтлар рўйхати">
-      <a href="kristal-4/kristal_uz_cyrillic.html" class="site-card primary"><div class="num">01</div><div><div class="name">Kristal-4 UZ</div><div class="url">kristal-4/kristal_uz_cyrillic.html</div></div></a>
-      <a href="kristal-3/" class="site-card"><div class="num">02</div><div><div class="name">Kristal-3</div><div class="url">kristal-3/</div></div></a>
-      <a href="kristal-2/" class="site-card"><div class="num">03</div><div><div class="name">Kristal-2</div><div class="url">kristal-2/</div></div></a>
-      <a href="kristal/" class="site-card"><div class="num">04</div><div><div class="name">Kristal</div><div class="url">kristal/</div></div></a>
-      <a href="sustav/" class="site-card"><div class="num">05</div><div><div class="name">Sustav Pro Max</div><div class="url">sustav/</div></div></a>
-      <a href="sustav-2/" class="site-card"><div class="num">06</div><div><div class="name">Sustav-2</div><div class="url">sustav-2/</div></div></a>
-      <a href="a9/" class="site-card"><div class="num">07</div><div><div class="name">A9</div><div class="url">a9/</div></div></a>
-      <a href="a9-2/" class="site-card"><div class="num">08</div><div><div class="name">A9-2</div><div class="url">a9-2/</div></div></a>
-      <a href="a9-3/" class="site-card"><div class="num">09</div><div><div class="name">A9-3</div><div class="url">a9-3/</div></div></a>
-      <a href="f9/" class="site-card"><div class="num">10</div><div><div class="name">F9</div><div class="url">f9/</div></div></a>
-    </section>
-  </main>
+    <div class="logo">НОЖ</div>
+    <div class="tagline">Сайтни танланг</div>
+    <div class="sites">
+        <a href="a9/" class="site-card">
+            <div class="num">01</div>
+            <div class="name">Шахсий ҳикоялар</div>
+            <div class="url">mydomain.com/a9/</div>
+        </a>
+
+        <a href="kristal/" class="site-card">
+            <div class="num">02</div>
+            <div class="name">Иккинчи сайт</div>
+            <div class="url">mydomain.com/kristal/</div>
+        </a>
+
+        <a href="f9/" class="site-card">
+            <div class="num">03</div>
+            <div class="name">Учинчи сайт</div>
+            <div class="url">mydomain.com/f9/</div>
+        </a>
+
+        <a href="kristal-2/" class="site-card">
+            <div class="num">04</div>
+            <div class="name">Kristal-2</div>
+            <div class="url">mydomain.com/kristal-2/</div>
+        </a>
+
+        <a href="kristal-3/" class="site-card">
+            <div class="num">05</div>
+            <div class="name">Kristal-3</div>
+            <div class="url">mydomain.com/kristal-3/</div>
+        </a>
+
+        <a href="sustav/" class="site-card">
+            <div class="num">06</div>
+            <div class="name">Sustav Pro Max</div>
+            <div class="url">mydomain.com/sustav/</div>
+        </a>
+
+        <a href="a9-2/" class="site-card">
+            <div class="num">07</div>
+            <div class="name">A9-2</div>
+            <div class="url">mydomain.com/a9-2/</div>
+        </a>
+
+        <a href="a9-3/" class="site-card">
+            <div class="num">08</div>
+            <div class="name">A9-3</div>
+            <div class="url">mydomain.com/a9-3/</div>
+        </a>
+
+        <a href="kristal-4/kristal_uz_cyrillic.html" class="site-card">
+            <div class="num">09</div>
+            <div class="name">Kristal UZ Cyrillic</div>
+            <div class="url">mydomain.com/kristal-4/</div>
+        </a>
+    </div>
 </body>
 </html>
