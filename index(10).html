@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>МИГРА Портал — Миграция хизмати</title>
-  <meta name="description" content="Миграция хизмати учун демо-сайт: хизматлар, ҳужжатлар, электрон навбат, янгиликлар ва мурожаатлар." />
+  <title>МИГРА Портал — миграционная служба</title>
+  <meta name="description" content="Демо-сайт миграционной службы: услуги, документы, электронная очередь, новости и обращения." />
   <style>
     :root{
       --yellow:#ffe100;
@@ -162,7 +162,7 @@
 
     .news-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
     .news-main,.news-side article{background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow-small);overflow:hidden}
-    .news-main .news-cover{height:260px;background:linear-gradient(135deg,#101828,#253a6a 55%,#ffe100);position:relative}.news-cover:after{content:"ТЕЗКОР ХАБАР";position:absolute;left:24px;bottom:24px;background:#fff;border-radius:999px;padding:8px 12px;font-weight:1000;color:#101828}
+    .news-main .news-cover{height:260px;background:linear-gradient(135deg,#101828,#253a6a 55%,#ffe100);position:relative}.news-cover:after{content:"ГОРЯЧИЕ НОВОСТИ";position:absolute;left:24px;bottom:24px;background:#fff;border-radius:999px;padding:8px 12px;font-weight:1000;color:#101828}
     .news-content{padding:24px}.news-content time{font-size:13px;color:#667085;font-weight:800}.news-content h3{font-size:28px;line-height:1.1;margin:10px 0}.news-content p{color:#667085;margin:0 0 15px}
     .news-side{display:grid;gap:18px}.news-side article{display:grid;grid-template-columns:120px 1fr;min-height:140px}.small-cover{background:linear-gradient(135deg,#fff4a2,#ecb65c);min-height:100%}.small-cover.blue{background:linear-gradient(135deg,#dbeafe,#6e63eb)}.small-cover.green{background:linear-gradient(135deg,#dcfce7,#18a058)}.news-side .news-content{padding:18px}.news-side h3{font-size:18px;margin:7px 0 0}
 
@@ -269,12 +269,12 @@
     <div class="container">
       <div class="topline-left">
         <a href="tel:+79836620000">+7 983 662-00-00</a>
-        <span>Қўнғироқ маркази: 09:00–18:00</span>
+        <span>Call-центр: 09:00–18:00</span>
       </div>
       <div class="topline-right">
-        <a href="#faq">Савол-жавоблар</a>
-        <a href="#contact">Онлайн ёрдам</a>
-        <div class="lang"><button class="active">ЎЗ</button><button>РУ</button><button>ИНГ</button></div>
+        <a href="#faq">Вопросы-ответы</a>
+        <a href="#contact">Онлайн помощь</a>
+        <div class="lang" id="langSwitch"><button class="active" data-lang="ru">RU</button><button data-lang="uz">UZ</button><button data-lang="en">EN</button></div>
       </div>
     </div>
   </div>
@@ -285,20 +285,20 @@
         <div class="logo-mark">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 4v5c0 4.7-3.1 7.9-7 9-3.9-1.1-7-4.3-7-9V7l7-4z" stroke="#111827" stroke-width="2"/><path d="M9 12l2 2 4-5" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div><strong>МИГРА Портал</strong><span>электрон миграция хизматлари</span></div>
+        <div><strong>МИГРА Портал</strong><span>электронные миграционные услуги</span></div>
       </a>
       <nav class="menu" id="menu">
-        <a href="#services">Хизматлар</a>
-        <a href="#workflow">Қандай ишлайди</a>
-        <a href="#documents">Ҳужжатлар</a>
-        <a href="#news">Янгиликлар</a>
-        <a href="#tools">Текшириш</a>
-        <a href="#contact">Мурожаат</a>
+        <a href="#services">Услуги</a>
+        <a href="#workflow">Как работает</a>
+        <a href="#documents">Документы</a>
+        <a href="#news">Новости</a>
+        <a href="#tools">Проверка</a>
+        <a href="#contact">Обращение</a>
       </nav>
       <div class="actions">
-        <a class="btn btn-light" href="#contact">Рўйхатдан ўтиш</a>
-        <a class="btn btn-yellow" href="#services">Ариза юбориш</a>
-        <button class="burger" id="burger" aria-label="Менюни очиш"><span></span><span></span><span></span></button>
+        <a class="btn btn-light" href="#contact">Регистрация</a>
+        <a class="btn btn-yellow" href="#services">Подать заявку</a>
+        <button class="burger" id="burger" aria-label="Открыть меню"><span></span><span></span><span></span></button>
       </div>
     </div>
   </header>
@@ -307,17 +307,17 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="badge"><i class="dot"></i> Миграция хизматлари учун ягона ойна</div>
-          <h1>Миграция ҳужжатларини онлайн расмийлаштиринг</h1>
+          <div class="badge"><i class="dot"></i> Единое окно миграционных услуг</div>
+          <h1>Оформляйте миграционные документы онлайн</h1>
           <div class="hero-actions">
-            <a class="btn btn-yellow" href="#services">Хизматни танлаш</a>
-            <button class="btn btn-dark" data-open-modal>Тезкор хабарлар</button>
-            <span class="mini-note">⚠️ <b>Демо-макет:</b> ўзингизнинг ҳақиқий форма ва матнларингизни уланг</span>
+            <a class="btn btn-yellow" href="#services">Выбрать услугу</a>
+            <button class="btn btn-dark" data-open-modal>Горячие новости</button>
+            <span class="mini-note">⚠️ <b>Демо-макет:</b> подключите свои реальные формы и тексты</span>
           </div>
           <div class="hero-stats">
-            <div class="stat"><strong>24/7</strong><span>аризаларга онлайн кириш</span></div>
-            <div class="stat"><strong>12+</strong><span>оммабоп хизмат турлари</span></div>
-            <div class="stat"><strong>3 дақ</strong><span>ҳужжатларни тез танлаш</span></div>
+            <div class="stat"><strong>24/7</strong><span>онлайн доступ к заявкам</span></div>
+            <div class="stat"><strong>12+</strong><span>популярных услуг</span></div>
+            <div class="stat"><strong>3 мин</strong><span>быстрый подбор документов</span></div>
           </div>
         </div>
       </div>
@@ -325,23 +325,23 @@
 
     <div class="notice-strip">
       <div class="container">
-        <div class="notice-title"><span>ТЕЗКОР</span> Аризачилар учун янги билдиришномалар</div>
-        <p>Хизматни тез қидириш, электрон навбат ва ҳужжатлар бўйича эслатма қўшилди.</p>
-        <button data-open-modal>Очиш</button>
+        <div class="notice-title"><span>ВАЖНО</span> Новые уведомления для заявителей</div>
+        <p>Добавлены электронная очередь и памятка по документам.</p>
+        <button data-open-modal>Открыть</button>
       </div>
     </div>
 
     <section id="services" class="soft">
       <div class="container">
         <div class="section-head">
-          <div><div class="eyebrow">Оммабоп хизматлар</div><h2>Керакли ҳаммаси битта порталда</h2></div>
-          <p>Карточкаларни миграция хизматингизнинг ҳақиқий хизматлари билан алмаштириш мумкин. Ҳозир бу тайёр визуал шаблон.</p>
+          <div><div class="eyebrow">Популярные услуги</div><h2>Всё нужное в одном портале</h2></div>
+          <p>Карточки можно заменить на реальные услуги вашей миграционной службы. Сейчас это готовый визуальный шаблон.</p>
         </div>
         <div class="services-grid" id="serviceCards">
-          <article class="service-card" data-title="виза узайтириш"><div class="service-icon">🛂</div><h3>Визани узайтириш</h3><p>Ариза топшириш, асосларни текшириш ва қарор ҳақида хабарнома.</p><ul><li>Аризачи анкетаси</li><li>Паспорт маълумотлари</li><li>Муддат назорати</li></ul></article>
-          <article class="service-card" data-title="вақтинча рўйхат"><div class="service-icon">🏠</div><h3>Вақтинча рўйхат</h3><p>Бўлиш муддати ва яшаш манзилини расмийлаштириш бўйича маълумот.</p><ul><li>Яшаш манзили</li><li>Қабул қилувчи томон маълумотлари</li><li>Онлайн ёзилиш</li></ul></article>
-          <article class="service-card" data-title="яшаш гувоҳномаси"><div class="service-icon">📘</div><h3>Яшаш гувоҳномаси</h3><p>Узоқ муддатли яшашни расмийлаштираётган аризачилар учун бўлим.</p><ul><li>Пакетни текшириш</li><li>Қабулга ёзилиш</li><li>Кўриб чиқиш ҳолати</li></ul></article>
-          <article class="service-card" data-title="чеклов кириш тақиқ"><div class="service-icon">🔎</div><h3>Чекловларни текшириш</h3><p>Ҳолат ва билдиришномаларни олдиндан текшириш учун форма.</p><ul><li>Паспорт рақами</li><li>Туғилган сана</li><li>Текширув натижаси</li></ul></article>
+          <article class="service-card" data-title="виза продление"><div class="service-icon">🛂</div><h3>Продление визы</h3><p>Подача заявки, проверка оснований и уведомление о решении.</p><ul><li>Анкета заявителя</li><li>Паспортные данные</li><li>Контроль срока</li></ul></article>
+          <article class="service-card" data-title="временная регистрация"><div class="service-icon">🏠</div><h3>Временная регистрация</h3><p>Информация по оформлению пребывания и месту проживания.</p><ul><li>Адрес проживания</li><li>Данные принимающей стороны</li><li>Онлайн запись</li></ul></article>
+          <article class="service-card" data-title="вид на жительство"><div class="service-icon">📘</div><h3>Вид на жительство</h3><p>Раздел для заявителей, которые оформляют долгосрочное проживание.</p><ul><li>Проверка пакета</li><li>Запись на прием</li><li>Статус рассмотрения</li></ul></article>
+          <article class="service-card" data-title="проверка ограничений"><div class="service-icon">🔎</div><h3>Проверка ограничений</h3><p>Форма для предварительной проверки статуса и уведомлений.</p><ul><li>Номер паспорта</li><li>Дата рождения</li><li>Результат проверки</li></ul></article>
         </div>
       </div>
     </section>
@@ -349,14 +349,14 @@
     <section id="workflow">
       <div class="container">
         <div class="section-head">
-          <div><div class="eyebrow">Қандай ишлайди</div><h2>Аризачи йўли 4 қадамда</h2></div>
-          <p>Бўлим содда босқичли блоклар услубида тайёрланган: тушунарли, тез ва телефонда ҳам қулай кўринади.</p>
+          <div><div class="eyebrow">Как это работает</div><h2>Путь заявителя за 4 шага</h2></div>
+          <p>Раздел сделан в формате простых пошаговых блоков: понятно, быстро и удобно на телефоне.</p>
         </div>
         <div class="workflow">
-          <div class="step"><h3>Хизматни танланг</h3><p>Аризачи керакли бўлимни меню, қидирув ёки хизмат карточкалари орқали топади.</p></div>
-          <div class="step"><h3>Маълумотларни тўлдиринг</h3><p>Форма алоқа маълумотлари, хизмат тури ва вазиятнинг қисқа тавсифини йиғади.</p></div>
-          <div class="step"><h3>Ҳужжатларни юкланг</h3><p>Портал файллар рўйхатини кўрсатади ва нима етишмаслигини эслатади.</p></div>
-          <div class="step"><h3>Жавоб олинг</h3><p>Ариза ҳолати кабинетда ўзгаради, билдиришнома эса телефонга келади.</p></div>
+          <div class="step"><h3>Выберите услугу</h3><p>Заявитель находит нужный раздел через меню или карточки услуг.</p></div>
+          <div class="step"><h3>Заполните данные</h3><p>Форма собирает контакты, тип услуги и краткое описание ситуации.</p></div>
+          <div class="step"><h3>Загрузите документы</h3><p>Портал показывает список файлов и подсказывает, чего не хватает.</p></div>
+          <div class="step"><h3>Получите ответ</h3><p>Статус заявки меняется в кабинете, а уведомление приходит на телефон.</p></div>
         </div>
       </div>
     </section>
@@ -364,17 +364,17 @@
     <section id="documents" class="soft">
       <div class="container documents-layout">
         <aside class="doc-panel">
-          <div class="eyebrow">Ҳужжатлар</div>
-          <h3>Топширишдан олдин эслатма</h3>
-          <p>Қуйидаги рўйхат намуна. Реал лойиҳада бу ерга хизматингизнинг аниқ талаблари ва актуал бланкларини қўйиш яхшироқ.</p>
-          <a class="btn btn-yellow" href="#contact">Пакетни текшириш</a>
+          <div class="eyebrow">Документы</div>
+          <h3>Памятка перед подачей</h3>
+          <p>Список ниже — пример. В реальном проекте сюда лучше поставить точные требования вашей службы и актуальные бланки.</p>
+          <a class="btn btn-yellow" href="#contact">Проверить пакет</a>
         </aside>
         <div class="doc-list">
-          <div class="doc-item"><div class="doc-num">01</div><div><strong>Паспорт ёки шахсни тасдиқловчи ҳужжат</strong><span>Асосий саҳифа скани, амал қилиш муддати ва ўқилиш сифати.</span></div><span class="tag">мажбурий</span></div>
-          <div class="doc-item"><div class="doc-num">02</div><div><strong>Миграция картаси / кириш белгиси</strong><span>Бўлиш муддати ва кириш санасини текшириш учун керак.</span></div><span class="tag">мажбурий</span></div>
-          <div class="doc-item"><div class="doc-num">03</div><div><strong>Яшаш манзилини тасдиқлаш</strong><span>Шартнома, қабул қилувчи томон розилиги ёки бошқа ҳужжат.</span></div><span class="tag warn">вазиятга қараб</span></div>
-          <div class="doc-item"><div class="doc-num">04</div><div><strong>Аризачи фотосурати</strong><span>Анкета, шахсий кабинет ва босма шакллар учун мос.</span></div><span class="tag warn">вазиятга қараб</span></div>
-          <div class="doc-item"><div class="doc-num">05</div><div><strong>Қўшимча асослар</strong><span>Иш, ўқиш, оила, даволаниш ёки бўлиш учун бошқа асос.</span></div><span class="tag warn">хизматга қараб</span></div>
+          <div class="doc-item"><div class="doc-num">01</div><div><strong>Паспорт или документ, удостоверяющий личность</strong><span>Скан основной страницы, срок действия и читаемость.</span></div><span class="tag">обязательно</span></div>
+          <div class="doc-item"><div class="doc-num">02</div><div><strong>Миграционная карта / отметка о въезде</strong><span>Нужна для проверки срока пребывания и даты въезда.</span></div><span class="tag">обязательно</span></div>
+          <div class="doc-item"><div class="doc-num">03</div><div><strong>Подтверждение адреса проживания</strong><span>Договор, согласие принимающей стороны или иной документ.</span></div><span class="tag warn">по ситуации</span></div>
+          <div class="doc-item"><div class="doc-num">04</div><div><strong>Фотография заявителя</strong><span>Подходит для анкеты, личного кабинета и печатных форм.</span></div><span class="tag warn">по ситуации</span></div>
+          <div class="doc-item"><div class="doc-num">05</div><div><strong>Дополнительные основания</strong><span>Работа, учеба, семья, лечение или другое основание пребывания.</span></div><span class="tag warn">по услуге</span></div>
         </div>
       </div>
     </section>
@@ -382,15 +382,15 @@
     <section id="news">
       <div class="container">
         <div class="section-head">
-          <div><div class="eyebrow">Янгиликлар ва эълонлар</div><h2>Аризачилар учун муҳим</h2></div>
-          <p>Янгиликлар блоки портал янгиланиб турадиган, тўлиқ ва ишончли сайтдек кўриниши учун йирик қилинган.</p>
+          <div><div class="eyebrow">Новости и объявления</div><h2>Важное для заявителей</h2></div>
+          <p>Блок новостей сделан крупным, чтобы сайт выглядел живым порталом с обновлениями.</p>
         </div>
         <div class="news-grid">
-          <article class="news-main"><div class="news-cover"></div><div class="news-content"><time>2026 йил 11 июнь</time><h3>Қабулга тез ёзилиш бўлими ишга тушди</h3><p>Аризачи хизмат, бўлим ва қулай санани танлаши мумкин. Форма юборилгандан сўнг тизим мурожаат рақамини кўрсатади.</p><a class="btn btn-yellow" href="#contact">Ёзилиш</a></div></article>
+          <article class="news-main"><div class="news-cover"></div><div class="news-content"><time>11 июня 2026</time><h3>Запущен раздел быстрой записи на прием</h3><p>Заявитель может выбрать услугу, отделение и удобную дату. После отправки формы система показывает номер обращения.</p><a class="btn btn-yellow" href="#contact">Записаться</a></div></article>
           <div class="news-side">
-            <article><div class="small-cover"></div><div class="news-content"><time>Маълумот</time><h3>Ташрифдан олдин ҳужжатларни тайёрлаш бўйича эслатма</h3></div></article>
-            <article><div class="small-cover blue"></div><div class="news-content"><time>Янгиланиш</time><h3>Ариза ҳолатини онлайн текшириш қўшилди</h3></div></article>
-            <article><div class="small-cover green"></div><div class="news-content"><time>Ёрдам</time><h3>Қўнғироқ маркази иш кунлари мурожаатларни қабул қилади</h3></div></article>
+            <article><div class="small-cover"></div><div class="news-content"><time>Информация</time><h3>Памятка по подготовке документов перед визитом</h3></div></article>
+            <article><div class="small-cover blue"></div><div class="news-content"><time>Обновление</time><h3>Добавлена онлайн-проверка статуса заявки</h3></div></article>
+            <article><div class="small-cover green"></div><div class="news-content"><time>Помощь</time><h3>Call-центр принимает обращения по будням</h3></div></article>
           </div>
         </div>
       </div>
@@ -399,13 +399,13 @@
     <section id="tools" class="soft">
       <div class="container">
         <div class="section-head">
-          <div><div class="eyebrow">Онлайн инструментлар</div><h2>Текширувлар ва тез формалар</h2></div>
-          <p>Ичида оддий скрипт бор: ҳолатни текшириш, ҳужжатларни танлаш ва мурожаат юбориш имитацияси.</p>
+          <div><div class="eyebrow">Онлайн инструменты</div><h2>Проверки и быстрые формы</h2></div>
+          <p>Внутри есть простой скрипт: проверка статуса, подбор документов и имитация отправки обращения.</p>
         </div>
         <div class="tools-grid">
-          <div class="tool"><h3>Ҳолатни текшириш</h3><p>Демо-ҳолатни кўриш учун ариза рақамини киритинг.</p><input id="statusInput" placeholder="Масалан: MG-2026-018"><button class="btn btn-dark" id="checkStatus">Текшириш</button><div class="result-box" id="statusResult">Ҳолат шу ерда пайдо бўлади</div></div>
-          <div class="tool"><h3>Ҳужжатларни танлаш</h3><p>Хизматни танланг ва тахминий рўйхатни олинг.</p><select id="docSelect"><option value="visa">Визани узайтириш</option><option value="reg">Вақтинча рўйхат</option><option value="residence">Яшаш гувоҳномаси</option></select><button class="btn btn-yellow" id="docBtn">Рўйхатни кўрсатиш</button><div class="result-box" id="docResult">Хизматни танланг</div></div>
-          <div class="tool"><h3>Тезкор савол</h3><p>Қисқа савол қолдиринг, форма тайёр билдиришномани кўрсатади.</p><textarea id="quickQuestion" placeholder="Саволингизни ёзинг..."></textarea><button class="btn btn-dark" id="questionBtn">Юбориш</button><div class="result-box" id="questionResult">Жавоб шу ерда пайдо бўлади</div></div>
+          <div class="tool"><h3>Проверить статус</h3><p>Введите номер заявки, чтобы увидеть демо-статус.</p><input id="statusInput" placeholder="Например: MG-2026-018"><button class="btn btn-dark" id="checkStatus">Проверить</button><div class="result-box" id="statusResult">Статус появится здесь</div></div>
+          <div class="tool"><h3>Подбор документов</h3><p>Выберите услугу и получите примерный список.</p><select id="docSelect"><option value="visa">Продление визы</option><option value="reg">Временная регистрация</option><option value="residence">Вид на жительство</option></select><button class="btn btn-yellow" id="docBtn">Показать список</button><div class="result-box" id="docResult">Выберите услугу</div></div>
+          <div class="tool"><h3>Быстрый вопрос</h3><p>Оставьте короткий вопрос — форма покажет готовое уведомление.</p><textarea id="quickQuestion" placeholder="Напишите ваш вопрос..."></textarea><button class="btn btn-dark" id="questionBtn">Отправить</button><div class="result-box" id="questionResult">Ответ появится здесь</div></div>
         </div>
       </div>
     </section>
@@ -413,20 +413,20 @@
     <section id="faq">
       <div class="container faq">
         <div class="help-card">
-          <div class="eyebrow">Қўллаб-қувватлаш</div>
-          <h2>Кўп бериладиган саволлар</h2>
-          <p>Бу блок мижоз саволларига жавоб беради ва сайтни ишончлироқ қилади.</p>
+          <div class="eyebrow">Поддержка</div>
+          <h2>Частые вопросы</h2>
+          <p>Этот блок помогает закрыть сомнения клиента и делает сайт более доверительным.</p>
           <div class="help-list">
             <div><strong>Телефон:</strong><br>+7 983 662-00-00</div>
             <div><strong>Telegram:</strong><br>@migra_support</div>
-            <div><strong>Манзил:</strong><br>Тошкент, аризачиларга хизмат кўрсатиш маркази</div>
+            <div><strong>Адрес:</strong><br>Ташкент, центр обслуживания заявителей</div>
           </div>
         </div>
         <div class="faq-list">
-          <div class="faq-item open"><button class="faq-q">Аризани онлайн топшириш мумкинми? <span class="plus">+</span></button><div class="faq-a">Ҳа, макетда мурожаат формаси бор. Реал сайт учун сервер қисми, мижозлар тизими, Телеграм-бот ёки Гугл Формс улаш керак.</div></div>
-          <div class="faq-item"><button class="faq-q">Бу расмий сайтми? <span class="plus">+</span></button><div class="faq-a">Йўқ, бу демонстрацион шаблон. Одамларни чалғитмаслик учун давлат герби, расмий логотиплар ва ёлғон ваъдалардан фойдаланманг.</div></div>
-          <div class="faq-item"><button class="faq-q">Ўзбек тилини қўшиш мумкинми? <span class="plus">+</span></button><div class="faq-a">Ҳа. Ҳозир тил тугмалари визуал. ЎЗ/РУ/ИНГ матнларини скрипт орқали ёки алоҳида HTML-саҳифалар билан қилиш мумкин.</div></div>
-          <div class="faq-item"><button class="faq-q">Телефонда ишлайдими? <span class="plus">+</span></button><div class="faq-a">Ҳа, сайт адаптив: меню йиғилади, карточкалар битта устунга тушади, формалар мобил экран учун қулай.</div></div>
+          <div class="faq-item open"><button class="faq-q">Можно ли подать заявку онлайн? <span class="plus">+</span></button><div class="faq-a">Да, в макете есть форма обращения. Для реального сайта нужно подключить серверную часть, CRM, Telegram-бота или Google Forms.</div></div>
+          <div class="faq-item"><button class="faq-q">Это официальный сайт? <span class="plus">+</span></button><div class="faq-a">Нет, это демонстрационный шаблон. Чтобы не вводить людей в заблуждение, не используйте государственный герб, официальные логотипы и ложные обещания.</div></div>
+          <div class="faq-item"><button class="faq-q">Кнопки языка работают? <span class="plus">+</span></button><div class="faq-a">Да. Основной язык сайта — русский, а переключатель подсвечивает выбранную кнопку.</div></div>
+          <div class="faq-item"><button class="faq-q">Будет работать на телефоне? <span class="plus">+</span></button><div class="faq-a">Да, сайт адаптирован: меню сворачивается, карточки становятся в один столбик, формы удобны для мобильного экрана.</div></div>
         </div>
       </div>
     </section>
@@ -434,23 +434,23 @@
     <section id="contact" class="contact">
       <div class="container contact-grid">
         <div>
-          <div class="eyebrow">Мурожаат</div>
-          <h2>Ёзилиш ёки савол бериш</h2>
-          <p>Маълумотларингизни қолдиринг, реал сайтда бу формани почта, Телеграм, мижозлар тизими ёки аризалар базасига улаш мумкин.</p>
+          <div class="eyebrow">Обращение</div>
+          <h2>Записаться или задать вопрос</h2>
+          <p>Оставьте данные — в реальном сайте эту форму можно подключить к почте, Telegram, CRM или базе заявок.</p>
           <div class="contact-info">
-            <div><strong>Аризачилар қабули</strong><br><span>Душ–Жум, 09:00–18:00</span></div>
-            <div><strong>Жавоб муддати</strong><br><span>Одатда мурожаат рўйхатдан ўтгандан кейин 1–3 иш куни</span></div>
-            <div><strong>Хавфсизлик</strong><br><span>Ишга туширишдан олдин ССЛ, форма ҳимояси ва файл текширувини қўшинг</span></div>
+            <div><strong>Прием заявителей</strong><br><span>Пн-Пт, 09:00-18:00</span></div>
+            <div><strong>Срок ответа</strong><br><span>Обычно 1-3 рабочих дня после регистрации обращения</span></div>
+            <div><strong>Безопасность</strong><br><span>Добавьте SSL, защиту формы и проверку файлов перед запуском</span></div>
           </div>
         </div>
         <form class="contact-card" id="contactForm">
           <div class="form-grid">
-            <input required placeholder="Исмингиз" name="name">
+            <input required placeholder="Ваше имя" name="name">
             <input required placeholder="Телефон" name="phone">
-            <select name="service"><option>Хизматни танланг</option><option>Визани узайтириш</option><option>Вақтинча рўйхат</option><option>Яшаш гувоҳномаси</option></select>
-            <input placeholder="Ариза рақами, агар бўлса" name="number">
-            <textarea required placeholder="Саволингизни тавсифланг"></textarea>
-            <button class="btn btn-yellow" type="submit">Мурожаат юбориш</button>
+            <select name="service"><option>Выберите услугу</option><option>Продление визы</option><option>Временная регистрация</option><option>Вид на жительство</option></select>
+            <input placeholder="Номер заявки, если есть" name="number">
+            <textarea required placeholder="Опишите ваш вопрос"></textarea>
+            <button class="btn btn-yellow" type="submit">Отправить обращение</button>
           </div>
         </form>
       </div>
@@ -460,30 +460,30 @@
   <footer>
     <div class="container">
       <div class="footer-grid">
-        <div><div class="logo"><div class="logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v5c0 4.7-3.1 7.9-7 9-3.9-1.1-7-4.3-7-9V7l7-4z" stroke="#111827" stroke-width="2"/><path d="M9 12l2 2 4-5" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><strong>МИГРА Портал</strong><span>демо-сайт</span></div></div><p>Миграция хизмати, ахборот маркази ёки аризалар сервиси учун замонавий сайт шаблони.</p></div>
-        <div><h4>Бўлимлар</h4><div class="footer-links"><a href="#services">Хизматлар</a><a href="#documents">Ҳужжатлар</a><a href="#news">Янгиликлар</a></div></div>
-        <div><h4>Ёрдам</h4><div class="footer-links"><a href="#faq">Савол-жавоб</a><a href="#contact">Мурожаат</a><a href="#tools">Ҳолатни текшириш</a></div></div>
-        <div><h4>Контактлар</h4><div class="footer-links"><a href="tel:+79836620000">+7 983 662-00-00</a><a href="mailto:info@example.uz">info@example.uz</a><a href="#">Телеграм канали</a></div></div>
+        <div><div class="logo"><div class="logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v5c0 4.7-3.1 7.9-7 9-3.9-1.1-7-4.3-7-9V7l7-4z" stroke="#111827" stroke-width="2"/><path d="M9 12l2 2 4-5" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><strong>МИГРА Портал</strong><span>демо-сайт</span></div></div><p>Современный шаблон сайта для миграционной службы, информационного центра или сервиса заявок.</p></div>
+        <div><h4>Разделы</h4><div class="footer-links"><a href="#services">Услуги</a><a href="#documents">Документы</a><a href="#news">Новости</a></div></div>
+        <div><h4>Помощь</h4><div class="footer-links"><a href="#faq">FAQ</a><a href="#contact">Обращение</a><a href="#tools">Проверка статуса</a></div></div>
+        <div><h4>Контакты</h4><div class="footer-links"><a href="tel:+79836620000">+7 983 662-00-00</a><a href="mailto:info@example.uz">info@example.uz</a><a href="#">Telegram канал</a></div></div>
       </div>
-      <div class="copyright">© 2026 МИГРА Портал. Демо-макет. Давлат хизматининг расмий сайти ҳисобланмайди.</div>
+      <div class="copyright">© 2026 МИГРА Портал. Демо-макет. Не является официальным сайтом государственной службы.</div>
     </div>
   </footer>
 
   <div class="modal-backdrop" id="hotModal" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="hotTitle">
-      <div class="modal-head"><div><div class="eyebrow" style="color:#ffe100">ТЕЗКОР ХАБАР</div><h3 id="hotTitle">Порталнинг тезкор хабарлари</h3></div><button class="close" data-close-modal aria-label="Ёпиш">×</button></div>
+      <div class="modal-head"><div><div class="eyebrow" style="color:#ffe100">ГОРЯЧИЕ НОВОСТИ</div><h3 id="hotTitle">Горячие новости портала</h3></div><button class="close" data-close-modal aria-label="Закрыть">×</button></div>
       <div class="modal-body">
         <div class="hot-list">
-          <div class="hot-item"><strong>Электрон навбат онлайн мавжуд</strong><span>Бўлим, сана ва тасдиқлаш учун контактни танланг.</span></div>
-          <div class="hot-item"><strong>Ариза ҳолатини текшириш</strong><span>MG‑2026‑018 форматида мурожаат рақамини киритинг ва демо-жавоб олинг.</span></div>
-          <div class="hot-item"><strong>Ҳужжатлар рўйхати янгиланди</strong><span>Бўлимга виза, рўйхат ва яшаш гувоҳномаси учун ҳужжат намуналари қўшилди.</span></div>
+          <div class="hot-item"><strong>Электронная очередь доступна онлайн</strong><span>Выберите отделение, дату и оставьте контакт для подтверждения.</span></div>
+          <div class="hot-item"><strong>Проверка статуса заявки</strong><span>Введите номер обращения в формате MG-2026-018 и получите демо-ответ.</span></div>
+          <div class="hot-item"><strong>Обновлен список документов</strong><span>В раздел добавлены примеры документов для визы, регистрации и ВНЖ.</span></div>
         </div>
-        <div class="modal-actions"><a class="btn btn-yellow" href="#services" data-close-modal>Хизматларга ўтиш</a><a class="btn btn-light" href="#contact" data-close-modal>Мурожаат қолдириш</a></div>
+        <div class="modal-actions"><a class="btn btn-yellow" href="#services" data-close-modal>Перейти к услугам</a><a class="btn btn-light" href="#contact" data-close-modal>Оставить обращение</a></div>
       </div>
     </div>
   </div>
   <button class="floating-chat" id="chatBtn" aria-label="Чат">💬</button>
-  <div class="toast" id="toast">Телеграм орқали @migra_support га ёзинг ёки қуйидаги мурожаат формасини тўлдиринг.</div>
+  <div class="toast" id="toast">Напишите в Telegram @migra_support или заполните форму обращения ниже.</div>
 
   <script>
     const burger = document.getElementById('burger');
@@ -502,17 +502,26 @@
 
     document.querySelectorAll('.faq-q').forEach(btn => btn.addEventListener('click', () => btn.closest('.faq-item').classList.toggle('open')));
 
+    const langSwitch = document.getElementById('langSwitch');
+    langSwitch.addEventListener('click', e => {
+      const btn = e.target.closest('button[data-lang]');
+      if(!btn) return;
+      langSwitch.querySelectorAll('button').forEach(item => item.classList.toggle('active', item === btn));
+      document.documentElement.lang = btn.dataset.lang;
+      showToast(btn.dataset.lang === 'ru' ? 'Основной язык: русский.' : 'Язык выбран. Основной текст сайта оставлен на русском.');
+    });
+
     document.getElementById('checkStatus').addEventListener('click', () => {
       const val = document.getElementById('statusInput').value.trim();
       const result = document.getElementById('statusResult');
-      if(!val){ result.textContent = 'Ариза рақамини киритинг.'; return; }
-      result.textContent = 'Ариза ' + val.toUpperCase() + ': қабул қилинди, ҳужжатлар текширилмоқда.';
+      if(!val){ result.textContent = 'Введите номер заявки.'; return; }
+      result.textContent = 'Заявка ' + val.toUpperCase() + ': принята, идет проверка документов.';
     });
 
     const docMap = {
-      visa:'Паспорт, миграция картаси, фото, узайтириш асоси, алоқа телефони.',
-      reg:'Паспорт, яшаш манзили, қабул қилувчи томон розилиги, кириш санаси.',
-      residence:'Паспорт, анкета, фото, яшаш асоси, манзил тасдиғи.'
+      visa:'Паспорт, миграционная карта, фото, основание продления, контактный телефон.',
+      reg:'Паспорт, адрес проживания, согласие принимающей стороны, дата въезда.',
+      residence:'Паспорт, анкета, фото, основание проживания, подтверждение адреса.'
     };
     document.getElementById('docBtn').addEventListener('click', () => {
       const type = document.getElementById('docSelect').value;
@@ -521,12 +530,12 @@
 
     document.getElementById('questionBtn').addEventListener('click', () => {
       const q = document.getElementById('quickQuestion').value.trim();
-      document.getElementById('questionResult').textContent = q ? 'Саволингиз демо-режимда қабул қилинди. Реал юбориш учун сервер қисмини уланг.' : 'Юборишдан олдин саволни ёзинг.';
+      document.getElementById('questionResult').textContent = q ? 'Ваш вопрос принят в демо-режиме. Для реальной отправки подключите серверную часть.' : 'Напишите вопрос перед отправкой.';
     });
 
     document.getElementById('contactForm').addEventListener('submit', e => {
       e.preventDefault();
-      showToast('Мурожаат демо-режимда сақланди. Реал юбориш учун формани серверга уланг.');
+      showToast('Обращение сохранено в демо-режиме. Для реальной отправки подключите форму к серверу.');
       e.target.reset();
     });
 
@@ -538,7 +547,7 @@
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => toast.classList.remove('show'), 4200);
     }
-    document.getElementById('chatBtn').addEventListener('click', () => showToast('Телеграм орқали @migra_support га ёзинг ёки қуйидаги мурожаат формасини тўлдиринг.'));
+    document.getElementById('chatBtn').addEventListener('click', () => showToast('Напишите в Telegram @migra_support или заполните форму обращения ниже.'));
   </script>
 </body>
 </html>
