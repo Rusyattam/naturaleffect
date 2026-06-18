@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>МИГРА Портал — Миграция хизмати</title>
+  <meta name="description" content="Миграция хизмати учун демо-сайт: хизматлар, ҳужжатлар, электрон навбат, янгиликлар ва мурожаатлар." />
+  <style>
+    :root{
+      --yellow:#ffe100;
+      --yellow-dark:#ecb65c;
+      --blue:#19284a;
+      --blue-2:#253a6a;
+      --purple:#6e63eb;
+      --text:#111827;
+      --muted:#667085;
+      --light:#f4f7f9;
+      --white:#ffffff;
+      --line:#e7edf3;
+      --green:#18a058;
+      --red:#e5484d;
+      --shadow:0 18px 55px rgba(16,24,40,.12);
+      --shadow-small:0 8px 25px rgba(16,24,40,.08);
+      --radius:28px;
+      --radius-small:18px;
+      --container:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color:var(--text);
+      background:#fff;
+      line-height:1.55;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    img,svg{max-width:100%}
+    .container{width:min(var(--container), calc(100% - 32px));margin:0 auto}
+    .topline{
+      background:#101828;
+      color:#fff;
+      font-size:14px;
+    }
+    .topline .container{
+      min-height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .topline-left,.topline-right{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+    .topline a{opacity:.9}
+    .lang{display:flex;gap:6px;align-items:center}
+    .lang button{
+      border:1px solid rgba(255,255,255,.24);
+      background:transparent;color:#fff;border-radius:12px;padding:4px 9px;cursor:pointer;
+    }
+    .lang button.active{background:#fff;color:#111827}
+    .header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(255,255,255,.86);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(231,237,243,.8);
+    }
+    .nav{
+      height:82px;
+      display:flex;align-items:center;justify-content:space-between;gap:18px;
+    }
+    .logo{display:flex;align-items:center;gap:12px;min-width:max-content}
+    .logo-mark{
+      width:48px;height:48px;border-radius:16px;
+      background:linear-gradient(135deg,var(--yellow),#fff4a2 48%,#f4b044);
+      display:grid;place-items:center;box-shadow:0 10px 22px rgba(236,182,92,.28);
+      position:relative;overflow:hidden;
+    }
+    .logo-mark:after{content:"";position:absolute;inset:9px;border:2px solid rgba(17,24,39,.7);border-radius:11px}
+    .logo-mark svg{width:25px;z-index:2}
+    .logo strong{display:block;font-size:18px;line-height:1.1;letter-spacing:.2px}
+    .logo span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+    .menu{display:flex;align-items:center;gap:26px;font-size:15px;color:#253044}
+    .menu a{position:relative;white-space:nowrap}
+    .menu a:after{content:"";position:absolute;left:0;right:100%;bottom:-7px;height:3px;border-radius:3px;background:var(--yellow);transition:.25s}
+    .menu a:hover:after{right:0}
+    .actions{display:flex;align-items:center;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:9px;
+      min-height:46px;padding:12px 22px;border-radius:999px;
+      border:0;cursor:pointer;font-weight:800;letter-spacing:.01em;
+      transition:.22s ease;white-space:nowrap;
+    }
+    .btn-yellow{background:var(--yellow);color:#111;box-shadow:0 11px 24px rgba(255,225,0,.28)}
+    .btn-yellow:hover{background:var(--yellow-dark);transform:translateY(-2px);box-shadow:0 16px 30px rgba(236,182,92,.35)}
+    .btn-light{background:#f4f7f9;border:2px solid #101828;color:#101828}
+    .btn-light:hover{border-color:var(--yellow);box-shadow:0 0 12px rgba(0,0,0,.16);background:#fff}
+    .btn-dark{background:#101828;color:#fff}
+    .btn-dark:hover{background:var(--purple);transform:translateY(-2px)}
+    .burger{display:none;width:48px;height:48px;border:1px solid var(--line);border-radius:16px;background:#fff;cursor:pointer}
+    .burger span{display:block;width:22px;height:2px;background:#111;margin:5px auto;border-radius:5px}
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at top right, rgba(255,225,0,.45), transparent 28%),
+        radial-gradient(circle at 15% 20%, rgba(110,99,235,.16), transparent 24%),
+        linear-gradient(180deg,#f8fafc 0%,#fff 72%);
+      padding:72px 0 44px;
+    }
+    .hero:before{
+      content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(25,40,74,.05) 1px, transparent 1px),linear-gradient(90deg,rgba(25,40,74,.05) 1px, transparent 1px);background-size:38px 38px;mask-image:linear-gradient(#000,transparent 75%);
+    }
+    .hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
+      box-shadow:var(--shadow-small);border-radius:999px;padding:8px 14px;font-weight:800;color:#1d2939;font-size:14px;
+    }
+    .badge .dot{width:10px;height:10px;border-radius:999px;background:var(--green);box-shadow:0 0 0 6px rgba(24,160,88,.12)}
+    h1{font-size:clamp(38px,6vw,76px);line-height:.98;margin:22px 0 20px;letter-spacing:-.06em;color:#101828}
+    .hero p.lead{font-size:clamp(17px,2vw,22px);color:#475467;max-width:650px;margin:0 0 28px}
+    .hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:30px}
+    .mini-note{font-size:13px;color:#667085;display:flex;align-items:center;gap:8px}
+    .mini-note b{color:#101828}
+    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:650px}
+    .stat{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow-small)}
+    .stat strong{display:block;font-size:30px;line-height:1;color:#101828}
+    .stat span{font-size:13px;color:#667085}
+    .portal-card{
+      background:#fff;border:1px solid rgba(231,237,243,.9);border-radius:36px;box-shadow:var(--shadow);padding:22px;position:relative;
+      transform:rotate(1deg);
+    }
+    .portal-card-inner{border-radius:28px;background:linear-gradient(180deg,#f4f7f9,#fff);overflow:hidden;border:1px solid var(--line)}
+    .card-top{display:flex;align-items:center;justify-content:space-between;padding:18px;background:#101828;color:#fff}
+    .card-dots{display:flex;gap:6px}.card-dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.45)}
+    .card-body{padding:22px}
+    .searchbar{display:flex;gap:8px;padding:10px;background:#fff;border:1px solid var(--line);border-radius:18px;margin-bottom:16px}
+    .searchbar input{border:0;outline:0;flex:1;font-size:14px;min-width:0}.searchbar button{border:0;border-radius:14px;background:var(--yellow);font-weight:800;padding:9px 12px}
+    .dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .dash-item{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px;min-height:125px;position:relative;overflow:hidden}
+    .dash-item:after{content:"";position:absolute;width:90px;height:90px;border-radius:50%;right:-32px;bottom:-38px;background:rgba(255,225,0,.25)}
+    .dash-icon{width:42px;height:42px;border-radius:15px;background:#f9fafb;display:grid;place-items:center;margin-bottom:10px;font-size:20px}
+    .dash-item strong{display:block;margin-bottom:4px}.dash-item span{font-size:13px;color:#667085}
+    .status-line{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;align-items:center;gap:10px}
+    .progress{height:8px;background:#edf2f7;border-radius:99px;overflow:hidden;flex:1}.progress i{display:block;width:68%;height:100%;background:linear-gradient(90deg,var(--yellow),var(--yellow-dark));border-radius:99px}
+
+    section{padding:80px 0}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:34px}
+    .eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.18em;font-weight:900;color:var(--purple);margin-bottom:10px}
+    h2{font-size:clamp(30px,4vw,50px);line-height:1.05;margin:0;letter-spacing:-.04em;color:#101828}
+    .section-head p{max-width:500px;color:#667085;margin:0;font-size:17px}
+    .soft{background:#f4f7f9}
+
+    .notice-strip{background:#101828;color:#fff;padding:18px 0}
+    .notice-strip .container{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    .notice-title{display:flex;align-items:center;gap:12px;font-weight:800}.notice-title span{background:var(--yellow);color:#111;border-radius:999px;padding:7px 10px;font-size:12px}
+    .notice-strip p{margin:0;color:rgba(255,255,255,.75)}
+    .notice-strip button{border:0;border-radius:999px;background:var(--yellow);padding:11px 18px;font-weight:900;cursor:pointer}
+
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .service-card{
+      background:#fff;border:1px solid var(--line);border-radius:28px;padding:24px;box-shadow:0 8px 22px rgba(16,24,40,.04);
+      transition:.25s;position:relative;overflow:hidden;min-height:260px;
+    }
+    .service-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+    .service-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(255,225,0,.28),transparent 34%);opacity:0;transition:.25s}.service-card:hover:before{opacity:1}
+    .service-card>*{position:relative}.service-icon{width:58px;height:58px;border-radius:20px;background:linear-gradient(135deg,#fff9b6,#fff);display:grid;place-items:center;font-size:26px;margin-bottom:18px;border:1px solid #fff1a5}
+    .service-card h3{font-size:22px;line-height:1.15;margin:0 0 10px}.service-card p{color:#667085;margin:0 0 16px}.service-card ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;color:#344054;font-size:14px}.service-card li:before{content:"✓";font-weight:900;color:var(--green);margin-right:7px}
+
+    .workflow{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:step}
+    .step{background:#fff;border:1px solid var(--line);border-radius:28px;padding:24px;position:relative;min-height:250px;box-shadow:var(--shadow-small)}
+    .step:before{counter-increment:step;content:"0" counter(step);display:inline-grid;place-items:center;width:50px;height:50px;border-radius:16px;background:var(--yellow);font-weight:1000;margin-bottom:26px}
+    .step h3{margin:0 0 10px;font-size:21px}.step p{margin:0;color:#667085}.step:after{content:"";position:absolute;right:-18px;top:48px;width:36px;height:2px;background:#d0d5dd}.step:last-child:after{display:none}
+
+    .documents-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:24px;align-items:start}
+    .doc-panel{background:#101828;color:#fff;border-radius:34px;padding:30px;position:sticky;top:105px;box-shadow:var(--shadow)}
+    .doc-panel h3{font-size:28px;line-height:1.05;margin:0 0 14px}.doc-panel p{color:rgba(255,255,255,.72);margin:0 0 22px}.doc-panel .btn{width:100%}
+    .doc-list{display:grid;gap:14px}
+    .doc-item{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;display:grid;grid-template-columns:auto 1fr auto;gap:15px;align-items:center}
+    .doc-num{width:42px;height:42px;border-radius:14px;background:#f4f7f9;display:grid;place-items:center;font-weight:900}.doc-item strong{display:block}.doc-item span{color:#667085;font-size:14px}.tag{font-size:12px;background:#ecfdf3;color:#067647;border-radius:999px;padding:6px 10px;font-weight:800}.tag.warn{background:#fff8db;color:#8a6100}
+
+    .news-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+    .news-main,.news-side article{background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow-small);overflow:hidden}
+    .news-main .news-cover{height:260px;background:linear-gradient(135deg,#101828,#253a6a 55%,#ffe100);position:relative}.news-cover:after{content:"ТЕЗКОР ХАБАР";position:absolute;left:24px;bottom:24px;background:#fff;border-radius:999px;padding:8px 12px;font-weight:1000;color:#101828}
+    .news-content{padding:24px}.news-content time{font-size:13px;color:#667085;font-weight:800}.news-content h3{font-size:28px;line-height:1.1;margin:10px 0}.news-content p{color:#667085;margin:0 0 15px}
+    .news-side{display:grid;gap:18px}.news-side article{display:grid;grid-template-columns:120px 1fr;min-height:140px}.small-cover{background:linear-gradient(135deg,#fff4a2,#ecb65c);min-height:100%}.small-cover.blue{background:linear-gradient(135deg,#dbeafe,#6e63eb)}.small-cover.green{background:linear-gradient(135deg,#dcfce7,#18a058)}.news-side .news-content{padding:18px}.news-side h3{font-size:18px;margin:7px 0 0}
+
+    .tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.tool{background:#fff;border:1px solid var(--line);border-radius:28px;padding:24px;box-shadow:var(--shadow-small)}.tool h3{font-size:22px;margin:0 0 10px}.tool p{color:#667085;margin:0 0 18px}.tool input,.tool select,.tool textarea{width:100%;border:1px solid #d0d5dd;border-radius:16px;padding:14px 15px;font:inherit;margin-bottom:10px;outline:none}.tool input:focus,.tool select:focus,.tool textarea:focus{border-color:var(--purple);box-shadow:0 0 0 4px rgba(110,99,235,.12)}.result-box{background:#f4f7f9;border-radius:16px;padding:14px;font-weight:800;margin-top:10px;min-height:50px}
+
+    .faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:26px;align-items:start}.faq-list{display:grid;gap:12px}.faq-item{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden}.faq-q{width:100%;background:#fff;border:0;padding:20px;text-align:left;font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}.faq-a{display:none;padding:0 20px 20px;color:#667085}.faq-item.open .faq-a{display:block}.faq-item.open .plus{transform:rotate(45deg)}.plus{font-size:26px;transition:.2s}.help-card{background:linear-gradient(135deg,#101828,#253a6a);border-radius:34px;padding:30px;color:#fff;box-shadow:var(--shadow)}.help-card p{color:rgba(255,255,255,.72)}.help-list{display:grid;gap:12px;margin-top:20px}.help-list div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px}
+
+    .contact{background:#101828;color:#fff;position:relative;overflow:hidden}.contact:before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:rgba(255,225,0,.24);right:-170px;top:-150px}.contact-grid{position:relative;display:grid;grid-template-columns:.95fr 1.05fr;gap:30px;align-items:start}.contact h2{color:#fff}.contact p{color:rgba(255,255,255,.72)}.contact-card{background:#fff;color:#111;border-radius:34px;padding:26px;box-shadow:var(--shadow)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.contact-card input,.contact-card select,.contact-card textarea{width:100%;border:1px solid #d0d5dd;border-radius:16px;padding:14px 15px;font:inherit;outline:none}.contact-card textarea{grid-column:1/-1;min-height:130px;resize:vertical}.contact-card .btn{width:100%;grid-column:1/-1}.contact-info{display:grid;gap:12px;margin-top:25px}.contact-info div{border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.07);border-radius:20px;padding:16px}
+
+    footer{background:#0b1220;color:#fff;padding:36px 0}.footer-grid{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:24px}.footer-grid p,.footer-grid a{color:rgba(255,255,255,.68);font-size:14px}.footer-grid h4{margin:0 0 12px}.footer-links{display:grid;gap:9px}.copyright{margin-top:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.55);font-size:13px}
+
+    .modal-backdrop{position:fixed;inset:0;background:rgba(16,24,40,.58);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:18px}.modal-backdrop.show{display:flex}.modal{width:min(760px,100%);background:#fff;border-radius:34px;box-shadow:0 32px 90px rgba(0,0,0,.28);overflow:hidden;animation:pop .22s ease}@keyframes pop{from{transform:translateY(18px) scale(.97);opacity:0}to{transform:none;opacity:1}}.modal-head{background:linear-gradient(135deg,#101828,#253a6a);color:#fff;padding:26px 28px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.modal-head h3{font-size:30px;line-height:1.05;margin:0}.close{border:0;background:rgba(255,255,255,.12);color:#fff;border-radius:15px;width:44px;height:44px;font-size:24px;cursor:pointer}.modal-body{padding:26px 28px}.hot-list{display:grid;gap:12px}.hot-item{border:1px solid var(--line);border-radius:20px;padding:16px;background:#f8fafc}.hot-item strong{display:block;margin-bottom:4px}.hot-item span{font-size:14px;color:#667085}.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+
+    .floating-chat{position:fixed;right:22px;bottom:22px;z-index:60;width:60px;height:60px;border-radius:50%;background:var(--yellow);box-shadow:0 16px 35px rgba(255,225,0,.35);display:grid;place-items:center;font-size:26px;border:0;cursor:pointer}.toast{position:fixed;right:22px;bottom:96px;z-index:80;background:#101828;color:#fff;border-radius:18px;padding:14px 16px;box-shadow:var(--shadow);display:none;max-width:320px}.toast.show{display:block}
+
+    @media (max-width:1020px){
+      .menu{display:none;position:absolute;left:16px;right:16px;top:88px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:var(--shadow);flex-direction:column;align-items:flex-start}.menu.open{display:flex}.burger{display:block}.actions .btn-light{display:none}.hero-grid,.documents-layout,.news-grid,.faq,.contact-grid{grid-template-columns:1fr}.portal-card{transform:none}.workflow{grid-template-columns:repeat(2,1fr)}.services-grid,.tools-grid{grid-template-columns:repeat(2,1fr)}.doc-panel{position:relative;top:auto}.footer-grid{grid-template-columns:1fr 1fr}.step:after{display:none}
+    }
+    @media (max-width:700px){
+      .topline .container{align-items:flex-start;flex-direction:column;padding:10px 0}.nav{height:74px}.logo span{display:none}.actions .btn-yellow{display:none}.hero{padding:46px 0 34px}.hero-stats,.services-grid,.workflow,.tools-grid,.footer-grid,.dash-grid,.form-grid{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:12px}.doc-item{grid-template-columns:auto 1fr}.doc-item .tag{grid-column:2}.news-side article{grid-template-columns:1fr}.small-cover{height:110px}.contact-card textarea{grid-column:auto}.contact-card .btn{grid-column:auto}section{padding:58px 0}.modal-head h3{font-size:24px}.floating-chat{right:16px;bottom:16px}
+    }
+  </style>
+</head>
+<body>
+  <div class="topline">
+    <div class="container">
+      <div class="topline-left">
+        <a href="tel:+998781234567">+998 (78) 123-45-67</a>
+        <span>Қўнғироқ маркази: 09:00–18:00</span>
+      </div>
+      <div class="topline-right">
+        <a href="#faq">Савол-жавоблар</a>
+        <a href="#contact">Онлайн ёрдам</a>
+        <div class="lang"><button class="active">ЎЗ</button><button>РУ</button><button>ИНГ</button></div>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container nav">
+      <a class="logo" href="#top" aria-label="МИГРА Портал">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 4v5c0 4.7-3.1 7.9-7 9-3.9-1.1-7-4.3-7-9V7l7-4z" stroke="#111827" stroke-width="2"/><path d="M9 12l2 2 4-5" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div><strong>МИГРА Портал</strong><span>электрон миграция хизматлари</span></div>
+      </a>
+      <nav class="menu" id="menu">
+        <a href="#services">Хизматлар</a>
+        <a href="#workflow">Қандай ишлайди</a>
+        <a href="#documents">Ҳужжатлар</a>
+        <a href="#news">Янгиликлар</a>
+        <a href="#tools">Текшириш</a>
+        <a href="#contact">Мурожаат</a>
+      </nav>
+      <div class="actions">
+        <a class="btn btn-light" href="#contact">Рўйхатдан ўтиш</a>
+        <a class="btn btn-yellow" href="#services">Ариза юбориш</a>
+        <button class="burger" id="burger" aria-label="Менюни очиш"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge"><i class="dot"></i> Миграция хизматлари учун ягона ойна</div>
+          <h1>Миграция ҳужжатларини онлайн расмийлаштиринг</h1>
+          <p class="lead">Навбатга ёзилиш, мурожаат юбориш, ариза ҳолатини текшириш ва ҳужжатларни тайёрлаш учун қулай ахборот портали.</p>
+          <div class="hero-actions">
+            <a class="btn btn-yellow" href="#services">Хизматни танлаш</a>
+            <button class="btn btn-dark" data-open-modal>Тезкор хабарлар</button>
+            <span class="mini-note">⚠️ <b>Демо-макет:</b> ўзингизнинг ҳақиқий форма ва матнларингизни уланг</span>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><strong>24/7</strong><span>аризаларга онлайн кириш</span></div>
+            <div class="stat"><strong>12+</strong><span>оммабоп хизмат турлари</span></div>
+            <div class="stat"><strong>3 дақ</strong><span>ҳужжатларни тез танлаш</span></div>
+          </div>
+        </div>
+        <div class="portal-card" aria-label="Портал демо интерфейси">
+          <div class="portal-card-inner">
+            <div class="card-top"><strong>Аризачининг шахсий кабинети</strong><div class="card-dots"><i></i><i></i><i></i></div></div>
+            <div class="card-body">
+              <div class="searchbar"><input id="serviceSearch" placeholder="Хизматни топиш: виза, рўйхат, яшаш гувоҳномаси..."/><button>Қидириш</button></div>
+              <div class="dash-grid">
+                <div class="dash-item"><div class="dash-icon">🛂</div><strong>Ҳолатни текшириш</strong><span>Ариза рақамини киритинг ва босқичларни кузатинг.</span></div>
+                <div class="dash-item"><div class="dash-icon">📅</div><strong>Электрон навбат</strong><span>Қулай кун ва бўлимни танланг.</span></div>
+                <div class="dash-item"><div class="dash-icon">📄</div><strong>Ҳужжатлар рўйхати</strong><span>Вазиятингизга мос пакетни танлаш.</span></div>
+                <div class="dash-item"><div class="dash-icon">💬</div><strong>Мурожаат</strong><span>Мутахассисга саволни онлайн юборинг.</span></div>
+              </div>
+              <div class="status-line"><span>Ариза №MG‑2026‑018</span><div class="progress"><i></i></div><b>68%</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="notice-strip">
+      <div class="container">
+        <div class="notice-title"><span>ТЕЗКОР</span> Аризачилар учун янги билдиришномалар</div>
+        <p>Хизматни тез қидириш, электрон навбат ва ҳужжатлар бўйича эслатма қўшилди.</p>
+        <button data-open-modal>Очиш</button>
+      </div>
+    </div>
+
+    <section id="services" class="soft">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">Оммабоп хизматлар</div><h2>Керакли ҳаммаси битта порталда</h2></div>
+          <p>Карточкаларни миграция хизматингизнинг ҳақиқий хизматлари билан алмаштириш мумкин. Ҳозир бу тайёр визуал шаблон.</p>
+        </div>
+        <div class="services-grid" id="serviceCards">
+          <article class="service-card" data-title="виза узайтириш"><div class="service-icon">🛂</div><h3>Визани узайтириш</h3><p>Ариза топшириш, асосларни текшириш ва қарор ҳақида хабарнома.</p><ul><li>Аризачи анкетаси</li><li>Паспорт маълумотлари</li><li>Муддат назорати</li></ul></article>
+          <article class="service-card" data-title="вақтинча рўйхат"><div class="service-icon">🏠</div><h3>Вақтинча рўйхат</h3><p>Бўлиш муддати ва яшаш манзилини расмийлаштириш бўйича маълумот.</p><ul><li>Яшаш манзили</li><li>Қабул қилувчи томон маълумотлари</li><li>Онлайн ёзилиш</li></ul></article>
+          <article class="service-card" data-title="яшаш гувоҳномаси"><div class="service-icon">📘</div><h3>Яшаш гувоҳномаси</h3><p>Узоқ муддатли яшашни расмийлаштираётган аризачилар учун бўлим.</p><ul><li>Пакетни текшириш</li><li>Қабулга ёзилиш</li><li>Кўриб чиқиш ҳолати</li></ul></article>
+          <article class="service-card" data-title="ишлаш рухсатномаси"><div class="service-icon">💼</div><h3>Ишлаш рухсатномаси</h3><p>Чет эллик мутахассис ва иш берувчи учун эслатма.</p><ul><li>Иш берувчи</li><li>Шартнома</li><li>Ходим ҳужжатлари</li></ul></article>
+          <article class="service-card" data-title="фуқаролик ариза"><div class="service-icon">🏛️</div><h3>Фуқаролик бўйича ариза</h3><p>Босқичлар, муддатлар ва мажбурий ҳужжатлар бўйича йўналтириш.</p><ul><li>Анкетани тайёрлаш</li><li>Ҳужжатлар скани</li><li>Маслаҳат</li></ul></article>
+          <article class="service-card" data-title="чеклов кириш тақиқ"><div class="service-icon">🔎</div><h3>Чекловларни текшириш</h3><p>Ҳолат ва билдиришномаларни олдиндан текшириш учун форма.</p><ul><li>Паспорт рақами</li><li>Туғилган сана</li><li>Текширув натижаси</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">Қандай ишлайди</div><h2>Аризачи йўли 4 қадамда</h2></div>
+          <p>Бўлим содда босқичли блоклар услубида тайёрланган: тушунарли, тез ва телефонда ҳам қулай кўринади.</p>
+        </div>
+        <div class="workflow">
+          <div class="step"><h3>Хизматни танланг</h3><p>Аризачи керакли бўлимни меню, қидирув ёки хизмат карточкалари орқали топади.</p></div>
+          <div class="step"><h3>Маълумотларни тўлдиринг</h3><p>Форма алоқа маълумотлари, хизмат тури ва вазиятнинг қисқа тавсифини йиғади.</p></div>
+          <div class="step"><h3>Ҳужжатларни юкланг</h3><p>Портал файллар рўйхатини кўрсатади ва нима етишмаслигини эслатади.</p></div>
+          <div class="step"><h3>Жавоб олинг</h3><p>Ариза ҳолати кабинетда ўзгаради, билдиришнома эса телефонга келади.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="documents" class="soft">
+      <div class="container documents-layout">
+        <aside class="doc-panel">
+          <div class="eyebrow">Ҳужжатлар</div>
+          <h3>Топширишдан олдин эслатма</h3>
+          <p>Қуйидаги рўйхат намуна. Реал лойиҳада бу ерга хизматингизнинг аниқ талаблари ва актуал бланкларини қўйиш яхшироқ.</p>
+          <a class="btn btn-yellow" href="#contact">Пакетни текшириш</a>
+        </aside>
+        <div class="doc-list">
+          <div class="doc-item"><div class="doc-num">01</div><div><strong>Паспорт ёки шахсни тасдиқловчи ҳужжат</strong><span>Асосий саҳифа скани, амал қилиш муддати ва ўқилиш сифати.</span></div><span class="tag">мажбурий</span></div>
+          <div class="doc-item"><div class="doc-num">02</div><div><strong>Миграция картаси / кириш белгиси</strong><span>Бўлиш муддати ва кириш санасини текшириш учун керак.</span></div><span class="tag">мажбурий</span></div>
+          <div class="doc-item"><div class="doc-num">03</div><div><strong>Яшаш манзилини тасдиқлаш</strong><span>Шартнома, қабул қилувчи томон розилиги ёки бошқа ҳужжат.</span></div><span class="tag warn">вазиятга қараб</span></div>
+          <div class="doc-item"><div class="doc-num">04</div><div><strong>Аризачи фотосурати</strong><span>Анкета, шахсий кабинет ва босма шакллар учун мос.</span></div><span class="tag warn">вазиятга қараб</span></div>
+          <div class="doc-item"><div class="doc-num">05</div><div><strong>Қўшимча асослар</strong><span>Иш, ўқиш, оила, даволаниш ёки бўлиш учун бошқа асос.</span></div><span class="tag warn">хизматга қараб</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="news">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">Янгиликлар ва эълонлар</div><h2>Аризачилар учун муҳим</h2></div>
+          <p>Янгиликлар блоки портал янгиланиб турадиган, тўлиқ ва ишончли сайтдек кўриниши учун йирик қилинган.</p>
+        </div>
+        <div class="news-grid">
+          <article class="news-main"><div class="news-cover"></div><div class="news-content"><time>2026 йил 11 июнь</time><h3>Қабулга тез ёзилиш бўлими ишга тушди</h3><p>Аризачи хизмат, бўлим ва қулай санани танлаши мумкин. Форма юборилгандан сўнг тизим мурожаат рақамини кўрсатади.</p><a class="btn btn-yellow" href="#contact">Ёзилиш</a></div></article>
+          <div class="news-side">
+            <article><div class="small-cover"></div><div class="news-content"><time>Маълумот</time><h3>Ташрифдан олдин ҳужжатларни тайёрлаш бўйича эслатма</h3></div></article>
+            <article><div class="small-cover blue"></div><div class="news-content"><time>Янгиланиш</time><h3>Ариза ҳолатини онлайн текшириш қўшилди</h3></div></article>
+            <article><div class="small-cover green"></div><div class="news-content"><time>Ёрдам</time><h3>Қўнғироқ маркази иш кунлари мурожаатларни қабул қилади</h3></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tools" class="soft">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">Онлайн инструментлар</div><h2>Текширувлар ва тез формалар</h2></div>
+          <p>Ичида оддий скрипт бор: ҳолатни текшириш, ҳужжатларни танлаш ва мурожаат юбориш имитацияси.</p>
+        </div>
+        <div class="tools-grid">
+          <div class="tool"><h3>Ҳолатни текшириш</h3><p>Демо-ҳолатни кўриш учун ариза рақамини киритинг.</p><input id="statusInput" placeholder="Масалан: MG-2026-018"><button class="btn btn-dark" id="checkStatus">Текшириш</button><div class="result-box" id="statusResult">Ҳолат шу ерда пайдо бўлади</div></div>
+          <div class="tool"><h3>Ҳужжатларни танлаш</h3><p>Хизматни танланг ва тахминий рўйхатни олинг.</p><select id="docSelect"><option value="visa">Визани узайтириш</option><option value="reg">Вақтинча рўйхат</option><option value="work">Ишлаш рухсатномаси</option><option value="residence">Яшаш гувоҳномаси</option></select><button class="btn btn-yellow" id="docBtn">Рўйхатни кўрсатиш</button><div class="result-box" id="docResult">Хизматни танланг</div></div>
+          <div class="tool"><h3>Тезкор савол</h3><p>Қисқа савол қолдиринг, форма тайёр билдиришномани кўрсатади.</p><textarea id="quickQuestion" placeholder="Саволингизни ёзинг..."></textarea><button class="btn btn-dark" id="questionBtn">Юбориш</button><div class="result-box" id="questionResult">Жавоб шу ерда пайдо бўлади</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container faq">
+        <div class="help-card">
+          <div class="eyebrow">Қўллаб-қувватлаш</div>
+          <h2>Кўп бериладиган саволлар</h2>
+          <p>Бу блок мижоз саволларига жавоб беради ва сайтни ишончлироқ қилади.</p>
+          <div class="help-list">
+            <div><strong>Телефон:</strong><br>+998 (78) 123‑45‑67</div>
+            <div><strong>Telegram:</strong><br>@migra_support</div>
+            <div><strong>Манзил:</strong><br>Тошкент, аризачиларга хизмат кўрсатиш маркази</div>
+          </div>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item open"><button class="faq-q">Аризани онлайн топшириш мумкинми? <span class="plus">+</span></button><div class="faq-a">Ҳа, макетда мурожаат формаси бор. Реал сайт учун сервер қисми, мижозлар тизими, Телеграм-бот ёки Гугл Формс улаш керак.</div></div>
+          <div class="faq-item"><button class="faq-q">Бу расмий сайтми? <span class="plus">+</span></button><div class="faq-a">Йўқ, бу демонстрацион шаблон. Одамларни чалғитмаслик учун давлат герби, расмий логотиплар ва ёлғон ваъдалардан фойдаланманг.</div></div>
+          <div class="faq-item"><button class="faq-q">Ўзбек тилини қўшиш мумкинми? <span class="plus">+</span></button><div class="faq-a">Ҳа. Ҳозир тил тугмалари визуал. ЎЗ/РУ/ИНГ матнларини скрипт орқали ёки алоҳида HTML-саҳифалар билан қилиш мумкин.</div></div>
+          <div class="faq-item"><button class="faq-q">Телефонда ишлайдими? <span class="plus">+</span></button><div class="faq-a">Ҳа, сайт адаптив: меню йиғилади, карточкалар битта устунга тушади, формалар мобил экран учун қулай.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container contact-grid">
+        <div>
+          <div class="eyebrow">Мурожаат</div>
+          <h2>Ёзилиш ёки савол бериш</h2>
+          <p>Маълумотларингизни қолдиринг, реал сайтда бу формани почта, Телеграм, мижозлар тизими ёки аризалар базасига улаш мумкин.</p>
+          <div class="contact-info">
+            <div><strong>Аризачилар қабули</strong><br><span>Душ–Жум, 09:00–18:00</span></div>
+            <div><strong>Жавоб муддати</strong><br><span>Одатда мурожаат рўйхатдан ўтгандан кейин 1–3 иш куни</span></div>
+            <div><strong>Хавфсизлик</strong><br><span>Ишга туширишдан олдин ССЛ, форма ҳимояси ва файл текширувини қўшинг</span></div>
+          </div>
+        </div>
+        <form class="contact-card" id="contactForm">
+          <div class="form-grid">
+            <input required placeholder="Исмингиз" name="name">
+            <input required placeholder="Телефон" name="phone">
+            <select name="service"><option>Хизматни танланг</option><option>Визани узайтириш</option><option>Вақтинча рўйхат</option><option>Яшаш гувоҳномаси</option><option>Ишлаш рухсатномаси</option></select>
+            <input placeholder="Ариза рақами, агар бўлса" name="number">
+            <textarea required placeholder="Саволингизни тавсифланг"></textarea>
+            <button class="btn btn-yellow" type="submit">Мурожаат юбориш</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div><div class="logo"><div class="logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v5c0 4.7-3.1 7.9-7 9-3.9-1.1-7-4.3-7-9V7l7-4z" stroke="#111827" stroke-width="2"/><path d="M9 12l2 2 4-5" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><strong>МИГРА Портал</strong><span>демо-сайт</span></div></div><p>Миграция хизмати, ахборот маркази ёки аризалар сервиси учун замонавий сайт шаблони.</p></div>
+        <div><h4>Бўлимлар</h4><div class="footer-links"><a href="#services">Хизматлар</a><a href="#documents">Ҳужжатлар</a><a href="#news">Янгиликлар</a></div></div>
+        <div><h4>Ёрдам</h4><div class="footer-links"><a href="#faq">Савол-жавоб</a><a href="#contact">Мурожаат</a><a href="#tools">Ҳолатни текшириш</a></div></div>
+        <div><h4>Контактлар</h4><div class="footer-links"><a href="tel:+998781234567">+998 (78) 123‑45‑67</a><a href="mailto:info@example.uz">info@example.uz</a><a href="#">Телеграм канали</a></div></div>
+      </div>
+      <div class="copyright">© 2026 МИГРА Портал. Демо-макет. Давлат хизматининг расмий сайти ҳисобланмайди.</div>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="hotModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="hotTitle">
+      <div class="modal-head"><div><div class="eyebrow" style="color:#ffe100">ТЕЗКОР ХАБАР</div><h3 id="hotTitle">Порталнинг тезкор хабарлари</h3></div><button class="close" data-close-modal aria-label="Ёпиш">×</button></div>
+      <div class="modal-body">
+        <div class="hot-list">
+          <div class="hot-item"><strong>Электрон навбат онлайн мавжуд</strong><span>Бўлим, сана ва тасдиқлаш учун контактни танланг.</span></div>
+          <div class="hot-item"><strong>Ариза ҳолатини текшириш</strong><span>MG‑2026‑018 форматида мурожаат рақамини киритинг ва демо-жавоб олинг.</span></div>
+          <div class="hot-item"><strong>Ҳужжатлар рўйхати янгиланди</strong><span>Бўлимга виза, рўйхат ва яшаш гувоҳномаси учун ҳужжат намуналари қўшилди.</span></div>
+        </div>
+        <div class="modal-actions"><a class="btn btn-yellow" href="#services" data-close-modal>Хизматларга ўтиш</a><a class="btn btn-light" href="#contact" data-close-modal>Мурожаат қолдириш</a></div>
+      </div>
+    </div>
+  </div>
+  <button class="floating-chat" id="chatBtn" aria-label="Чат">💬</button>
+  <div class="toast" id="toast">Телеграм орқали @migra_support га ёзинг ёки қуйидаги мурожаат формасини тўлдиринг.</div>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('menu');
+    burger.addEventListener('click', () => menu.classList.toggle('open'));
+    document.querySelectorAll('.menu a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+    const modal = document.getElementById('hotModal');
+    const openModal = () => { modal.classList.add('show'); modal.setAttribute('aria-hidden','false'); };
+    const closeModal = () => { modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); if(location.hash === '#popup:hotnews') history.replaceState(null,'',location.pathname + location.search); };
+    document.querySelectorAll('[data-open-modal]').forEach(btn => btn.addEventListener('click', openModal));
+    document.querySelectorAll('[data-close-modal]').forEach(btn => btn.addEventListener('click', closeModal));
+    modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+    if(location.hash === '#popup:hotnews') openModal();
+
+    const search = document.getElementById('serviceSearch');
+    const cards = [...document.querySelectorAll('.service-card')];
+    search.addEventListener('input', () => {
+      const q = search.value.trim().toLowerCase();
+      cards.forEach(card => {
+        const text = (card.dataset.title + ' ' + card.innerText).toLowerCase();
+        card.style.display = text.includes(q) ? '' : 'none';
+      });
+    });
+
+    document.querySelectorAll('.faq-q').forEach(btn => btn.addEventListener('click', () => btn.closest('.faq-item').classList.toggle('open')));
+
+    document.getElementById('checkStatus').addEventListener('click', () => {
+      const val = document.getElementById('statusInput').value.trim();
+      const result = document.getElementById('statusResult');
+      if(!val){ result.textContent = 'Ариза рақамини киритинг.'; return; }
+      result.textContent = 'Ариза ' + val.toUpperCase() + ': қабул қилинди, ҳужжатлар текширилмоқда.';
+    });
+
+    const docMap = {
+      visa:'Паспорт, миграция картаси, фото, узайтириш асоси, алоқа телефони.',
+      reg:'Паспорт, яшаш манзили, қабул қилувчи томон розилиги, кириш санаси.',
+      work:'Паспорт, шартнома/таклифнома, иш берувчи маълумотлари, фото, ариза.',
+      residence:'Паспорт, анкета, фото, яшаш асоси, манзил тасдиғи.'
+    };
+    document.getElementById('docBtn').addEventListener('click', () => {
+      const type = document.getElementById('docSelect').value;
+      document.getElementById('docResult').textContent = docMap[type];
+    });
+
+    document.getElementById('questionBtn').addEventListener('click', () => {
+      const q = document.getElementById('quickQuestion').value.trim();
+      document.getElementById('questionResult').textContent = q ? 'Саволингиз демо-режимда қабул қилинди. Реал юбориш учун сервер қисмини уланг.' : 'Юборишдан олдин саволни ёзинг.';
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', e => {
+      e.preventDefault();
+      showToast('Мурожаат демо-режимда сақланди. Реал юбориш учун формани серверга уланг.');
+      e.target.reset();
+    });
+
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast(text){
+      toast.textContent = text;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 4200);
+    }
+    document.getElementById('chatBtn').addEventListener('click', () => showToast('Телеграм орқали @migra_support га ёзинг ёки қуйидаги мурожаат формасини тўлдиринг.'));
+  </script>
+</body>
+</html>
