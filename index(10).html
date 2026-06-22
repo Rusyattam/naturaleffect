@@ -366,14 +366,15 @@
             <div><strong>Прием заявителей</strong><br><span>Пн-Пт, 09:00-18:00</span></div>
           </div>
         </div>
-        <form class="contact-card" id="contactForm">
+        <form class="contact-card" id="contactForm" data-telegram-form data-hide-on-success data-endpoint="./telegram-contact.php">
           <div class="form-grid">
             <input required placeholder="Ваше имя" name="name">
             <input required placeholder="Телефон" name="phone">
             <select name="service"><option>Выберите услугу</option><option>Продление визы</option><option>Временная регистрация</option><option>Вид на жительство</option></select>
             <input placeholder="Номер заявки, если есть" name="number">
-            <textarea required placeholder="Опишите ваш вопрос"></textarea>
+            <textarea required placeholder="Опишите ваш вопрос" name="message"></textarea>
             <button class="btn btn-yellow" type="submit">Отправить обращение</button>
+            <div data-form-status aria-live="polite"></div>
           </div>
         </form>
       </div>
@@ -394,6 +395,7 @@
   <button class="floating-chat" id="chatBtn" aria-label="Чат">💬</button>
   <div class="toast" id="toast">Напишите в Telegram @migra_support или заполните форму обращения ниже.</div>
 
+  <script src="./telegram-contact.js"></script>
   <script>
     const burger = document.getElementById('burger');
     const menu = document.getElementById('menu');
@@ -409,12 +411,6 @@
       langSwitch.querySelectorAll('button').forEach(item => item.classList.toggle('active', item === btn));
       document.documentElement.lang = btn.dataset.lang;
       showToast(btn.dataset.lang === 'ru' ? 'Основной язык: русский.' : 'Язык выбран. Основной текст сайта оставлен на русском.');
-    });
-
-    document.getElementById('contactForm').addEventListener('submit', e => {
-      e.preventDefault();
-      showToast('Обращение сохранено в демо-режиме. Для реальной отправки подключите форму к серверу.');
-      e.target.reset();
     });
 
     const toast = document.getElementById('toast');
