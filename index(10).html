@@ -141,9 +141,10 @@
     .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
     .service-card{
       background:#fff;border:1px solid var(--line);border-radius:28px;padding:24px;box-shadow:0 8px 22px rgba(16,24,40,.04);
-      transition:.25s;position:relative;overflow:hidden;min-height:260px;
+      transition:.25s;position:relative;overflow:hidden;min-height:260px;cursor:pointer;
     }
     .service-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+    .service-card:focus-visible{outline:4px solid rgba(255,225,0,.5);outline-offset:4px}
     .service-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(255,225,0,.28),transparent 34%);opacity:0;transition:.25s}.service-card:hover:before{opacity:1}
     .service-card>*{position:relative}.service-icon{width:58px;height:58px;border-radius:20px;background:linear-gradient(135deg,#fff9b6,#fff);display:grid;place-items:center;font-size:26px;margin-bottom:18px;border:1px solid #fff1a5}
     .service-card h3{font-size:22px;line-height:1.15;margin:0 0 10px}.service-card p{color:#667085;margin:0 0 16px}.service-card ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;color:#344054;font-size:14px}.service-card li:before{content:"✓";font-weight:900;color:var(--green);margin-right:7px}
@@ -315,9 +316,9 @@
           <p>Карточки можно заменить на реальные услуги вашей миграционной службы. Сейчас это готовый визуальный шаблон.</p>
         </div>
         <div class="services-grid" id="serviceCards">
-          <article class="service-card" data-title="виза продление"><div class="service-icon">🛂</div><h3>Продление визы</h3><p>Подача заявки, проверка оснований и уведомление о решении.</p><ul><li>Анкета заявителя</li><li>Паспортные данные</li><li>Контроль срока</li></ul></article>
-          <article class="service-card" data-title="временная регистрация"><div class="service-icon">🏠</div><h3>Временная регистрация</h3><p>Информация по оформлению пребывания и месту проживания.</p><ul><li>Адрес проживания</li><li>Данные принимающей стороны</li><li>Онлайн запись</li></ul></article>
-          <article class="service-card" data-title="проверка ограничений"><div class="service-icon">🔎</div><h3>Проверка ограничений</h3><p>Форма для предварительной проверки статуса и уведомлений.</p><ul><li>Номер паспорта</li><li>Дата рождения</li><li>Результат проверки</li></ul></article>
+          <article class="service-card" data-title="Продление визы" role="button" tabindex="0"><div class="service-icon">🛂</div><h3>Продление визы</h3><p>Подача заявки, проверка оснований и уведомление о решении.</p><ul><li>Анкета заявителя</li><li>Паспортные данные</li><li>Контроль срока</li></ul></article>
+          <article class="service-card" data-title="Временная регистрация" role="button" tabindex="0"><div class="service-icon">🏠</div><h3>Временная регистрация</h3><p>Информация по оформлению пребывания и месту проживания.</p><ul><li>Адрес проживания</li><li>Данные принимающей стороны</li><li>Онлайн запись</li></ul></article>
+          <article class="service-card" data-title="Проверка ограничений" role="button" tabindex="0"><div class="service-icon">🔎</div><h3>Проверка ограничений</h3><p>Форма для предварительной проверки статуса и уведомлений.</p><ul><li>Номер паспорта</li><li>Дата рождения</li><li>Результат проверки</li></ul></article>
         </div>
       </div>
     </section>
@@ -342,11 +343,12 @@
             <div><strong>Прием заявителей</strong><br><span>Пн-Сб, 09:00-18:00</span></div>
           </div>
         </div>
-        <form class="contact-card" id="contactForm" data-telegram-form data-hide-on-success data-endpoint="./telegram-contact.php">
+        <form class="contact-card" id="contactForm">
           <div class="form-grid">
             <input required placeholder="Ваше имя" name="name">
             <input required placeholder="Телефон" name="phone">
-            <select name="service"><option>Выберите услугу</option><option>Продление визы</option><option>Временная регистрация</option><option>Вид на жительство</option></select>
+            <select name="service"><option>Выберите услугу</option><option>Продление визы</option><option>Временная регистрация</option><option>Проверка ограничений</option><option>Вид на жительство</option></select>
+            <textarea placeholder="Комментарий или вопрос" name="message"></textarea>
             <button class="btn btn-yellow" type="submit">Отправить обращение</button>
             <div data-form-status aria-live="polite"></div>
           </div>
@@ -369,7 +371,6 @@
   <button class="floating-chat" id="chatBtn" aria-label="Чат">💬</button>
   <div class="toast" id="toast">Напишите в Telegram @migra_support или заполните форму обращения ниже.</div>
 
-  <script src="./telegram-contact.js"></script>
   <script>
     const burger = document.getElementById('burger');
     const menu = document.getElementById('menu');
@@ -393,6 +394,81 @@
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => toast.classList.remove('show'), 4200);
     }
+
+    const contactForm = document.getElementById('contactForm');
+    const serviceSelect = contactForm.querySelector('select[name="service"]');
+    const formStatus = contactForm.querySelector('[data-form-status]');
+    const contactSubmit = contactForm.querySelector('[type="submit"]');
+    const contactSubmitText = contactSubmit ? contactSubmit.textContent : '';
+
+    contactForm.addEventListener('submit', async event => {
+      event.preventDefault();
+
+      const formData = new FormData(contactForm);
+      const name = String(formData.get('name') || '').trim();
+      const phone = String(formData.get('phone') || '').trim();
+      const service = String(formData.get('service') || '').trim();
+      const message = String(formData.get('message') || '').trim();
+
+      if(!name || !phone){
+        if(formStatus) formStatus.textContent = 'Укажите имя и телефон.';
+        return;
+      }
+
+      if(contactSubmit){
+        contactSubmit.disabled = true;
+        contactSubmit.textContent = 'Отправляем...';
+      }
+      if(formStatus) formStatus.textContent = 'Отправляем заявку...';
+
+      try{
+        const response = await fetch('./telegram-contact.php', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            name,
+            phone,
+            service,
+            message,
+            page: window.location.href
+          })
+        });
+        const result = await response.json();
+
+        if(!response.ok || !result.ok){
+          throw new Error(result.message || 'Ошибка отправки');
+        }
+
+        contactForm.reset();
+        if(formStatus) formStatus.textContent = 'Заявка отправлена в Telegram.';
+        showToast('Заявка отправлена. Мы свяжемся с вами в ближайшее время.');
+      }catch(error){
+        if(formStatus) formStatus.textContent = error.message || 'Не удалось отправить заявку.';
+      }finally{
+        if(contactSubmit){
+          contactSubmit.disabled = false;
+          contactSubmit.textContent = contactSubmitText;
+        }
+      }
+    });
+
+    function openContactForm(serviceName){
+      if(serviceSelect && serviceName){
+        serviceSelect.value = serviceName;
+      }
+      contactForm.scrollIntoView({behavior:'smooth', block:'center'});
+      const firstInput = contactForm.querySelector('input[name="name"]');
+      setTimeout(() => firstInput && firstInput.focus({preventScroll:true}), 450);
+    }
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.addEventListener('click', () => openContactForm(card.dataset.title));
+      card.addEventListener('keydown', event => {
+        if(event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        openContactForm(card.dataset.title);
+      });
+    });
+
     document.getElementById('chatBtn').addEventListener('click', () => showToast('Напишите в Telegram @migra_support или заполните форму обращения ниже.'));
   </script>
 </body>
