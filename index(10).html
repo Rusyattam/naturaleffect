@@ -288,7 +288,7 @@
       </nav>
       <div class="actions">
         <a class="btn btn-light" href="#contact">Регистрация</a>
-        <a class="btn btn-yellow" href="#services">Подать заявку</a>
+        <a class="btn btn-yellow" href="#contact">Подать заявку</a>
         <button class="burger" id="burger" aria-label="Открыть меню"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -343,10 +343,10 @@
             <div><strong>Прием заявителей</strong><br><span>Пн-Сб, 09:00-18:00</span></div>
           </div>
         </div>
-        <form class="contact-card" id="contactForm">
+        <form class="contact-card" id="contactForm" action="./telegram-contact.php" method="post">
           <div class="form-grid">
             <input required placeholder="Ваше имя" name="name">
-            <input required placeholder="Телефон" name="phone">
+            <input required placeholder="+998 __ ___ __ __" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="17">
             <select name="service"><option>Выберите услугу</option><option>Продление визы</option><option>Временная регистрация</option><option>Проверка ограничений</option><option>Вид на жительство</option></select>
             <textarea placeholder="Комментарий или вопрос" name="message"></textarea>
             <button class="btn btn-yellow" type="submit">Отправить обращение</button>
@@ -397,9 +397,103 @@
 
     const contactForm = document.getElementById('contactForm');
     const serviceSelect = contactForm.querySelector('select[name="service"]');
+    const phoneInput = contactForm.querySelector('input[name="phone"]');
     const formStatus = contactForm.querySelector('[data-form-status]');
     const contactSubmit = contactForm.querySelector('[type="submit"]');
     const contactSubmitText = contactSubmit ? contactSubmit.textContent : '';
+    const telegramFallbackToken = '8686784975:AAFi-nQ8k19jjZlEC8a4SV0PVmhaSFN1-GI';
+    const telegramFallbackChatId = '-5182608570';
+
+    function formatPhoneInput(value){
+      let digits = value.replace(/\D/g, '');
+
+      if(digits.startsWith('998')){
+        digits = digits.slice(3);
+      }else if(digits.startsWith('8') || digits.startsWith('0')){
+        digits = digits.slice(1);
+      }
+
+      digits = digits.slice(0, 9);
+
+      let result = '+998';
+      if(digits.length > 0) result += ' ' + digits.slice(0, 2);
+      if(digits.length > 2) result += ' ' + digits.slice(2, 5);
+      if(digits.length > 5) result += ' ' + digits.slice(5, 7);
+      if(digits.length > 7) result += ' ' + digits.slice(7, 9);
+
+      return result + (digits.length === 0 ? ' ' : '');
+    }
+
+    function hasFullPhoneNumber(value){
+      const digits = value.replace(/\D/g, '');
+      const localNumber = digits.startsWith('998') ? digits.slice(3) : digits;
+      return localNumber.length === 9;
+    }
+
+    if(phoneInput){
+      phoneInput.value = '+998 ';
+      phoneInput.addEventListener('focus', () => {
+        if(!phoneInput.value.trim()) phoneInput.value = '+998 ';
+      });
+      phoneInput.addEventListener('input', () => {
+        phoneInput.value = formatPhoneInput(phoneInput.value);
+      });
+    }
+
+    function buildTelegramText(data){
+      return [
+        'Новая заявка',
+        'Имя: ' + data.name,
+        'Телефон: ' + data.phone,
+        data.service ? 'Услуга: ' + data.service : '',
+        data.message ? 'Вопрос: ' + data.message : '',
+        'Страница: ' + data.page
+      ].filter(Boolean).join('\n');
+    }
+
+    async function sendViaServer(data){
+      if(window.location.protocol === 'file:'){
+        throw new Error('Страница открыта как файл, PHP недоступен.');
+      }
+
+      const endpoint = new URL(contactForm.getAttribute('action') || './telegram-contact.php', window.location.href);
+      const response = await fetch(endpoint.href, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      const resultText = await response.text();
+      let result;
+      try{
+        result = JSON.parse(resultText);
+      }catch(parseError){
+        if(response.status === 404){
+          throw new Error('Файл telegram-contact.php не найден.');
+        }
+        throw new Error('PHP не вернул JSON.');
+      }
+
+      if(!response.ok || !result.ok){
+        throw new Error(result.message || 'Ошибка отправки через PHP.');
+      }
+    }
+
+    async function sendViaTelegramFallback(data){
+      const response = await fetch('https://api.telegram.org/bot' + telegramFallbackToken + '/sendMessage', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          chat_id: telegramFallbackChatId,
+          text: buildTelegramText(data),
+          disable_web_page_preview: true
+        })
+      });
+      const result = await response.json().catch(() => null);
+
+      if(!response.ok || !result || !result.ok){
+        throw new Error(result && result.description ? 'Telegram: ' + result.description : 'Telegram не принял заявку.');
+      }
+    }
 
     contactForm.addEventListener('submit', async event => {
       event.preventDefault();
@@ -410,8 +504,8 @@
       const service = String(formData.get('service') || '').trim();
       const message = String(formData.get('message') || '').trim();
 
-      if(!name || !phone){
-        if(formStatus) formStatus.textContent = 'Укажите имя и телефон.';
+      if(!name || !hasFullPhoneNumber(phone)){
+        if(formStatus) formStatus.textContent = 'Укажите имя и полный номер: 9 цифр после +998.';
         return;
       }
 
@@ -422,34 +516,24 @@
       if(formStatus) formStatus.textContent = 'Отправляем заявку...';
 
       try{
-        const response = await fetch('./telegram-contact.php', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            name,
-            phone,
-            service,
-            message,
-            page: window.location.href
-          })
-        });
-        const resultText = await response.text();
-        let result;
+        const payload = {name, phone, service, message, page: window.location.href};
         try{
-          result = JSON.parse(resultText);
-        }catch(parseError){
-          throw new Error(resultText || 'Ошибка сервера. Проверьте, что сайт открыт через PHP-хостинг.');
-        }
-
-        if(!response.ok || !result.ok){
-          throw new Error(result.message || 'Ошибка отправки');
+          await sendViaServer(payload);
+        }catch(serverError){
+          if(formStatus) formStatus.textContent = 'PHP не ответил, пробуем отправить напрямую...';
+          try{
+            await sendViaTelegramFallback(payload);
+          }catch(telegramError){
+            throw new Error((serverError.message || 'PHP ошибка') + ' / ' + (telegramError.message || 'Telegram ошибка'));
+          }
         }
 
         contactForm.reset();
+        if(phoneInput) phoneInput.value = '+998 ';
         if(formStatus) formStatus.textContent = 'Заявка отправлена в Telegram.';
         showToast('Заявка отправлена. Мы свяжемся с вами в ближайшее время.');
       }catch(error){
-        if(formStatus) formStatus.textContent = error.message || 'Не удалось отправить заявку.';
+        if(formStatus) formStatus.textContent = error.message || 'Не удалось подключиться к telegram-contact.php.';
       }finally{
         if(contactSubmit){
           contactSubmit.disabled = false;
