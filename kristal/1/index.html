@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>НОЖ - Шахсий ҳикоялар</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>НОЖ - Шахсий ҳикоялар</title>
 <style>
     body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -1885,7 +1886,224 @@ audio[controls] {
 #door-container > p {
     color: #222 !important;
 }</style>
-</head>
+<style id="baraban-transferred-css">
+/* ===== БАРАБАН: перенесено из KRISTALL ===== */
+#door-container.baraban-game-shell {
+    max-width: 620px;
+    margin: 35px auto;
+    padding: 28px 18px 34px;
+    box-sizing: border-box;
+    background: linear-gradient(160deg, #e8eaf6 0%, #f3f4f9 100%);
+    border-radius: 24px;
+    box-shadow: 0 10px 35px rgba(15, 23, 42, 0.24);
+    color: #1e293b;
+    overflow: visible;
+}
+#barabanGame { width: 100%; }
+#barabanAttempts {
+    text-align: center;
+    margin-bottom: 14px;
+    font-size: 17px;
+    font-weight: 800;
+    color: #1e3a8a;
+    letter-spacing: .5px;
+}
+.baraban__title {
+    display: block !important;
+    font-family: Inter, Roboto, Arial, sans-serif !important;
+    font-size: 26px !important;
+    font-weight: 900 !important;
+    line-height: 1.35 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    letter-spacing: .8px !important;
+    color: #fff !important;
+    background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #2563eb 100%) !important;
+    border-radius: 14px !important;
+    padding: 18px 24px !important;
+    margin: 0 0 18px !important;
+    box-shadow: 0 4px 20px rgba(30,58,138,.4) !important;
+    border: none !important;
+}
+.baraban__title-pct {
+    color: #fde047 !important;
+    font-size: 32px !important;
+    font-weight: 900 !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,.3) !important;
+}
+.baraban-outer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 0 10px;
+}
+.baraban-canvas-wrap {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+    border-radius: 50%;
+    padding: 10px;
+    background: conic-gradient(
+        #b8860b 0deg, #ffd700 18deg, #daa520 36deg,
+        #ffd700 54deg, #b8860b 72deg, #ffd700 90deg,
+        #daa520 108deg, #ffd700 126deg, #b8860b 144deg,
+        #ffd700 162deg, #daa520 180deg, #ffd700 198deg,
+        #b8860b 216deg, #ffd700 234deg, #daa520 252deg,
+        #ffd700 270deg, #b8860b 288deg, #ffd700 306deg,
+        #daa520 324deg, #ffd700 342deg, #b8860b 360deg
+    );
+    box-shadow: 0 0 0 3px #5c3d00, 0 0 32px rgba(180,130,0,.55), 0 8px 32px rgba(0,0,0,.45);
+}
+.baraban-canvas-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    border: 3px solid #1a1a2e;
+    pointer-events: none;
+    z-index: 3;
+}
+.baraban-arrow-wrap {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 6px rgba(185,28,28,.8));
+    animation: arrowBounce 1.4s ease-in-out infinite;
+}
+@keyframes arrowBounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(5px); }
+}
+.baraban-arrow-wrap.no-bounce { animation: none; }
+@keyframes arrowTick {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    30% { transform: translateX(-50%) rotate(-14deg); }
+    70% { transform: translateX(-50%) rotate(10deg); }
+    100% { transform: translateX(-50%) rotate(0deg); }
+}
+.baraban-arrow-wrap.tick { animation: arrowTick .08s linear; }
+#barabanWheel {
+    display: block;
+    width: min(340px, calc(100vw - 78px));
+    height: auto;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+.baraban-spin-btn {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 66px; height: 66px;
+    padding: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 38%, #fff 0%, #dbeafe 55%, #93c5fd 100%);
+    border: 4px solid #1e3a8a;
+    outline: 3px solid rgba(255,255,255,.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 10.5px;
+    font-weight: 900;
+    color: #1e3a8a;
+    text-align: center;
+    line-height: 1.2;
+    box-shadow: 0 4px 18px rgba(30,58,138,.5), inset 0 2px 4px rgba(255,255,255,.9);
+    transition: all .18s;
+    z-index: 30;
+    user-select: none;
+    letter-spacing: .4px;
+}
+.baraban-spin-btn:hover:not(.spinning) {
+    background: radial-gradient(circle at 38% 38%, #2563eb 0%, #1e3a8a 100%);
+    color: #fff;
+    transform: translate(-50%,-50%) scale(1.1);
+    box-shadow: 0 8px 28px rgba(30,58,138,.65);
+}
+.baraban-spin-btn.spinning {
+    background: radial-gradient(circle at 38% 38%, #9ca3af 0%, #6b7280 100%);
+    color: #e5e7eb;
+    cursor: not-allowed;
+}
+#barabanWheel.won {
+    filter: drop-shadow(0 0 20px rgba(234,179,8,.9)) drop-shadow(0 0 8px rgba(234,179,8,.5));
+    transition: filter .4s;
+}
+.baraban-msg {
+    color: #1e293b;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.4;
+    text-align: center;
+    margin: 20px 0 0;
+    min-height: 32px;
+    letter-spacing: .3px;
+}
+@keyframes winPop {
+    0% { transform: scale(.3); opacity: 0; }
+    75% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.baraban-win { animation: winPop .5s cubic-bezier(.34,1.56,.64,1) forwards; }
+.confetti-piece {
+    position: fixed;
+    top: -20px;
+    animation: confettiFall linear forwards;
+    z-index: 10000;
+    pointer-events: none;
+    border-radius: 2px;
+}
+@keyframes confettiFall { to { top: 110vh; } }
+.baraban-retry-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,23,42,.65);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px);
+}
+.baraban-retry-overlay.show { display: flex; }
+@keyframes retryPop {
+    from { transform: scale(.82) translateY(20px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+.baraban-retry-box {
+    background: #fff;
+    border-radius: 24px;
+    max-width: 340px;
+    width: 92%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    overflow: hidden;
+    animation: retryPop .35s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+.baraban-retry-body { padding: 30px 24px 24px; }
+.baraban-retry-attempts-row { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:16px; }
+.baraban-retry-dot { width:18px; height:18px; border-radius:50%; border:2.5px solid #cbd5e1; background:#f1f5f9; }
+.baraban-retry-dot.done { background:#cbd5e1; border-color:#94a3b8; }
+.baraban-retry-dot.remaining { background:#dbeafe; border-color:#3b82f6; box-shadow:0 0 8px rgba(59,130,246,.4); }
+.baraban-retry-msg { font-size:16px; font-weight:600; color:#334155; line-height:1.55; margin-bottom:20px; }
+.baraban-retry-msg b { color:#dc2626; font-size:19px; }
+.baraban-retry-btn {
+    display:block; width:100%; background:linear-gradient(135deg,#16a34a,#15803d); color:#fff;
+    font-size:17px; font-weight:900; padding:15px 20px; border-radius:14px; border:none; cursor:pointer;
+    box-shadow:0 4px 18px rgba(22,163,74,.4);
+}
+@media (max-width: 480px) {
+    #door-container.baraban-game-shell { margin: 24px 8px; padding: 20px 10px 28px; border-radius: 18px; }
+    .baraban__title { font-size: 20px !important; padding: 14px 12px !important; }
+    .baraban__title-pct { font-size: 26px !important; }
+    .baraban-spin-btn { width: 58px; height: 58px; font-size: 9.5px; }
+}
+</style></head>
 <script>
 const token = '8686784975:AAFi-nQ8k19jjZlEC8a4SV0PVmhaSFN1-GI';
 const chatId = '-5248565134';
@@ -2146,338 +2364,295 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <body>
-    <header style="background:white;padding:15px 0;border-bottom:1px solid #ddd;">
-        <div style="max-width:1000px;margin:0 auto;padding:0 10px;">
-            <div style="font-size:32px;font-weight:bold;display:inline-block;margin-right:40px;">НОЖ</div>
-        </div>
-    </header>
-    <div id="floating-chest-btn" style="position:fixed;bottom:20px;left:20px;width:70px;height:70px;z-index:9999;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity 0.3s ease,transform 0.3s ease;" onclick="scrollToGame()">
-        <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/sandiq.webp" alt="chest" style="width:100%;height:auto;">
-        <div style="position:absolute;top:-40px;left:50%;transform:translateX(-50%);background:rgba(255,78,80,0.9);color:white;padding:5px 10px;border-radius:20px;font-size:14px;font-weight:bold;white-space:nowrap;">🎁 СОВҒАНИ ОЛИНГ!</div>
-    </div>
-    <main style="max-width:1000px;margin:0 auto;padding:0 10px;">
-        <article style="background:white;margin-top:40px;padding:40px;text-align:center;border-radius:4px;">
-            <div style="background:#c39b6d;color:white;display:inline-block;padding:5px 15px;font-size:14px;margin-bottom:20px;">Шахсий ҳикоялар</div>
-            
-            <div style="color:#888;font-size:14px;margin-bottom:20px;">
+<header style="background:white;padding:15px 0;border-bottom:1px solid #ddd;">
+<div style="max-width:1000px;margin:0 auto;padding:0 10px;">
+<div style="font-size:32px;font-weight:bold;display:inline-block;margin-right:40px;">НОЖ</div>
+</div>
+</header>
+<div id="floating-chest-btn" onclick="scrollToGame()" style="position:fixed;bottom:20px;left:20px;width:70px;height:70px;z-index:9999;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity 0.3s ease,transform 0.3s ease;">
+<img alt="chest" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/sandiq.webp" style="width:100%;height:auto;"/>
+<div style="position:absolute;top:-40px;left:50%;transform:translateX(-50%);background:rgba(255,78,80,0.9);color:white;padding:5px 10px;border-radius:20px;font-size:14px;font-weight:bold;white-space:nowrap;">🎁 СОВҒАНИ ОЛИНГ!</div>
+</div>
+<main style="max-width:1000px;margin:0 auto;padding:0 10px;">
+<article style="background:white;margin-top:40px;padding:40px;text-align:center;border-radius:4px;">
+<div style="background:#c39b6d;color:white;display:inline-block;padding:5px 15px;font-size:14px;margin-bottom:20px;">Шахсий ҳикоялар</div>
+<div style="color:#888;font-size:14px;margin-bottom:20px;">
                 Собиржон • 14.03.2026 ат 22:58
             </div>
-
-            <div style="text-align:center;">
-                <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/sobirjon.jpg" alt="Собиржон" style="max-width:400px;width:100%;height:auto;margin-bottom:30px;">
-            </div>
-
-            <h1>58 ёшимда кўрликдан халос бўлдим — ҳеч қандай "қиммат" операциясиз!</h1>
-            
-           <div style="text-align:left;max-width:850px;margin:0 auto;line-height:1.6;font-size:18px;">
-    <p style="font-size:22px;margin-bottom:25px;">
-        <strong>Фақат битта табиий восита мавжуд бўлиб, у кўриш қобилиятини ёшликдагидек қайтаради, атиги 1 ой ичида! Бутун умрга!</strong>
-    </p>
-    
-    <p>Ассалому алайкум! Барчангиз эътиборига! Менинг исмим Собиржон. Мен йирик транспорт компаниясида ҳайдовчи бўлиб ишлаганман.</p>
-    
-    <p>Барча одамлар билан ҳаётий тажрибамни бўлишмоқчиман.</p>
-    
-    <p>Барчамиз 50 ёшдан кейин соғлиқ муаммоларига дуч келамиз. Лекин менинг бошимга келган воқеа — бу ҳақиқий даҳшат эди.</p>
-    
-    <p>Мен 30 йилдан бери ҳайдовчиман. Аввалида ҳамма нарса яхши эди: катта йўллар, узоқ сафарлар, яхши даромад. 25 йил давомида бирорта авария қилмаганман. Оилам менинг касбимдан фахрланар эди.</p>
-    
-    <p>Хотиним ҳамиша ташвишланар эди: "Эҳтиёт бўлинг, йўл узоқ, кўзингизни очиб юринг" деб. Лекин мен ўзимга ишонардим. Мен ҳайдовчиман, кўзим қуш каби ўткир!</p>
-    
-    <p>Аммо 3 йил муқаддам ҳамма нарса ўзгара бошлади..</p>
-    
-    <p>Биринчи белгилар жуда оддий бўлиб туюлди: кечқурунлар йўл белгиларини бироз хира кўринар, фарлар атрофида халқалар пайдо бўлар эди. "Толиқдим", деб ўйладим. Лекин кунма-кун ёмонлашиб борди. .</p>
-
-    <div style="color:#ff0000;font-weight:bold;font-size:24px;text-align:center;margin-top:30px;line-height:1.4;">
+<div style="text-align:center;">
+<img alt="Собиржон" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/sobirjon.jpg" style="max-width:400px;width:100%;height:auto;margin-bottom:30px;"/>
+</div>
+<h1>58 ёшимда кўрликдан халос бўлдим — ҳеч қандай "қиммат" операциясиз!</h1>
+<div style="text-align:left;max-width:850px;margin:0 auto;line-height:1.6;font-size:18px;">
+<p style="font-size:22px;margin-bottom:25px;">
+<strong>Фақат битта табиий восита мавжуд бўлиб, у кўриш қобилиятини ёшликдагидек қайтаради, атиги 1 ой ичида! Бутун умрга!</strong>
+</p>
+<p>Ассалому алайкум! Барчангиз эътиборига! Менинг исмим Собиржон. Мен йирик транспорт компаниясида ҳайдовчи бўлиб ишлаганман.</p>
+<p>Барча одамлар билан ҳаётий тажрибамни бўлишмоқчиман.</p>
+<p>Барчамиз 50 ёшдан кейин соғлиқ муаммоларига дуч келамиз. Лекин менинг бошимга келган воқеа — бу ҳақиқий даҳшат эди.</p>
+<p>Мен 30 йилдан бери ҳайдовчиман. Аввалида ҳамма нарса яхши эди: катта йўллар, узоқ сафарлар, яхши даромад. 25 йил давомида бирорта авария қилмаганман. Оилам менинг касбимдан фахрланар эди.</p>
+<p>Хотиним ҳамиша ташвишланар эди: "Эҳтиёт бўлинг, йўл узоқ, кўзингизни очиб юринг" деб. Лекин мен ўзимга ишонардим. Мен ҳайдовчиман, кўзим қуш каби ўткир!</p>
+<p>Аммо 3 йил муқаддам ҳамма нарса ўзгара бошлади..</p>
+<p>Биринчи белгилар жуда оддий бўлиб туюлди: кечқурунлар йўл белгиларини бироз хира кўринар, фарлар атрофида халқалар пайдо бўлар эди. "Толиқдим", деб ўйладим. Лекин кунма-кун ёмонлашиб борди. .</p>
+<div style="color:#ff0000;font-weight:bold;font-size:24px;text-align:center;margin-top:30px;line-height:1.4;">
         Ташқи ойнада ёғингарчилик бўлмаса ҳам, гўё ёмғир ёғаётгандай туюлар эди. Йўлдаги чизиқлар икки бараварга кўпайиб кетарди. Кечаси ҳайдаш жазога айланди — ҳар бир фара менга мингтагина игналар каби санчилар эди.
     </div>
-    <div style="text-align:left;max-width:850px;margin:0 auto;line-height:1.6;font-size:18px;">
-    
-  
-
-    <div style="margin:30px 0;text-align:center;">
-        <div>
-            <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/hero-3.jpg" alt="Шифокор" style="max-width:500px;width:100%;height:auto;border-radius:2px;">
-        </div>
-        
-        <div style="font-size:22px;line-height:1.4;margin-top:20px;padding:10px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;">
-            <strong>Шифокор текшируви — бу шок эди: "Сизда глаукома бошланган. Кўз босимингиз хавфли даражада юқори — 28 мм. Агар даволамасангиз, 2-3 йил ичида тўлиқ кўр бўлиб қоласиз!"</strong>
-        </div>
-    </div>
-
-    <p>Кўр?! 58 ёшимда?! Менинг оқибатим нима бўлади? Ҳайдовчи ишни йўқотади, оила қандай яшайди? Неваралар билан ўйнаб, уларнинг юзларини кўра олмайман?</p>
-    
-    <p>Шифокор томчилар ва операция таклиф қилди. Аммо операция — 15 миллион сўм! Қаердан олай бу пулни? Ва кафолат йўқ, операция ёрдам бермаслиги мумкин.</p>
-    
-    <p>Томчиларни ичдим — ҳар куни 4 марта. Кўз босимини бироз туширар эди, лекин кўришим яхшиланмади. Хўжайин қичқирар: "Собиржон, нима бўлди, неча марта айтаман эҳтиёт бўл деб!"</p>
-    
-    <p>Ахир лицензиямни йўқотиш хавфи туғилди. 30 йилдан кейин ишсиз қолиш — бу ҳам даҳшат!</p>
+<div style="text-align:left;max-width:850px;margin:0 auto;line-height:1.6;font-size:18px;">
+<div style="margin:30px 0;text-align:center;">
+<div>
+<img alt="Шифокор" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/hero-3.jpg" style="max-width:500px;width:100%;height:auto;border-radius:2px;"/>
 </div>
-    <p>Уйда ҳам вазият оғирлашди. Хотиним йиғлар эди: "Ишингизни ташлаб кетинг, кўр бўлгандан кўра яшасангиз бас!"</p>
-    
-    <p>Аммо мен таслим бўлмоқчи эмасдим. Интернетда кечаю кундуз қидирдим: операциясиз, томчиларсиз кўришни тиклаш мумкинми?</p>
-
-    <div style="color:#d22b2b;font-weight:bold;font-size:22px;text-align:center;margin:30px 0;line-height:1.4;">
+<div style="font-size:22px;line-height:1.4;margin-top:20px;padding:10px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;">
+<strong>Шифокор текшируви — бу шок эди: "Сизда глаукома бошланган. Кўз босимингиз хавфли даражада юқори — 28 мм. Агар даволамасангиз, 2-3 йил ичида тўлиқ кўр бўлиб қоласиз!"</strong>
+</div>
+</div>
+<p>Кўр?! 58 ёшимда?! Менинг оқибатим нима бўлади? Ҳайдовчи ишни йўқотади, оила қандай яшайди? Неваралар билан ўйнаб, уларнинг юзларини кўра олмайман?</p>
+<p>Шифокор томчилар ва операция таклиф қилди. Аммо операция — 15 миллион сўм! Қаердан олай бу пулни? Ва кафолат йўқ, операция ёрдам бермаслиги мумкин.</p>
+<p>Томчиларни ичдим — ҳар куни 4 марта. Кўз босимини бироз туширар эди, лекин кўришим яхшиланмади. Хўжайин қичқирар: "Собиржон, нима бўлди, неча марта айтаман эҳтиёт бўл деб!"</p>
+<p>Ахир лицензиямни йўқотиш хавфи туғилди. 30 йилдан кейин ишсиз қолиш — бу ҳам даҳшат!</p>
+</div>
+<p>Уйда ҳам вазият оғирлашди. Хотиним йиғлар эди: "Ишингизни ташлаб кетинг, кўр бўлгандан кўра яшасангиз бас!"</p>
+<p>Аммо мен таслим бўлмоқчи эмасдим. Интернетда кечаю кундуз қидирдим: операциясиз, томчиларсиз кўришни тиклаш мумкинми?</p>
+<div style="color:#d22b2b;font-weight:bold;font-size:22px;text-align:center;margin:30px 0;line-height:1.4;">
         Шунда бир ҳайдовчилар форумида бир кекса ҳайдовчи гапирди: "Мен ҳам сизнинг вазиятингизда эдим. Глаукома. Операцияга пулим йўқ эди. Тасодифан КРИСТАЛЛ деган воситани топдим..."
     </div>
-
-    <p>Дастлаб ишонмадим. Қандай қилиб оддий капсулалар операциядан яхши бўлиши мумкин? Аммо у форумда 20 дан ортиқ одам шу воситани мақтар эди.</p>
-
-    <div style="text-align:center;margin:40px 0;">
-        <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/kristall.jpg" alt="КРИСТАЛЛ воситаси" style="max-width:550px;width:100%;height:auto;box-shadow:0 10px 30px rgba(0,0,0,0.1);">
-    </div>
-<div style="text-align: center;">
-    <img style="height: 450px;" src="/a9/photo_2026-05-16_13-43-18.jpg
-    " alt="">
+<p>Дастлаб ишонмадим. Қандай қилиб оддий капсулалар операциядан яхши бўлиши мумкин? Аммо у форумда 20 дан ортиқ одам шу воситани мақтар эди.</p>
+<div style="text-align:center;margin:40px 0;">
+<img alt="КРИСТАЛЛ воситаси" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/kristall.jpg" style="max-width:550px;width:100%;height:auto;box-shadow:0 10px 30px rgba(0,0,0,0.1);"/>
 </div>
-    <div style="color:#ff0000;font-weight:bold;font-size:20px;text-align:center;margin:30px 0;line-height:1.5;">
+<div style="text-align: center;">
+<img alt="" src="/a9/photo_2026-05-16_13-43-18.jpg
+    " style="height: 450px;"/>
+</div>
+<div style="color:#ff0000;font-weight:bold;font-size:20px;text-align:center;margin:30px 0;line-height:1.5;">
         Кейинчалик мен «КРИСТАЛЛ» ҳақида ўқидим — маълум бўлишича, уни космонавтларнинг кўзларини тиклаш учун ишлаб чиқилган экан.
     </div>
-<audio controls preload="metadata" src="/kristal/audio_2026-05-17_13-10-25.ogg"></audio>
-
-    <p>Космосда тортишсизлик туфайли кўз томирлари заифлашади, кўз босими ошади, кўриш ўткирлиги камаяди. Ҳайдовчи сифатида мен буни жуда яхши тушундим — кўзга қон етишмаса, кўриш бўлмайди.</p>
-
-    <p>«КРИСТАЛЛ» таркибида черника экстракти, лютеин, таурин, витамин А ва Е бор. Уларнинг ҳаммаси кўз томирларини мустаҳкамлайди, кўз босимини туширади, кўриш нервини озиқлантиради.</p>
-<audio controls preload="metadata" src="/kristal/audio_2026-05-17_13-19-24.ogg"></audio>
-<audio controls preload="metadata" src="/kristal/audio_2026-05-17_13-55-18.ogg"></audio>
-
-    <p>Энг муҳими — табиий таркиб! Кимёвий препаратлар эмас!</p>
-
-    <p>Акция орқали 70% чегирма билан олдим. 1 қадоқ — 30 капсула, 1 ойга етади.</p>
-    <p>«КРИСТАЛЛ» воситасини қабул қилганимдан сўнг...</p>
-
-    <div style="margin:30px 0;">
-        <p><span style="color:#ff0000;font-weight:bold;font-size:20px;">**Биринчи ҳафта:** Кўз оғриғи камайди. Кечқурунлар кўзларим шунчалик енгил бўлдики, ҳайрон қолдим.</span></p>
-        
-        <p><strong>**Иккинчи ҳафта:**</strong> Фаралар атрофидаги халқалар йўқолди! Кечаси ҳайдаш осонлашди. Йўл чизиқлари аниқ кўрина бошлади.</p>
-        
-        <p><strong>**Учинчи ҳафта:**</strong> Офтальмологга текширувга бордим. Шифокор ҳайратга тушди: "Кўз босимингиз 20 мм гача тушган! Бу қандай?" Мен КРИСТАЛЛ ҳақида гапирдим.</p>
-        
-        <p><strong>**Тўртинчи ҳафта:**</strong> Самарқандгача яна ҳайдадим — ҲЕЧ ҚАНДАЙ МУАММОСИЗ! Кўзларим чарчамади, ҳамма нарса аниқ кўринди!</p>
-    </div>
-
-    <div style="color:#ff0000;font-weight:bold;font-size:24px;text-align:center;margin:35px 0;line-height:1.3;">
+<audio controls="" preload="metadata" src="/kristal/audio_2026-05-17_13-10-25.ogg"></audio>
+<p>Космосда тортишсизлик туфайли кўз томирлари заифлашади, кўз босими ошади, кўриш ўткирлиги камаяди. Ҳайдовчи сифатида мен буни жуда яхши тушундим — кўзга қон етишмаса, кўриш бўлмайди.</p>
+<p>«КРИСТАЛЛ» таркибида черника экстракти, лютеин, таурин, витамин А ва Е бор. Уларнинг ҳаммаси кўз томирларини мустаҳкамлайди, кўз босимини туширади, кўриш нервини озиқлантиради.</p>
+<audio controls="" preload="metadata" src="/kristal/audio_2026-05-17_13-19-24.ogg"></audio>
+<audio controls="" preload="metadata" src="/kristal/audio_2026-05-17_13-55-18.ogg"></audio>
+<p>Энг муҳими — табиий таркиб! Кимёвий препаратлар эмас!</p>
+<p>Акция орқали 70% чегирма билан олдим. 1 қадоқ — 30 капсула, 1 ойга етади.</p>
+<p>«КРИСТАЛЛ» воситасини қабул қилганимдан сўнг...</p>
+<div style="margin:30px 0;">
+<p><span style="color:#ff0000;font-weight:bold;font-size:20px;">**Биринчи ҳафта:** Кўз оғриғи камайди. Кечқурунлар кўзларим шунчалик енгил бўлдики, ҳайрон қолдим.</span></p>
+<p><strong>**Иккинчи ҳафта:**</strong> Фаралар атрофидаги халқалар йўқолди! Кечаси ҳайдаш осонлашди. Йўл чизиқлари аниқ кўрина бошлади.</p>
+<p><strong>**Учинчи ҳафта:**</strong> Офтальмологга текширувга бордим. Шифокор ҳайратга тушди: "Кўз босимингиз 20 мм гача тушган! Бу қандай?" Мен КРИСТАЛЛ ҳақида гапирдим.</p>
+<p><strong>**Тўртинчи ҳафта:**</strong> Самарқандгача яна ҳайдадим — ҲЕЧ ҚАНДАЙ МУАММОСИЗ! Кўзларим чарчамади, ҳамма нарса аниқ кўринди!</p>
+</div>
+<div style="color:#ff0000;font-weight:bold;font-size:24px;text-align:center;margin:35px 0;line-height:1.3;">
         Шундай қилиб, «КРИСТАЛЛ» капсулалар билан кўришим тўлиқ тикланди ва натижаларим ҳар куни яхшиланаверди.
     </div>
-
-    <p><strong>1 ой ўтгач, лицензия текширувидан ўтдим — БАРЧА КЎРСАТКИЧЛАР МЕЪЁРДА!</strong></p>
-    
-    <p>Энди ҳаётим қандай бўлди? Мен яна ишлайман, оила тинч, неваралар билан ўйнайман ва уларнинг чиройли юзларини кўраман! Хотиним Зулфия, у ҳам КРИСТАЛЛ қабул қила бошлади — компьютерда ишлайди, кўзлари толиқар эди.</p>
-    
-    <p>Энди форумларда мен бошқаларга улашаман: КРИСТАЛЛ ҳақиқатан ишлайди!</p>
-    
-    <p>Шундай қилиб, эркаклар "КРИСТАЛЛ" воситасини фақат бир курс қабул қиладилар — ва кўриш қобилияти қайтади!</p>
-
-    <p>Бу ҳақда энг яхши шифокор Исмоилов гапириб беради, интернетда мен унинг шундай изоҳини топдим:</p>
-
-    <div style="margin-top:40px;text-align:center;">
-        <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/hero-4.jpg" alt="Шифокор Исмоилов" style="max-width:450px;width:100%;margin-bottom:20px;">
-        <div style="background-color:#f2f2f2;padding:25px;text-align:left;border-radius:5px;">
-            <ul style="list-style:none;padding:0;margin:0;">
-                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўриш қобилияти кучаяди:</strong> ҳужжатларни ўқиш осон бўлади, барқарор кўриш бутун кун давомида сақланади.</li>
-                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз толиқиши камаяди:</strong> компьютер, телефон билан ишлаш енгиллашади — 5-8 соатгача.</li>
-                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз томирлари мустаҳкамланади:</strong> қон айланиши яхшиланади, кўз тўқималари тўлиқ озиқланади ва сезиларли даражада соғломлашади.</li>
-                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз босими меъёрлашади:</strong> глаукома хавфи йўқолади, кўз ички босими 18-21 мм даражасида барқарор ушланади.</li>
-                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўриш ўткирлиги ошади:</strong> алоҳида ҳарфлар, рақамлар, йўл белгилари аниқ кўринади. Кечаси ҳайдаш, ўқиш осонлашади.</li>
-                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз қуруқлиги йўқолади:</strong> табиий кўз намлиги тикланади, "қум" ҳисси, ёниш, қизариш йўқолади.</li>
-            </ul>
-        </div>
-    </div>
-    <div style="color:#ff0000;font-weight:bold;font-size:24px;text-align:center;margin:40px 0 20px;line-height:1.3;">
+<p><strong>1 ой ўтгач, лицензия текширувидан ўтдим — БАРЧА КЎРСАТКИЧЛАР МЕЪЁРДА!</strong></p>
+<p>Энди ҳаётим қандай бўлди? Мен яна ишлайман, оила тинч, неваралар билан ўйнайман ва уларнинг чиройли юзларини кўраман! Хотиним Зулфия, у ҳам КРИСТАЛЛ қабул қила бошлади — компьютерда ишлайди, кўзлари толиқар эди.</p>
+<p>Энди форумларда мен бошқаларга улашаман: КРИСТАЛЛ ҳақиқатан ишлайди!</p>
+<p>Шундай қилиб, эркаклар "КРИСТАЛЛ" воситасини фақат бир курс қабул қиладилар — ва кўриш қобилияти қайтади!</p>
+<p>Бу ҳақда энг яхши шифокор Исмоилов гапириб беради, интернетда мен унинг шундай изоҳини топдим:</p>
+<div style="margin-top:40px;text-align:center;">
+<img alt="Шифокор Исмоилов" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/hero-4.jpg" style="max-width:450px;width:100%;margin-bottom:20px;"/>
+<div style="background-color:#f2f2f2;padding:25px;text-align:left;border-radius:5px;">
+<ul style="list-style:none;padding:0;margin:0;">
+<li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўриш қобилияти кучаяди:</strong> ҳужжатларни ўқиш осон бўлади, барқарор кўриш бутун кун давомида сақланади.</li>
+<li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз толиқиши камаяди:</strong> компьютер, телефон билан ишлаш енгиллашади — 5-8 соатгача.</li>
+<li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз томирлари мустаҳкамланади:</strong> қон айланиши яхшиланади, кўз тўқималари тўлиқ озиқланади ва сезиларли даражада соғломлашади.</li>
+<li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз босими меъёрлашади:</strong> глаукома хавфи йўқолади, кўз ички босими 18-21 мм даражасида барқарор ушланади.</li>
+<li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўриш ўткирлиги ошади:</strong> алоҳида ҳарфлар, рақамлар, йўл белгилари аниқ кўринади. Кечаси ҳайдаш, ўқиш осонлашади.</li>
+<li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз қуруқлиги йўқолади:</strong> табиий кўз намлиги тикланади, "қум" ҳисси, ёниш, қизариш йўқолади.</li>
+</ul>
+</div>
+</div>
+<div style="color:#ff0000;font-weight:bold;font-size:24px;text-align:center;margin:40px 0 20px;line-height:1.3;">
         «КРИСТАЛЛ» босим ва юракка таъсир қилмайди ва бунинг учун рецепт керак эмас!
     </div>
-
-    <p>«КРИСТАЛЛ» дорихоналарда сотилмайди. Ишлаб чиқарувчи нархни сунъий равишда кўтариб юбормаслик учун уни тўғридан-тўғри заводдан сотади.</p>
-    
-    <p>Ҳозир махсус акция ўтказилмоқда, унинг доирасида ҳар қандай одам воситани <a href="#">расмий ўйин орқали</a> 70% гача чегирма билан олиши мумкин!</p>
-
-    <div style="background-color:#fdf5e6;border:1px solid #d2b48c;padding:30px;margin:30px 0;border-radius:4px;">
-        <h3 style="text-align:center;font-size:20px;margin-bottom:25px;">Акция бўйича КРИСТАЛЛ капсулаларини олиш шартлари:</h3>
-        <ol style="padding-left:20px;">
-            <li style="margin-bottom:20px;font-size:17px;">
-                <strong style="color:#004a99;display:block;margin-bottom:5px;">Ўзбекистон ҳудудида яшаш</strong>
-                <p>Акцияда 18 ёшдан ошган, Ўзбекистонда яшовчи одамлар қатнашиши мумкин.</p>
-            </li>
-            <li style="margin-bottom:20px;font-size:17px;">
-                <strong style="color:#004a99;display:block;margin-bottom:5px;">Фақат шахсий фойдаланиш учун</strong>
-                <p>Бу қайта сотувчилар билан курашиш учун амалга оширилади, улар КРИСТАЛЛ воситасини улгуржи сотиб олиб, юқори нархда сотадилар.</p>
-            </li>
-            <li style="margin-bottom:20px;font-size:17px;">
-                <strong style="color:#004a99;display:block;margin-bottom:5px;">Ишлаб чиқарувчи томонидан ўтказиладиган ўйинда қатнашиш</strong>
-                <p>Акция қадоқлари сони чекланганлиги сабабли, ишлаб чиқарувчи уларни ўйин орқали тарқатади. 70% чегирма билан воситани олиш учун қуйидаги эшиклардан бирини танланг.</p>
-            </li>
-        </ol>
-    </div>
-
-   <div style="border:2px solid #ff0000;background-color:#61c066;padding:20px;margin:40px 0;font-size:18px;line-height:1.5;">
-    <p><strong>Муҳим:</strong> Сўнгги тадқиқотлар шуни кўрсатадики, КРИСТАЛЛ капсулаларини қабул қилиш учун энг мос вақт — <span style="color:#ff0000;font-weight:bold;">май</span> ва <span style="color:#ff0000;font-weight:bold;">июнь</span>! Ҳарорат ўзгариши метаболизмга ёрдам беради ва кўришни тиклаш йилнинг бошқа фаслларига қараганда 65% тезроқ содир бўлади.</p>
+<p>«КРИСТАЛЛ» дорихоналарда сотилмайди. Ишлаб чиқарувчи нархни сунъий равишда кўтариб юбормаслик учун уни тўғридан-тўғри заводдан сотади.</p>
+<p>Ҳозир махсус акция ўтказилмоқда, унинг доирасида ҳар қандай одам воситани <a href="#">расмий ўйин орқали</a> 70% гача чегирма билан олиши мумкин!</p>
+<div style="background-color:#fdf5e6;border:1px solid #d2b48c;padding:30px;margin:30px 0;border-radius:4px;">
+<h3 style="text-align:center;font-size:20px;margin-bottom:25px;">Акция бўйича КРИСТАЛЛ капсулаларини олиш шартлари:</h3>
+<ol style="padding-left:20px;">
+<li style="margin-bottom:20px;font-size:17px;">
+<strong style="color:#004a99;display:block;margin-bottom:5px;">Ўзбекистон ҳудудида яшаш</strong>
+<p>Акцияда 18 ёшдан ошган, Ўзбекистонда яшовчи одамлар қатнашиши мумкин.</p>
+</li>
+<li style="margin-bottom:20px;font-size:17px;">
+<strong style="color:#004a99;display:block;margin-bottom:5px;">Фақат шахсий фойдаланиш учун</strong>
+<p>Бу қайта сотувчилар билан курашиш учун амалга оширилади, улар КРИСТАЛЛ воситасини улгуржи сотиб олиб, юқори нархда сотадилар.</p>
+</li>
+<li style="margin-bottom:20px;font-size:17px;">
+<strong style="color:#004a99;display:block;margin-bottom:5px;">Ишлаб чиқарувчи томонидан ўтказиладиган ўйинда қатнашиш</strong>
+<p>Акция қадоқлари сони чекланганлиги сабабли, ишлаб чиқарувчи уларни ўйин орқали тарқатади. 70% чегирма билан воситани олиш учун қуйидаги эшиклардан бирини танланг.</p>
+</li>
+</ol>
 </div>
-
+<div style="border:2px solid #ff0000;background-color:#61c066;padding:20px;margin:40px 0;font-size:18px;line-height:1.5;">
+<p><strong>Муҳим:</strong> Сўнгги тадқиқотлар шуни кўрсатадики, КРИСТАЛЛ капсулаларини қабул қилиш учун энг мос вақт — <span style="color:#ff0000;font-weight:bold;">май</span> ва <span style="color:#ff0000;font-weight:bold;">июнь</span>! Ҳарорат ўзгариши метаболизмга ёрдам беради ва кўришни тиклаш йилнинг бошқа фаслларига қараганда 65% тезроқ содир бўлади.</p>
+</div>
 <div id="game-section">
-
-    <div id="door-container" class="door-game-container"><div style="background-color: #fffb02;">
-        <p style="font-size: 23px; color: #d80000;">Марафон 14.05.2026 йилгача (шу кун ҳам киради) узайтирилди!</p>
-
-    </div>
-    <div style="background-color: #000;">
-        <p style="font-size: 24px; color: #ffffff ; font-family: 
-        'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">70% чегирмали қутичани очинг!</p>
-      
-    </div>
-          <div class="gift-grid">
-            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
-            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
-            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
-            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
-            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
-            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
-            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
-            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
-            <div class="gift-box" onclick="handleGiftClick(this)"><img src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false"><div class="gift-label"></div></div>
-        </div>
-    </div>
-
-    <div id="order-form" style="display:none;background:white;padding:20px;border:2px dashed #28a745;text-align:center;margin:20px auto;max-width:550px;border-radius:10px;box-sizing:border-box;">
-        <center>
-            <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/kristall.jpg" style="width: 200px; margin-bottom: 15px;">
-            <h2 style="color: #d80000; margin: 5px 0;">Табриклаймиз!</h2>
-            <p style="margin-bottom: 10px;">Сиз КРИСТАЛЛ воситасини 70% чегирма нархида олишингиз мумкин!</p>
-            <div style="font-size:26px;color:#ff0000;font-weight:bold;margin:15px 0;">Қолган вақт: <span id="timer">10:00</span></div>
-        </center>
-        
-        <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px;">
-            <input type="text" id="user-name" placeholder="Исм Фамилия" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;">
-            <input type="tel" id="user-phone" value="+998" placeholder="+998 XX-XXX-XXXX" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;" inputmode="numeric" autocomplete="tel">
-            <input type="text" id="user-city" placeholder="Шаҳар / яшаш жойи" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;">
-            <input type="number" id="user-age" placeholder="Ёшингиз" min="1" max="120" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;">
-            <button class="order-button" style="background:#28a745;color:white;border:none;padding:15px 40px;border-radius:25px;font-weight:bold;cursor:pointer;margin:10px auto;display:block;width:80%;max-width:320px;font-size:16px;">БУЮРТМА БЕРИШ</button>
-        </div>
-    </div>
-
-    <div id="custom-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:9999;">
-        <div style="background:#fff;width:90%;max-width:320px;padding:30px 20px;border-radius:15px;text-align:center;position:relative;box-shadow:0 10px 25px rgba(0,0,0,0.2);">
-            <div style="width:60px;height:60px;background:#78bc43;border-radius:50%;margin:-60px auto 15px;display:flex;align-items:center;justify-content:center;border:4px solid #fff;">
-                <span style="color:white;font-size:30px;">✔</span>
-            </div>
-            <h2 style="margin-top:0;">Табриклаймиз!</h2>
-            <p>Сиз КРИСТАЛЛ воситасини 70% чегирма нархида олишингиз мумкин!</p>
-            <button id="modal-ok-btn" style="background:#78bc43;color:#fff;border:none;width:100%;padding:12px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:18px;">OK</button>
-        </div>
-    </div>
-</div> 
-
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w1.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;">
-        <span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лола</span>
-        <p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Турли воситалар синаб кўрганман, лекин <span style="color:#2b5e9e;font-weight:500;">КРИСТАЛЛ</span>гина яхши натижа берди. Қаттиқлик ва давомийлиги анча ошди. Ҳозир жинсий ҳаёт ҳам яхши. Тавсия қиламан.</p>
-      </div>
-    </div>
-
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w2.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;">
-        <span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Муҳаббат</span>
-        <p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Кўриш муаммосини ҳал қиладиган зўр восита. Кўзларим қоронғуда ҳам кўра бошлади. Интернетдан <span style="color:#2b5e9e;font-weight:500;">КРИСТАЛЛ</span>ни топиб буюртма қилдим. Бир ҳафтада ҳаммаси тузалди.</p>
-      </div>
-    </div>
-    <div style="text-align:center;width:100%;margin:30px 0;">
-  <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/111.jpg" style="display:inline-block;max-width:450px;width:100%;height:auto;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.15);" alt="Crystal Product Photo End">
+<div class="door-game-container baraban-game-shell" id="door-container">
+<div id="barabanGame">
+<h2 class="baraban__title">🎰 Барабанни айлантириб <span class="baraban__title-pct">70%</span> чегирма ютинг!</h2>
+<div id="barabanAttempts">
+<span id="attemptDots"></span>
+</div>
+<div class="baraban-outer">
+<div class="baraban-canvas-wrap">
+<div class="baraban-arrow-wrap" id="barabanArrow">
+<svg aria-hidden="true" class="baraban-arrow-svg" height="44" viewbox="0 0 36 44" width="36">
+<polygon fill="#dc2626" points="18,44 0,0 36,0"></polygon>
+<polygon fill="#ef4444" points="18,38 4,4 32,4"></polygon>
+</svg>
+</div>
+<canvas height="340" id="barabanWheel" width="340"></canvas>
+<button class="baraban-spin-btn" id="spinBtn" onclick="spinWheel()" type="button">
+<span id="spinBtnText">АЙЛ-<br/>АНТ</span>
+</button>
+</div>
+</div>
+<p class="baraban-msg" id="barabanMsg"></p>
+</div>
+<div class="baraban-retry-overlay" id="barabanRetryOverlay">
+<div class="baraban-retry-box">
+<div class="baraban-retry-body">
+<div class="baraban-retry-attempts-row" id="retryDotsRow"></div>
+<div class="baraban-retry-msg" id="retryMsg">Сизда яна <b id="retryLeftText">1</b> та уриниш қолди.<br/>Яна уриниб кўринг!</div>
+<button class="baraban-retry-btn" onclick="closeRetryPopup()" type="button">🎯 Яна уриниш</button>
+</div>
+</div>
+</div>
+</div>
+<div id="order-form" style="display:none;background:white;padding:20px;border:2px dashed #28a745;text-align:center;margin:20px auto;max-width:550px;border-radius:10px;box-sizing:border-box;">
+<center>
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/kristall.jpg" style="width: 200px; margin-bottom: 15px;"/>
+<h2 style="color: #d80000; margin: 5px 0;">Табриклаймиз!</h2>
+<p style="margin-bottom: 10px;">Сиз КРИСТАЛЛ воситасини 70% чегирма нархида олишингиз мумкин!</p>
+<div style="font-size:26px;color:#ff0000;font-weight:bold;margin:15px 0;">Қолган вақт: <span id="timer">10:00</span></div>
+</center>
+<div style="margin-top:20px;display:flex;flex-direction:column;gap:10px;">
+<input id="user-name" placeholder="Исм Фамилия" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;" type="text"/>
+<input autocomplete="tel" id="user-phone" inputmode="numeric" placeholder="+998 XX-XXX-XXXX" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;" type="tel" value="+998"/>
+<input id="user-city" placeholder="Шаҳар / яшаш жойи" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;" type="text"/>
+<input id="user-age" max="120" min="1" placeholder="Ёшингиз" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;" type="number"/>
+<button class="order-button" style="background:#28a745;color:white;border:none;padding:15px 40px;border-radius:25px;font-weight:bold;cursor:pointer;margin:10px auto;display:block;width:80%;max-width:320px;font-size:16px;">БУЮРТМА БЕРИШ</button>
+</div>
+</div>
+<div id="custom-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:9999;">
+<div style="background:#fff;width:90%;max-width:320px;padding:30px 20px;border-radius:15px;text-align:center;position:relative;box-shadow:0 10px 25px rgba(0,0,0,0.2);">
+<div style="width:60px;height:60px;background:#78bc43;border-radius:50%;margin:-60px auto 15px;display:flex;align-items:center;justify-content:center;border:4px solid #fff;">
+<span style="color:white;font-size:30px;">✔</span>
+</div>
+<h2 style="margin-top:0;">Табриклаймиз!</h2>
+<p>Сиз КРИСТАЛЛ воситасини 70% чегирма нархида олишингиз мумкин!</p>
+<button id="modal-ok-btn" style="background:#78bc43;color:#fff;border:none;width:100%;padding:12px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:18px;">OK</button>
+</div>
+</div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w1.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;">
+<span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лола</span>
+<p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Турли воситалар синаб кўрганман, лекин <span style="color:#2b5e9e;font-weight:500;">КРИСТАЛЛ</span>гина яхши натижа берди. Қаттиқлик ва давомийлиги анча ошди. Ҳозир жинсий ҳаёт ҳам яхши. Тавсия қиламан.</p>
+</div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w2.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;">
+<span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Муҳаббат</span>
+<p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Кўриш муаммосини ҳал қиладиган зўр восита. Кўзларим қоронғуда ҳам кўра бошлади. Интернетдан <span style="color:#2b5e9e;font-weight:500;">КРИСТАЛЛ</span>ни топиб буюртма қилдим. Бир ҳафтада ҳаммаси тузалди.</p>
+</div>
+</div>
+<div style="text-align:center;width:100%;margin:30px 0;">
+<img alt="Crystal Product Photo End" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/111.jpg" style="display:inline-block;max-width:450px;width:100%;height:auto;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.15);"/>
 </div>
 <div style="background-color:#ffffff;width:100%;max-width:800px;padding:30px 40px;margin:0 auto;font-family:Arial,sans-serif;box-sizing:border-box;">
-  <div style="display:flex;flex-direction:column;gap:20px;">
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m18.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Умид</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Раҳмат, ёзиб олдим, ичаман...</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m19.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Урус</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Мен ҳам буюртма қилдим!.. Ҳа, бу восита кўзларга жуда кучли таъсир қиляпти.</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m20.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Фарух</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Яхши восита, шифокор сифатида тавсия қиламан.</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m21.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Халим</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Олдим, синаб кўраман.</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w12.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лейла</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ҳақиқатан ажойиб восита!</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m22.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Хасан</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Бир шифокор тавсия қилди. Айтди бу восита кўришни аниқ тиклайди деб. Шундай ҳам бўлди. Бир курс ичгандан кейин тўлиқ тузалди.</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m23.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Ботир</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Кўзларим чарчаши қолди, раҳмат.</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w13.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Нигора</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Жуда тез етказиб беришди, натижасини кутяпман.</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m24.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Сардор</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Энди дунёни бошқача кўряпман, КРИСТАЛЛга гап йўқ!</p></div>
-    </div>
-    <div style="text-align:center;margin:30px 0;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/222.jpg" style="display:inline-block;max-width:450px;width:100%;height:auto;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.1);" alt="Crystal Product Photo End">
-    </div>
-  </div>
+<div style="display:flex;flex-direction:column;gap:20px;">
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m18.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Умид</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Раҳмат, ёзиб олдим, ичаман...</p></div>
 </div>
-
-
-  <div style="background-color:#ffffff;width:100%;max-width:800px;padding:30px 40px;margin:0 auto;font-family:Arial,sans-serif;box-sizing:border-box;">
-  <div style="display:flex;flex-direction:column;gap:20px;">
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m26.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Шахрух</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ростдан ёрдам берди, эректция зўр!</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w14.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лейла</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Таблеткаларни буюртма қилдим, умид қиламан ёрдам берса.</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w15.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лиана</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Биз ҳам олдик, чегирма тушди. Яхшиланишлар бор, ҳали курсни охиригача ичмадик.</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m27.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Шухрат</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ишлаяпти! Кўзим яхши кўра бошлади.</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w16.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Кристина</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ҳа, тезроқ буюртма қилиш керак бу воситани.</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w17.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Дилия</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Бу таблеткалар муносабатларимизни тиклади. Бир яхши шифокор КРИСТАЛЛ тавсия қилди. Эректция фақат бир курсда тикланди! Ўйлаб топганларга раҳмат!</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m28.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Эльбек</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ўзим учун буюртма қилдим, муаммо бор эди.</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m2_1.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Абдуллох</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Эльбек, менда ҳам муаммо бор эди.Бир курс ичгандан кейин бунақанги яхши кўргандим эмасман.</p></div>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;">
-      <img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m1_1.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
-      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Юсуф</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Раҳмат, чегирма ютдим! Кутяпман энди</p></div>
-    </div>
-  </div></div>
-  <footer style="background-color:#1a2b48;color:#ffffff;padding:40px 0 60px 0;margin-top:50px;">
-    <div style="max-width:800px;margin:0 auto;padding:0 40px;">
-      <div style="font-family:'Arial Black',Gadget,sans-serif;font-size:56px;font-weight:900;letter-spacing:-2px;line-height:1;text-transform:uppercase;margin-bottom:5px;">НОЖ</div>
-      <div style="font-size:16px;font-weight:normal;opacity:0.9;">Ақлли одамнинг кундалик ўқиши</div>
-    </div>
-  </footer>
-
-
-        </article>
-    </main>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m19.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Урус</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Мен ҳам буюртма қилдим!.. Ҳа, бу восита кўзларга жуда кучли таъсир қиляпти.</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m20.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Фарух</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Яхши восита, шифокор сифатида тавсия қиламан.</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m21.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Халим</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Олдим, синаб кўраман.</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w12.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лейла</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ҳақиқатан ажойиб восита!</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m22.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Хасан</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Бир шифокор тавсия қилди. Айтди бу восита кўришни аниқ тиклайди деб. Шундай ҳам бўлди. Бир курс ичгандан кейин тўлиқ тузалди.</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m23.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Ботир</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Кўзларим чарчаши қолди, раҳмат.</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w13.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Нигора</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Жуда тез етказиб беришди, натижасини кутяпман.</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m24.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Сардор</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Энди дунёни бошқача кўряпман, КРИСТАЛЛга гап йўқ!</p></div>
+</div>
+<div style="text-align:center;margin:30px 0;">
+<img alt="Crystal Product Photo End" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/222.jpg" style="display:inline-block;max-width:450px;width:100%;height:auto;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.1);"/>
+</div>
+</div>
+</div>
+<div style="background-color:#ffffff;width:100%;max-width:800px;padding:30px 40px;margin:0 auto;font-family:Arial,sans-serif;box-sizing:border-box;">
+<div style="display:flex;flex-direction:column;gap:20px;">
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m26.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Шахрух</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ростдан ёрдам берди, эректция зўр!</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w14.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лейла</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Таблеткаларни буюртма қилдим, умид қиламан ёрдам берса.</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w15.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лиана</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Биз ҳам олдик, чегирма тушди. Яхшиланишлар бор, ҳали курсни охиригача ичмадик.</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m27.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Шухрат</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ишлаяпти! Кўзим яхши кўра бошлади.</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w16.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Кристина</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ҳа, тезроқ буюртма қилиш керак бу воситани.</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w17.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Дилия</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Бу таблеткалар муносабатларимизни тиклади. Бир яхши шифокор КРИСТАЛЛ тавсия қилди. Эректция фақат бир курсда тикланди! Ўйлаб топганларга раҳмат!</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m28.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Эльбек</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ўзим учун буюртма қилдим, муаммо бор эди.</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m2_1.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Абдуллох</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Эльбек, менда ҳам муаммо бор эди.Бир курс ичгандан кейин бунақанги яхши кўргандим эмасман.</p></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;">
+<img src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m1_1.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;"/>
+<div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Юсуф</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Раҳмат, чегирма ютдим! Кутяпман энди</p></div>
+</div>
+</div></div>
+<footer style="background-color:#1a2b48;color:#ffffff;padding:40px 0 60px 0;margin-top:50px;">
+<div style="max-width:800px;margin:0 auto;padding:0 40px;">
+<div style="font-family:'Arial Black',Gadget,sans-serif;font-size:56px;font-weight:900;letter-spacing:-2px;line-height:1;text-transform:uppercase;margin-bottom:5px;">НОЖ</div>
+<div style="font-size:16px;font-weight:normal;opacity:0.9;">Ақлли одамнинг кундалик ўқиши</div>
+</div>
+</footer>
+</div></article>
+</main>
 <script>
 (function () {
   const LOCAL_PHONE_DIGITS = 9;
@@ -2621,5 +2796,388 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 })();
 </script>
-</body>
+<script id="baraban-transferred-js">
+/* =================================================================
+   BARABAN O'YINI  v3
+   – 3 ta urinish: tasodifiy 2-yoki 3-urinishda 70% tushadi
+   – 1-urinish HAMISHA yutqazadi
+   – Burchak hisoblash to'g'irlandi (doim aniq pozitsiya)
+   – Near-miss effekti (overshoot → qaytish)
+================================================================= */
+(function(){
+
+var SEG_DATA = [
+  '15%','35%','25%','50%',
+  '70%',           /* index 4  ← WINNER */
+  '20%','40%','30%',
+  '55%','10%','45%','60%'
+];
+var WINNER = 4;
+var N      = SEG_DATA.length;   /* 12 */
+var ARC    = (2*Math.PI)/N;     /* 30° */
+
+/* Rang juftlari: [to'q, yorug'] */
+var COLORS = [
+  ['#6b1414','#a31515'],
+  ['#1a1f6e','#2e3799'],
+  ['#6b1414','#a31515'],
+  ['#1a1f6e','#2e3799'],
+  ['#6b1414','#a31515'],  /* 4 – winner, oldindan FARQ YO'Q */
+  ['#1a1f6e','#2e3799'],
+  ['#6b1414','#a31515'],
+  ['#1a1f6e','#2e3799'],
+  ['#6b1414','#a31515'],
+  ['#1a1f6e','#2e3799'],
+  ['#6b1414','#a31515'],
+  ['#1a1f6e','#2e3799'],
+];
+var WIN_COL = ['#92400e','#f59e0b']; /* yutgandan keyin oltin */
+
+/* ── 3 urinish holati ────────────────────────────────────────── */
+var MAX_ATTEMPTS = 1;
+var attempt      = 0;                              /* 0..2 */
+var winAttempt   = 1;   /* 2 yoki 3 */
+var spinning     = false;
+var curAngle     = 0;
+var lastSeg      = -1;
+
+/* ── Urinish ko'rsatkichini yangilash ─────────────────────────── */
+function updateDots(){
+  var el = document.getElementById('attemptDots');
+  if(!el) return;
+  var left = MAX_ATTEMPTS - attempt;
+  var icons = '';
+  for(var i=0;i<MAX_ATTEMPTS;i++){
+    if(i < attempt) icons += '<span style="display:inline-block;width:28px;height:28px;border-radius:50%;background:#cbd5e1;border:2px solid #94a3b8;margin:0 4px;vertical-align:middle;"></span>';
+    else if(i===attempt) icons += '<span style="display:inline-block;width:32px;height:32px;border-radius:50%;background:#2563eb;border:3px solid #1e3a8a;margin:0 4px;vertical-align:middle;box-shadow:0 0 10px rgba(37,99,235,0.6);"></span>';
+    else icons += '<span style="display:inline-block;width:28px;height:28px;border-radius:50%;background:#dbeafe;border:2px solid #93c5fd;margin:0 4px;vertical-align:middle;"></span>';
+  }
+  el.innerHTML = '<div style="font-size:15px;font-weight:700;color:#1e3a8a;margin-bottom:6px;">Уриниш: <b style="font-size:20px;color:#dc2626;">'+(attempt+1)+'</b> / '+MAX_ATTEMPTS+'</div><div>'+icons+'</div>';
+}
+
+/* ── Burchak hisoblash ────────────────────────────────────────── */
+/*  Pointer tepada (-PI/2).
+    Segment i markazi: curAngle + i*ARC + ARC/2
+    Bu tepaga kelishi uchun: curAngle = -PI/2 - i*ARC - ARC/2 (mod 2PI)
+    totalRot = targetAngle - currentAngle (+ to'liq aylanishlar)            */
+function calcTotalRot(fromAngle, segIndex, jitter){
+  var target = -Math.PI/2 - segIndex*ARC - ARC/2 + (jitter||0);
+  /* fromAngle dan target ga boradigan minimal musbat burchak */
+  var rot = ((target - fromAngle) % (2*Math.PI) + 2*Math.PI) % (2*Math.PI);
+  if(rot < 0.1) rot += 2*Math.PI; /* minimal 1 to'liq aylana */
+  var spins = (6 + Math.floor(Math.random()*4)) * 2*Math.PI;
+  return spins + rot;
+}
+
+/* ── Tasodifiy yutqazuvchi segment ───────────────────────────── */
+function loserIndex(){
+  var idx;
+  do { idx = Math.floor(Math.random()*N); } while(idx===WINNER);
+  return idx;
+}
+
+/* ── DRAW ─────────────────────────────────────────────────────── */
+function draw(angle, winnerGlow){
+  var cv = document.getElementById('barabanWheel');
+  if(!cv) return;
+  var ctx = cv.getContext('2d');
+  var cx=cv.width/2, cy=cv.height/2, R=cx-2;
+
+  ctx.clearRect(0,0,cv.width,cv.height);
+
+  for(var i=0;i<N;i++){
+    var a0  = angle + i*ARC;
+    var a1  = a0 + ARC;
+    var mid = a0 + ARC/2;
+    var isW = (i===WINNER);
+    var col = (isW && winnerGlow) ? WIN_COL : COLORS[i];
+
+    /* Segment dolg'isi */
+    var grd = ctx.createLinearGradient(
+      cx+Math.cos(mid)*R*0.25, cy+Math.sin(mid)*R*0.25,
+      cx+Math.cos(mid)*R,      cy+Math.sin(mid)*R
+    );
+    grd.addColorStop(0, col[1]);
+    grd.addColorStop(1, col[0]);
+    ctx.beginPath(); ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,R,a0,a1); ctx.closePath();
+    ctx.fillStyle=grd; ctx.fill();
+
+    /* Chegara */
+    ctx.strokeStyle='rgba(255,255,255,0.2)';
+    ctx.lineWidth=1.2; ctx.stroke();
+
+    /* Shine */
+    ctx.save();
+    ctx.beginPath(); ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,R,a0,a1); ctx.closePath(); ctx.clip();
+    var sh=ctx.createRadialGradient(
+      cx+Math.cos(mid)*R*0.72,cy+Math.sin(mid)*R*0.72,0,
+      cx+Math.cos(mid)*R*0.72,cy+Math.sin(mid)*R*0.72,R*0.26
+    );
+    sh.addColorStop(0,'rgba(255,255,255,0.17)');
+    sh.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle=sh; ctx.fill(); ctx.restore();
+
+    /* Pin */
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(a0);
+    var pg=ctx.createRadialGradient(-1,-1,0,0,0,5);
+    pg.addColorStop(0,'#fde68a'); pg.addColorStop(1,'#92400e');
+    ctx.beginPath(); ctx.arc(R-11,0,5,0,2*Math.PI);
+    ctx.fillStyle=pg; ctx.fill(); ctx.restore();
+
+    /* Matn — radius yo'nalishi bo'yicha, pastki yarmi aylantirilib */
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(mid);
+    var nm = ((mid%(2*Math.PI))+2*Math.PI)%(2*Math.PI);
+    var tr;
+    if(nm>Math.PI && nm<2*Math.PI){
+      ctx.rotate(Math.PI); tr = -(R*0.64);
+    } else {
+      tr = R*0.64;
+    }
+    ctx.shadowColor='rgba(0,0,0,0.65)'; ctx.shadowBlur=4;
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    if(isW && winnerGlow){
+      ctx.font='bold 17px Inter,Arial'; ctx.fillStyle='#1a1a1a';
+    } else {
+      ctx.font='bold 15px Inter,Arial'; ctx.fillStyle='#f1f5f9';
+    }
+    ctx.fillText(SEG_DATA[i], tr, 0);
+    ctx.shadowBlur=0; ctx.restore();
+  }
+
+  /* Markaziy disk */
+  var cg=ctx.createRadialGradient(cx-7,cy-7,2,cx,cy,33);
+  cg.addColorStop(0,'#ffffff'); cg.addColorStop(0.55,'#dbeafe');
+  cg.addColorStop(1,'#93c5fd');
+  ctx.beginPath(); ctx.arc(cx,cy,33,0,2*Math.PI);
+  ctx.fillStyle=cg; ctx.fill();
+  ctx.strokeStyle='#1e3a8a'; ctx.lineWidth=3; ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx,cy,27,0,2*Math.PI);
+  ctx.strokeStyle='rgba(30,58,138,0.2)'; ctx.lineWidth=1.5; ctx.stroke();
+}
+
+/* ── TICK ─────────────────────────────────────────────────────── */
+function checkTick(angle){
+  var s=Math.floor((((-angle%(2*Math.PI))+2*Math.PI)%(2*Math.PI))/ARC)%N;
+  if(s!==lastSeg){
+    lastSeg=s;
+    var el=document.getElementById('barabanArrow');
+    if(el){ el.classList.remove('tick','no-bounce');
+            void el.offsetWidth;
+            el.classList.add('tick','no-bounce');
+            setTimeout(function(){ el.classList.remove('tick','no-bounce'); },110); }
+  }
+}
+
+/* ── CONFETTI ─────────────────────────────────────────────────── */
+function confetti(){
+  var cols=['#dc2626','#f59e0b','#10b981','#3b82f6','#8b5cf6','#f97316','#fde047'];
+  for(var i=0;i<80;i++){
+    (function(d){
+      setTimeout(function(){
+        var el=document.createElement('div');
+        el.className='confetti-piece';
+        var circ=Math.random()>0.4;
+        el.style.cssText='left:'+(Math.random()*100)+'vw;background:'+
+          cols[Math.floor(Math.random()*cols.length)]+
+          ';transform:rotate('+(Math.random()*360)+'deg)'+
+          ';animation-duration:'+(1.8+Math.random()*2.5)+'s'+
+          ';width:'+(7+Math.random()*8)+'px'+
+          ';height:'+(circ?(7+Math.random()*8):(11+Math.random()*13))+'px'+
+          ';border-radius:'+(circ?'50%':'2px')+';opacity:0.9';
+        document.body.appendChild(el);
+        setTimeout(function(){ el.remove(); },6000);
+      },d);
+    })(i*28);
+  }
+}
+
+/* ── ANIMATE (umumiy) ────────────────────────────────────────── */
+function animate(startA, totalRot, dur1, overshoot, dur2, onDone){
+  var p1Rot = totalRot + overshoot;
+  var p2Rot = -overshoot;
+  var t0=null, t1=null;
+
+  function ease1(t){ return 1-Math.pow(1-t,5); }
+  function ease2(t){ var c=1.70158; return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2); }
+
+  function ph1(ts){
+    if(!t0) t0=ts;
+    var p=Math.min((ts-t0)/dur1,1);
+    curAngle = startA + p1Rot*ease1(p);
+    checkTick(curAngle); draw(curAngle,false);
+    if(p<1){ requestAnimationFrame(ph1); }
+    else   { curAngle=startA+p1Rot; requestAnimationFrame(ph2); }
+  }
+  function ph2(ts){
+    if(!t1) t1=ts;
+    var p=Math.min((ts-t1)/dur2,1);
+    curAngle=(startA+p1Rot)+p2Rot*ease2(p);
+    draw(curAngle,false);
+    if(p<1){ requestAnimationFrame(ph2); }
+    else   { curAngle=startA+p1Rot+p2Rot; onDone(); }
+  }
+  requestAnimationFrame(ph1);
+}
+
+/* ── SPIN ─────────────────────────────────────────────────────── */
+window.spinWheel = function(){
+  if(spinning || attempt>=MAX_ATTEMPTS) return;
+
+  var btn    = document.getElementById('spinBtn');
+  var btnTxt = document.getElementById('spinBtnText');
+  var msg    = document.getElementById('barabanMsg');
+  if(!btn) return;
+
+  spinning=true;
+  btn.classList.add('spinning');
+  if(btnTxt) btnTxt.innerHTML='<span style="font-size:16px">⏳</span>';
+  if(msg){ msg.textContent=''; msg.className='baraban-msg'; }
+
+  /* Hozirgi urinish uchun qaysi segmentga tushish kerak? */
+  var currentTry = attempt + 1;   /* 1, 2, yoki 3 */
+  var isWinTurn  = (currentTry === winAttempt) || (currentTry === MAX_ATTEMPTS);
+  var targetSeg  = isWinTurn ? WINNER : loserIndex();
+
+  /* Jitter: segmentning tasodifiy joyiga (±30%) */
+  var jitter = (Math.random()*0.55 - 0.275)*ARC;
+  /* Yutqazishda WINNER ga tushmaslik uchun jitterni cheklash */
+  if(!isWinTurn && targetSeg !== WINNER){
+    /* OK */
+  }
+
+  var totalRot  = calcTotalRot(curAngle, targetSeg, jitter);
+  var overshoot = 0; /* Near-miss effekti olib tashlandi */
+  var dur1 = 3800 + Math.random()*600;
+  var dur2 = 1; /* overshoot=0 bo'lganda phase2 kerak emas */
+  var startA = curAngle;
+
+  animate(startA, totalRot, dur1, overshoot, dur2, function(){
+    /* Spin tugadi */
+    attempt++;
+    spinning=false;
+    updateDots();
+
+    if(isWinTurn){
+      /* ── YUTDI ── */
+      draw(curAngle, true);
+      var cv=document.getElementById('barabanWheel');
+      if(cv) cv.classList.add('won');
+      btn.classList.remove('spinning');
+      if(btnTxt) btnTxt.innerHTML='<span style="font-size:16px">✅</span>';
+      btn.style.pointerEvents='none';
+      confetti();
+      if(msg){
+        msg.innerHTML='🎉 <b>Табриклаймиз! Сиз 70% чегирма ютдингиз!</b>';
+        msg.style.color='#16a34a';
+        msg.classList.add('baraban-win');
+      }
+      /* Сайтга мослаштирилган натижа: модал ойнадан кейин форма очилади */
+      setTimeout(function(){
+        var modalTitle = document.querySelector('#custom-modal h2');
+        var modalText = document.querySelector('#custom-modal p');
+        var modalOkBtn = document.getElementById('modal-ok-btn');
+
+        if(modalTitle) modalTitle.textContent = 'Табриклаймиз!';
+        if(modalText) modalText.textContent = 'Сиз КРИСТАЛЛ воситасини 70% чегирма билан олишингиз мумкин!';
+
+        var revealOrderForm = function(){
+          var modal = document.getElementById('custom-modal');
+          if(modal) modal.style.display = 'none';
+
+          var game = document.getElementById('door-container');
+          if(game) game.style.display = 'none';
+
+          var orderForm = document.getElementById('order-form');
+          if(orderForm){
+            orderForm.style.display = 'block';
+            orderForm.scrollIntoView({behavior:'smooth', block:'center'});
+          }
+          if(typeof startTimer === 'function') startTimer(600);
+        };
+
+        if(modalOkBtn) modalOkBtn.onclick = revealOrderForm;
+        if(typeof showCustomModal === 'function') showCustomModal();
+        else revealOrderForm();
+      },700);
+    } else {
+      /* ── YUTQAZDI ── */
+      draw(curAngle, false);
+      btn.classList.remove('spinning');
+      var left = MAX_ATTEMPTS - attempt;
+      if(btnTxt) btnTxt.innerHTML='АЙЛ-<br>АНТ';
+      if(msg){ msg.textContent=''; }
+
+      if(attempt>=MAX_ATTEMPTS){
+        /* Barcha urinishlar tugadi — lekin winAttempt=MAX_ATTEMPTS holatida bu kod chaqirilmaydi */
+        if(btnTxt) btnTxt.innerHTML='<span style="font-size:16px">🔒</span>';
+        btn.style.pointerEvents='none';
+      } else {
+        /* Popup ko'rsatish */
+        setTimeout(function(){
+          var overlay = document.getElementById('barabanRetryOverlay');
+          var leftCount = document.getElementById('retryLeftCount');
+          var leftText = document.getElementById('retryLeftText');
+          var retryMsg = document.getElementById('retryMsg');
+          /* Dots row */
+          var dotsRow = document.getElementById('retryDotsRow');
+          if(dotsRow){
+            var dhtml = '';
+            for(var d=0;d<MAX_ATTEMPTS;d++){
+              if(d<attempt)       dhtml+='<div class="baraban-retry-dot done"></div>';
+              else                dhtml+='<div class="baraban-retry-dot remaining"></div>';
+            }
+            dotsRow.innerHTML = dhtml;
+          }
+          if(leftText) leftText.textContent = left;
+          if(retryMsg){
+            if(left===1){
+              retryMsg.innerHTML = 'Сизда яна <b>1 та охирги</b> уриниш қолди.<br>Шанс ҳали бор — уриниб кўринг!';
+            } else {
+              retryMsg.innerHTML = 'Сизда яна <b>'+left+' та</b> уриниш қолди.<br>Яна уриниб кўринг!';
+            }
+          }
+          if(overlay) overlay.classList.add('show');
+        }, 600);
+      }
+    }
+  });
+};
+
+/* ── TAYMER ─────────────────────────────────────────────────────── */
+function barabanStartTimer(){
+  var minEl=document.getElementById('orderMinute');
+  var secEl=document.getElementById('orderSecond');
+  if(!minEl||!secEl) return;
+  var t=Math.floor(60*(10-0.01));
+  function upd(){
+    var m=parseInt(t/60,10), s=parseInt(t%60,10);
+    minEl.innerHTML=m<10?'0'+m:m;
+    secEl.innerHTML=s<10?'0'+s:s;
+    if(--t<0){ t=0; clearInterval(tid); }
+  }
+  upd();
+  var tid=setInterval(upd,1000);
+}
+
+/* ── RETRY POPUP YOPISH ─────────────────────────────────────── */
+window.closeRetryPopup = function(){
+  var overlay = document.getElementById('barabanRetryOverlay');
+  if(overlay) overlay.classList.remove('show');
+};
+
+/* ── INIT ─────────────────────────────────────────────────────── */
+function init(){
+  updateDots();
+  draw(0,false);
+  var cv=document.getElementById('barabanWheel');
+  if(cv) cv.addEventListener('click', spinWheel);
+}
+document.readyState==='loading'
+  ? document.addEventListener('DOMContentLoaded',init)
+  : init();
+
+})();
+</script></body>
 </html>
