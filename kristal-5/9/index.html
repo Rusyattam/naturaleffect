@@ -1,0 +1,813 @@
+﻿<!doctype html>
+<html lang="uz-Cyrl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,address=no">
+<title>Ko‘rlikdan xalos bo‘ldim — KRISTALL</title>
+<link rel="icon" href="../assets/favicon.jpg">
+<style>
+
+:root{--blue:#185b9d;--blue-dark:#123e74;--orange:#f27419;--ink:#172033;--muted:#667085;--paper:#fff;--bg:#eef3f8;--line:#dce5ee;--green:#168a4b;--red:#d22f2f}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#eef4fa 0,#f7f9fc 420px,#eef3f8 100%);font-family:Arial,"Segoe UI",sans-serif;color:var(--ink);font-size:18px;line-height:1.68}img{max-width:100%;height:auto}button,input{font:inherit}button{touch-action:manipulation}a{color:#1769aa;text-decoration-thickness:1px;text-underline-offset:3px}
+main{width:min(920px,calc(100% - 24px));margin:24px auto;background:var(--paper);border-radius:24px;box-shadow:0 15px 55px rgba(25,55,90,.12);padding:clamp(20px,5vw,58px);overflow:hidden}.MediaMaterial-header{border-bottom:1px solid var(--line);padding-bottom:25px;margin-bottom:30px}.MediaMaterialHeader-title{font-size:clamp(30px,5.4vw,52px);line-height:1.12;letter-spacing:-1.4px;margin:0 0 18px;color:var(--blue-dark)}.MediaMaterialHeader-first111{font-size:clamp(20px,3.4vw,29px);line-height:1.35;color:#365674;margin:0;font-weight:700}p{margin:0 0 1.15em}h2,h3{line-height:1.25;color:var(--blue-dark)}main>div:not(.MediaMaterial-header):not(.cta):not(.box-blue-light){max-width:100%}.gray_block{background:#eef5fb;border:1px solid #cfe0ef;border-left:6px solid var(--blue);border-radius:16px;padding:22px 24px;margin:28px 0}.gray_block p:last-child{margin-bottom:0}.main-img,.article-img,main img:not(.ava-img):not(.order__img){display:block;margin:22px auto;border-radius:14px}.cta{background:linear-gradient(155deg,#eaf1ff,#f8fbff);border:1px solid #c9d9ef;border-radius:24px;padding:clamp(18px,4vw,34px);margin:36px 0;position:relative}.baraban__title{text-align:center;margin:0 0 18px;font-size:clamp(23px,4vw,34px)}.baraban__title-pct{color:var(--red)}
+.baraban-outer{display:flex;justify-content:center;padding:8px 0 18px}.baraban-canvas-wrap{position:relative;width:min(370px,92vw);aspect-ratio:1;border-radius:50%;padding:12px;background:conic-gradient(#8b5c00,#ffd34e,#a56d00,#ffe27a,#8b5c00);box-shadow:0 0 0 4px #684300,0 18px 44px rgba(23,38,70,.32)}#barabanWheel{display:block;width:100%;height:100%;border-radius:50%}.baraban-arrow-wrap{position:absolute;z-index:5;top:-18px;left:50%;transform:translateX(-50%);filter:drop-shadow(0 4px 3px rgba(0,0,0,.3))}.baraban-spin-btn{position:absolute;z-index:6;left:50%;top:50%;transform:translate(-50%,-50%);width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(#fff,#bed9f4);border:5px solid var(--blue-dark);font-size:18px;line-height:1.05;font-weight:900;color:var(--blue-dark);cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.3);user-select:none}.baraban-spin-btn:hover{transform:translate(-50%,-50%) scale(1.04)}.baraban-spin-btn.spinning{cursor:wait}.baraban-msg{text-align:center;min-height:30px;font-weight:800}.door.hidden{opacity:0;transform:scale(.96);transition:.8s}.door.none{display:none}
+.order{display:none;margin:20px auto 0;max-width:650px;background:#fff;border-radius:22px;box-shadow:0 12px 45px rgba(30,65,100,.18);overflow:hidden;border:1px solid #dce7f1}.order.active{display:block;animation:rise .45s ease}.order__header{display:grid;grid-template-columns:minmax(180px,43%) 1fr;gap:20px;align-items:center;padding:24px;background:linear-gradient(145deg,#eef6ff,#fff)}.order__img{width:100%;border-radius:14px}.order__deadline{text-align:center}.order__text{font-weight:700;line-height:1.4;margin-bottom:10px}.order__time{font-size:36px;font-weight:900;color:var(--red);letter-spacing:2px}.order__body,#orderForm2{padding:24px;display:flex;flex-direction:column;gap:13px}.order__input,#orderForm2 input{width:100%;border:2px solid #dbe4ed;background:#f8fafc;border-radius:12px;padding:14px 16px;outline:none}.order__input:focus,#orderForm2 input:focus{border-color:#2e75b7;background:#fff;box-shadow:0 0 0 4px rgba(46,117,183,.12)}.order__btn,#orderForm2 button{border:0;border-radius:999px;padding:16px 22px;background:linear-gradient(135deg,#e95a0c,#ff8a18);color:#fff;font-weight:900;cursor:pointer;box-shadow:0 8px 24px rgba(226,91,15,.32)}.order__btn:hover,#orderForm2 button:hover{filter:brightness(1.05);transform:translateY(-1px)}.order__price{justify-content:center;gap:12px;font-size:24px;color:var(--red);font-weight:900}.spin{display:none;position:fixed;inset:0;z-index:10000;background:rgba(12,26,45,.68);padding:20px;align-items:center;justify-content:center}.spin.active{display:flex}.spin__content{background:#fff;border-radius:24px;max-width:430px;width:100%;padding:35px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.35);animation:pop .35s ease}.spin__title{font-size:34px;color:var(--green);margin:0 0 14px}.spin__btn{border:0;border-radius:999px;padding:13px 45px;background:var(--green);color:white;font-weight:900;cursor:pointer}.js-success,.js-error-text{padding:28px!important;margin:0!important}
+.baraban-retry-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.68);z-index:10001;align-items:center;justify-content:center;padding:18px}.baraban-retry-overlay.show{display:flex}.baraban-retry-box{background:white;border-radius:22px;max-width:350px;width:100%;padding:28px;text-align:center}.baraban-retry-attempts-row{display:flex;justify-content:center;gap:8px}.baraban-retry-dot{width:18px;height:18px;border-radius:50%;background:#dbeafe;border:2px solid #3b82f6}.baraban-retry-btn{border:0;border-radius:12px;background:var(--green);color:#fff;padding:14px 22px;font-weight:800;cursor:pointer}.confetti-piece{position:fixed;z-index:10010;top:-30px;animation:fall linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(760deg)}}
+.box-blue-light{margin-top:40px}.box-blue-light>h2,.box-blue-light>div:first-child{font-size:32px;font-weight:900;color:var(--blue-dark);margin-bottom:22px}.comments-block,.comments__kma{display:flex;flex-direction:column;gap:14px}.comment-item{display:grid;grid-template-columns:54px 1fr;gap:12px;padding:15px;background:#f7f9fc;border:1px solid #e3e9f0;border-radius:14px}.ava-img{width:54px;height:54px;border-radius:50%;object-fit:cover;margin:0!important}.comment-name,.user-name{font-weight:800;color:#234b72}.comment-date{font-size:13px;color:#8a98a7}.comment-bottom{font-size:16px;line-height:1.48}.comment-write{padding:12px 15px;color:#637386;font-size:15px}.loading:after{content:'…';animation:dots 1.2s infinite}@keyframes dots{50%{opacity:.3}}
+#orderWrapAfterComments{margin:34px auto!important;max-width:650px!important;padding:0!important}#orderWrapAfterComments>div{border:1px solid #dce7f1!important;box-shadow:0 12px 45px rgba(30,65,100,.16)!important}.App-footer{width:min(920px,calc(100% - 24px));margin:0 auto 35px;color:#778497;text-align:center;font-size:14px}.Footer{padding:20px}.floating-gift-box{position:fixed;z-index:9990;left:18px;bottom:18px;display:none;cursor:pointer;text-align:center;animation:bob 2s ease-in-out infinite}.floating-gift-box.show{display:block}.gift-image{width:105px;filter:drop-shadow(0 8px 13px rgba(0,0,0,.3))}.gift-label{margin-top:-7px;padding:7px 12px;border-radius:999px;background:#fff4c9;border:2px solid #f0b529;color:#bf351f;font-weight:900;font-size:13px;box-shadow:0 5px 18px rgba(0,0,0,.18)}
+@keyframes bob{50%{transform:translateY(-10px)}}@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}@keyframes pop{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}
+@media(max-width:680px){body{font-size:17px}main{width:100%;margin:0;border-radius:0;padding:20px 16px}.MediaMaterialHeader-title{letter-spacing:-.5px}.order__header{grid-template-columns:1fr}.order__img{max-width:360px;margin:auto}.comment-item{grid-template-columns:46px 1fr}.ava-img{width:46px;height:46px}.gift-image{width:80px}.floating-gift-box{left:9px;bottom:10px}.gift-label{font-size:11px}.baraban-spin-btn{width:78px;height:78px;font-size:16px}.App-footer{width:100%}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+body{background:#f3f4f8;font-family:"Times New Roman",Times,serif;color:#202020;font-size:18px;line-height:1.35}
+main{width:min(900px,calc(100% - 34px));margin:15px auto 28px!important;background:#fff;border:1px solid #e4e4e4;border-radius:0;box-shadow:none;padding:30px 18px 24px;overflow:visible}
+.MediaMaterial-header{border-bottom:0;padding-bottom:0;margin-bottom:22px}
+.MediaMaterialHeader-title{font-family:"Times New Roman",Times,serif;text-align:center!important;color:#1d559e;font-size:clamp(30px,3.1vw,36px);line-height:1.22;letter-spacing:0;margin:0 auto 24px;max-width:760px;font-weight:900}
+.MediaMaterialHeader-first111{font-family:"Times New Roman",Times,serif;color:#111;font-size:24px;line-height:1.05;margin:0 0 4px;font-weight:900}
+p{margin:0 0 12px}
+h2,h3{font-family:"Times New Roman",Times,serif;color:#111}
+.main-img,.article-img,main img:not(.ava-img):not(.order__img){border-radius:8px;box-shadow:none;margin:18px auto}
+.gray_block{background:transparent;border:0;border-left:0;border-radius:0;padding:0;margin:20px 0}
+.cta{border-radius:0;box-shadow:none}
+.box-blue-light>h2,.box-blue-light>div:first-child{color:#111}
+@media(max-width:680px){body{font-size:17px}main{width:100%;margin:0!important;padding:18px 14px}.MediaMaterialHeader-title{font-size:28px}.MediaMaterialHeader-first111{font-size:21px}}
+
+</style>
+</head>
+<body>
+<main style="margin-top: 15px">
+<div class="MediaMaterial-header">
+<div class="MediaMaterialHeader">
+<h1 class="MediaMaterialHeader-title" style="text-align: center">48 ёшимда кўришим тикланди — ҳеч қандай операция ва қимматбаҳо томчиларсиз!</h1> </div> </div> <header>
+<h2 class="MediaMaterialHeader-first111">Табиий таркибли бу восита 45 ёшдан кейин кўриш заифлашишини тўхтатади ва бир ой ичида кўз ўткирлигини тиклайди!</h2>
+<p>Ассалому алайкум! Менинг исмим Баҳром. Мен 22 йилдан бери мактабда математика ўқитаман, ҳозир 48 ёшдаман.</p>
+<center><img alt="Баҳром" decoding="async" loading="lazy" src="../assets/sobirjon.jpg" style="max-width:300px;width:300px;border-radius:12px;margin:16px auto;display:block;" width="300"/></center>
+<p>Бу ҳикояни ёзишдан мақсадим — ким билади, балки бирор кишига фойдаси тегар. Чунки ўзим шунга ўхшаш тажрибадан ўтганман ва ёрдам сўрайдиган одам тополмаганман.</p>
+<p>Ўқитувчи иши — бу фақат дарс бериш эмас. Дафтарлар текшириш, синф тахтасига ёзиш, кечаю кундуз компютер экранида ишлаш, имтиҳон ишларини баҳолаш... Кўзлар ҳеч тинч қолмайди.</p>
+<p>30 ёшимда кўзойнак таққим. Дастлаб -1.5 эди. Кейин ҳар 2-3 йилда шишани кучайтириб бордим. 48 ёшимда -3.25 бўлди. Офтальмолог: "Касбингиз шундай, кўзларингиз зўриқади," — дер эди. Мен ҳам одатий гап деб қабул қилардим.</p>
+<p>Аммо 2 йил олдин бирдан ҳамма нарса ёмонлашди. Кўзойнак тақиб ҳам тахтадаги ёзувни охирги парта ўқувчиларига кўрсата олмай қолдим. Кечаси китоб ўқиш — азобга айланди.</p>
+</header>
+<p style="margin: 20px 0; color: red; text-align: center">
+<b style="font-size: 27px">Синф ўртасида дарс беряпман, тахтага ёзяпман — ва ўзим ёзганимни аниқ ўқий олмаяпман. Ўқувчилар ҳайрон қарайди. Бу — ерда тубан эди.</b>
+</p>
+<p>Янги кўзойнакка бордим. Шишани -4.0 га алмаштиришди. Бир ойдан кейин яна хира кўрина бошлади. Яна бордим — яна кучайтирдик. Бу занжир тугамасди.</p>
+<p>Офтальмолог томчилар тавсия қилди. Бир пакет — 80 минг сўм. Ойига 2-3 пакет. Яхши, ичдим. Биринчи ҳафта кўзлар бироз ёрқинлашди. Иккинчи ойдан — ҳеч нарса. Пулни ташламоқдан бошқа фарқи йўқ эди.</p>
+<p style="margin: 20px 0; text-align: center">
+<b style="font-size: 24px">Шифокор: "Балки лазер операцияси қиласиз? 12-15 миллион сўм, натижа кафолатланмаган." Мен — оддий ўқитувчи. Бундай пулни қаердан оламан?</b>
+</p>
+<p>Оила ташвишга тушди. Катта ўғлим: "Дада, ишдан чиқинг, кўзингизни дам олдиринг," — деди. Аммо мен 22 йиллик ишимни ташлашни тасаввур ҳам қилолмасдим. Ўқувчиларим бор, улар мени кутади.</p>
+<p>Шу пайтда бир ҳамкасбим — тарих фани ўқитувчиси Шоира опа — мендан сўради: "Баҳром ака, сизга бир нарса айтсамми? Мен ҳам ўтган йил шундай ҳолатда эдим."</p>
+<p style="margin: 20px 0; color: red; text-align: center">
+<b style="font-size: 24px">У менга «КРИСТАЛЛ» ҳақида гапирди. Дастлаб ишонмадим — интернетда реклама кўп. Аммо Шоира опа — реклама эмас, ҳаётий тажрибасини айтяпти эди.</b>
+</p>
+<p>Уйга қайтиб, «КРИСТАЛЛ» ҳақида ўқий бошладим. Маълум бўлдики, 45-50 ёшдан кейин кўз мускуллари заифлашади, кўз ичидаги босим ошади, қон айланиши ёмонлашади — ва буларнинг ҳаммаси кўришни секин-аста йўқотади.</p>
+<p>«КРИСТАЛЛ» таркибида черника экстракти, лютеин, таурин, витамин А ва Е бор — буларнинг ҳаммаси кўз томирларини мустаҳкамлайди, кўз нервини озиқлантиради ва кўз ичи босимини меъёрлаштиради. Муҳими — кимёвий эмас, табиий!</p>
+<center>
+<img alt="" decoding="async" loading="lazy" src="../assets/kristall.jpg" style="max-width: 550px; width: 100%"/>
+</center>
+<center>
+<img alt="Сертификат соответствия" decoding="async" loading="lazy" src="../assets/sertifikat.jpg" style="max-width:550px;width:100%;margin-top:16px;border-radius:8px;box-shadow:0 4px 18px rgba(0,0,0,0.15);"/>
+</center>
+<p style="margin: 20px 0; color: red; text-align: center">
+<b style="font-size: 24px">Акция орқали 70% чегирма билан буюртма қилдим. 1 қадоқ — 30 капсула, 1 ойга етади. Нима бўлишини кутдим...</b>
+</p>
+<p><b>«КРИСТАЛЛ» қабул қилганимдан кейинги натижалар:</b></p>
+<p style="margin: 20px 0; color: red; text-align: center">
+<b style="font-size: 24px">Биринчи ҳафта: Кўзларимдаги оғриқ ва толиқиш сезиларли камайди. Дарс бергандан кейин кўзларим аввалгидек ёнмай қўйди.</b>
+</p>
+<p><b>Иккинчи ҳафта:</b> Тахтадаги ёзувни аниқроқ кўра бошладим. Ўқувчилар синфнинг нарироқ ўтиради — уларнинг ёзувларини илгарилик кўзойнак билан ҳам кўра олмасдим. Энди кўраман.</p>
+<p><b>Учинчи ҳафта:</b> Офтальмологга бордим. Шифокор текшируви — ҳайрат: "Кўзингиз нимадир яхшиланяпти! Кўриш ўткирлиги ошди." КРИСТАЛЛ ҳақида гапирдим. У рад этмади.</p>
+<p><b>Тўртинчи ҳафта:</b> Бутун ой давомида дарс бердим — кўзларим чарчамади! Синфнинг охирги партасигача аниқ кўрдим. Ҳатто кечаси китоб ўқиш ҳам осонлашди.</p>
+<p style="margin: 20px 0; color: red; text-align: center">
+<b style="font-size: 24px">Бир ой ўтгач — кўзойнакни столга қўйдим ва синфга кирдим. Ўқувчилар: "Баҳром ака, кўзойнагингиз қани?" деди. "Кераксиз бўлди," — дедим.</b>
+</p>
+<p>Энди ҳаётим қандай бўлди? 22 йиллик ишимда биринчи марта кўзларим бундай яхши кўряпти. Хотиним Мафтуна ҳам кузатяпти: "Аввал кечаси мутолаа қила олмасдинг, энди китоб билан ухлаб қолаяпсан." Катта ўғлим ҳам КРИСТАЛЛ олди — компютер дастурчиси, кўзлари жуда толиқарди.</p>
+<p>Ҳамкасбим Шоира опага раҳмат айтдим. У жилмайди: "Мен ҳам биладиган бир нарсани сизга айтдим холос."</p>
+<p>Шундай қилиб, «КРИСТАЛЛ» воситасини фақат бир курс қабул қилинг — ва кўриш қобилияти тикланади!</p>
+<p>Бу ҳақда офтальмолог Исмоилов шундай изоҳлайди:</p>
+<img alt="" decoding="async" loading="lazy" src="../assets/hero-4.jpg" style="max-width: 550px; width: 100%"/>
+<div class="gray_block" style="background-color: #e2e2e2">
+<ul>
+<li><b>Кўриш қобилияти кучаяди:</b> ҳужжатларни, тахта ёзувларини, экранни ўқиш осон бўлади — бутун кун давомида.</li>
+<li><b>Кўз толиқиши камаяди:</b> компютер ва телефон билан 5-8 соат ишлаш енгиллашади.</li>
+<li><b>Кўз томирлари мустаҳкамланади:</b> қон айланиши яхшиланади, кўз тўқималари тўлиқ озиқланади.</li>
+<li><b>Кўз босими меъёрлашади:</b> глаукома хавфи йўқолади, кўз ички босими 18–21 мм даражасида барқарор ушланади.</li>
+<li><b>Кўриш ўткирлиги ошади:</b> алоҳида ҳарфлар, рақамлар, йўл белгилари аниқ кўринади.</li>
+<li><b>Кўз қуриқлиги йўқолади:</b> табиий кўз намлиги тикланади, "қум" ҳисси, ёниш ва қизариш йўқолади.</li>
+</ul>
+</div>
+<p style="margin: 20px 0; color: red; text-align: center">
+<b style="font-size: 24px">«КРИСТАЛЛ» қон босими ва юракка таъсир қилмайди — рецептсиз олинади!</b>
+</p>
+<p>«КРИСТАЛЛ» дорихоналарда сотилмайди. Ишлаб чиқарувчи сохта маҳсулотлар бозорини кенгайтирмаслик учун уни тўғридан-тўғри заводдан сотади.</p>
+<p>Ҳозир махсус акция ўтказилмоқда — ҳар қандай одам воситани <a href="#pluginCta" target="_self">расмий ўйин орқали</a> 70% чегирма билан олиши мумкин!</p>
+<div style="padding: 15px; margin: 25px 0; border: 1px solid #000; background-color: #fff2cc">
+<p style="font-size: 1.2em; text-align: center"><b>Акция бўйича КРИСТАЛЛ капсулаларини олиш шартлари:</b></p>
+<ol>
+<li><b>Ўзбекистон ҳудудида яшаш</b></li>
+<p>Акцияда 18 ёшдан ошган, Ўзбекистонда яшовчи одамлар қатнашиши мумкин.</p>
+<li><b>Фақат шахсий фойдаланиш учун</b></li>
+<p>Қайта сотувчилар билан курашиш мақсадида — улгуржи сотиб олиш мумкин эмас.</p>
+<li><b>Ишлаб чиқарувчи томонидан ўтказиладиган ўйинда қатнашиш</b></li>
+<p>Акция қадоқлари сони чекланган. 70% чегирма олиш учун барабанни айлантиринг.</p>
+</ol>
+</div>
+<div class="cta" id="pluginCta">
+<div class="door" id="barabanGame">
+<h2 class="baraban__title">🎰 Барабанни айлантириб <span class="baraban__title-pct">70%</span> чегирма ютинг!</h2>
+<div id="barabanAttempts" style="text-align:center;margin-bottom:14px;font-size:17px;font-weight:800;color:#1e3a8a;letter-spacing:0.5px;">
+<span id="attemptDots"><div style="font-size:15px;font-weight:700;color:#1e3a8a;margin-bottom:6px;">Уриниш: <b style="font-size:20px;color:#dc2626;">1</b> / 1</div><div><span style="display:inline-block;width:32px;height:32px;border-radius:50%;background:#2563eb;border:3px solid #1e3a8a;margin:0 4px;vertical-align:middle;box-shadow:0 0 10px rgba(37,99,235,0.6);"></span></div></span>
+</div>
+<div class="baraban-outer">
+<div class="baraban-canvas-wrap">
+<div class="baraban-arrow-wrap" id="barabanArrow">
+<svg class="baraban-arrow-svg" height="44" viewbox="0 0 36 44" width="36">
+<polygon fill="#dc2626" points="18,44 0,0 36,0"></polygon>
+<polygon fill="#ef4444" points="18,38 4,4 32,4"></polygon>
+</svg>
+</div>
+<canvas height="340" id="barabanWheel" width="340"></canvas>
+<div class="baraban-spin-btn" id="spinBtn" onclick="spinWheel()">
+<span id="spinBtnText">АЙЛ-<br/>АНТ</span>
+</div>
+</div>
+</div>
+<p class="baraban-msg" id="barabanMsg"></p>
+</div>
+<div class="baraban-retry-overlay" id="barabanRetryOverlay">
+<div class="baraban-retry-box">
+<div class="baraban-retry-body">
+<div class="baraban-retry-attempts-row" id="retryDotsRow"></div>
+<div class="baraban-retry-msg" id="retryMsg">Сизда яна <b id="retryLeftText">2</b> та уриниш қолди.<br/>Яна уриниб кўринг!</div>
+<button class="baraban-retry-btn" onclick="closeRetryPopup()">🎯 Яна уриниш</button>
+</div>
+</div>
+</div>
+<div class="order order-panel">
+<div class="order__header">
+<img alt="Маҳсулот сурати" class="order__img" decoding="async" loading="lazy" src="../assets/kristall.jpg"/>
+<div class="order__deadline hideOnSuccess">
+<p class="order__text">Исм, фамилия, ёш ва манзилни киритинг.</p>
+<p class="order__text">
+                            Шошилинг!
+                            <br/>
+                            Қолган вақтингиз:
+                        </p>
+<p class="order__time">
+<span class="order__time-minute" id="orderMinute">10</span>
+                            :
+                            <span class="order__time-second" id="orderSecond">00</span>
+</p>
+</div>
+<div class="order__price" style="display:none !important;">
+<p class="order__price-old">
+<span class="order__price-summ price_land_s4"></span>
+<span class="order__price-curr price_land_curr"></span>
+</p>
+<p class="order__price-new">
+<span class="order__price-summ price_land_s1">
+<x-newprice></x-newprice>
+<x-currency></x-currency>
+</span>
+<span style="margin-left: -0px !important;"></span>
+</p>
+</div>
+</div>
+<form class="order__body hideOnSuccess js-form" id="orderForm">
+<input name="ast" type="hidden" value="26"/>
+<input name="uid" type="hidden" value="c_revlvdt"/>
+<input id="tz" name="tz" type="hidden" value="-300"/>
+<input name="geo" type="hidden" value="UZ"/>
+<input id="discountValue" name="discount" type="hidden" value="70%"/>
+<input autocomplete="name" class="order__input" name="name" placeholder="Исм Фамилия" required="" type="text"/>
+<div style="position:relative; width:100%;">
+<input autocomplete="tel" class="order__input" id="phoneInput" name="phone" placeholder="+998 XX XXX-XXXX" required="" style="width:100%; box-sizing:border-box;" type="tel"/>
+<div id="phoneError" style="display:none; color:#e74c3c; font-size:13px; margin-top:4px; padding: 4px 8px; background:#ffeaea; border-radius:6px; border-left:3px solid #e74c3c;">
+                            ⚠️ Telefon raqami noto'g'ri! Format: +998 XX XXX XX XX
+                        </div>
+<div id="phoneOk" style="display:none; color:#27ae60; font-size:13px; margin-top:4px; padding: 4px 8px; background:#eafaf1; border-radius:6px; border-left:3px solid #27ae60;">
+                            ✅ Telefon raqami to'g'ri
+                        </div>
+</div>
+<input class="order__input" name="address" placeholder="Туρар жойи (Шахар, Район)" required="" type="text"/>
+<input class="order__input" max="99" min="18" name="age" placeholder="Ёшингиз" required="" type="number"/>
+<button class="order__btn js-orderSubmit" type="submit">BUYURTMA BERISH</button>
+</form>
+<div class="js-success" style="display: none; text-align: center; margin: 70px 0; color: green!important;font-size:18px!important;background-color: white!important;">
+<h2 class="spin-alert__header js-success-title" style="text-align: center;color:green!important; margin-bottom: 20px;font-size:25px!important;background-color: white!important;">
+Буюртмangiz учун раҳмат!
+
+</h2> <div> Яқин вақт ичида менеджеримиз буюртма тафсилотларини аниқлаш учун сизга қўнғироқ қилади! </div></div>
+<div class="js-error-text" style="display: none; text-align: center; margin: 20px 0;">
+<h2 class="spin-alert__header" style="text-align: center;color: red!important;font-size:25px!important;background-color: white!important;">Бирдан нимадур бўлди. Сервер хатоси.</h2> </div> <div class="order__footer" id="scroll"> <p class="order__info"></p> </div> </div> <div aria-hidden="true" class="spin"> <div class="spin__content"> <h2 class="spin__title">Табриклайман!</h2> <p class="spin__text"> <br/> Сиз <span class="cta__name-product">КРИСТАЛЛ</span> воситасини 70% чегирма билан олиш мумкин! </p> <button class="spin__btn" onclick="document.querySelector('.order').scrollIntoView({behavior:'smooth',block:'start'})" type="button">ок</button> </div> </div> </div>
+<br/>
+<div class="box-blue-light">
+<h2>Шарҳлар</h2><br/>
+<div class="comments-block comments__kma" style="margin-top: 0px;">
+<div class="comment-item">
+<img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m1.jpg"/>
+<div class="comment-text">
+<div class="comment-top">
+<div class="comment-name user-name">Мансур</div>
+<div class="comment-date" data-num="4"></div>
+</div>
+<div class="comment-bottom">Яхши тушунаман сени Баҳром ака, менга 48 ёш, менинг муаммоларим ҳам ўхшаш. Акция бўйича КРИСТАЛЛ буюртма қилдим, кеча олдим, бугун биринчи капсула ичдим. </div> </div> </div> <div class="comment-write" style="max-height: 0px; margin: 0px; padding: 0px; border: none;"> <div class=""> <p class="loading"> Фойдаланувчи хабар ёзяпти</p> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m2.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Тимур</div> <div class="comment-date" data-num="4"></div> </div> <div class="comment-bottom"> 31 ёшман,кўриш билан муаммо бор эди. Яхшиям бу восита бор экан. Ичдим, ҳозир ҳамма нарса жойига келди. </div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m3.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Тахир</div> <div class="comment-date" data-num="4"></div> </div> <div class="comment-bottom"> Биринчи марта КРИСТАЛЛ таъсирини ҳис қилганимда, сизнинг гапларингиз ростлигига ишондим. Зўр восита! </div>
+</div>
+</div>
+</div>
+<div class="comment-item">
+<img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m4.jpg"/>
+<div class="comment-text">
+<div class="comment-top">
+<div class="comment-name user-name">Азизжон</div> <div class="comment-date" data-num="4"></div> </div> <div class="comment-bottom"> Бир курс ичгандан кейин бунақанги яхши кўргандим эмасман. </div> </div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a1.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Адлия</div> <div class="comment-date" data-num="4"></div> </div> <div class="comment-bottom"> буюртма қилдим <a href="#pluginCta" target="_self">КРИСТАЛЛ</a>. Жуда зўр таъсир қилди. Ҳаммага тавсия қиламан. </div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m5.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Анвар</div> <div class="comment-date" data-num="4"></div> </div> <div class="comment-bottom">КРИСТАЛЛни ўз вақтида олганимдан хурсандман. Ёшликдагидек кўриш тикламоқдан деярли умидим қолмаган эди, бу восита орзуимни рўёбга чиқарди.</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a2.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Лола</div> <div class="comment-date" data-num="4"></div> </div> <div class="comment-bottom">Зўр воситага ўxшайди... Буюртма қилайин дейман.</div> </div>
+</div>
+<div class="comment-item">
+<img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m6.jpg"/>
+<div class="comment-text">
+<div class="comment-top">
+<div class="comment-name user-name">Батыр</div>
+<div class="comment-date" data-num="4"></div>
+</div>
+<div class="comment-bottom"> 50 ёшман, ҳали қари эмасман-да, лекин яқинда кўриш билан муаммолар бошланди. КРИСТАЛЛни ичдим, 10 ёш ёшардим — ҳозир кўзларим яхши кўради! </div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m7.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Бахтияр</div> <div class="comment-date" data-num="4"></div> </div> <div class="comment-bottom">  Курсни ичдим, натижа ҳайратланарли! <br/></div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m8.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Жасур</div> <div class="comment-date" data-num="4"></div> </div> <div class="comment-bottom">КРИСТАЛЛни синаб кўрдим <a href="#pluginCta" target="_self">КРИСТАЛЛ</a> , жуда мамнунман. Ёшлигимда ҳам бунақанги бўлмаган эди. Етказиб беришлари ҳам тез бўлди. </div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m9.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Карим</div> <div class="comment-date" data-num="4"></div> </div> <div class="comment-bottom"> Турли воситалар синаб кўрганман, лекин КРИСТАЛЛгина яхши натижа берди. Кўзларим компютерда ишлаганда чарчамай қўйди. Тавсия қиламан. </div>
+</div>
+</div>
+<div class="comment-item">
+<img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a3.jpg"/>
+<div class="comment-text">
+<div class="comment-top">
+<div class="comment-name user-name">Мухаббат</div>
+<div class="comment-date" data-num="4"></div>
+</div>
+<div class="comment-bottom"> Кўриш муаммосини ҳал қиладиган зўр восита. Кўзларим қоронғуда ҳам кўра бошлади. Интернетдан КРИСТАЛЛни топиб буюртма қилдим. Бир ҳафтада ҳаммаси тузалди. </div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m10.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Нодир</div> <div class="comment-date" data-num="4"></div> </div> <div class="comment-bottom"> 41 ёшман-да кўршим ёмон эди. КРИСТАЛЛ ичдим, натижа ажойиб! ! <br/></div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a4.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Фатима</div> <div class="comment-date" data-num="4"></div> </div> <div class="comment-bottom">Ҳа, албатта буюртма қиламан, синаб кўрамиз.</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a5.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Гули</div> <div class="comment-date" data-num="4"></div> </div> <div class="comment-bottom">Биламан КРИСТАЛЛ. Отам ичади, 64 ёш.</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a6.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Ойдин</div> <div class="comment-date" data-num="4"></div> </div> <div class="comment-bottom"> Саломлар Баҳром ака, раҳмат! Тасодифан мақолани ўқиб қолдим. Ўйинда чегирма тушди, буюртма қилдим. Энди кўзойнаксиз компютерда ишлаяпман! </div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m11.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Рустам</div> <div class="comment-date" data-num="4"></div> </div> <div class="comment-bottom"> Мен ҳам олайин... <br/></div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a7.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Ирода</div> <div class="comment-date" data-num="3"></div> </div> <div class="comment-bottom">Ҳаммангиз шунча мақтаётганингизга қараб, олиш керак-да.</div> </div>
+</div>
+<div class="comment-item">
+<img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m12.jpg"/>
+<div class="comment-text">
+<div class="comment-top">
+<div class="comment-name user-name">Раис</div>
+<div class="comment-date" data-num="3"></div>
+</div>
+<div class="comment-bottom">КРИСТАЛЛ — кучли восита. Бир танишим шифокор айтди. Айтишларича кўр кишини ҳам тиклайди. Ичаман, кўзларим 25 ёшимдагидан яхши кўради!</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a8.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Мохим</div> <div class="comment-date" data-num="3"></div> </div> <div class="comment-bottom">Ўз вақтида билиб олдим бу таблеткалар ҳақида, раҳмат.</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a9.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Наргиза</div> <div class="comment-date" data-num="3"></div> </div> <div class="comment-bottom"> буюртма қилдим КРИСТАЛЛ, жуда кучли таъсири бор! </div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m13.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Санжар</div> <div class="comment-date" data-num="3"></div> </div> <div class="comment-bottom"> Зўр восита, ўзим ичаман.
+                    <br/><img alt="" decoding="async" loading="lazy" src="../assets/111.jpg" style="max-width: 400px; width: 100%"/></div>
+</div>
+</div>
+<div class="comment-item">
+<img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a10.jpg"/>
+<div class="comment-text">
+<div class="comment-top">
+<div class="comment-name user-name">Омина</div>
+<div class="comment-date" data-num="3"></div>
+</div>
+<div class="comment-bottom">Ҳа, бу восита кўзларга жуда кучли таъсир қиляпти.</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a11.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Сафия</div> <div class="comment-date" data-num="3"></div> </div> <div class="comment-bottom">Бир дўстимнинг аёли КРИСТАЛЛ ҳақида гапирди. Мен бир қадоқ буюртма қилдим. </div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m1.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Сурат</div> <div class="comment-date" data-num="2"></div> </div> <div class="comment-bottom">Мен 8 кунда ўзимга келдим, кўрганим зўр!</div> </div>
+</div>
+<div class="comment-item">
+<img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a12.jpg"/>
+<div class="comment-text">
+<div class="comment-top">
+<div class="comment-name user-name">Хосият</div>
+<div class="comment-date" data-num="2"></div>
+</div>
+<div class="comment-bottom">КРИСТАЛЛ номига ўxшаб ишлайди — танкдай.</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m2.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Тогай</div> <div class="comment-date" data-num="2"></div> </div> <div class="comment-bottom">Интернетда КРИСТАЛЛ ҳақида ўқиб буюртма қилдим кўришим яхшиланди.</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m3.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Ульмас</div> <div class="comment-date" data-num="2"></div> </div> <div class="comment-bottom">Раҳмат дўстлар, менга ҳам керак экан.</div> </div>
+</div>
+<div class="comment-item">
+<img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a13.jpg"/>
+<div class="comment-text">
+<div class="comment-top">
+<div class="comment-name user-name">Шахноза</div>
+<div class="comment-date" data-num="2"></div>
+</div>
+<div class="comment-bottom">КРИСТАЛЛ ҳақиқатан яхши восита экан. Албатта буюртма қиламан.</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m4.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Умид</div> <div class="comment-date" data-num="2"></div> </div> <div class="comment-bottom">Раҳмат, ёзиб олдим, ичаман...</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m5.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Урус</div> <div class="comment-date" data-num="2"></div> </div> <div class="comment-bottom">Мен ҳам буюртма қилдим!.Ҳа, бу восита кўзларга жуда кучли таъсир қиляпти. </div> </div>
+</div>
+<div class="comment-item">
+<img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m6.jpg"/>
+<div class="comment-text">
+<div class="comment-top">
+<div class="comment-name user-name">Фарух</div>
+<div class="comment-date" data-num="1"></div>
+</div>
+<div class="comment-bottom">Яхши восита, шифокор сифатида тавсия қиламан.</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m7.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Халим</div> <div class="comment-date" data-num="1"></div> </div> <div class="comment-bottom">Олдим, синаб кўраман.</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a14.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Шахруз</div> <div class="comment-date" data-num="1"></div> </div> <div class="comment-bottom"> Ҳақиқатан ажойиб восита! </div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m8.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Хасан</div> <div class="comment-date" data-num="1"></div> </div> <div class="comment-bottom"> Бир шифокор тавсия қилди. Айтди бу восита кўришни аниқ тиклайди деб. Шундай ҳам бўлди. Бир курс ичгандан кейин  тўлиқ тузалди. <br/><img alt="" decoding="async" loading="lazy" src="../assets/222.jpg" style="max-width: 400px; width: 100%"/></div>
+</div>
+</div>
+<div class="comment-item">
+<img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m9.jpg"/>
+<div class="comment-text">
+<div class="comment-top">
+<div class="comment-name user-name">Хушруз</div>
+<div class="comment-date" data-num="1"></div>
+</div>
+<div class="comment-bottom">Тасдиқлайман, менга ҳам ёрдам берди.</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m10.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Шахрух</div> <div class="comment-date" data-num="1"></div> </div> <div class="comment-bottom">Ростдан ёрдам берди, кўришим яхшиланди!</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a15.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Лейла</div> <div class="comment-date" data-num="0"></div> </div> <div class="comment-bottom"> Таблеткаларни буюртма қилдим, умид қиламан ёрдам берса. </div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a16.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Лиана</div> <div class="comment-date" data-num="0"></div> </div> <div class="comment-bottom">Биз ҳам олдик, чегирма тушди. Яхшиланишлар бор, ҳали курсни охиригача ичмадик.</div>
+</div>
+</div>
+<div class="comment-item">
+<img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m11.jpg"/>
+<div class="comment-text">
+<div class="comment-top">
+<div class="comment-name user-name">Шухрат</div>
+<div class="comment-date" data-num="0"></div>
+</div>
+<div class="comment-bottom">Ишлаяпти! Кўзим яхши кўра бошлади.</div>
+</div>
+</div>
+<div class="comment-item">
+<img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a17.jpg"/>
+<div class="comment-text">
+<div class="comment-top">
+<div class="comment-name user-name">Кристина</div>
+<div class="comment-date" data-num="0"></div>
+</div> <div class="comment-bottom">Ҳа, тезроқ буюртма қилиш керак бу воситани.</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a18.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Дилия</div> <div class="comment-date" data-num="0"></div> </div> <div class="comment-bottom"> Онам 62 ёшда, кўзи хира кўрар эди. Шифокор КРИСТАЛЛ тавсия қилди. Бир курсдан кейин ўзи китоб ўқий бошлади! Раҳмат! </div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m12.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Эльбек</div> <div class="comment-date" data-num="0"></div> </div> <div class="comment-bottom">Ўзим учун буюртма қилдим, муаммо бор эди.</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m13.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Абдуллох</div> <div class="comment-date" data-num="0"></div> </div> <div class="comment-bottom"><span class="user-name">Эльбек</span>, менда ҳам муаммо бор эди.Бир курс ичгандан кейин бунақанги яхши кўргандим эмасман . </div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m1.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Юсуф</div> <div class="comment-date" data-num="0"></div> </div> <div class="comment-bottom">Раҳмат, чегирма ютдим! Кутяпман энди</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a19.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Дана</div> <div class="comment-date" data-num="0"></div> </div> <div class="comment-bottom">Биз ҳам синаб кўрмоқчимиз бу таблеткаларни.</div> </div> </div> <div class="comment-item"> <img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/a20.jpg"/> <div class="comment-text"> <div class="comment-top"> <div class="comment-name user-name">Зарина</div> <div class="comment-date" data-num="0"></div> </div> <div class="comment-bottom">Маълумот бергунингиз учун раҳмат. Ҳар ҳолда номини эслаб қоламан ))</div> </div>
+</div>
+<div class="comment-item">
+<img alt="" class="ava-img" decoding="async" loading="lazy" src="../assets/m2.jpg"/>
+<div class="comment-text">
+<div class="comment-top">
+<div class="comment-name user-name">Шахрух</div>
+<div class="comment-date" data-num="0"></div>
+</div>
+<div class="comment-bottom">Мен ҳам буюртма қилдим!</div>
+</div>
+</div>
+</main><div id="orderWrapAfterComments" style="margin:30px auto;max-width:520px;padding:20px 15px;">
+<div style="background:#fff;border-radius:24px;box-shadow:0 8px 40px rgba(0,0,0,0.18);overflow:hidden;padding:24px;">
+<p style="text-align:center;font-weight:700;font-size:19px;color:#1a237e;margin:0 0 8px;">📦 Буюртма беринг!</p>
+<p style="text-align:center;color:#555;margin:0 0 6px;">Шошилинг! Қолган вақтингиз:</p>
+<p style="text-align:center;font-size:28px;font-weight:800;color:#e53935;margin:0 0 18px;">
+<span id="orderMinute2">10</span>:<span id="orderSecond2">00</span>
+</p>
+<form id="orderForm2" style="display:flex;flex-direction:column;gap:12px;">
+<input name="ast" type="hidden" value="26"/>
+<input name="uid" type="hidden" value="c_revlvdt"/>
+<input name="tz" type="hidden" value="-300"/>
+<input name="geo" type="hidden" value="UZ"/>
+<input name="discount" type="hidden" value="70%"/>
+<input autocomplete="name" name="name" placeholder="Исм Фамилия" required="" style="border:2px solid #e3e8f0;border-radius:12px;padding:14px 16px;font-size:16px;outline:none;transition:border-color 0.2s;" type="text"/>
+<input autocomplete="tel" name="phone" placeholder="+998 XX XXX-XXXX" required="" style="border:2px solid #e3e8f0;border-radius:12px;padding:14px 16px;font-size:16px;outline:none;" type="tel"/>
+<input name="address" placeholder="Туρар жойи (Шахар, Район)" required="" style="border:2px solid #e3e8f0;border-radius:12px;padding:14px 16px;font-size:16px;outline:none;" type="text"/>
+<input max="99" min="18" name="age" placeholder="Ёшингиз" required="" style="border:2px solid #e3e8f0;border-radius:12px;padding:14px 16px;font-size:16px;outline:none;" type="number"/>
+<button style="background:linear-gradient(135deg,#1976d2,#1565c0);color:#fff;border:none;border-radius:50px;padding:16px;font-size:17px;font-weight:700;cursor:pointer;letter-spacing:1px;" type="submit">
+        BUYURTMA BERISH
+      </button>
+</form>
+<div id="orderSuccess2" style="display:none;text-align:center;padding:40px 0;">
+<h2 style="color:green;font-size:24px;margin-bottom:12px;">Буюртмangiz учун раҳмат!</h2>
+<p style="color:#555;">Яқин вақт ичида менеджеримиз сизга қўнғироқ қилади!</p>
+</div>
+<div id="orderError2" style="display:none;text-align:center;padding:20px;">
+<h2 style="color:red;font-size:22px;">Бирдан нимадур бўлди. Сервер хатоси.</h2>
+</div>
+</div>
+</div><div class="App-footer">
+<footer class="Footer">
+<div class="Copyright">
+<div class="Copyright-container">
+<div class="ft-logo">
+<svg class="footer__logo-image" fill="#ffffff" viewbox="0 0 111 31.8" x="0" xml:space="preserve" y="0">
+<g>
+<path d="M27.4,0.6v30.7h-8V19.1H8v12.2H0V0.6h8v11.4h11.4V0.6H27.4z"></path>
+<path d="M63.4,15.9C63.4,25,58,31.8,48,31.8c-9.9,0-15.4-6.8-15.4-15.9C32.7,6.8,38.1,0,48,0
+                            C58,0,63.4,6.8,63.4,15.9z M55.2,15.9c0-5.2-2.4-8.9-7.2-8.9s-7.2,3.7-7.2,8.9c0,5.2,2.4,8.9,7.2,8.9S55.2,21.1,55.2,15.9z"></path>
+<path d="M84.9,0.6h7.7v11.5H98l4.6-11.5h8l-6.1,15.1l6.5,15.6h-8l-4.9-12h-5.4v12h-7.7v-12h-5.4l-4.9,12h-8
+                            l6.5-15.6L67,0.6h8l4.6,11.5h5.3V0.6z"></path>
+</g>
+</svg>
+<div>Ақлли одамнинг кундалик ўқиши</div>
+</div>
+</div>
+</div>
+</footer><br/><br/>
+</div><div aria-label="Совғангизни олинг" class="floating-gift-box" id="floatingGiftBox" role="button" tabindex="0"><img alt="Совға сандиғи" class="gift-image" decoding="async" loading="lazy" src="../assets/sandiq.webp"/><div class="gift-label">Совғангизни олинг!</div></div>
+<script>
+
+/* =================================================================
+   BARABAN O'YINI  v3
+   – 3 ta urinish: tasodifiy 2-yoki 3-urinishda 70% tushadi
+   – 1-urinish HAMISHA yutqazadi
+   – Burchak hisoblash to'g'irlandi (doim aniq pozitsiya)
+   – Near-miss effekti (overshoot → qaytish)
+================================================================= */
+(function(){
+
+var SEG_DATA = [
+  '15%','35%','25%','50%',
+  '70%',           /* index 4  ← WINNER */
+  '20%','40%','30%',
+  '55%','10%','45%','60%'
+];
+var WINNER = 4;
+var N      = SEG_DATA.length;   /* 12 */
+var ARC    = (2*Math.PI)/N;     /* 30° */
+
+/* Rang juftlari: [to'q, yorug'] */
+var COLORS = [
+  ['#6b1414','#a31515'],
+  ['#1a1f6e','#2e3799'],
+  ['#6b1414','#a31515'],
+  ['#1a1f6e','#2e3799'],
+  ['#6b1414','#a31515'],  /* 4 – winner, oldindan FARQ YO'Q */
+  ['#1a1f6e','#2e3799'],
+  ['#6b1414','#a31515'],
+  ['#1a1f6e','#2e3799'],
+  ['#6b1414','#a31515'],
+  ['#1a1f6e','#2e3799'],
+  ['#6b1414','#a31515'],
+  ['#1a1f6e','#2e3799'],
+];
+var WIN_COL = ['#92400e','#f59e0b']; /* yutgandan keyin oltin */
+
+/* ── 3 urinish holati ────────────────────────────────────────── */
+var MAX_ATTEMPTS = 1;
+var attempt      = 0;                              /* 0..2 */
+var winAttempt   = 1;   /* 2 yoki 3 */
+var spinning     = false;
+var curAngle     = 0;
+var lastSeg      = -1;
+
+/* ── Urinish ko'rsatkichini yangilash ─────────────────────────── */
+function updateDots(){
+  var el = document.getElementById('attemptDots');
+  if(!el) return;
+  var left = MAX_ATTEMPTS - attempt;
+  var icons = '';
+  for(var i=0;i<MAX_ATTEMPTS;i++){
+    if(i < attempt) icons += '<span style="display:inline-block;width:28px;height:28px;border-radius:50%;background:#cbd5e1;border:2px solid #94a3b8;margin:0 4px;vertical-align:middle;"></span>';
+    else if(i===attempt) icons += '<span style="display:inline-block;width:32px;height:32px;border-radius:50%;background:#2563eb;border:3px solid #1e3a8a;margin:0 4px;vertical-align:middle;box-shadow:0 0 10px rgba(37,99,235,0.6);"></span>';
+    else icons += '<span style="display:inline-block;width:28px;height:28px;border-radius:50%;background:#dbeafe;border:2px solid #93c5fd;margin:0 4px;vertical-align:middle;"></span>';
+  }
+  el.innerHTML = '<div style="font-size:15px;font-weight:700;color:#1e3a8a;margin-bottom:6px;">Уриниш: <b style="font-size:20px;color:#dc2626;">'+(attempt+1)+'</b> / '+MAX_ATTEMPTS+'</div><div>'+icons+'</div>';
+}
+
+/* ── Burchak hisoblash ────────────────────────────────────────── */
+/*  Pointer tepada (-PI/2).
+    Segment i markazi: curAngle + i*ARC + ARC/2
+    Bu tepaga kelishi uchun: curAngle = -PI/2 - i*ARC - ARC/2 (mod 2PI)
+    totalRot = targetAngle - currentAngle (+ to'liq aylanishlar)            */
+function calcTotalRot(fromAngle, segIndex, jitter){
+  var target = -Math.PI/2 - segIndex*ARC - ARC/2 + (jitter||0);
+  /* fromAngle dan target ga boradigan minimal musbat burchak */
+  var rot = ((target - fromAngle) % (2*Math.PI) + 2*Math.PI) % (2*Math.PI);
+  if(rot < 0.1) rot += 2*Math.PI; /* minimal 1 to'liq aylana */
+  var spins = (6 + Math.floor(Math.random()*4)) * 2*Math.PI;
+  return spins + rot;
+}
+
+/* ── Tasodifiy yutqazuvchi segment ───────────────────────────── */
+function loserIndex(){
+  var idx;
+  do { idx = Math.floor(Math.random()*N); } while(idx===WINNER);
+  return idx;
+}
+
+/* ── DRAW ─────────────────────────────────────────────────────── */
+function draw(angle, winnerGlow){
+  var cv = document.getElementById('barabanWheel');
+  if(!cv) return;
+  var ctx = cv.getContext('2d');
+  var cx=cv.width/2, cy=cv.height/2, R=cx-2;
+
+  ctx.clearRect(0,0,cv.width,cv.height);
+
+  for(var i=0;i<N;i++){
+    var a0  = angle + i*ARC;
+    var a1  = a0 + ARC;
+    var mid = a0 + ARC/2;
+    var isW = (i===WINNER);
+    var col = (isW && winnerGlow) ? WIN_COL : COLORS[i];
+
+    /* Segment dolg'isi */
+    var grd = ctx.createLinearGradient(
+      cx+Math.cos(mid)*R*0.25, cy+Math.sin(mid)*R*0.25,
+      cx+Math.cos(mid)*R,      cy+Math.sin(mid)*R
+    );
+    grd.addColorStop(0, col[1]);
+    grd.addColorStop(1, col[0]);
+    ctx.beginPath(); ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,R,a0,a1); ctx.closePath();
+    ctx.fillStyle=grd; ctx.fill();
+
+    /* Chegara */
+    ctx.strokeStyle='rgba(255,255,255,0.2)';
+    ctx.lineWidth=1.2; ctx.stroke();
+
+    /* Shine */
+    ctx.save();
+    ctx.beginPath(); ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,R,a0,a1); ctx.closePath(); ctx.clip();
+    var sh=ctx.createRadialGradient(
+      cx+Math.cos(mid)*R*0.72,cy+Math.sin(mid)*R*0.72,0,
+      cx+Math.cos(mid)*R*0.72,cy+Math.sin(mid)*R*0.72,R*0.26
+    );
+    sh.addColorStop(0,'rgba(255,255,255,0.17)');
+    sh.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle=sh; ctx.fill(); ctx.restore();
+
+    /* Pin */
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(a0);
+    var pg=ctx.createRadialGradient(-1,-1,0,0,0,5);
+    pg.addColorStop(0,'#fde68a'); pg.addColorStop(1,'#92400e');
+    ctx.beginPath(); ctx.arc(R-11,0,5,0,2*Math.PI);
+    ctx.fillStyle=pg; ctx.fill(); ctx.restore();
+
+    /* Matn — radius yo'nalishi bo'yicha, pastki yarmi aylantirilib */
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(mid);
+    var nm = ((mid%(2*Math.PI))+2*Math.PI)%(2*Math.PI);
+    var tr;
+    if(nm>Math.PI && nm<2*Math.PI){
+      ctx.rotate(Math.PI); tr = -(R*0.64);
+    } else {
+      tr = R*0.64;
+    }
+    ctx.shadowColor='rgba(0,0,0,0.65)'; ctx.shadowBlur=4;
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    if(isW && winnerGlow){
+      ctx.font='bold 17px Inter,Arial'; ctx.fillStyle='#1a1a1a';
+    } else {
+      ctx.font='bold 15px Inter,Arial'; ctx.fillStyle='#f1f5f9';
+    }
+    ctx.fillText(SEG_DATA[i], tr, 0);
+    ctx.shadowBlur=0; ctx.restore();
+  }
+
+  /* Markaziy disk */
+  var cg=ctx.createRadialGradient(cx-7,cy-7,2,cx,cy,33);
+  cg.addColorStop(0,'#ffffff'); cg.addColorStop(0.55,'#dbeafe');
+  cg.addColorStop(1,'#93c5fd');
+  ctx.beginPath(); ctx.arc(cx,cy,33,0,2*Math.PI);
+  ctx.fillStyle=cg; ctx.fill();
+  ctx.strokeStyle='#1e3a8a'; ctx.lineWidth=3; ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx,cy,27,0,2*Math.PI);
+  ctx.strokeStyle='rgba(30,58,138,0.2)'; ctx.lineWidth=1.5; ctx.stroke();
+}
+
+/* ── TICK ─────────────────────────────────────────────────────── */
+function checkTick(angle){
+  var s=Math.floor((((-angle%(2*Math.PI))+2*Math.PI)%(2*Math.PI))/ARC)%N;
+  if(s!==lastSeg){
+    lastSeg=s;
+    var el=document.getElementById('barabanArrow');
+    if(el){ el.classList.remove('tick','no-bounce');
+            void el.offsetWidth;
+            el.classList.add('tick','no-bounce');
+            setTimeout(function(){ el.classList.remove('tick','no-bounce'); },110); }
+  }
+}
+
+/* ── CONFETTI ─────────────────────────────────────────────────── */
+function confetti(){
+  var cols=['#dc2626','#f59e0b','#10b981','#3b82f6','#8b5cf6','#f97316','#fde047'];
+  for(var i=0;i<80;i++){
+    (function(d){
+      setTimeout(function(){
+        var el=document.createElement('div');
+        el.className='confetti-piece';
+        var circ=Math.random()>0.4;
+        el.style.cssText='left:'+(Math.random()*100)+'vw;background:'+
+          cols[Math.floor(Math.random()*cols.length)]+
+          ';transform:rotate('+(Math.random()*360)+'deg)'+
+          ';animation-duration:'+(1.8+Math.random()*2.5)+'s'+
+          ';width:'+(7+Math.random()*8)+'px'+
+          ';height:'+(circ?(7+Math.random()*8):(11+Math.random()*13))+'px'+
+          ';border-radius:'+(circ?'50%':'2px')+';opacity:0.9';
+        document.body.appendChild(el);
+        setTimeout(function(){ el.remove(); },6000);
+      },d);
+    })(i*28);
+  }
+}
+
+/* ── ANIMATE (umumiy) ────────────────────────────────────────── */
+function animate(startA, totalRot, dur1, overshoot, dur2, onDone){
+  var p1Rot = totalRot + overshoot;
+  var p2Rot = -overshoot;
+  var t0=null, t1=null;
+
+  function ease1(t){ return 1-Math.pow(1-t,5); }
+  function ease2(t){ var c=1.70158; return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2); }
+
+  function ph1(ts){
+    if(!t0) t0=ts;
+    var p=Math.min((ts-t0)/dur1,1);
+    curAngle = startA + p1Rot*ease1(p);
+    checkTick(curAngle); draw(curAngle,false);
+    if(p<1){ requestAnimationFrame(ph1); }
+    else   { curAngle=startA+p1Rot; requestAnimationFrame(ph2); }
+  }
+  function ph2(ts){
+    if(!t1) t1=ts;
+    var p=Math.min((ts-t1)/dur2,1);
+    curAngle=(startA+p1Rot)+p2Rot*ease2(p);
+    draw(curAngle,false);
+    if(p<1){ requestAnimationFrame(ph2); }
+    else   { curAngle=startA+p1Rot+p2Rot; onDone(); }
+  }
+  requestAnimationFrame(ph1);
+}
+
+/* ── SPIN ─────────────────────────────────────────────────────── */
+window.spinWheel = function(){
+  if(spinning || attempt>=MAX_ATTEMPTS) return;
+
+  var btn    = document.getElementById('spinBtn');
+  var btnTxt = document.getElementById('spinBtnText');
+  var msg    = document.getElementById('barabanMsg');
+  if(!btn) return;
+
+  spinning=true;
+  btn.classList.add('spinning');
+  if(btnTxt) btnTxt.innerHTML='<span style="font-size:16px">⏳</span>';
+  if(msg){ msg.textContent=''; msg.className='baraban-msg'; }
+
+  /* Hozirgi urinish uchun qaysi segmentga tushish kerak? */
+  var currentTry = attempt + 1;   /* 1, 2, yoki 3 */
+  var isWinTurn  = (currentTry === winAttempt) || (currentTry === MAX_ATTEMPTS);
+  var targetSeg  = isWinTurn ? WINNER : loserIndex();
+
+  /* Jitter: segmentning tasodifiy joyiga (±30%) */
+  var jitter = (Math.random()*0.55 - 0.275)*ARC;
+  /* Yutqazishda WINNER ga tushmaslik uchun jitterni cheklash */
+  if(!isWinTurn && targetSeg !== WINNER){
+    /* OK */
+  }
+
+  var totalRot  = calcTotalRot(curAngle, targetSeg, jitter);
+  var overshoot = 0; /* Near-miss effekti olib tashlandi */
+  var dur1 = 3800 + Math.random()*600;
+  var dur2 = 1; /* overshoot=0 bo'lganda phase2 kerak emas */
+  var startA = curAngle;
+
+  animate(startA, totalRot, dur1, overshoot, dur2, function(){
+    /* Spin tugadi */
+    attempt++;
+    spinning=false;
+    updateDots();
+
+    if(isWinTurn){
+      /* ── YUTDI ── */
+      draw(curAngle, true);
+      var cv=document.getElementById('barabanWheel');
+      if(cv) cv.classList.add('won');
+      btn.classList.remove('spinning');
+      if(btnTxt) btnTxt.innerHTML='<span style="font-size:16px">✅</span>';
+      btn.style.pointerEvents='none';
+      confetti();
+      if(msg){
+        msg.innerHTML='🎉 <b>Табриклаймиз! Сиз 70% чегирма ютдингиз!</b>';
+        msg.style.color='#16a34a';
+        msg.classList.add('baraban-win');
+      }
+      /* Chegirma qiymatini o'rnatish */
+      var di=document.getElementById('discountValue');
+      if(di) di.value='70%';
+
+      /* Narx blokini ko'rsatish */
+      var priceEl=document.querySelector('#pluginCta .order__price');
+      if(priceEl) priceEl.style.cssText='display:flex !important';
+
+      /* 2 soniyadan keyin spin popup + order forma */
+      setTimeout(function(){
+        /* 1. Spin popup ko'rsatish */
+        var spinEl=document.querySelector('#pluginCta .spin');
+        if(spinEl){
+          spinEl.classList.add('active');
+          var orderEl=document.querySelector('#pluginCta .order');
+          if(orderEl) orderEl.classList.add('active');
+          barabanStartTimer();
+          var btnClose=spinEl.querySelector('.spin__btn');
+          if(btnClose){
+            btnClose.addEventListener('click',function(){
+              spinEl.classList.remove('active');
+              /* Order formani ko'rsatish */
+              var orderEl=document.querySelector('#pluginCta .order');
+              if(orderEl) orderEl.classList.add('active');
+              /* Taymerni boshlash */
+              barabanStartTimer();
+              /* Formaga scroll */
+              setTimeout(function(){
+                var footer=document.querySelector('#pluginCta .order__footer');
+                if(footer) footer.scrollIntoView({behavior:'smooth',block:'end'});
+                else{
+                  var ord=document.querySelector('#pluginCta .order');
+                  if(ord) ord.scrollIntoView({behavior:'smooth',block:'center'});
+                }
+              },300);
+            });
+          }
+        }
+        /* 2. Baraban o'yinini yashirish */
+        var doorEl=document.getElementById('barabanGame');
+        if(doorEl){
+          doorEl.classList.add('hidden');
+          setTimeout(function(){ doorEl.classList.add('none'); },1200);
+        }
+      },2000);
+    } else {
+      /* ── YUTQAZDI ── */
+      draw(curAngle, false);
+      btn.classList.remove('spinning');
+      var left = MAX_ATTEMPTS - attempt;
+      if(btnTxt) btnTxt.innerHTML='АЙЛ-<br>АНТ';
+      if(msg){ msg.textContent=''; }
+
+      if(attempt>=MAX_ATTEMPTS){
+        /* Barcha urinishlar tugadi — lekin winAttempt=MAX_ATTEMPTS holatida bu kod chaqirilmaydi */
+        if(btnTxt) btnTxt.innerHTML='<span style="font-size:16px">🔒</span>';
+        btn.style.pointerEvents='none';
+      } else {
+        /* Popup ko'rsatish */
+        setTimeout(function(){
+          var overlay = document.getElementById('barabanRetryOverlay');
+          var leftCount = document.getElementById('retryLeftCount');
+          var leftText = document.getElementById('retryLeftText');
+          var retryMsg = document.getElementById('retryMsg');
+          /* Dots row */
+          var dotsRow = document.getElementById('retryDotsRow');
+          if(dotsRow){
+            var dhtml = '';
+            for(var d=0;d<MAX_ATTEMPTS;d++){
+              if(d<attempt)       dhtml+='<div class="baraban-retry-dot done"></div>';
+              else                dhtml+='<div class="baraban-retry-dot remaining"></div>';
+            }
+            dotsRow.innerHTML = dhtml;
+          }
+          if(leftText) leftText.textContent = left;
+          if(retryMsg){
+            if(left===1){
+              retryMsg.innerHTML = 'Сизда яна <b>1 та охирги</b> уриниш қолди.<br>Шанс ҳали бор — уриниб кўринг!';
+            } else {
+              retryMsg.innerHTML = 'Сизда яна <b>'+left+' та</b> уриниш қолди.<br>Яна уриниб кўринг!';
+            }
+          }
+          if(overlay) overlay.classList.add('show');
+        }, 600);
+      }
+    }
+  });
+};
+
+/* ── TAYMER ─────────────────────────────────────────────────────── */
+function barabanStartTimer(){
+  var minEl=document.getElementById('orderMinute');
+  var secEl=document.getElementById('orderSecond');
+  if(!minEl||!secEl) return;
+  if(window.__barabanTimerStarted) return;
+  window.__barabanTimerStarted=true;
+  var t=Math.floor(60*(10-0.01));
+  function upd(){
+    var m=parseInt(t/60,10), s=parseInt(t%60,10);
+    minEl.innerHTML=m<10?'0'+m:m;
+    secEl.innerHTML=s<10?'0'+s:s;
+    if(--t<0){ t=0; clearInterval(tid); }
+  }
+  upd();
+  var tid=setInterval(upd,1000);
+}
+
+/* ── RETRY POPUP YOPISH ─────────────────────────────────────── */
+window.closeRetryPopup = function(){
+  var overlay = document.getElementById('barabanRetryOverlay');
+  if(overlay) overlay.classList.remove('show');
+};
+
+/* ── INIT ─────────────────────────────────────────────────────── */
+function init(){
+  updateDots();
+  draw(0,false);
+  var cv=document.getElementById('barabanWheel');
+  if(cv) cv.addEventListener('click', spinWheel);
+}
+document.readyState==='loading'
+  ? document.addEventListener('DOMContentLoaded',init)
+  : init();
+
+})();
+
+</script>
+<script>
+
+(function(){
+  'use strict';
+  const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+  function digits(v){return (v||'').replace(/\D/g,'').replace(/^998/,'').slice(0,9)}
+  function mask(v){const d=digits(v);let o='+998';if(d.length)o+=' '+d.slice(0,2);if(d.length>2)o+=' '+d.slice(2,5);if(d.length>5)o+='-'+d.slice(5,9);return o}
+  function validPhone(v){return digits(v).length===9}
+  function bindPhone(input){if(!input)return;input.addEventListener('focus',()=>{if(!input.value)input.value='+998 '});input.addEventListener('input',()=>{input.value=mask(input.value);const err=$('#phoneError'),ok=$('#phoneOk');if(input.id==='phoneInput'){if(err)err.style.display=input.value.length>5&&!validPhone(input.value)?'block':'none';if(ok)ok.style.display=validPhone(input.value)?'block':'none'}})}
+  function startTimer(minEl,secEl){if(!minEl||!secEl)return;let t=599;const tick=()=>{const m=Math.floor(t/60),s=t%60;minEl.textContent=String(m).padStart(2,'0');secEl.textContent=String(s).padStart(2,'0');if(t>0)t--};tick();setInterval(tick,1000)}
+  function hideSubmittedForm(form){const panel=form.closest('.order');if(panel){const header=panel.querySelector('.order__header');const footer=panel.querySelector('.order__footer');if(header)header.style.display='none';if(footer)footer.style.display='none'}form.style.display='none'}
+  function submitTelegram(form, success, error){form.addEventListener('submit',async e=>{e.preventDefault();const phone=form.querySelector('[name="phone"]');if(phone&&!validPhone(phone.value)){phone.focus();phone.setCustomValidity('Telefon raqamini to‘liq kiriting');phone.reportValidity();setTimeout(()=>phone.setCustomValidity(''),100);return}const btn=form.querySelector('button[type="submit"]');const original=btn?btn.textContent:'';if(btn){btn.disabled=true;btn.textContent='ЮБОРИЛМОҚДА...'}try{const data=new FormData(form);const token='8686784975:AAFi-nQ8k19jjZlEC8a4SV0PVmhaSFN1-GI';const chatId='-5205054614';const name=data.get('name')||'';const phoneValue=data.get('phone')||'';const address=data.get('address')||'';const age=data.get('age')||'';const discount=data.get('discount')||'70%';const text=['🆕 Yangi buyurtma: Kristal-5/9','','👤 Ism Familiya: '+name,'📱 Telefon: '+phoneValue,address?'📍 Turar joyi: '+address:'',age?'🎂 Yosh: '+age:'','🎁 Chegirma: '+discount,'🕒 Sana: '+new Date().toLocaleString('uz-UZ')].filter(Boolean).join('\n');const body=new URLSearchParams({chat_id:chatId,text:text,disable_web_page_preview:'true'});await fetch('https://api.telegram.org/bot'+token+'/sendMessage',{method:'POST',mode:'no-cors',body:body});hideSubmittedForm(form);if(success)success.style.display='block'}catch(err){hideSubmittedForm(form);if(success)success.style.display='block'}finally{if(btn){btn.disabled=false;btn.textContent=original||'BUYURTMA BERISH'}}})}
+  function scrollToGame(){const el=$('#pluginCta');if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
+  document.addEventListener('DOMContentLoaded',()=>{
+    $$('img').forEach(img=>img.addEventListener('error',()=>{img.style.opacity='.25'}));
+    bindPhone($('#phoneInput'));bindPhone($('#orderForm2 [name="phone"]'));
+    const f1=$('#orderForm'), f2=$('#orderForm2');
+    if(f1)submitTelegram(f1,$('.js-success'),$('.js-error-text'));
+    if(f2)submitTelegram(f2,$('#orderSuccess2'),$('#orderError2'));
+    startTimer($('#orderMinute2'),$('#orderSecond2'));
+    const gift=$('#floatingGiftBox');
+    if(gift){const show=()=>gift.classList.toggle('show',scrollY>650);show();addEventListener('scroll',show,{passive:true});gift.addEventListener('click',scrollToGame);gift.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();scrollToGame()}})}
+    $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const target=$(a.getAttribute('href'));if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'})}}));
+    const modal=$('.spin');if(modal)modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('active')});
+  });
+})();
+
+</script>
+</body>
+</html>
