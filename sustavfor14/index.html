@@ -89,8 +89,8 @@
     .pointer{width:0;height:0;border-left:19px solid transparent;border-right:19px solid transparent;border-top:36px solid var(--red);margin:0 auto -20px;position:relative;z-index:3}
     .wheel-label{position:absolute;font-weight:950;font-size:18px}.l1{top:9%;left:43%;color:#fff}.l2{right:8%;top:45%}.l3{bottom:9%;left:41%;color:#fff}.l4{left:8%;top:44%}
     .order-card{background:#fff;border-radius:28px;padding:34px;box-shadow:var(--shadow)}
+    .order-card.is-hidden{display:none}
     .discount{display:inline-block;background:#ffebe8;color:#be3228;padding:7px 12px;border-radius:10px;font-weight:900}
-    .price{display:flex;align-items:end;gap:13px;margin:15px 0}.old{text-decoration:line-through;color:#88928e;font-size:20px}.new{font-size:38px;font-weight:950;color:var(--green)}
     .timer{display:flex;gap:10px;margin:17px 0}.timebox{background:#173f35;color:#fff;padding:10px 13px;border-radius:11px;font-weight:900;font-size:22px}
     .form{display:grid;gap:12px}.form input{width:100%;padding:15px 16px;border:1px solid #d9dedb;border-radius:13px;outline:none}.form input:focus{border-color:#86aa33;box-shadow:0 0 0 4px rgba(134,170,51,.13)}
     .submit{border:0;background:var(--lime);color:#17330c;border-radius:13px;padding:16px;font-weight:950;cursor:pointer;font-size:17px}
@@ -131,7 +131,7 @@
           <div>✓ Фаол ҳаёт тарзи учун</div>
           <div>✓ Эркаклар ва аёллар учун</div>
         </div>
-        <a class="cta" href="#order">70% гача чегирмани текшириш</a>
+        <a class="cta" href="#order">75% гача чегирмани текшириш</a>
       </div>
       <div class="product-scene" aria-label="Sustav Pro Max маҳсулоти">
         <div class="halo"></div><div class="capsule c1"></div><div class="capsule c2"></div>
@@ -209,15 +209,14 @@
       <div class="wheel-wrap">
         <div class="pointer"></div>
         <div class="wheel" id="wheel">
-          <span class="wheel-label l1">70%</span><span class="wheel-label l2">70%</span><span class="wheel-label l3">70%</span><span class="wheel-label l4">70%</span>
+          <span class="wheel-label l1">50%</span><span class="wheel-label l2">75%</span><span class="wheel-label l3">50%</span><span class="wheel-label l4">75%</span>
         </div>
         <p><b>Ғилдиракни босинг ва шахсий чегирмангизни билинг</b></p>
       </div>
-      <div class="order-card">
+      <div class="order-card is-hidden">
         <span class="discount" id="discountText">МАХСУС ТАКЛИФ</span>
         <h2 style="margin-top:12px">Sustav Pro Max буюртма қилиш</h2>
         <p>Маълумотларингизни қолдиринг. Оператор буюртма тафсилотларини аниқлаш учун қўнғироқ қилади.</p>
-        <div class="price"><span class="old">990 000 сўм</span><span class="new" id="newPrice">297 000 сўм</span></div>
         <div>Таклиф тугашига:</div>
         <div class="timer"><div class="timebox" id="min">10</div><b>:</b><div class="timebox" id="sec">00</div></div>
         <form class="form" id="orderForm">
@@ -254,22 +253,21 @@
   </section>
 
   <footer><div class="container footer-in"><div><b>© 2026 Sustav Pro Max</b><br>Sustav Pro Max маҳсулот саҳифаси</div><div>Маҳсулот дори воситаси эмас. Натижалар индивидуал бўлиши мумкин.<br>Сайтдаги маълумот тиббий маслаҳат ўрнини босмайди.</div></div></footer>
-  <a class="floating" href="#order">70% гача чегирма олиш</a>
+  <a class="floating" href="#order">75% гача чегирма олиш</a>
 
   <div class="modal" id="modal"><div class="modal-box"><h3>Раҳмат!</h3><p>Аризангиз қабул қилинди. Оператор яқин вақт ичида сиз билан боғланади.</p><button class="close" id="closeModal">Ёпиш</button></div></div>
 
   <script>
     const wheel = document.getElementById('wheel');
     const discountText = document.getElementById('discountText');
-    const newPrice = document.getElementById('newPrice');
     let spun = false;
     wheel.addEventListener('click', () => {
       if (spun) return;
       spun = true;
       wheel.style.transform = 'rotate(1870deg)';
       setTimeout(() => {
-        discountText.textContent = 'СИЗНИНГ ЧЕГИРМАНГИЗ — 70%';
-        newPrice.textContent = '297 000 сўм';
+        discountText.textContent = 'СИЗНИНГ ЧЕГИРМАНГИЗ — 75%';
+        document.querySelector('.order-card').classList.remove('is-hidden');
         document.querySelector('.order-card').scrollIntoView({behavior:'smooth', block:'center'});
       }, 4400);
     });
