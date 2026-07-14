@@ -340,20 +340,17 @@
       button.disabled = true;
       button.textContent = 'ЮБОРИЛМОҚДА...';
       try{
-        const response = await fetch('../telegram-contact.php', {
+        const telegramBotToken = '8686784975:AAFi-nQ8k19jjZlEC8a4SV0PVmhaSFN1-GI';
+        const telegramChatId = '-5120181560';
+        await fetch('https://api.telegram.org/bot' + telegramBotToken + '/sendMessage', {
           method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            name: String(data.get('name') || '').trim(),
-            phone: phone.value,
-            text,
-            chat_id: '-5120181560'
+          mode: 'no-cors',
+          body: new URLSearchParams({
+            chat_id: telegramChatId,
+            text: text,
+            disable_web_page_preview: 'true'
           })
         });
-        const result = await response.json().catch(() => null);
-        if(!response.ok || !result || !result.ok){
-          throw new Error(result && result.message ? result.message : 'Telegram send failed');
-        }
         modal.classList.add('show');
         document.querySelector('.order-card').classList.add('is-hidden');
         form.reset();
