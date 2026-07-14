@@ -223,6 +223,9 @@
         <form class="form" id="orderForm">
           <input name="name" required minlength="2" placeholder="Исмингиз">
           <input name="phone" required inputmode="tel" placeholder="+998 __ ___ __ __">
+          <input name="address" required placeholder="Turar joyi">
+          <input name="age" required inputmode="numeric" type="number" min="1" max="120" placeholder="Yosh">
+          <input name="discount" type="hidden" value="70%">
           <button class="submit" type="submit">БУЮРТМА БЕРИШ</button>
         </form>
         <div class="note">Тугмани босиш орқали шахсий маълумотларни қайта ишлашга розилик билдирасиз. Маҳсулот дори воситаси эмас. Қўллашдан олдин мутахассис билан маслаҳатлашинг.</div>
@@ -296,14 +299,68 @@
     });
 
     const modal = document.getElementById('modal');
-    document.getElementById('orderForm').addEventListener('submit', e => {
+    function formatPhoneForTelegram(value){
+      const digits = value.replace(/\D/g, '');
+      const local = (digits.startsWith('998') ? digits.slice(3) : digits).slice(0, 9);
+      if(local.length !== 9) return value;
+      return '+998 ' + local.slice(0, 2) + ' ' + local.slice(2, 5) + '-' + local.slice(5, 9);
+    }
+
+    function formatTelegramDate(){
+      return new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Tashkent',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      }).format(new Date());
+    }
+
+    document.getElementById('orderForm').addEventListener('submit', async e => {
       e.preventDefault();
+      const form = e.target;
       const digits = phone.value.replace(/\D/g,'');
       if(digits.length !== 12){ phone.setCustomValidity('Телефон рақамини тўлиқ киритинг'); phone.reportValidity(); return; }
       phone.setCustomValidity('');
-      modal.classList.add('show');
-      document.querySelector('.order-card').classList.add('is-hidden');
-      e.target.reset();
+      const data = new FormData(form);
+      const text = [
+        '🆕 Yangi buyurtma: sustav/14 ',
+        '👤 Ism Familiya: ' + String(data.get('name') || '').trim(),
+        '📱 Telefon: ' + formatPhoneForTelegram(phone.value),
+        '📍 Turar joyi: ' + String(data.get('address') || '').trim(),
+        '🎂 Yosh: ' + String(data.get('age') || '').trim(),
+        '🎁 Chegirma: ' + String(data.get('discount') || '70%').trim(),
+        '🕒 Sana: ' + formatTelegramDate()
+      ].join('\n');
+      const button = form.querySelector('button[type="submit"]');
+      const oldText = button.textContent;
+      button.disabled = true;
+      button.textContent = 'ЮБОРИЛМОҚДА...';
+      try{
+        const response = await fetch('../telegram-contact.php', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            name: String(data.get('name') || '').trim(),
+            phone: phone.value,
+            text,
+            chat_id: '-5120181560'
+          })
+        });
+        const result = await response.json().catch(() => null);
+        if(!response.ok || !result || !result.ok){
+          throw new Error(result && result.message ? result.message : 'Telegram send failed');
+        }
+        modal.classList.add('show');
+        document.querySelector('.order-card').classList.add('is-hidden');
+        form.reset();
+      }finally{
+        button.disabled = false;
+        button.textContent = oldText;
+      }
     });
     document.getElementById('closeModal').onclick = () => modal.classList.remove('show');
     modal.addEventListener('click', e => { if(e.target === modal) modal.classList.remove('show'); });
