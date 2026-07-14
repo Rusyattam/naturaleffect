@@ -82,13 +82,14 @@
     .checklist{display:grid;gap:12px;margin-top:20px}
     .check{display:flex;gap:11px}.check:before{content:"✓";color:#7ca51d;font-weight:900}
     .offer{background:linear-gradient(135deg,#f5f1e3,#eef6d7)}
-    .offer-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:35px;align-items:center}
+    .offer-grid{display:grid;grid-template-columns:1fr;gap:35px;align-items:center;justify-items:center}
     .wheel-wrap{text-align:center}
+    .wheel-wrap.is-hidden{display:none}
     .wheel{width:min(340px,85vw);aspect-ratio:1;margin:auto;border-radius:50%;position:relative;background:conic-gradient(#173f35 0 45deg,#c7ef6a 45deg 90deg,#fff 90deg 135deg,#d9a443 135deg 180deg,#173f35 180deg 225deg,#c7ef6a 225deg 270deg,#fff 270deg 315deg,#d9a443 315deg);border:12px solid #fff;box-shadow:0 20px 50px rgba(30,64,53,.2);transition:transform 4.3s cubic-bezier(.12,.7,.12,1)}
     .wheel:after{content:"БОСИНГ";position:absolute;inset:34%;border-radius:50%;background:#fff;display:grid;place-items:center;font-weight:950;color:var(--green);box-shadow:0 4px 18px rgba(0,0,0,.18)}
     .pointer{width:0;height:0;border-left:19px solid transparent;border-right:19px solid transparent;border-top:36px solid var(--red);margin:0 auto -20px;position:relative;z-index:3}
     .wheel-label{position:absolute;font-weight:950;font-size:18px}.l1{top:9%;left:43%;color:#fff}.l2{right:8%;top:45%}.l3{bottom:9%;left:41%;color:#fff}.l4{left:8%;top:44%}
-    .order-card{background:#fff;border-radius:28px;padding:34px;box-shadow:var(--shadow)}
+    .order-card{width:min(650px,100%);background:#fff;border-radius:28px;padding:34px;box-shadow:var(--shadow)}
     .order-card.is-hidden{display:none}
     .discount{display:inline-block;background:#ffebe8;color:#be3228;padding:7px 12px;border-radius:10px;font-weight:900}
     .timer{display:flex;gap:10px;margin:17px 0}.timebox{background:#173f35;color:#fff;padding:10px 13px;border-radius:11px;font-weight:900;font-size:22px}
@@ -209,7 +210,7 @@
       <div class="wheel-wrap">
         <div class="pointer"></div>
         <div class="wheel" id="wheel">
-          <span class="wheel-label l1">50%</span><span class="wheel-label l2">75%</span><span class="wheel-label l3">50%</span><span class="wheel-label l4">75%</span>
+          <span class="wheel-label l1">15%</span><span class="wheel-label l2">25%</span><span class="wheel-label l3">50%</span><span class="wheel-label l4">75%</span>
         </div>
         <p><b>Ғилдиракни босинг ва шахсий чегирмангизни билинг</b></p>
       </div>
@@ -267,6 +268,7 @@
       wheel.style.transform = 'rotate(1870deg)';
       setTimeout(() => {
         discountText.textContent = 'СИЗНИНГ ЧЕГИРМАНГИЗ — 75%';
+        document.querySelector('.wheel-wrap').classList.add('is-hidden');
         document.querySelector('.order-card').classList.remove('is-hidden');
         document.querySelector('.order-card').scrollIntoView({behavior:'smooth', block:'center'});
       }, 4400);
@@ -300,6 +302,7 @@
       if(digits.length !== 12){ phone.setCustomValidity('Телефон рақамини тўлиқ киритинг'); phone.reportValidity(); return; }
       phone.setCustomValidity('');
       modal.classList.add('show');
+      document.querySelector('.order-card').classList.add('is-hidden');
       e.target.reset();
     });
     document.getElementById('closeModal').onclick = () => modal.classList.remove('show');
