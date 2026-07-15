@@ -356,10 +356,7 @@
         ctx.translate(cx, cy);
         ctx.rotate(mid);
         ctx.translate(radius * .62, 0);
-        const normalized = ((segmentMid % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-        if(normalized > Math.PI / 2 && normalized < Math.PI * 1.5){
-          ctx.rotate(Math.PI);
-        }
+        ctx.rotate(Math.PI);
         ctx.font = '800 28px Arial';
         ctx.fillStyle = '#fff';
         ctx.textAlign = 'center';
