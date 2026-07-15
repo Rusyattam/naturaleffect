@@ -106,12 +106,12 @@
     .baraban-attempts{margin-bottom:16px;font-family:Georgia,"Times New Roman",serif;font-size:24px;font-weight:900;color:#1e3a6d}
     .baraban-attempts b{font-size:34px;color:#d12b2b}
     .baraban-dot{width:46px;height:46px;border-radius:50%;background:#2867e8;border:4px solid #16419b;margin:4px auto 0;box-shadow:0 0 18px rgba(40,103,232,.45)}
-    .baraban-stage{position:relative;width:min(520px,86vw);aspect-ratio:1;margin:0 auto 10px;border-radius:50%;padding:14px;background:conic-gradient(#8b5c00,#f5cc45,#9d6900,#ffe27a,#8b5c00);box-shadow:0 0 0 6px #6d4700,0 18px 45px rgba(23,63,53,.28)}
+    .baraban-stage{position:relative;width:min(520px,86vw);aspect-ratio:1;margin:0 auto 12px;border-radius:50%;padding:16px;background:conic-gradient(from -18deg,#7d4d00,#ffd95b 13%,#9d6500 25%,#fff0a8 38%,#815000 50%,#ffd95b 63%,#9d6500 76%,#fff0a8 88%,#7d4d00);box-shadow:0 0 0 6px #6d4700,0 0 0 11px rgba(255,230,130,.55),0 22px 55px rgba(23,63,53,.3),inset 0 0 22px rgba(255,255,255,.42)}
     #barabanWheel{width:100%;height:100%;display:block;border-radius:50%;cursor:pointer}
     .baraban-pointer-dot{position:absolute;z-index:5;top:-88px;left:50%;transform:translateX(-50%);width:54px;height:54px;border-radius:50%;background:#2867e8;border:5px solid #16419b;box-shadow:0 5px 16px rgba(0,0,0,.22)}
     .baraban-pointer{position:absolute;z-index:6;top:-35px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:32px solid transparent;border-right:32px solid transparent;border-top:78px solid #ef3333;filter:drop-shadow(0 4px 4px rgba(0,0,0,.3))}
     .baraban-pointer:after{content:"";position:absolute;left:-22px;top:-70px;border-left:22px solid transparent;border-right:22px solid transparent;border-top:55px solid #ff4b4b}
-    .baraban-spin-btn{position:absolute;z-index:7;left:50%;top:50%;transform:translate(-50%,-50%);width:96px;height:96px;border-radius:50%;border:6px solid #174d72;background:#eefaff;color:#173b60;font-family:Georgia,"Times New Roman",serif;font-size:22px;line-height:1;font-weight:950;display:grid;place-items:center;text-align:center;cursor:pointer;box-shadow:0 7px 22px rgba(0,0,0,.25)}
+    .baraban-spin-btn{position:absolute;z-index:7;left:50%;top:50%;transform:translate(-50%,-50%);width:100px;height:100px;border-radius:50%;border:6px solid #174d72;background:radial-gradient(circle at 35% 25%,#fff 0,#effbff 42%,#b9dff2 100%);color:#173b60;font-family:Georgia,"Times New Roman",serif;font-size:22px;line-height:1;font-weight:950;display:grid;place-items:center;text-align:center;cursor:pointer;box-shadow:0 7px 22px rgba(0,0,0,.25),inset 0 3px 8px rgba(255,255,255,.9)}
     .baraban-spin-btn:disabled{cursor:wait;opacity:.9}
     .baraban-msg{min-height:30px;margin:8px 0 0;font-weight:900;color:#168a4b}
     .order-card{width:min(650px,100%);background:#fff;border-radius:28px;padding:34px;box-shadow:var(--shadow)}
@@ -320,9 +320,11 @@
       ctx.clearRect(0, 0, wheel.width, wheel.height);
 
       barabanSegments.forEach((label, i) => {
-        const start = angle + i * arc;
+        const segmentStart = i * arc;
+        const segmentMid = segmentStart + arc / 2;
+        const start = angle + segmentStart;
         const end = start + arc;
-        const mid = start + arc / 2;
+        const mid = angle + segmentMid;
         const color = won && i === winnerIndex ? ['#f6c54a','#936004'] : colors[i % 2];
         const grad = ctx.createLinearGradient(cx, cy, cx + Math.cos(mid) * radius, cy + Math.sin(mid) * radius);
         grad.addColorStop(0, color[0]);
@@ -350,19 +352,18 @@
         ctx.save();
         ctx.translate(cx, cy);
         ctx.rotate(mid);
-        const normalized = ((mid % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-        let textX = radius * .62;
+        ctx.translate(radius * .62, 0);
+        const normalized = ((segmentMid % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
         if(normalized > Math.PI / 2 && normalized < Math.PI * 1.5){
           ctx.rotate(Math.PI);
-          textX = -textX;
         }
-        ctx.font = 'bold 24px Arial';
+        ctx.font = '800 28px Arial';
         ctx.fillStyle = '#fff';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.shadowColor = 'rgba(0,0,0,.65)';
         ctx.shadowBlur = 4;
-        ctx.fillText(label, textX, 0);
+        ctx.fillText(label, 0, 0);
         ctx.restore();
       });
 
