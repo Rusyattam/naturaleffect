@@ -1,0 +1,728 @@
+﻿<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1365, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <title>Fatizon</title>
+  <link rel="icon" type="image/png" href="../Fatizon_files/fatizon_product.png">
+  <meta property="og:title" content="Fatizon">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="../Fatizon_files/fatizon_product.png">
+  <link href="../Fatizon_files/css2" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:#fff;color:#000;font-family:'Open Sans',Arial,sans-serif;min-width:1365px}
+    .page{width:1365px;margin:0 auto;overflow:hidden;background:#fff}
+    .section{position:relative;width:1365px;overflow:hidden}
+    .carrier,.filter{position:absolute;inset:0;width:100%;height:100%}
+    .item{position:absolute;box-sizing:border-box}
+    .image{display:block}
+    .text strong{font-weight:700}
+    .button{cursor:pointer}
+    .order-form{display:flex;flex-direction:column;gap:8px}
+    .order-form select,.order-form input{width:300px;height:46px;border:0;border-radius:18px;background:#f7eee8;color:#0f0f0f;padding:0 16px;font-family:'Open Sans',Arial,sans-serif;font-size:15px;font-weight:700;outline:none}
+    .order-form button{width:300px;height:46px;border:0;border-radius:18px;background:#ef391b;color:#fff;font-family:'Open Sans',Arial,sans-serif;font-size:19px;font-weight:600;cursor:pointer}
+    .form-row{display:flex;gap:8px;width:300px}
+    .form-row input{width:146px}
+  
+    .s1{height:100px;background:rgb(147, 187, 76)}
+    .s2{position:absolute;left:83px;top:16px;width:60px;height:68px;z-index:1;object-fit:contain}
+    .s3{position:absolute;left:364px;top:19px;width:60px;height:60px;z-index:2;object-fit:contain}
+    .s4{position:absolute;left:643px;top:20px;width:60px;height:60px;z-index:3;object-fit:contain}
+    .s5{position:absolute;left:163px;top:19px;width:131px;height:auto;z-index:4;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+    .s6{position:absolute;left:444px;top:9px;width:173px;height:auto;z-index:5;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:27px;text-align:start;text-transform:none}
+    .s7{position:absolute;left:723px;top:23px;width:162px;height:auto;z-index:6;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:27px;text-align:start;text-transform:none}
+    .s8{position:absolute;left:925px;top:25px;width:200px;height:55px;z-index:7;color:rgb(0, 0, 0);background:rgb(244, 198, 2);border:0px solid rgba(0, 0, 0, 0);border-radius:30px;font-family:Arial, Arial, sans-serif;font-size:14px;font-weight:600;line-height:21.7px;text-align:center;display:flex;align-items:center;justify-content:center;text-decoration:none}
+    .s9{height:790px;background:rgb(255, 255, 255)}
+    .s10{background-image:url('../Fatizon_files/bg1.jpg');background-position:50% 50%;background-size:cover;background-repeat:no-repeat}
+    .s11{position:absolute;left:604px;top:45px;width:607px;height:auto;z-index:4;color:rgb(0, 0, 0);font-family:Georgia, serif;font-size:40px;font-weight:700;line-height:62px;text-align:start;text-transform:none}
+    .s12{color: rgb(132, 191, 66)}
+    .s13{position:absolute;left:403px;top:226px;width:70px;height:70px;z-index:5;background:rgb(242, 194, 2);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s14{position:absolute;left:413px;top:236px;width:50px;height:50px;z-index:6;object-fit:contain}
+    .s15{position:absolute;left:503px;top:230px;width:338px;height:auto;z-index:7;color:rgb(83, 77, 73);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+    .s16{position:absolute;left:403px;top:326px;width:70px;height:70px;z-index:8;background:rgb(242, 194, 2);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s17{position:absolute;left:413px;top:336px;width:50px;height:50px;z-index:9;object-fit:contain}
+    .s18{position:absolute;left:503px;top:330px;width:338px;height:auto;z-index:10;color:rgb(83, 77, 73);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+    .s19{position:absolute;left:403px;top:432px;width:70px;height:70px;z-index:11;background:rgb(242, 194, 2);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s20{position:absolute;left:413px;top:442px;width:50px;height:50px;z-index:12;object-fit:contain}
+    .s21{position:absolute;left:503px;top:436px;width:338px;height:auto;z-index:13;color:rgb(83, 77, 73);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+    .s22{position:absolute;left:403px;top:528px;width:70px;height:70px;z-index:14;background:rgb(242, 194, 2);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s23{position:absolute;left:413px;top:538px;width:50px;height:50px;z-index:15;object-fit:contain}
+    .s24{position:absolute;left:503px;top:532px;width:338px;height:auto;z-index:16;color:rgb(83, 77, 73);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+    .s25{position:absolute;left:755px;top:309px;width:427px;height:285px;z-index:17;object-fit:contain}
+    .s26{position:absolute;left:323px;top:665px;width:200px;height:90px;z-index:18;object-fit:contain}
+    .s27{position:absolute;left:543px;top:660px;width:200px;height:91px;z-index:20;object-fit:contain}
+    .s28{position:absolute;left:314px;top:68px;width:249px;height:auto;z-index:2;color:rgb(255, 255, 255);font-family:Georgia, serif;font-size:50px;font-weight:700;line-height:78px;text-align:start;text-transform:none}
+    .s29{position:absolute;left:303px;top:58px;width:271px;height:98px;z-index:1;background:rgb(0, 0, 0);border:0px solid rgba(0, 0, 0, 0);border-radius:0px;opacity:1}
+    .s30{height:690px;background:rgb(255, 255, 255)}
+    .s31{position:absolute;left:30px;top:160px;width:700px;height:530px;z-index:1;object-fit:contain}
+    .s32{position:absolute;left:672px;top:502px;width:101px;height:auto;z-index:13;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:16px;font-weight:400;line-height:22px;text-align:start;text-transform:none}
+    .s33{position:absolute;left:692px;top:448px;width:48px;height:45px;z-index:12;object-fit:contain}
+    .s34{position:absolute;left:641px;top:438px;width:150px;height:150px;z-index:11;background:radial-gradient(rgb(252, 220, 4) 0%, rgb(244, 199, 2) 100%);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s35{position:absolute;left:237px;top:160px;width:371px;height:auto;z-index:14;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:25px;font-weight:700;line-height:39px;text-align:center;text-transform:none}
+    .s36{position:absolute;left:895px;top:188px;width:309px;height:478px;z-index:15;background:rgb(255, 255, 255);border:1px solid rgb(0, 0, 0);border-radius:20px;opacity:1}
+    .s37{position:absolute;left:895px;top:261px;width:309px;height:117px;z-index:16;background:linear-gradient(232deg, rgb(254, 75, 27) 31%, rgb(255, 111, 38) 100%);border:0px solid rgba(0, 0, 0, 0);border-radius:0px;opacity:1}
+    .s38{position:absolute;left:936px;top:215px;width:226px;height:auto;z-index:17;color:rgb(255, 64, 9);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:none}
+    .s39{position:absolute;left:947px;top:277px;width:205px;height:auto;z-index:19;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:700;line-height:31px;text-align:start;text-transform:uppercase}
+    .s40{position:absolute;left:973px;top:308px;width:152px;height:auto;z-index:20;color:rgb(131, 27, 10);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:none}
+    .s41{position:absolute;left:899px;top:390px;width:300px;height:260px;z-index:21}
+    .s42{position:absolute;left:106px;top:504px;width:106px;height:auto;z-index:7;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:16px;font-weight:400;line-height:22px;text-align:start;text-transform:none}
+    .s43{position:absolute;left:119px;top:450px;width:79px;height:49px;z-index:6;object-fit:contain}
+    .s44{position:absolute;left:83px;top:438px;width:150px;height:150px;z-index:5;background:radial-gradient(rgb(252, 220, 4) 0%, rgb(244, 199, 2) 100%);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s45{position:absolute;left:1006px;top:197px;width:86px;height:78px;z-index:22;color:rgb(0, 0, 0);font-family:&quot;Times New Roman&quot;;font-size:16px;font-weight:400;line-height:normal;text-align:start}
+    .s46{position:absolute;left:112px;top:204px;width:101px;height:auto;z-index:4;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:16px;font-weight:400;line-height:22px;text-align:start;text-transform:none}
+    .s47{position:absolute;left:117px;top:144px;width:90px;height:54px;z-index:3;object-fit:contain}
+    .s48{position:absolute;left:87px;top:138px;width:150px;height:150px;z-index:2;background:radial-gradient(rgb(252, 220, 4) 0%, rgb(244, 199, 2) 100%);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s49{position:absolute;left:665px;top:207px;width:101px;height:auto;z-index:10;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:16px;font-weight:400;line-height:22px;text-align:start;text-transform:none}
+    .s50{position:absolute;left:679px;top:144px;width:77px;height:55px;z-index:9;object-fit:contain}
+    .s51{position:absolute;left:642px;top:138px;width:150px;height:150px;z-index:8;background:radial-gradient(rgb(252, 220, 4) 0%, rgb(244, 199, 2) 100%);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s52{position:absolute;left:83px;top:0px;width:1178px;height:auto;z-index:23;color:rgb(132, 191, 66);font-family:'Open Sans', Arial, sans-serif;font-size:35px;font-weight:700;line-height:54px;text-align:center;text-transform:none}
+    .s53{height:760px;background:rgb(248, 244, 239)}
+    .s54{position:absolute;left:163px;top:15px;width:618px;height:auto;z-index:1;color:rgb(132, 191, 66);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:none}
+    .s55{position:absolute;left:868px;top:51px;width:293px;height:198px;z-index:2;object-fit:contain}
+    .s56{position:absolute;left:163px;top:129px;width:695px;height:auto;z-index:3;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+    .s57{position:absolute;left:163px;top:480px;width:696px;height:auto;z-index:4;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+    .s58{position:absolute;left:163px;top:665px;width:585px;height:auto;z-index:5;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:700;line-height:31px;text-align:start;text-transform:none}
+    .s59{position:absolute;left:823px;top:609px;width:393px;height:118px;z-index:7;object-fit:contain}
+    .s60{height:550px;background:rgb(255, 255, 255)}
+    .s61{position:absolute;left:428px;top:20px;width:511px;height:auto;z-index:1;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:25px;font-weight:700;line-height:39px;text-align:start;text-transform:none}
+    .s62{position:absolute;left:219px;top:79px;width:928px;height:auto;z-index:2;color:rgb(127, 184, 64);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:none}
+    .s63{position:absolute;left:125px;top:150px;width:1115px;height:340px;z-index:3;object-fit:contain}
+    .s64{position:absolute;left:466px;top:210px;width:721px;height:auto;z-index:4;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:500;line-height:28px;text-align:start;text-transform:none}
+    .s65{color: rgb(255, 64, 9)}
+    .s66{height:220px;background:rgb(255, 255, 255)}
+    .s67{background-image:url('../Fatizon_files/bg4.jpg');background-position:50% 50%;background-size:cover;background-repeat:no-repeat}
+    .s68{position:absolute;left:350px;top:0px;width:666px;height:auto;z-index:1;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:400;line-height:47px;text-align:center;text-transform:none}
+    .s69{position:absolute;left:474px;top:94px;width:418px;height:auto;z-index:2;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:700;line-height:31px;text-align:start;text-transform:none}
+    .s70{position:absolute;left:866px;top:100px;width:44px;height:85px;z-index:3;object-fit:contain}
+    .s71{position:absolute;left:576px;top:155px;width:218px;height:auto;z-index:5;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:25px;font-weight:700;line-height:39px;text-align:start;text-transform:none}
+    .s72{color: inherit}
+    .s73{position:absolute;left:531px;top:140px;width:304px;height:101px;z-index:4;object-fit:contain}
+    .s74{height:680px;background:rgb(255, 255, 255)}
+    .s75{background-image:url('../Fatizon_files/bg6.jpg');background-position:50% 50%;background-size:cover;background-repeat:no-repeat}
+    .s76{position:absolute;left:163px;top:10px;width:739px;height:auto;z-index:1;color:rgb(132, 191, 66);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:uppercase}
+    .s77{position:absolute;left:893px;top:70px;width:200px;height:141px;z-index:2;object-fit:contain}
+    .s78{position:absolute;left:163px;top:118px;width:620px;height:85px;z-index:3;background:rgb(244, 198, 2);border:0px solid rgba(0, 0, 0, 0);border-radius:0px;opacity:1}
+    .s79{position:absolute;left:173px;top:126px;width:69px;height:69px;z-index:4;object-fit:contain}
+    .s80{position:absolute;left:261px;top:129px;width:522px;height:auto;z-index:5;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+    .s81{position:absolute;left:163px;top:223px;width:641px;height:auto;z-index:6;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+    .s82{position:absolute;left:783px;top:320px;width:399px;height:266px;z-index:7;object-fit:contain}
+    .s83{position:absolute;left:163px;top:584px;width:799px;height:auto;z-index:8;color:rgb(255, 64, 9);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:700;line-height:31px;text-align:start;text-transform:none}
+    .s84{height:590px;background:rgb(255, 255, 255)}
+    .s85{background-image:url('../Fatizon_files/bg2.jpg');background-position:50% 50%;background-size:cover;background-repeat:no-repeat}
+    .s86{position:absolute;left:163px;top:77px;width:636px;height:auto;z-index:1;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:500;line-height:31px;text-align:start;text-transform:none}
+    .s87{position:absolute;left:300px;top:10px;width:766px;height:auto;z-index:2;color:rgb(132, 191, 66);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:uppercase}
+    .s88{position:absolute;left:881px;top:77px;width:200px;height:316px;z-index:3;object-fit:contain}
+    .s89{position:absolute;left:1081px;top:77px;width:200px;height:316px;z-index:4;object-fit:contain}
+    .s90{position:absolute;left:173px;top:336px;width:200px;height:89px;z-index:5;object-fit:contain}
+    .s91{position:absolute;left:547px;top:343px;width:200px;height:81px;z-index:6;object-fit:contain}
+    .s92{position:absolute;left:84px;top:475px;width:1199px;height:auto;z-index:7;color:rgb(132, 191, 66);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:center;text-transform:uppercase}
+    .s93{height:320px;background:rgb(255, 255, 255)}
+    .s94{background-image:url('../Fatizon_files/bg8.jpg');background-position:50% 50%;background-size:cover;background-repeat:no-repeat}
+    .s95{position:absolute;left:232px;top:10px;width:903px;height:auto;z-index:1;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:none}
+    .s96{position:absolute;left:403px;top:80px;width:120px;height:120px;z-index:2;background:rgb(244, 198, 2);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s97{position:absolute;left:623px;top:80px;width:120px;height:120px;z-index:3;background:rgb(244, 198, 2);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s98{position:absolute;left:843px;top:80px;width:120px;height:120px;z-index:4;background:rgb(244, 198, 2);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s99{position:absolute;left:420px;top:117px;width:86px;height:auto;z-index:5;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:none}
+    .s100{position:absolute;left:648px;top:117px;width:70px;height:auto;z-index:7;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:none}
+    .s101{position:absolute;left:868px;top:117px;width:70px;height:auto;z-index:8;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:none}
+    .s102{position:absolute;left:366px;top:215px;width:187px;height:auto;z-index:9;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:700;line-height:31px;text-align:center;text-transform:none}
+    .s103{position:absolute;left:585px;top:215px;width:187px;height:auto;z-index:10;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:700;line-height:31px;text-align:center;text-transform:none}
+    .s104{position:absolute;left:804px;top:215px;width:187px;height:auto;z-index:11;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:700;line-height:31px;text-align:center;text-transform:none}
+    .s105{background-image:url('../Fatizon_files/bg10.jpg');background-position:50% 50%;background-size:cover;background-repeat:no-repeat}
+    .s106{position:absolute;left:593px;top:105px;width:563px;height:419px;z-index:1;object-fit:contain}
+    .s107{position:absolute;left:503px;top:25px;width:766px;height:auto;z-index:3;color:rgb(132, 191, 66);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:uppercase}
+    .s108{position:absolute;left:633px;top:155px;width:50px;height:50px;z-index:4;background:rgb(255, 209, 2);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s109{position:absolute;left:651px;top:161px;width:14px;height:auto;z-index:5;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:25px;font-weight:700;line-height:39px;text-align:start;text-transform:none}
+    .s110{position:absolute;left:633px;top:225px;width:50px;height:50px;z-index:6;background:rgb(255, 209, 2);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s111{position:absolute;left:651px;top:231px;width:14px;height:auto;z-index:7;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:25px;font-weight:700;line-height:39px;text-align:start;text-transform:none}
+    .s112{position:absolute;left:633px;top:295px;width:50px;height:50px;z-index:8;background:rgb(255, 209, 2);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s113{position:absolute;left:651px;top:301px;width:14px;height:auto;z-index:9;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:25px;font-weight:700;line-height:39px;text-align:start;text-transform:none}
+    .s114{position:absolute;left:633px;top:365px;width:50px;height:50px;z-index:10;background:rgb(255, 209, 2);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s115{position:absolute;left:651px;top:371px;width:14px;height:auto;z-index:11;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:25px;font-weight:700;line-height:39px;text-align:start;text-transform:none}
+    .s116{position:absolute;left:633px;top:435px;width:50px;height:50px;z-index:12;background:rgb(255, 209, 2);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s117{position:absolute;left:651px;top:441px;width:14px;height:auto;z-index:13;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:25px;font-weight:700;line-height:39px;text-align:start;text-transform:none}
+    .s118{position:absolute;left:703px;top:155px;width:424px;height:auto;z-index:14;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:19px;font-weight:500;line-height:26px;text-align:start;text-transform:none}
+    .s119{position:absolute;left:703px;top:224px;width:416px;height:auto;z-index:15;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:500;line-height:27px;text-align:start;text-transform:none}
+    .s120{position:absolute;left:703px;top:306px;width:416px;height:auto;z-index:16;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:500;line-height:27px;text-align:start;text-transform:none}
+    .s121{position:absolute;left:703px;top:435px;width:416px;height:auto;z-index:17;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:500;line-height:27px;text-align:start;text-transform:none}
+    .s122{position:absolute;left:703px;top:376px;width:416px;height:auto;z-index:18;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:500;line-height:27px;text-align:start;text-transform:none}
+    .s123{position:absolute;left:352px;top:317px;width:290px;height:193px;z-index:19;object-fit:contain}
+    .s124{height:350px;background:rgb(255, 255, 255)}
+    .s125{background-image:url('../Fatizon_files/bg11.jpg');background-position:50% 50%;background-size:cover;background-repeat:no-repeat}
+    .s126{position:absolute;left:478px;top:0px;width:410px;height:333px;z-index:1;object-fit:contain}
+    .s127{position:absolute;left:753px;top:242px;width:283px;height:122px;z-index:3;object-fit:contain}
+    .s128{position:absolute;left:603px;top:30px;width:160px;height:auto;z-index:4;color:rgb(255, 64, 9);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:uppercase}
+    .s129{position:absolute;left:534px;top:100px;width:299px;height:auto;z-index:5;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:700;line-height:31px;text-align:start;text-transform:none}
+    .s130{height:670px;background:rgb(248, 244, 239)}
+    .s131{position:absolute;left:369px;top:17px;width:629px;height:auto;z-index:2;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:uppercase}
+    .s132{position:absolute;left:208px;top:90px;width:230px;height:227px;z-index:3;background:rgb(255, 255, 255);border:0px solid rgba(0, 0, 0, 0);border-radius:10px;opacity:1}
+    .s133{position:absolute;left:215px;top:105px;width:202px;height:auto;z-index:5;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:500;line-height:31px;text-align:start;text-transform:none}
+    .s134{position:absolute;left:215px;top:136px;width:202px;height:auto;z-index:6;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:17px;font-weight:400;line-height:23px;text-align:start;text-transform:none}
+    .s135{position:absolute;left:214px;top:117px;width:200px;height:200px;z-index:4;object-fit:contain}
+    .s136{position:absolute;left:207px;top:327px;width:230px;height:227px;z-index:7;background:rgb(34, 30, 31);border:0px solid rgba(0, 0, 0, 0);border-radius:10px;opacity:1}
+    .s137{position:absolute;left:213px;top:354px;width:200px;height:200px;z-index:8;object-fit:contain}
+    .s138{position:absolute;left:214px;top:342px;width:202px;height:auto;z-index:9;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:500;line-height:31px;text-align:start;text-transform:none}
+    .s139{position:absolute;left:214px;top:373px;width:219px;height:auto;z-index:10;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:17px;font-weight:400;line-height:20px;text-align:start;text-transform:none}
+    .s140{position:absolute;left:448px;top:90px;width:230px;height:227px;z-index:11;background:rgb(34, 30, 31);border:0px solid rgba(0, 0, 0, 0);border-radius:10px;opacity:1}
+    .s141{position:absolute;left:463px;top:117px;width:200px;height:199px;z-index:12;object-fit:contain}
+    .s142{position:absolute;left:455px;top:105px;width:202px;height:auto;z-index:13;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:500;line-height:31px;text-align:start;text-transform:none}
+    .s143{position:absolute;left:455px;top:136px;width:219px;height:auto;z-index:14;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:17px;font-weight:400;line-height:20px;text-align:start;text-transform:none}
+    .s144{position:absolute;left:447px;top:327px;width:230px;height:227px;z-index:15;background:rgb(255, 255, 255);border:0px solid rgba(0, 0, 0, 0);border-radius:10px;opacity:1}
+    .s145{position:absolute;left:453px;top:327px;width:200px;height:200px;z-index:16;object-fit:contain}
+    .s146{position:absolute;left:458px;top:415px;width:159px;height:auto;z-index:17;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:500;line-height:31px;text-align:start;text-transform:none}
+    .s147{position:absolute;left:458px;top:452px;width:202px;height:auto;z-index:18;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:17px;font-weight:400;line-height:23px;text-align:start;text-transform:none}
+    .s148{position:absolute;left:688px;top:91px;width:230px;height:227px;z-index:19;background:rgb(255, 255, 255);border:0px solid rgba(0, 0, 0, 0);border-radius:10px;opacity:1}
+    .s149{position:absolute;left:718px;top:118px;width:200px;height:200px;z-index:20;object-fit:contain}
+    .s150{position:absolute;left:693px;top:100px;width:204px;height:auto;z-index:21;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:500;line-height:31px;text-align:start;text-transform:none}
+    .s151{position:absolute;left:695px;top:132px;width:202px;height:auto;z-index:22;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:17px;font-weight:400;line-height:23px;text-align:start;text-transform:none}
+    .s152{position:absolute;left:687px;top:328px;width:230px;height:227px;z-index:23;background:rgb(0, 0, 0);border:0px solid rgba(0, 0, 0, 0);border-radius:10px;opacity:1}
+    .s153{position:absolute;left:717px;top:355px;width:200px;height:200px;z-index:24;object-fit:contain}
+    .s154{position:absolute;left:694px;top:343px;width:202px;height:auto;z-index:25;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:500;line-height:31px;text-align:start;text-transform:none}
+    .s155{position:absolute;left:694px;top:374px;width:219px;height:auto;z-index:26;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:17px;font-weight:400;line-height:20px;text-align:start;text-transform:none}
+    .s156{position:absolute;left:928px;top:91px;width:230px;height:227px;z-index:27;background:rgb(34, 30, 31);border:0px solid rgba(0, 0, 0, 0);border-radius:10px;opacity:1}
+    .s157{position:absolute;left:958px;top:118px;width:200px;height:200px;z-index:28;object-fit:contain}
+    .s158{position:absolute;left:935px;top:106px;width:202px;height:auto;z-index:29;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:500;line-height:31px;text-align:start;text-transform:none}
+    .s159{position:absolute;left:935px;top:137px;width:219px;height:auto;z-index:30;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:17px;font-weight:400;line-height:20px;text-align:start;text-transform:none}
+    .s160{position:absolute;left:923px;top:328px;width:230px;height:227px;z-index:31;background:rgb(255, 255, 255);border:0px solid rgba(0, 0, 0, 0);border-radius:10px;opacity:1}
+    .s161{position:absolute;left:929px;top:355px;width:200px;height:200px;z-index:32;object-fit:contain}
+    .s162{position:absolute;left:930px;top:343px;width:202px;height:auto;z-index:33;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:500;line-height:31px;text-align:start;text-transform:none}
+    .s163{position:absolute;left:930px;top:376px;width:202px;height:auto;z-index:34;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:16px;font-weight:400;line-height:20px;text-align:start;text-transform:none}
+    .s164{position:absolute;left:133px;top:285px;width:94px;height:108px;z-index:1;object-fit:contain}
+    .s165{position:absolute;left:1093px;top:495px;width:94px;height:94px;z-index:37;object-fit:contain}
+    .s166{position:absolute;left:183px;top:591px;width:1000px;height:auto;z-index:36;color:rgb(132, 191, 66);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:700;line-height:31px;text-align:start;text-transform:uppercase}
+    .s167{height:1370px;background:rgb(255, 255, 255)}
+    .s168{position:absolute;left:177px;top:0px;width:1012px;height:auto;z-index:1;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:35px;font-weight:700;line-height:54px;text-align:center;text-transform:none}
+    .s169{position:absolute;left:83px;top:118px;width:342px;height:1227px;z-index:2;background:rgb(248, 244, 239);border:0px solid rgba(0, 0, 0, 0);border-radius:0px;opacity:1}
+    .s170{position:absolute;left:100px;top:128px;width:309px;height:309px;z-index:3;object-fit:contain}
+    .s171{position:absolute;left:91px;top:445px;width:326px;height:auto;z-index:4;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+    .s172{position:absolute;left:91px;top:1147px;width:326px;height:auto;z-index:5;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:600;line-height:31px;text-align:start;text-transform:none}
+    .s173{position:absolute;left:512px;top:116px;width:342px;height:1227px;z-index:6;background:rgb(248, 244, 239);border:0px solid rgba(0, 0, 0, 0);border-radius:0px;opacity:1}
+    .s174{position:absolute;left:529px;top:126px;width:309px;height:309px;z-index:7;object-fit:contain}
+    .s175{position:absolute;left:520px;top:443px;width:326px;height:auto;z-index:8;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+    .s176{position:absolute;left:520px;top:1083px;width:326px;height:auto;z-index:9;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:600;line-height:31px;text-align:start;text-transform:none}
+    .s177{position:absolute;left:941px;top:120px;width:342px;height:1227px;z-index:10;background:rgb(248, 244, 239);border:0px solid rgba(0, 0, 0, 0);border-radius:0px;opacity:1}
+    .s178{position:absolute;left:958px;top:130px;width:309px;height:309px;z-index:11;object-fit:contain}
+    .s179{position:absolute;left:949px;top:447px;width:326px;height:auto;z-index:12;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+    .s180{position:absolute;left:949px;top:1199px;width:326px;height:auto;z-index:13;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:600;line-height:31px;text-align:start;text-transform:none}
+    .s181{height:400px;background:rgb(248, 244, 239)}
+    .s182{position:absolute;left:435px;top:0px;width:497px;height:auto;z-index:1;color:rgb(132, 191, 66);font-family:'Open Sans', Arial, sans-serif;font-size:35px;font-weight:700;line-height:54px;text-align:start;text-transform:none}
+    .s183{position:absolute;left:220px;top:100px;width:160px;height:160px;z-index:2;background:rgba(0, 0, 0, 0);border:1px solid rgb(132, 191, 66);border-radius:3000px;opacity:1}
+    .s184{position:absolute;left:225px;top:105px;width:150px;height:150px;z-index:3;object-fit:contain}
+    .s185{position:absolute;left:193px;top:275px;width:215px;height:auto;z-index:4;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:center;text-transform:none}
+    .s186{color: rgb(227, 12, 12)}
+    .s187{position:absolute;left:603px;top:100px;width:160px;height:160px;z-index:5;background:rgba(0, 0, 0, 0);border:1px solid rgb(132, 191, 66);border-radius:3000px;opacity:1}
+    .s188{position:absolute;left:608px;top:105px;width:150px;height:150px;z-index:6;object-fit:contain}
+    .s189{position:absolute;left:529px;top:275px;width:308px;height:auto;z-index:7;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:center;text-transform:none}
+    .s190{position:absolute;left:969px;top:100px;width:160px;height:160px;z-index:8;background:rgba(0, 0, 0, 0);border:1px solid rgb(132, 191, 66);border-radius:3000px;opacity:1}
+    .s191{position:absolute;left:974px;top:105px;width:150px;height:150px;z-index:9;object-fit:contain}
+    .s192{position:absolute;left:958px;top:265px;width:182px;height:auto;z-index:10;color:rgb(0, 0, 0);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:center;text-transform:none}
+    .s193{position:absolute;left:895px;top:188px;width:309px;height:478px;z-index:21;background:rgb(255, 255, 255);border:1px solid rgb(0, 0, 0);border-radius:20px;opacity:1}
+    .s194{position:absolute;left:895px;top:261px;width:309px;height:117px;z-index:22;background:linear-gradient(232deg, rgb(254, 75, 27) 31%, rgb(255, 111, 38) 100%);border:0px solid rgba(0, 0, 0, 0);border-radius:0px;opacity:1}
+    .s195{position:absolute;left:936px;top:215px;width:226px;height:auto;z-index:23;color:rgb(255, 64, 9);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:none}
+    .s196{position:absolute;left:947px;top:277px;width:205px;height:auto;z-index:24;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:700;line-height:31px;text-align:start;text-transform:uppercase}
+    .s197{position:absolute;left:973px;top:308px;width:152px;height:auto;z-index:25;color:rgb(131, 27, 10);font-family:'Open Sans', Arial, sans-serif;font-size:30px;font-weight:700;line-height:47px;text-align:start;text-transform:none}
+    .s198{position:absolute;left:899px;top:390px;width:300px;height:260px;z-index:26}
+    .s199{position:absolute;left:1006px;top:197px;width:86px;height:78px;z-index:27;color:rgb(0, 0, 0);font-family:&quot;Times New Roman&quot;;font-size:16px;font-weight:400;line-height:normal;text-align:start}
+    .s200{height:360px;background:rgb(0, 0, 0)}
+    .s201{position:absolute;left:153px;top:45px;width:272px;height:auto;z-index:1;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+    .s202{position:absolute;left:713px;top:40px;width:406px;height:auto;z-index:2;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+    .s203{position:absolute;left:203px;top:296px;width:489px;height:auto;z-index:3;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:16px;font-weight:400;line-height:25px;text-align:start;text-transform:none}
+    .s204{position:absolute;left:203px;top:118px;width:489px;height:auto;z-index:4;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:16px;font-weight:400;line-height:25px;text-align:start;text-transform:none}
+    .s205{position:absolute;left:203px;top:194px;width:489px;height:auto;z-index:5;color:rgb(255, 255, 255);font-family:'Open Sans', Arial, sans-serif;font-size:16px;font-weight:400;line-height:25px;text-align:start;text-transform:none}
+    .s206{position:absolute;left:139px;top:211px;width:40px;height:40px;z-index:7;object-fit:contain}
+    .s207{position:absolute;left:129px;top:201px;width:60px;height:60px;z-index:6;background:rgb(255, 255, 255);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s208{position:absolute;left:139px;top:123px;width:40px;height:40px;z-index:9;object-fit:contain}
+    .s209{position:absolute;left:129px;top:113px;width:60px;height:60px;z-index:8;background:rgb(255, 255, 255);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s210{position:absolute;left:139px;top:301px;width:40px;height:40px;z-index:11;object-fit:contain}
+    .s211{position:absolute;left:129px;top:291px;width:60px;height:60px;z-index:10;background:rgb(255, 255, 255);border:0px solid rgba(0, 0, 0, 0);border-radius:3000px;opacity:1}
+    .s212{position:absolute;left:713px;top:100px;width:342px;height:60px;z-index:12;object-fit:contain}
+    .s213{position:absolute;left:780px;top:190px;width:192px;height:17px;z-index:13;object-fit:contain}
+    .s214{position:absolute;left:753px;top:235px;width:222px;height:auto;z-index:14;color:rgb(107, 104, 104);font-family:'Open Sans', Arial, sans-serif;font-size:20px;font-weight:400;line-height:31px;text-align:start;text-transform:none}
+  </style>
+</head>
+<body>
+  <main class="page">
+<section class="section s1" data-source="rec564888861">
+
+
+<img class="item image s2" src="../Fatizon_files/cert.png" alt="">
+<img class="item image s3" src="../Fatizon_files/Group_1.png" alt="">
+<img class="item image s4" src="../Fatizon_files/Group_2.png" alt="">
+<div class="item text s5">Сифат Сертификати</div>
+<div class="item text s6">Курс ичида 5 дан 17 кг гача йўқотасиз!</div>
+<div class="item text s7"><strong>279,682 одам</strong> <br>буюртма берган</div>
+<a class="item button s8" href="#order">БЕПУЛ КОНСУЛТАТСИЯ ОЛИШ</a>
+</section>
+<section class="section s9" data-source="rec564888142">
+<div class="carrier s10"></div>
+
+<div class="item text s11">ОЗИНГИЗНИ ЯНА НОЗИК <span class="s12">ВА ЁШ ҲИС ЕТИНГ!</span></div>
+<div class="item shape s13"></div>
+<img class="item image s14" src="../Fatizon_files/---122371373-removeb.png" alt="">
+<div class="item text s15"><strong>Клиник жиҳатдан исботланган</strong><br>+ сертификат</div>
+<div class="item shape s16"></div>
+<img class="item image s17" src="../Fatizon_files/3349413.png" alt="">
+<div class="item text s18"><strong>Ёғни йўқ қилади</strong><br>сон ва қорин бўшлиғида</div>
+<div class="item shape s19"></div>
+<img class="item image s20" src="../Fatizon_files/pngtree-vector-apple.png" alt="">
+<div class="item text s21">Ошқозоннинг <strong>жарроҳлик килмасдан</strong> қисқартиради</div>
+<div class="item shape s22"></div>
+<img class="item image s23" src="../Fatizon_files/1668490.png" alt="">
+<div class="item text s24">Оғирлик<strong> яна</strong><br><strong> қайтиб </strong>келмайди</div>
+<img class="item image s25" src="../Fatizon_files/fatizon_product.png" alt="">
+<img class="item image s26" src="../Fatizon_files/shtamp1.png" alt="">
+<img class="item image s27" src="../Fatizon_files/shtamp2.png" alt="">
+<div class="item text s28">FATIZON</div>
+<div class="item shape s29"></div>
+</section>
+<section class="section s30" data-source="rec564919589">
+
+
+<img class="item image s31" src="../Fatizon_files/vesi.png" alt="">
+<div class="item text s32">Ортикча вазн <strong>яна қайтмайди</strong></div>
+<img class="item image s33" src="../Fatizon_files/4.png" alt="">
+<div class="item shape s34"></div>
+<div class="item text s35">ОДДИЙ ДИЕТАДАН 60 БАРАВАР САМАРАЛИРОҚ!</div>
+<div class="item shape s36"></div>
+<div class="item shape s37"></div>
+<div class="item text s38">ОХИРГИ КУН!</div>
+<div class="item text s39">Fatizon акцияда:</div>
+<div class="item text s40">-50%</div>
+<form id="order" class="item order-form s41" action="#" method="post">
+          <select name="Selectbox" aria-label="Davlat"><option value="Ўзбекистон">Ўзбекистон</option></select>
+          <input name="Name" type="text" placeholder="Исмингизни йозинг " required>
+          <input name="Phone" type="tel" value="+998 " placeholder="+998 XX XXX XX XX" inputmode="numeric" autocomplete="tel" maxlength="17" required>
+          <div class="form-row"><input name="Address" type="text" placeholder="Turar joyi"><input name="Age" type="number" min="1" max="99" placeholder="Yosh"></div>
+          <button type="submit">БЮРТМА БЕРИШ</button>
+        </form>
+<div class="item text s42"><strong>Ошқозон деворларини</strong> торайтиради</div>
+<img class="item image s43" src="../Fatizon_files/2.png" alt="">
+<div class="item shape s44"></div>
+<div class="item text html-text s45">23 07 2023</div>
+<div class="item text s46"><strong>Ёг</strong> бирикма-<br>ларини парчалайди</div>
+<img class="item image s47" src="../Fatizon_files/1.png" alt="">
+<div class="item shape s48"></div>
+<div class="item text s49">Иштаҳани <strong>2 баробар </strong>камайтиради</div>
+<img class="item image s50" src="../Fatizon_files/3.png" alt="">
+<div class="item shape s51"></div>
+<div class="item text s52">ФАТИЗОН-ОШҚОЗОННИНГ ЖАРРОҲЛИК КИЛМАСДАН КИЧРАЙТИРИШ!</div>
+</section>
+<section class="section s53" data-source="rec564928305">
+
+
+<div class="item text s54">ЕВРОПАЛИК МУТАХАССИСЛАР FATIZON ҲАҚИДА НИМА ДЕЙИШАДИ?</div>
+<img class="item image s55" src="../Fatizon_files/Group_1.jpg" alt="">
+<div class="item text s56">Албатта, ТОТАЛФИТ бугунги кунга қадар вазн йўқотиш учун енг яхши маҳсулотлардан бири бўлиб, соғликка зарар бермасдан кафолатланган вазн йўқотишни таъминлайди.<br><br> Ҳеч ким нима демасин, диеталар ҳали ҳам вазн йўқотишнинг ягона йўли. Бироқ, ҳамма ҳам темир иродасига ега емас ва очлик билан курашишга тайёр. <strong class="s12">FATIZON сизга бу жараённи сезиларли даражада енгиллаштириш</strong><strong> </strong>ва вазн йўқотишни ҳақиқатан ҳам қулай қилиш имконини беради. Л-карнитиннинг юқори миқдори туфайли препарат очликни самарали равишда бостиради ва иштаҳани пасайтиради.</div>
+<div class="item text s57">ФАТИЗОН тананинг зарур ёрдами билан жисмоний зўриқиш бўлмаса ҳам вазнни камайтиришга ёрдам беради. У ошқозонни қўллаш (тикиш) билан бир хил тарзда ҳаракат қилади, лекин фақат қиммат ва хавфли операциясиз. Агар сиз тез ва хавфсиз вазн йўқотмоқчи бўлсангиз, <strong class="s12">ФАТИЗОННИ синаб кўришингиз керак!</strong></div>
+<div class="item text s58">Ксения Левашова<br>Nutritionist-nutritionist, 12 йиллик амалиёт тажрибаси</div>
+<img class="item image s59" src="../Fatizon_files/shtamp4.png" alt="">
+</section>
+<section class="section s60" data-source="rec564932988">
+
+
+<div class="item text s61">Ҳар куни нозиклик ва гўзаллик сири!</div>
+<div class="item text s62">ФАТИЗОР БИЛАН ОРЗУЛАРНИ ҲАҚИҚАТГА АЙЛАНТИРИНГ!</div>
+<img class="item image s63" src="../Fatizon_files/block.jpg" alt="">
+<div class="item text s64"><strong class="s65">КАЛОРИЯЛАРНИ КАМАЙТИРИШ ОРҚАЛИ СЕМИРИШ БИЛАН КУРАШИШ БЕФОЙДА.</strong><br>Сиз диетанинг калория таркибини бир муддат камайтира олмайсиз. <span class="s65">Одатдаги овкатланиш тартибига қайтганда, вазн бошланғич нуқтага қайтади.</span><br><br>Камроқ овқатланишнинг табиий одатини ривожлантириш керак, бунда одам шунчаки ёг ъ тўқимасини тўплай олмайди ва натижани доимий равишда тузата олмайди.</div>
+</section>
+<section class="section s66" data-source="rec564935432">
+<div class="carrier s67"></div>
+
+<div class="item text s68">Диққат! ЕВРОПА ВА МДҲДА ДАВЛАТЛАРИДА ЎХШАШИ ЙЎҚ!</div>
+<div class="item text s69">Акция амал қилганда буюртма беринг</div>
+<img class="item image s70" src="../Fatizon_files/arrow2.png" alt="">
+<div class="item text s71"><a class="s72" href="#1">БЮРТМА БЕРИШ</a></div>
+<img class="item image s73" src="../Fatizon_files/btn.png" alt="">
+</section>
+<section class="section s74" data-source="rec564936708">
+<div class="carrier s75"></div>
+
+<div class="item text s76">Фатизоннинг сири таркибида Л-КАРНИТИННИНГ юқори даражадалигида!</div>
+<img class="item image s77" src="../Fatizon_files/shtamp3.png" alt="">
+<div class="item shape s78"></div>
+<img class="item image s79" src="../Fatizon_files/7325425.png" alt="">
+<div class="item text s80">Л-КАРНИТИН 0 КАЛОРИЯЛИК НОЁБ ОЗУҚАВИЙ АНТИОКСИДАНТДИР.</div>
+<div class="item text s81">Л-карнитиннинг ўзига хослиги улкан фойдали моддалар тўпламида. Бу танани токсинлар ва токсинлардан мулойимлик билан тозалайди, уларни шимгич каби танадан олиб ташлайди. TOTAL ФИТ ўсимлик комплекси нол калорияга ега. Тана ТОТАЛФИТ таркибини қайта ишлашга енергия сарфламайди ва тўпланган конларни ёқишни бошлайди.<br><br>Агар сиз ФАТИЗОННИ овқатдан олдин қабул қилсангиз, кўп миқдорда сув билан ювилган бўлсангиз, унда таркиб ошқозонни тўлдиради ва овқатдан олдин ҳам тўйинганлик ҳисси пайдо бўлишига ёрдам беради.</div>
+<img class="item image s82" src="../Fatizon_files/fatizon_product.png" alt="">
+<div class="item text s83">ОЧЛИК ВА СТРЕСССИЗ ВАЗН ЙЎҚОТИШ! ТАЪСИРИ КЛИНИК ЖИҲАТДАН ИСБОТЛАНГАН!</div>
+</section>
+<section class="section s84" data-source="rec564939391">
+<div class="carrier s85"></div>
+
+<div class="item text s86">Енг йирик ФАТИЗОН тадқиқотлари Стокголм озиқлантириш институтида бир йилда 1000 га яқин еркак ва аёл иштирокида ўтказилди.<br><br>Тадқиқотнинг барча иштирокчилари ФАТИЗОННИ 1 ой давомида қабул қилишди. Шундан сўнг натижалар сарҳисоб қилинди.</div>
+<div class="item text s87">ТОТАЛФИТ КЛИНИК СИНОВЛАРИ НАТИЖАЛАРИ</div>
+<img class="item image s88" src="../Fatizon_files/before.jpg" alt="">
+<img class="item image s89" src="../Fatizon_files/after.jpg" alt="">
+<img class="item image s90" src="../Fatizon_files/sweeden.png" alt="">
+<img class="item image s91" src="../Fatizon_files/karol.png" alt="">
+<div class="item text s92">РЕСПОНДЕНТЛАРНИНГ АКСАРИЯТИ ИСТЕЪМОЛ ҚИЛИНАДИГАН ОЗИҚ-ОВҚАТ МИҚДОРИ ВА КАЛОРИЯ МИҚДОРИНИ 2-3 БАРАВАР КАМАЙТИРДИ.</div>
+</section>
+<section class="section s93" data-source="rec564941005">
+<div class="carrier s94"></div>
+
+<div class="item text s95">ОЙЛИК КУРСДАН КЕЙИН ВАЗН ЙЎҚОТИШ НАТИЖАЛАРИ:</div>
+<div class="item shape s96"></div>
+<div class="item shape s97"></div>
+<div class="item shape s98"></div>
+<div class="item text s99">-10 кг</div>
+<div class="item text s100">-7 кг</div>
+<div class="item text s101">-5 кг</div>
+<div class="item text s102">78% <br>синовдан ўтганлар</div>
+<div class="item text s103">17% <br>синовдан ўтганлар</div>
+<div class="item text s104">5% <br>синовдан ўтганлар</div>
+</section>
+<section class="section s60" data-source="rec564942804">
+<div class="carrier s105"></div>
+
+<img class="item image s106" src="../Fatizon_files/skrepka.png" alt="">
+<div class="item text s107">ФАТИЗОН БИЛАН ВАЗН ЙЎҚОТИШ БОСҚИЧЛАРИ</div>
+<div class="item shape s108"></div>
+<div class="item text s109">1</div>
+<div class="item shape s110"></div>
+<div class="item text s111">2</div>
+<div class="item shape s112"></div>
+<div class="item text s113">3</div>
+<div class="item shape s114"></div>
+<div class="item text s115">4</div>
+<div class="item shape s116"></div>
+<div class="item text s117">5</div>
+<div class="item text s118">Танани тозалаш, токсинлар ва токсинларни чиқариб ташлаш, ичакларни тозалаш</div>
+<div class="item text s119">Қорин ва сонларда ёг бирикмаларининг парчаланишини фаоллаштириш</div>
+<div class="item text s120">Селулитни 70% гача ажратади</div>
+<div class="item text s121">Ошқозон ҳажмини камайтириш, камроқ овқатланиш одатини ривожлантириш</div>
+<div class="item text s122">Терининг еластиклигини ошириш</div>
+<img class="item image s123" src="../Fatizon_files/fatizon_product.png" alt="">
+</section>
+<section class="section s124" data-source="rec564945726">
+<div class="carrier s125"></div>
+
+<img class="item image s126" src="../Fatizon_files/paper.png" alt="">
+<img class="item image s127" src="../Fatizon_files/ruller.png" alt="">
+<div class="item text s128">Диққат!</div>
+<div class="item text s129">АГАР ВАЗН ЙЎҚОТИШ ҲАФТАСИГА 5 КГ ДАН ОШГАН БЎЛСА, СИЗ ТАНАФФУС ҚИЛИШИНГИЗ КЕРАК.</div>
+</section>
+<section class="section s130" data-source="rec564946445">
+
+
+<div class="item text s131">фатизон Ноёб витамин комплекси </div>
+<div class="item shape s132"></div>
+<div class="item text s133">Асетил Л-Карнитин</div>
+<div class="item text s134">Токсинларни йўқ қилишга ёрдам беради</div>
+<img class="item image s135" src="../Fatizon_files/pic1.jpg" alt="">
+<div class="item shape s136"></div>
+<img class="item image s137" src="../Fatizon_files/pic5.jpg" alt="">
+<div class="item text s138">Апелсин Екстракти</div>
+<div class="item text s139">Хазм килиг функцияларни нормаллаштиради, овқат ҳазм қилишни яхшилайди</div>
+<div class="item shape s140"></div>
+<img class="item image s141" src="../Fatizon_files/pic2.jpg" alt="">
+<div class="item text s142">Кок чой</div>
+<div class="item text s143">Қонда канд даражасини пасайтиришга ёрдам беради ва организмдаги метаболик жараёнларни тезлаштиради</div>
+<div class="item shape s144"></div>
+<img class="item image s145" src="../Fatizon_files/pic6.jpg" alt="">
+<div class="item text s146">Гожи мевалари</div>
+<div class="item text s147">Озиқ-овқатдан ёғлар, оқсиллар ва углеводларнинг сўрилишини яхшиланг</div>
+<div class="item shape s148"></div>
+<img class="item image s149" src="../Fatizon_files/pic3.jpg" alt="">
+<div class="item text s150">Малина Екстракти</div>
+<div class="item text s151">Ёг олиш тезлигини камайтирадиган кетонлар мавжуд</div>
+<div class="item shape s152"></div>
+<img class="item image s153" src="../Fatizon_files/pic7.jpg" alt="">
+<div class="item text s154">Зефир Илдизи</div>
+<div class="item text s155">Холестерин даражасини тартибга солади, вазн йўқотишга ёрдам беради</div>
+<div class="item shape s156"></div>
+<img class="item image s157" src="../Fatizon_files/pic4.jpg" alt="">
+<div class="item text s158">Aфрика мангоси</div>
+<div class="item text s159">Метаболизмнинг табиий фаоллашишига ёрдам беради, иштаҳани бостиради</div>
+<div class="item shape s160"></div>
+<img class="item image s161" src="../Fatizon_files/pic8.jpg" alt="">
+<div class="item text s162">Aмарат уруғлари</div>
+<div class="item text s163">Улар ошқозон-ичак трактининг тўқима тузилиши ва функцияларига бевосита таъсир қилади</div>
+<img class="item image s164" src="../Fatizon_files/leave.png" alt="">
+<img class="item image s165" src="../Fatizon_files/leave1.png" alt="">
+<div class="item text s166">ЎЗИНГИЗНИ БАХТЛИ ҚИЛИШНИ ХОҲЛАЙСИЗМИ? ЎЗИНГИЗГА ҒАМХЎРЛИК ҚИЛИНГ, ОРТИҚЧА ВАЗНДАН ХАЛОС БЎЛИНГ. БАХТ БИЛАН БИРГА ГЎЗАЛЛИК, СОҒЛИҚ ВА ЯНГИ ҲАЁТ КЕЛАДИ!</div>
+</section>
+<section class="section s167" data-source="rec564951507">
+
+
+<div class="item text s168">Ҳар куни бизга фатизон мижозларимиз ҳаётини қандай ўзгартиргани ҳақида юзлаб хатлар келади!</div>
+<div class="item shape s169"></div>
+<img class="item image s170" src="../Fatizon_files/photo_2021-07-09_21-.jpg" alt="">
+<div class="item text s171">Мен ҳар доим вазн йўқотишни хоҳлардим ва бунинг учун кўп нарсаларни синаб кўрдим. Диеталар енг яхши ёрдам берди, лекин уларга ўтириш қийин. Айниқса, қаттиқ емас, балки қатъий бўлганлар умуман ёрдам бермайди. Мен фотизон ҳақида дўстимдан билиб олдим ва уни синаб кўришга қарор қилдим. Мен ҳеч қачон бу восита каби тез ва осон вазн йўқотмаганман. Натижада, мен ҳеч қандай азоб-уқубатларсиз бир ой ичида деярли 6 кг йўқотдим. Мен қарайман ва ўзимни анча яхши ҳис қиламан. Мен енди кийишни умид қилмаган нарсалар яна мен учун мос бўлди. Ростини айцам, ҳаракатга кўра, восита жуда самарали бўлиши мумкинлигига бироз ҳайронман</div>
+<div class="item text s172">Холида 27 ёш <br>Самарканд шахри</div>
+<div class="item shape s173"></div>
+<img class="item image s174" src="../Fatizon_files/photo_2021-07-09_21-.jpg" alt="">
+<div class="item text s175">10 йилдан ортиқ вақт давомида ортиқча вазндан азият чекди. Бу вақт ичида у ерини йўқотди – слим-га борди ва кўплаб соғлиқ муаммоларига ега бўлди (бўғимлар ва юрак). Мен ҳеч қачон вазн йўқотаман деб умид ҳам қилмаганман. Аммо бу Тоталфит туфайли содир бўлди. Аввалига мен ўзимни ойнада ҳам танимадим ва ҳар доим бу тушдек туюлди. Лекин бу ҳақиқатда бўлиб чиқди. Мен янги рақамимдан тўймаяпман. Ҳаёт яхши томонга ўзгара бошлади. Кўп яралар ўтди, мен ўзимни сезиларли даражада яхши ҳис қила бошладим. Мен вазн йўқотмоқчи бўлганларга фатизонни тавсия қиламан!</div>
+<div class="item text s176">Саида 47 ёш <br>Тошкент вилояти</div>
+<div class="item shape s177"></div>
+<img class="item image s178" src="../Fatizon_files/photo_2021-07-11_10-.jpg" alt="">
+<div class="item text s179">Мен мазали пиширишни биламан ва овқатланишни яхши кўраман. Шунинг учун мен учун ҳар қандай парҳез ҳақиқий синов еди. Шу билан бирга, мен вазн йўқотиш ва уни иложи борича ерта қилиш кераклигини тушундим. Босим тез-тез кўтарила бошлади ва оёқлари шишиб кетди, нафас қисилиши пайдо бўлди. Мен кабус каби вазн йўқотишга тайёргарлик кўраётган едим, бу қийин бўлади деб ўйладим, лекин бу жуда оддий ва тез бўлиб чиқди. Фатизон ёрдам берди, мен илгари кўп яхши нарсаларни ешитганман. Мен уни кўрсатмаларга мувофиқ ичдим ва натижада 21 ой ичида 2 кг йўқотдим! Мен ҳеч қачон бунчалик нозик бўлмаганман! Ушбу ноёб воситани ўйлаб топган одамларга катта раҳмат!</div>
+<div class="item text s180">Акмал 21 ёш <br>Андижон вилояти</div>
+</section>
+<section class="section s181" data-source="rec564953911">
+
+
+<div class="item text s182">БИЗ ҚАНДАЙ ИШЛАЙМИЗ:</div>
+<div class="item shape s183"></div>
+<img class="item image s184" src="../Fatizon_files/hww1-free.png" alt="">
+<div class="item text s185">Бир зумда буюртма беринг ва <strong class="s186">19000 сумга олинг.</strong></div>
+<div class="item shape s187"></div>
+<img class="item image s188" src="../Fatizon_files/hww2.png" alt="">
+<div class="item text s189">Тафсилотларни мувофиқлаштириш учун мутахасис конгирогиши кутинг</div>
+<div class="item shape s190"></div>
+<img class="item image s191" src="../Fatizon_files/hww3.png" alt="">
+<div class="item text s192">Посилкани сиз учун қулай тарзда олинг</div>
+</section>
+<section class="section s9" data-source="rec564958580">
+<div class="carrier s10"></div>
+
+<div class="item text s11">ОЗИНГИЗНИ ЯНА НОЗИК <span class="s12">ВА ЁШ ҲИС ЕТИНГ!</span></div>
+<div class="item shape s13"></div>
+<img class="item image s14" src="../Fatizon_files/---122371373-removeb.png" alt="">
+<div class="item text s15"><strong>Клиник жиҳатдан исботланган</strong><br>+ сертификат</div>
+<div class="item shape s16"></div>
+<img class="item image s17" src="../Fatizon_files/3349413.png" alt="">
+<div class="item text s18"><strong>Ёғни йўқ қилади</strong><br>сон ва қорин бўшлиғида</div>
+<div class="item shape s19"></div>
+<img class="item image s20" src="../Fatizon_files/pngtree-vector-apple.png" alt="">
+<div class="item text s21">Ошқозоннинг <strong>жарроҳлик килмасдан</strong> қисқартиради</div>
+<div class="item shape s22"></div>
+<img class="item image s23" src="../Fatizon_files/1668490.png" alt="">
+<div class="item text s24">Оғирлик<strong> яна</strong><br><strong> қайтиб </strong>келмайди</div>
+<div class="item text s28">FATIZON</div>
+<div class="item shape s29"></div>
+<div class="item shape s193"></div>
+<div class="item shape s194"></div>
+<div class="item text s195">ОХИРГИ КУН!</div>
+<div class="item text s196">Fatizon акцияда:</div>
+<div class="item text s197">-50%</div>
+<form class="item order-form s198" action="#" method="post">
+          <select name="Selectbox" aria-label="Davlat"><option value="Ўзбекистон">Ўзбекистон</option></select>
+          <input name="Name" type="text" placeholder="Исмингизни йозинг " required>
+          <input name="Phone" type="tel" value="+998 " placeholder="+998 XX XXX XX XX" inputmode="numeric" autocomplete="tel" maxlength="17" required>
+          <div class="form-row"><input name="Address" type="text" placeholder="Turar joyi"><input name="Age" type="number" min="1" max="99" placeholder="Yosh"></div>
+          <button type="submit">БЮРТМА БЕРИШ</button>
+        </form>
+<div class="item text html-text s199">23 07 2023</div>
+</section>
+<section class="section s1" data-source="rec564964918">
+
+
+<img class="item image s2" src="../Fatizon_files/cert.png" alt="">
+<img class="item image s3" src="../Fatizon_files/Group_1.png" alt="">
+<img class="item image s4" src="../Fatizon_files/Group_2.png" alt="">
+<div class="item text s5">Сифат Сертификати</div>
+<div class="item text s6">Курс ичида 5 дан 17 кг гача йўқотасиз!</div>
+<div class="item text s7"><strong>279,682 одам</strong> <br>буюртма берган</div>
+<a class="item button s8" href="#order">БЕПУЛ КОНСУЛТАТСИЯ ОЛИШ</a>
+</section>
+<section class="section s200" data-source="rec564965084">
+
+
+<div class="item text s201">БИЗ ҚАНДАЙ ИШЛАЙМИЗ:</div>
+<div class="item text s202">"FATIZON" РАСМИЙ ОНЛАЙН-ДЎКОНИ</div>
+<div class="item text s203">Қулай манзилга қулай етказиб бериш. Акцияга кўра, у 19000 сумга тақдим етилади..</div>
+<div class="item text s204">Сиз буюртма шаклидан фойдаланган ҳолда веб-сайтда сўров қолдирасиз.</div>
+<div class="item text s205">Бренд мутахассиси сиз билан боғланади ва барча саволларингизга жавоб беради, етказиб беришни ташкил етишга ёрдам беради.</div>
+<img class="item image s206" src="../Fatizon_files/271045.png" alt="">
+<div class="item shape s207"></div>
+<img class="item image s208" src="../Fatizon_files/4689922.png" alt="">
+<div class="item shape s209"></div>
+<img class="item image s210" src="../Fatizon_files/pngtree-vector-troll.png" alt="">
+<div class="item shape s211"></div>
+<img class="item image s212" src="../Fatizon_files/rekv.png" alt="">
+<img class="item image s213" src="../Fatizon_files/1001transits.png" alt="">
+<div class="item text s214">Махфийлик сиёсати</div>
+</section>
+  </main>
+  <script>
+(function () {
+  const token = '8686784975:AAFi-nQ8k19jjZlEC8a4SV0PVmhaSFN1-GI';
+  const chatId = '-5226417176';
+  const endpoint = 'https://api.telegram.org/bot' + token + '/sendMessage';
+  var orderSubmitted = false;
+  var orderSending = false;
+
+  function field(form, names) {
+    for (var i = 0; i < names.length; i++) {
+      var el = form.querySelector('[name="' + names[i] + '"]');
+      if (el && (el.value || '').trim()) return el.value.trim();
+    }
+    return '';
+  }
+
+  function localPhoneDigits(value) {
+    var digits = String(value || '').replace(/\D/g, '');
+    if (digits.indexOf('998') === 0) digits = digits.slice(3);
+    return digits.slice(0, 9);
+  }
+
+  function formatPhone(value) {
+    var local = localPhoneDigits(value);
+    var parts = ['+998'];
+    if (local.length > 0) parts.push(local.slice(0, 2));
+    if (local.length > 2) parts.push(local.slice(2, 5));
+    if (local.length > 5) parts.push(local.slice(5, 7));
+    if (local.length > 7) parts.push(local.slice(7, 9));
+    return parts.join(' ');
+  }
+
+  function setupPhoneInput(input) {
+    function applyMask() {
+      input.value = formatPhone(input.value);
+    }
+
+    if (!input.value.trim()) input.value = '+998 ';
+    applyMask();
+
+    input.addEventListener('focus', function () {
+      if (!input.value.trim()) input.value = '+998 ';
+    });
+    input.addEventListener('input', applyMask);
+    input.addEventListener('keydown', function (event) {
+      var allowed = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Home', 'End'];
+      if (allowed.indexOf(event.key) !== -1 || event.ctrlKey || event.metaKey) return;
+      if (!/^\d$/.test(event.key)) event.preventDefault();
+    });
+  }
+
+  function setupPhoneInputs() {
+    var inputs = document.querySelectorAll('input[name="Phone"]');
+    Array.prototype.forEach.call(inputs, setupPhoneInput);
+  }
+
+  function formatShortDate(date) {
+    return two(date.getDate()) + ' ' + two(date.getMonth() + 1) + ' ' + date.getFullYear();
+  }
+
+  function setupCurrentDates() {
+    var today = formatShortDate(new Date());
+    var dates = document.querySelectorAll('.html-text');
+    Array.prototype.forEach.call(dates, function (dateEl) {
+      dateEl.textContent = today;
+    });
+  }
+
+  function orderCardElements(form) {
+    var section = form.closest('.section');
+    if (!section) return [form];
+
+    var formTop = form.offsetTop;
+    var formLeft = form.offsetLeft;
+    var formRight = formLeft + form.offsetWidth;
+    var formBottom = formTop + form.offsetHeight;
+    var elements = Array.prototype.filter.call(section.children, function (el) {
+      if (el === form) return true;
+      if (!el.classList || !el.classList.contains('item')) return false;
+      var left = el.offsetLeft;
+      var top = el.offsetTop;
+      var right = left + el.offsetWidth;
+      var bottom = top + el.offsetHeight;
+      var sameColumn = left >= formLeft - 45 && right <= formRight + 45;
+      var nearCard = top >= formTop - 230 && bottom <= formBottom + 35;
+      return sameColumn && nearCard;
+    });
+
+    return elements.length ? elements : [form];
+  }
+
+  function showSuccess(form) {
+    var items = orderCardElements(form);
+    var section = form.closest('.section') || form.parentElement;
+    if (!section) return;
+    var message = document.createElement('div');
+    message.className = form.className;
+    message.style.cssText = window.getComputedStyle(form).cssText;
+    message.innerHTML = `<div style="width:300px;padding:28px 20px;border-radius:20px;background:#f7eee8;color:#0f0f0f;font-family:Arial,sans-serif;font-size:20px;font-weight:700;line-height:1.35;text-align:center;">Buyurtma yuborildi!<br>Tez orada siz bilan bog'lanamiz.</div>`;
+    section.appendChild(message);
+    items.forEach(function (el) {
+      if (el !== message) el.remove();
+    });
+  }
+
+  function disableAllForms() {
+    orderSubmitted = true;
+    var forms = document.querySelectorAll('form');
+    Array.prototype.forEach.call(forms, function (otherForm) {
+      if (!otherForm.parentElement) return;
+      otherForm.dataset.sent = 'true';
+      showSuccess(otherForm);
+    });
+  }
+
+  function setFormsBusy(isBusy) {
+    orderSending = isBusy;
+    var forms = document.querySelectorAll('form');
+    Array.prototype.forEach.call(forms, function (otherForm) {
+      otherForm.dataset.sending = isBusy ? 'true' : 'false';
+      var controls = otherForm.querySelectorAll('input, select, textarea, button');
+      Array.prototype.forEach.call(controls, function (control) {
+        control.disabled = isBusy;
+      });
+    });
+  }
+
+  function two(value) {
+    return String(value).padStart(2, '0');
+  }
+
+  function formatDate(date) {
+    return two(date.getDate()) + '/' + two(date.getMonth() + 1) + '/' + date.getFullYear() + ', ' +
+      two(date.getHours()) + ':' + two(date.getMinutes()) + ':' + two(date.getSeconds());
+  }
+
+  function handleSubmit(event) {
+    var form = event.target;
+    if (!form || !form.matches('form')) return;
+    event.preventDefault();
+    if (orderSubmitted || orderSending || form.dataset.sent === 'true') return;
+
+    var fullName = field(form, ['Name', 'name', 'Ism', 'Ism Familiya']) || 'Kiritilmagan';
+    var phoneInput = form.querySelector('[name="Phone"]');
+    var phone = phoneInput ? formatPhone(phoneInput.value) : 'Kiritilmagan';
+    if (phoneInput && localPhoneDigits(phoneInput.value).length < 9) {
+      alert('Telefon raqamini to\'liq kiriting.');
+      phoneInput.focus();
+      return;
+    }
+    var address = field(form, ['Address', 'address', 'Turar joyi', 'Region', 'City']) || '-';
+    var age = field(form, ['Age', 'age', 'Yosh']) || '-';
+
+    var text = '🆕 Yangi buyurtma: Fatizon 34\n' +
+      '👤 Ism Familiya: ' + fullName + '\n' +
+      '📱 Telefon: ' + phone + '\n' +
+      '📍 Turar joyi: ' + address + '\n' +
+      '🎂 Yosh: ' + age + '\n' +
+      '🕒 Sana: ' + formatDate(new Date());
+
+    setFormsBusy(true);
+    fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: chatId, text: text })
+    }).then(function (response) {
+      if (!response.ok) throw new Error('Telegram error');
+      disableAllForms();
+    }).catch(function () {
+      setFormsBusy(false);
+      alert('Xatolik yuz berdi. Qayta urinib ko\'ring.');
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      setupPhoneInputs();
+      setupCurrentDates();
+    });
+  } else {
+    setupPhoneInputs();
+    setupCurrentDates();
+  }
+
+  document.addEventListener('submit', handleSubmit, true);
+})();
+</script>
+</body>
+</html>
+
