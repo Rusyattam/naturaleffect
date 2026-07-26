@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#123f1d"/>
+  <path d="M6 8h52v48H6z" fill="#0f371a"/>
+  <path d="M9 11h46v42H9z" fill="#165124"/>
+  <path d="M46 4l12 4v48l-12-4z" fill="#0a2b12"/>
+  <text x="13" y="39" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="800" fill="#e6b94b">F9</text>
+  <text x="15" y="50" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#ffffff">FATIZON</text>
+</svg>
