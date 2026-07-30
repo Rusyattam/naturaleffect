@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uz">
 <head>
 <meta charset="UTF-8" />
@@ -885,14 +885,15 @@ input,.btn,.navbtn a{touch-action:manipulation}
 .wheel-card{
   position:relative;
   z-index:3;
-  width:370px;
+  width:min(430px,94vw);
   min-width:340px;
   background:#fff;
   color:#111;
-  border-radius:24px;
-  padding:28px 24px 30px;
-  box-shadow:0 4px 18px #0008;
+  border-radius:22px;
+  padding:20px 20px 22px;
+  box-shadow:0 14px 38px rgba(0,0,0,.28);
   text-align:center;
+  overflow:hidden;
 }
 .wheel-card h3{
   margin:4px 0 8px;
@@ -900,8 +901,8 @@ input,.btn,.navbtn a{touch-action:manipulation}
   line-height:1.15;
 }
 .wheel-card p{
-  margin:0 auto 14px;
-  max-width:300px;
+  margin:0 auto 12px;
+  max-width:340px;
   color:#333;
   font-size:16px;
   font-weight:700;
@@ -1034,23 +1035,32 @@ input,.btn,.navbtn a{touch-action:manipulation}
   display:block;
 }
 .baraban__title{
-  margin:0 0 18px;
-  color:#123e74;
-  font-size:24px;
-  line-height:1.18;
+  width:min(320px,100%);
+  margin:2px auto 14px;
+  color:#111 !important;
+  font-size:18px;
+  line-height:1.28;
   text-align:center;
+  font-weight:900;
+}
+.baraban__title span:not(.baraban__title-pct){
+  color:#111 !important;
 }
 .baraban__title-pct{
+  display:block;
   color:#d22f2f;
+  font-size:44px;
+  line-height:1;
+  margin:4px 0;
 }
 .baraban-outer{
   display:flex;
   justify-content:center;
-  padding:8px 0 18px;
+  padding:2px 0 10px;
 }
 .baraban-canvas-wrap{
   position:relative;
-  width:min(330px,82vw);
+  width:min(350px,82vw);
   aspect-ratio:1;
   border-radius:50%;
   padding:12px;
@@ -1101,11 +1111,18 @@ input,.btn,.navbtn a{touch-action:manipulation}
   cursor:wait;
 }
 .baraban-msg{
-  min-height:30px;
+  min-height:0;
   margin:0;
   color:#16a34a;
   font-weight:900;
   text-align:center;
+}
+.baraban-msg:not(:empty){
+  margin-top:8px;
+  padding:10px 12px;
+  border-radius:14px;
+  background:#ecfdf5;
+  color:#15803d;
 }
 .confetti-piece{
   position:fixed;
@@ -1154,15 +1171,58 @@ input,.btn,.navbtn a{touch-action:manipulation}
 }
 @media (max-width:900px){
   .wheel-card{
-    width:94%;
+    width:min(420px,94%);
     min-width:auto;
     margin:auto;
   }
 }
 @media (max-width:420px){
+  .wheel-section{
+    padding:34px 0;
+  }
+  .wheel-section .wrap{
+    max-width:100%;
+  }
+  .wheel-section .wheel-card{
+    margin-top:18px;
+  }
+  .wheel-card{
+    width:calc(100% - 28px);
+    padding:16px 12px 18px;
+    border-radius:20px;
+  }
+  .wheel-card p{
+    font-size:14px;
+    line-height:1.25;
+    margin-bottom:10px;
+  }
+  .baraban__title{
+    width:min(280px,100%);
+    margin-bottom:10px;
+    font-size:16px;
+  }
+  .baraban__title-pct{
+    font-size:40px;
+  }
+  #barabanAttempts{
+    margin-bottom:8px !important;
+  }
   .wheel-wrap{
     width:252px;
     height:252px;
+  }
+  .baraban-canvas-wrap{
+    width:min(330px,86vw);
+    padding:10px;
+  }
+  .baraban-arrow-wrap{
+    top:-15px;
+  }
+  .baraban-spin-btn{
+    width:82px;
+    height:82px;
+    font-size:16px;
+    border-width:4px;
   }
   .wheel-prize{
     margin-top:-112px;
@@ -1197,7 +1257,7 @@ input,.btn,.navbtn a{touch-action:manipulation}
 <section class="expert"><div class="wrap"><h2><span class="orange">A9 ANDROBOSSнинг</span><br>самарадорлиги ҳақида мутахассис нима дейди?</h2><div class="expert-body"><div class="doctor"><img loading="lazy" decoding="async" src="../assets/doctor-muhammad-optimized.jpg" alt="Доктор Мухаммад Турсунов Эркинжонович"></div><div class="expert-copy"><p><b style="color:#e43">Эрекция фаолиятининг бузилиши ва простата яллиғланиши</b> — эркаклар орасида кенг тарқалган муаммолардан бўлиб, бундай муаммони вақтида тан олиш ва ҳаракатни бошлаш муҳим. Сабаблар турлича бўлиши мумкин: иммунитет пасайиши, камҳаракат ҳаёт тарзи, ортиқча вазн, зарарли одатлар ва совуқ қотиш.</p><p><b>A9 ANDROBOSS</b> умумий муолажа таркибидаги қўшимча сифатида кўрсатилиши мумкин. Табиий таркиб эркаклар саломатлигини қўллаб-қувватлашга ёрдам беради, натижа эса ҳар бир инсонда индивидуал бўлади. Жиддий белгилар бўлса, албатта мутахассисга мурожаат қилиш керак.</p><p>Шунинг учун муаммони кечиктирмасдан ҳал қилиш, профилактикага эътибор бериш ва организмни қўллаб-қувватлаш тавсия этилади.</p><h3>Доктор Мухаммад  Турсунов Эркинжонович — Терапевт Уролог</h3></div></div></div></section>
 <section class="black-section sparks"><div class="wrap"><h2 class="danger-title"><span>Агар зудлик билан ҳаракат</span><br>бошланмаса нима бўлади?</h2><div class="danger-grid"><div class="danger"><div class="round"><img loading="lazy" decoding="async" src="../assets/what-happen-img-1-opt.jpg" alt=""></div><div><h3>Простата аденомаси</h3><p>Уни фақат жарроҳлик йўли билан даволаш мумкин</p></div></div><div class="danger"><div class="round"><img loading="lazy" decoding="async" src="../assets/what-happen-img-2-opt.jpg" alt=""></div><div><h3>Бепуштлик</h3><p>Простатит билан оғриган 40 фоиз эркакларда кузатилади</p></div></div><div class="danger"><div class="round"><img loading="lazy" decoding="async" src="../assets/what-happen-img-3-opt.jpg" alt=""></div><div><h3>Импотенция</h3><p>Даволанмаган тақдирда у эркак кишида ўзига бўлган ишончни сусайтириб юборади</p></div></div><div class="danger"><div class="round"><img loading="lazy" decoding="async" src="../assets/what-happen-img-4-opt.jpg" alt=""></div><div><h3>Простата склерози</h3><p>Фақат жарроҳлик йўли билан даволаш мумкин</p></div></div><div class="danger danger-center"><div class="round"><img loading="lazy" decoding="async" src="../assets/what-happen-img-5-opt.jpg" alt=""></div><div><h3>Руҳий касалликлар</h3><p>Ўзига ишончсизликдан ва аёл кишини тўшакда қондира олмасликдан келиб чиқади</p></div></div></div></div></section>
 <section class="confidence"><div class="confidence-bg"></div><div class="wrap"><div class="confidence-copy"><h2><span>Бугун A9 ANDROBOSSга</span> буюртма бер,<br>эртага эса<br>аёлнинг оргазмдан<br>тинкаси қурисин!</h2><a class="btn" href="#order">Мақсадга ўтиш</a></div><div class="certificate"><img loading="lazy" decoding="async" src="../assets/certificate-optimized.jpg" alt="Сертификат соответствия"></div></div></section>
-<section class="bottom sparks wheel-section" id="gift-game"><div class="wrap"><h2><span class="orange">70% чегирмани ютиб олинг!</span><br>Барабанни айлантиринг ва буюртма қолдиринг</h2><div class="wheel-card"><div class="wheel-game" id="wheelGame"><p><i>Махсус нархларда фақатгина <span class="small-red">120 упаковок</span> ўрам қолди!</i></p><h2 class="baraban__title">🎰 Барабанни айлантириб <span class="baraban__title-pct">70%</span> чегирма ютинг!</h2><div id="barabanAttempts" style="text-align:center;margin-bottom:14px;font-size:17px;font-weight:800;color:#1e3a8a;letter-spacing:.5px;"><span id="attemptDots"><div style="font-size:15px;font-weight:700;color:#1e3a8a;margin-bottom:6px;">Уриниш: <b style="font-size:20px;color:#dc2626;">1</b> / 2</div><div><span style="display:inline-block;width:32px;height:32px;border-radius:50%;background:#2563eb;border:3px solid #1e3a8a;margin:0 4px;vertical-align:middle;box-shadow:0 0 10px rgba(37,99,235,.6);"></span><span style="display:inline-block;width:28px;height:28px;border-radius:50%;background:#dbeafe;border:2px solid #93c5fd;margin:0 4px;vertical-align:middle;"></span></div></span></div><div class="baraban-outer"><div class="baraban-canvas-wrap"><div class="baraban-arrow-wrap" id="barabanArrow"><svg class="baraban-arrow-svg" height="44" viewBox="0 0 36 44" width="36"><polygon fill="#dc2626" points="18,44 0,0 36,0"></polygon><polygon fill="#ef4444" points="18,38 4,4 32,4"></polygon></svg></div><canvas height="340" id="barabanWheel" width="340"></canvas><div class="baraban-spin-btn" id="spinBtn" onclick="spinWheel()"><span id="spinBtnText">АЙЛ-<br>АНТ</span></div></div></div><p class="baraban-msg" id="barabanMsg"></p></div><div class="order-card wheel-form hidden" id="wheelOrderForm"><input name="name" type="text" placeholder="Исм Фамилия"><input name="age" type="number" min="1" max="120" placeholder="Ёш"><input name="city" type="text" placeholder="Шаҳар"><input name="phone" type="tel" placeholder="+998"><a class="btn" href="#">ХАРИД ҚИЛИШ</a></div><div class="wheel-thanks" id="wheelThanks"><h3>Раҳмат!</h3><p>Аризангиз қабул қилинди. Тез орада сиз билан боғланамиз.</p></div></div></div></section>
+<section class="bottom sparks wheel-section" id="gift-game"><div class="wrap"><h2><span class="orange">Табриклаймиз, сиз 70% чегирма ютдингиз!</span><br>Барабанни айлантиринг ва буюртма қолдиринг</h2><div class="wheel-card"><div class="wheel-game" id="wheelGame"><p><i>Махсус нархларда фақатгина <span class="small-red">120 упаковок</span> ўрам қолди!</i></p><h2 class="baraban__title">Сиз <span class="baraban__title-pct">70%</span> гача чегирма ютиб олишингиз мумкин</h2><div id="barabanAttempts" style="text-align:center;margin-bottom:14px;font-size:17px;font-weight:800;color:#1e3a8a;letter-spacing:.5px;"><span id="attemptDots"><div style="font-size:15px;font-weight:700;color:#1e3a8a;margin-bottom:6px;">Уриниш: <b style="font-size:20px;color:#dc2626;">1</b> / 2</div><div><span style="display:inline-block;width:32px;height:32px;border-radius:50%;background:#2563eb;border:3px solid #1e3a8a;margin:0 4px;vertical-align:middle;box-shadow:0 0 10px rgba(37,99,235,.6);"></span><span style="display:inline-block;width:28px;height:28px;border-radius:50%;background:#dbeafe;border:2px solid #93c5fd;margin:0 4px;vertical-align:middle;"></span></div></span></div><div class="baraban-outer"><div class="baraban-canvas-wrap"><div class="baraban-arrow-wrap" id="barabanArrow"><svg class="baraban-arrow-svg" height="44" viewBox="0 0 36 44" width="36"><polygon fill="#dc2626" points="18,44 0,0 36,0"></polygon><polygon fill="#ef4444" points="18,38 4,4 32,4"></polygon></svg></div><canvas height="340" id="barabanWheel" width="340"></canvas><div class="baraban-spin-btn" id="spinBtn" onclick="spinWheel()"><span id="spinBtnText">АЙЛ-<br>АНТ</span></div></div></div><p class="baraban-msg" id="barabanMsg"></p></div><div class="order-card wheel-form hidden" id="wheelOrderForm"><input name="name" type="text" placeholder="Исм Фамилия"><input name="age" type="number" min="1" max="120" placeholder="Ёш"><input name="city" type="text" placeholder="Шаҳар"><input name="phone" type="tel" placeholder="+998"><a class="btn" href="#">ХАРИД ҚИЛИШ</a></div><div class="wheel-thanks" id="wheelThanks"><h3>Раҳмат!</h3><p>Аризангиз қабул қилинди. Тез орада сиз билан боғланамиз.</p></div></div></div></section>
 <section class="reviews"><div class="wrap"><h2><span class="orange">A9 ANDROBOSSни</span><br>аллақачон баҳолаб кўрганлар нима дейди?</h2><div class="review"><div class="avatar"><img loading="lazy" decoding="async" src="../assets/reviews-img-1-opt.jpg" alt=""></div><div><h3>«Михдек қотиб туриши ҳеч қачон ортиқчалик қилмайди!»</h3><p>40 ёшдан кейин турмуш ўртоғим билан жинсий алоқалар пайтида менда тез-тез муаммолар пайдо бўла бошлади. Бундан жуда кўп сиқилдим, лекин A9 ANDROBOSS буюртма беришга қарор қилдим. Фойдаси тегди! Ҳозир ўзимни анча ишончли ҳис қиламан.</p><h4>Хўжаев Абдулло, 43 ёш</h4></div></div><div class="review"><div class="avatar"><img loading="lazy" decoding="async" src="../assets/reviews-img-2-opt.jpg" alt=""></div><div><h3>«Энди менинг жинсий аъзойим чиндан ҳам СОҒЛОМ!»</h3><p>Жуда кўп вақтимни ишда ўтказаман, баъзан чарчоқ ҳам таъсир қиларди. Дўстим тавсияси билан A9 ANDROBOSSни синаб кўрдим. Биринчи курсдан кейин ўзимни кучлироқ ва анча ишончли ҳис қилдим.</p><h4>Хафизов Шерали, 37 ёш, Бухоро шаҳри</h4></div></div><div class="review"><div class="avatar"><img loading="lazy" decoding="async" src="../assets/reviews-img-3-opt.jpg" alt=""></div><div><h3>«Бир тунда бешта оргазм — фойдаланишдаги биринчи тажриба айнан шундай бўлди!»</h3><p>Охирги пайтларда муносабатлар зерикарли тус ола бошлаганди. A9 ANDROBOSSни олиб, натижасини биринчи кечанинг ўзидаёқ сездим. Турмуш ўртоғим ҳам ўзгаришни дарҳол пайқади.</p><h4>Рахманов Феруз, 41 ёш, Тошкент шаҳри</h4></div></div></div></section>
 <section class="bottom sparks" id="order"><div class="wrap"><h2><span class="orange">Жинсий аъзойингни букилмасга айлантир!</span><br>A9 ANDROBOSSга ҳозироқ буюртма бер!</h2><div class="bottom-box"><div class="order-card"><div><input name="name" type="text" placeholder="Исм Фамилия"><input name="age" type="number" min="1" max="120" placeholder="Ёш"><input name="city" type="text" placeholder="Шаҳар"><input name="phone" type="tel" placeholder="+998"><a class="btn" href="#">ХАРИД ҚИЛИШ</a></div><div><p><i>Махсус нархларда <span class="small-red">фақат 120 ўрам</span> қолди!</i></p><h3>Акция тугагунча:</h3><div class="timer"><div class="timebox">23<span>соат</span></div><div class="timebox">22<span>дақиқа</span></div><div class="timebox">44<span>қолди</span></div></div><p>♜ тош каби эрекция<br>☺ ёрқин ҳис этиш<br>◴ 3 соатлик секс<br>👍 ўзига ишонч</p></div></div></div></div></section>
 
