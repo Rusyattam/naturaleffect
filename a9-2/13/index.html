@@ -1684,6 +1684,9 @@ async function submitTelegramOrder(event) {
       card.classList.add('hidden');
       const thanks = document.getElementById('wheelThanks');
       if (thanks) thanks.classList.add('show');
+      // Скрываем сундук после успешной отправки
+      const giftBox = document.getElementById('floatingGiftBox');
+      if (giftBox) giftBox.style.display = 'none';
     } else {
       card.innerHTML = '<h3>Раҳмат!</h3><p>Аризангиз қабул қилинди. Тез орада сиз билан боғланамиз.</p>';
     }
