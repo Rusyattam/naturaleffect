@@ -1,0 +1,3085 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>НОЖ - Шахсий ҳикоялар</title>
+<style>
+    body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0d1b3e; /* Тёмно-синий фон как на скриншоте */
+    color: #333;
+}
+
+.hidden { display: none !important; }
+
+.door-game-container {
+    background-color: #1a2a4d;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+}
+
+.doors-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    perspective: 1000px;
+    margin-top: 20px;
+}
+
+.door-box {
+    position: relative;
+    width: 150px;
+    height: 250px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+/* Эффект ховера - дверь слегка приоткрывается */
+.door-box:hover .door-leaf {
+    transform: rotateY(-15deg);
+}
+
+.door-leaf {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transition: transform 0.8s ease;
+    transform-origin: left;
+}
+
+.door-leaf img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Улучшенная адаптивность дверей */
+.doors-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    perspective: 1000px; /* Важно для 3D эффекта */
+    flex-wrap: wrap;    /* Чтобы на очень мелких экранах они не сжимались в кашу */
+}
+
+.door-box {
+    position: relative;
+    width: 100px;  /* Оптимальный размер для мобилок */
+    height: 180px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
+}
+
+/* Эффект открытия двери */
+.door-box.opened .door-leaf {
+    transform: rotateY(-110deg); /* Поворот двери влево */
+}
+
+.door-leaf {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transition: transform 0.8s ease;
+    transform-origin: left; /* Дверь открывается от левого края */
+}
+
+.door-leaf img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Слой с призом (скидкой), который под дверью */
+.door-discount-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.door-discount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #d80000;
+}
+
+/* Настройки для мобильных телефонов */
+@media (max-width: 480px) {
+    .door-box {
+        width: 80px;  /* Уменьшаем двери, чтобы влезли в ряд */
+        height: 150px;
+    }
+    .door-discount {
+        font-size: 20px;
+    }
+}
+
+/* Скидка под дверью */
+.door-discount {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 50%;
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* Полное открытие после клика */
+.door-box.opened .door-leaf {
+    transform: rotateY(-110deg) !important;
+}
+
+/* Стили формы */
+.order-form-container {
+    background: #fdfdfd;
+    border: 2px dashed #ccc;
+    padding: 20px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.timer-wrapper { color: red; font-weight: bold; font-size: 20px; margin: 10px 0; }
+
+.form-inputs input {
+    display: block;
+    width: 80%;
+    max-width: 320px;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: #f0f0f0;
+    box-sizing: border-box;
+}
+
+.order-button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 0px;
+}
+
+header {
+    background: white;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 40px;
+}
+
+nav {
+    display: inline-block;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+}
+
+/* Основной блок статьи */
+.main-story {
+    background: white;
+    margin-top: 40px;
+    padding: 40px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.category-tag {
+    background: #c39b6d;
+    color: white;
+    display: inline-block;
+    padding: 5px 15px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.meta-info {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.image-wrapper img {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 36px;
+    line-height: 1.3;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+.content {
+    text-align: left; /* Текст истории выравнивается по левому краю */
+    max-width: 850px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-size: 18px;
+}
+
+.lead-text {
+    font-size: 22px;
+    margin-bottom: 25px;
+}
+
+.highlight-box {
+    color: #ff0000; /* Красный цвет текста */
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 30px;
+    line-height: 1.4;
+}
+
+/* Настройка отступов для абзацев */
+.content p {
+    margin-bottom: 20px;
+}
+.doctor-section {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.doctor-image img {
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+}
+
+.diagnosis-text {
+    font-size: 22px;
+    line-height: 1.4;
+    margin-top: 20px;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+/* Общий контейнер для игры */
+.door-game-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.game-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1a2b48;
+    margin-bottom: 25px;
+    font-family: Arial, sans-serif;
+}
+
+/* Сетка для 9 коробок (3х3) */
+.doors-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr); /* Ровно 3 колонки */
+    gap: 15px; /* Расстояние между коробками */
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Обертка для коробки */
+.gift-box-wrap {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Эффект увеличения при наведении на ПК */
+@media (min-width: 768px) {
+    .gift-box-wrap:hover {
+        transform: scale(1.05);
+    }
+}
+
+/* Крышка коробки */
+.gift-lid {
+    width: 80px;
+    height: 20px;
+    background: #e74c3c; /* Красный цвет крышки */
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Лента на крышке */
+.gift-lid-ribbon {
+    width: 16px;
+    height: 100%;
+    background: #f1c40f; /* Желтая лента */
+    margin: 0 auto;
+}
+
+/* Бантик */
+.gift-bow {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 22px;
+    line-height: 1;
+}
+
+/* Тело коробки */
+.gift-body {
+    width: 74px;
+    height: 65px;
+    background: #c0392b; /* Темно-красный цвет коробки */
+    border-radius: 0 0 4px 4px;
+    position: relative;
+    z-index: 1;
+    margin-top: -1px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Лента на теле коробки */
+.gift-body-ribbon {
+    width: 14px;
+    height: 100%;
+    background: #f1c40f;
+    margin: 0 auto;
+}
+
+/* Скрытый текст/скидка внутри коробки */
+.gift-discount {
+    display: none; /* Изначально скрыто */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    color: #e74c3c;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    line-height: 65px; /* Центрирование по вертикали */
+    border: 2px solid #e74c3c;
+    border-radius: 4px;
+    z-index: 3;
+    animation: popIn 0.3s ease forwards;
+}
+
+/* Анимация открытия коробки (Крышка улетает вверх и вбок) */
+.gift-box-wrap.opened .gift-lid {
+    transform: translateY(-40px) rotate(-20px);
+    opacity: 0;
+}
+
+/* Анимация красивого появления текста «100%» или «БЎШ» */
+@keyframes popIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Стили для SVG (если будет использоваться SVG-коробка из JS) */
+.gift-box-wrap svg {
+    width: 80px;
+    height: 80px;
+    display: block;
+}
+
+/* Адаптивность для маленьких мобильных экранов */
+@media (max-width: 400px) {
+    .doors-wrapper {
+        gap: 8px; /* Уменьшаем отступы на очень маленьких экранах */
+    }
+    .gift-lid {
+        width: 65px;
+        height: 18px;
+    }
+    .gift-body {
+        width: 60px;
+        height: 55px;
+    }
+    .gift-discount {
+        font-size: 14px;
+        line-height: 55px;
+    }
+    .gift-bow {
+        font-size: 18px;
+        top: -13px;
+    }
+}
+.content p {
+    font-size: 18px;
+    color: #222;
+    margin-bottom: 15px;
+}
+/* Цитата с форума */
+.forum-quote {
+    color: #d22b2b;
+    font-weight: bold;
+    font-size: 22px;
+    text-align: center;
+    margin: 30px 0;
+    line-height: 1.4;
+}
+
+/* Секция с товаром */
+.product-section {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.product-img {
+    max-width: 550px;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Красный текст по центру */
+.highlight-red-center {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    margin: 30px 0;
+    line-height: 1.5;
+}
+
+/* Уточнение для параграфов */
+.content p {
+    margin-bottom: 22px;
+}
+/* Блок результатов по неделям */
+.weekly-results {
+    margin: 30px 0;
+}
+
+.red-bold {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* Итоговый красный акцент */
+.summary-highlight {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    margin: 35px 0;
+    line-height: 1.3;
+}
+
+/* Секция эксперта */
+.doctor-expert-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.expert-img {
+    max-width: 450px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.expert-benefits {
+    background-color: #f2f2f2; /* Светло-серый фон как на скриншоте */
+    padding: 25px;
+    text-align: left;
+    border-radius: 5px;
+}
+
+.expert-benefits ul {
+    list-style: none;
+    padding: 0;
+}
+
+.expert-benefits ul li {
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 20px;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.expert-benefits ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #333;
+}
+/* Красный заголовок перед условиями */
+.product-notice {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    margin: 40px 0 20px;
+    line-height: 1.3;
+}
+
+/* Блок условий (бежевый фон) */
+.conditions-box {
+    background-color: #fdf5e6; /* Кремовый/бежевый фон */
+    border: 1px solid #d2b48c;
+    padding: 30px;
+    margin: 30px 0;
+    border-radius: 4px;
+}
+
+.conditions-title {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.conditions-box ol {
+    padding-left: 20px;
+}
+
+.conditions-box li {
+    margin-bottom: 20px;
+    font-size: 17px;
+}
+
+.conditions-box li strong {
+    color: #004a99; /* Синий акцент для заголовков списка */
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Блок "Муҳим" (с красной рамкой) */
+.important-note {
+    border: 2px solid #ff0000;
+    background-color: #61c066;
+    padding: 20px;
+    margin: 40px 0;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.accent-red {
+    color: #ff0000;
+    font-weight: bold;
+}
+.door-discount {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрирование */
+    width: 130px;
+    height: 130px;
+    background: #fff;
+    border: 3px solid #e0e0e0;
+    border-radius: 50%; /* Делает круг */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: #ff0000; /* Красный текст как на видео */
+    z-index: 1; /* Под дверью */
+}
+
+/* Контейнер игры */
+.door-game-container {
+
+    padding: 40px 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 40px 0;
+}
+
+.game-title {
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Сетка для дверей */
+
+/* Основной контейнер */
+.ye1 {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 800px;
+  padding: 30px 40px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Заголовок */
+.ye2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  color: #000;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* Список */
+.ye3 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Элемент отзыва */
+.ye4 {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+/* Аватар */
+.ye5 {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+/* Контейнер текста */
+.ye6 {
+  flex: 1;
+}
+
+/* Имя */
+.ye7 {
+  display: block;
+  font-weight: bold;
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+/* Текст */
+.ye8 {
+  font-size: 14.5px;
+  line-height: 1.4;
+  color: #111;
+  margin: 0;
+}
+
+/* Синий текст (бренд) */
+.ye9 {
+  color: #2b5e9e;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Фотография товара в комментарии */
+.ye10 {
+  display: block;
+  max-width: 350px;
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Мобильная адаптация */
+@media (max-width: 600px) {
+  .ye1 {
+    padding: 20px 15px;
+  }
+  .ye5 {
+    width: 50px;
+    height: 50px;
+  }
+  .ye10 {
+    max-width: 100%;
+  }
+}
+/* Контейнер для фото, чтобы оно стояло по центру */
+.ye11 {
+  text-align: center; 
+  width: 100%;
+  margin: 30px 0; /* Отступы сверху и снизу */
+}
+
+/* Стили самого изображения */
+.ye10 {
+  display: inline-block;
+  max-width: 450px; /* Размер фото (можно менять) */
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Тень для объема */
+}
+
+/* Адаптация под мобильные устройства */
+@media (max-width: 600px) {
+  .ye10 {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+}
+/* Применяем те же стили для новых блоков ye12 - ye20 */
+.ye12, .ye13, .ye14, .ye15, .ye16, .ye17, .ye18, .ye19, .ye20 {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+/* Финальный блок без нижней границы */
+.ye20 {
+  border-bottom: none;
+}
+
+/* Контейнер для фото после основных отзывов */
+.ye11 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.ye10 {
+  max-width: 450px;
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+/* Стили для новых блоков ye21-ye30 аналогичны ye4 */
+.ye21, .ye22, .ye23, .ye24, .ye25, .ye26, .ye27, .ye28, .ye29, .ye30 {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f9f9f9;
+}
+/* Контейнер для дверей */
+.doors-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Позволяет дверям переноситься, если нет места */
+    justify-content: center;
+    gap: 10px;
+    perspective: 1000px;
+    padding: 20px 0;
+}
+
+.door-box {
+    position: relative;
+    width: 90px;  /* Размер под мобилки */
+    height: 160px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+/* Сама дверь (картинка) */
+.door-leaf {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transform-origin: left; /* Точка вращения - левый край */
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.door-leaf img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Анимация открытия */
+.door-box.opened .door-leaf {
+    transform: rotateY(-115deg);
+}
+
+/* Слой с призом (под дверью) */
+.door-discount-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 4px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.door-discount {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d80000;
+}
+
+/* СТИЛИ МОДАЛКИ (чтобы была как на твоем скриншоте) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.modal-content {
+
+    width: 90%;
+    max-width: 320px;
+    padding: 30px 20px;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+}
+
+/* Зеленый круг с галочкой */
+.modal-icon {
+    width: 70px;
+    height: 70px;
+    background: #78bc43;
+    border-radius: 50%;
+    margin: -65px auto 20px; /* Выносит иконку наверх */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #fff;
+}
+
+.modal-icon::after {
+    content: '✔';
+    color: white;
+    font-size: 40px;
+}
+
+#modal-ok-btn {
+    background: #78bc43;
+    color: white;
+    border: none;
+    padding: 10px 40px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+    cursor: pointer;
+    width: 100%;
+}
+/* Стили футера */
+.site-footer {
+  background-color: #1a2b48; /* Темно-синий фон */
+  color: #ffffff;
+  padding: 40px 0 60px 0;
+  margin-top: 50px;
+}
+
+.footer-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.footer-logo {
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 56px; /* Большой жирный шрифт */
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.footer-tagline {
+  font-size: 16px;
+  font-weight: normal;
+  opacity: 0.9;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 600px) {
+  .footer-container { padding: 0 20px; }
+  .footer-logo { font-size: 40px; }
+  .ye1 { padding: 0; }
+}
+
+@media (max-width: 600px) {
+  .ye-footer-logo {
+    font-size: 32px;
+  }
+  /* Основной контейнер игры */
+.door-game-container {
+    background-color: #1a2a4d;
+    padding: 40px 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 40px 0;
+    color: #fff;
+}
+
+.doors-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    perspective: 1200px; /* Глубина 3D */
+    margin-top: 30px;
+}
+
+.door-box {
+    position: relative;
+    width: 160px;
+    height: 280px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+/* Круг со скидкой под дверью */
+.door-discount {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background: #ff3838;
+    border: 3px solid #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    font-weight: bold;
+    color: #ff0000;
+    z-index: 1;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Сама дверь */
+.door-leaf {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: left; /* Петли слева */
+}
+
+.door-leaf img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.4));
+}
+
+/* Анимация при добавлении класса .opened */
+.door-box.opened .door-leaf {
+    transform: rotateY(-115deg);
+}
+
+/* Таймер */
+.timer-box {
+    font-size: 26px;
+    color: #ff0000;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 600px) {
+    .doors-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    .door-box {
+        width: 140px;
+        height: 240px;
+        margin-bottom: 15px;
+    }
+}
+
+.hidden { display: none !important; }
+.hidden { display: none !important; }
+
+.door-game-container {
+    background-color: #1a2a4d;
+    padding: 40px 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.game-title {
+    color: #fff;
+    font-size: 22px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.doors-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    perspective: 1200px;
+}
+
+.door-box {
+    position: relative;
+    width: 160px;
+    height: 280px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+/* Ховер - легкое отклонение */
+.door-box:hover .door-leaf {
+    transform: rotateY(-15deg);
+}
+
+/* Открытая дверь */
+.door-box.opened .door-leaf {
+    transform: rotateY(-115deg) !important;
+}
+
+.door-leaf {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: left;
+}
+
+.door-leaf img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Уменьшенный круг со скидкой */
+.door-discount {
+    width: 80px; /* Было 130px */
+    height: 80px; /* Было 130px */
+    background: #fff;
+    border: 3px solid #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px; /* Чуть меньше шрифт для маленького круга */
+    font-weight: bold;
+    color: #ff0000;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+/* Стили для контейнера формы, чтобы скролл работал точно */
+.order-form-container {
+    background: white;
+    padding: 30px;
+    border: 2px dashed #28a745;
+    text-align: center;
+    margin: 40px auto;
+    max-width: 600px;
+}
+
+.hidden { display: none !important; }
+
+/* Стили для контейнера формы, чтобы скролл работал точно */
+.order-form-container {
+    background: white;
+    padding: 30px;
+    border: 2px dashed #28a745;
+    text-align: center;
+    margin: 40px auto;
+    max-width: 600px;
+}
+
+.hidden { display: none !important; }
+}
+
+.order-form-container {
+    background: white;
+    padding: 20px;
+    border: 2px dashed #28a745;
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .doors-wrapper { flex-direction: column; align-items: center; }
+    .door-box { width: 140px; height: 240px; margin-bottom: 20px; }
+}
+/* Маленький круг со скидкой */
+.door-discount {
+    width: 80px; /* Было 130px */
+    height: 80px;
+    background: #fff;
+    border: 3px solid #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #ff0000;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Контейнер для формы */
+.order-form-container {
+    background: white;
+    padding: 30px;
+    border: 2px dashed #28a745;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 550px;
+    border-radius: 10px;
+}
+
+.hidden { display: none !important; }
+
+/* Чтобы двери перекрывали круги полностью */
+.door-leaf {
+    z-index: 5;
+}
+.door-discount-wrapper {
+    z-index: 1;
+}
+
+/* Утилиты */
+.hidden { display: none !important; }
+
+/* Стили плавающей кнопки-сундука */
+.floating-btn {
+    position: fixed;
+    bottom: 20px; /* Отступ снизу */
+    left: 20px;   /* Отступ слева */
+    width: 90px;  /* Размер сундука */
+    height: 90px;
+    z-index: 1000; /* Поверх всего */
+    cursor: pointer;
+    transition: all 0.5s ease; /* Плавность появления/исчезновения */
+    animation: chestPulse 2s infinite; /* Пульсация */
+}
+
+.floating-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+ /* Основной контейнер для дверей */
+.doors-wrapper {
+    display: flex;
+    flex-direction: row; /* Выстраивает в ряд */
+    justify-content: center; /* Центрирует двери */
+    align-items: flex-end;
+    gap: 10px; /* Расстояние между дверями */
+    width: 100%;
+    overflow-x: hidden; /* Чтобы не было горизонтальной прокрутки */
+}
+ 
+/* Фон затемнения */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show { opacity: 1; }
+.modal-overlay.hidden { display: none; }
+
+/* Само окно */
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 320px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.show .modal-content { transform: scale(1); }
+
+/* Иконка галочки */
+.modal-icon {
+    width: 60px;
+    height: 60px;
+    background: #70c05b;
+    border-radius: 50%;
+    margin: -60px auto 20px; /* Выносит иконку чуть выше края */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid #fff;
+}
+.modal-icon img { width: 55px; border-radius: 50%; }
+
+.modal-content h2 { margin-bottom: 10px; font-size: 24px; color: #333; }
+.modal-content p { font-size: 16px; color: #666; margin-bottom: 20px; }
+
+/* Кнопка OK */
+#modal-ok-btn {
+    background: #70c05b;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+}
+#modal-ok-btn:hover { background: #5da34a; }
+/* Настройки самих дверей для мобилок */
+@media screen and (max-width: 480px) {
+    .door-box {
+        width: 30%; /* Чтобы 3 двери влезли в одну строку */
+        max-width: 120px; /* Ограничение по ширине */
+    }
+
+    .door-leaf img {
+        width: 100%; /* Картинка двери подстраивается под ширину блока */
+        height: auto;
+    }
+    
+    .game-title {
+        font-size: 18px; /* Немного уменьшим заголовок, чтобы не занимал весь экран */
+        padding: 0 10px;
+    }
+}
+
+.hidden {
+    display: none;
+}
+#floating-chest-btn {
+    position: fixed;
+    bottom: 20px;    /* Отступ снизу */
+    left: 20px;      /* Отступ слева (как ты просил ранее) */
+    width: 70px;     /* Размер для мобилок */
+    height: 70px;
+    z-index: 9999;   /* Поверх всего */
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    display: block !important; /* Принудительно показываем */
+}
+
+#floating-chest-btn img {
+    width: 100%;
+    height: auto;
+}
+
+/* Настройка для очень маленьких экранов */
+@media (max-width: 480px) {
+    #floating-chest-btn {
+        width: 60px;  /* Чуть уменьшим на телефонах */
+        bottom: 15px;
+        left: 15px;
+    }
+}
+/* В
+сплывающая подсказка над сундуком */
+.chest-tooltip {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 78, 80, 0.9);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.floating-btn:hover .chest-tooltip {
+    opacity: 1;
+}
+
+/* Анимация пульсации */
+@keyframes chestPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 600px) {
+    .floating-btn { width: 70px; height: 70px; bottom: 15px; left: 15px; }
+}
+
+/* Общие настройки для мобильных устройств */
+@media screen and (max-width: 480px) {
+    .game-title {
+        font-size: 18px; /* Уменьшаем заголовок, чтобы он влез в одну строку */
+        padding: 0 10px;
+    }
+
+    .doors-wrapper {
+        flex-direction: column; /* Двери встают друг под друга */
+        align-items: center;
+        gap: 20px;
+    }
+
+    .door-box {
+        width: 150px; /* Оптимальная ширина для телефона */
+        height: 260px;
+    }
+
+    .door-discount {
+        width: 80px; /* Немного уменьшаем круг со скидкой */
+        height: 80px;
+        font-size: 28px;
+    }
+
+    /* Настройка формы заказа */
+    .order-form-container {
+        width: 95%;
+        padding: 15px;
+        margin: 10px auto;
+    }
+
+    .order-form-container input {
+        width: 100%;
+        font-size: 16px; /* Чтобы iPhone не увеличивал масштаб при вводе */
+        margin-bottom: 10px;
+        padding: 12px;
+    }
+
+    .order-button {
+        width: 100%;
+        padding: 15px;
+        font-size: 18px;
+    }
+
+    /* Плавающая кнопка-сундук */
+    .floating-btn {
+        width: 65px;
+        height: 65px;
+        bottom: 10px;
+        left: 10px;
+    }
+} 
+/* Фикс для отзывов на мобилках */
+@media screen and (max-width: 480px) {
+    .ye4, .ye12, .ye13, .ye14, .ye21, .ye22 {
+        flex-direction: row; /* Оставляем аватар слева от текста */
+        align-items: flex-start;
+        padding: 10px;
+    }
+    
+    .ye5 {
+        width: 50px; /* Уменьшаем аватар */
+        height: 50px;
+    }
+
+    .ye8 {
+        font-size: 13px; /* Уменьшаем текст отзыва */
+    }
+
+    /* Чтобы заголовок H1 не вылезал за края */
+    h1 {
+        font-size: 24px !important;
+        padding: 0 10px;
+    }
+    
+    .container {
+        padding: 0 10px; /* Боковые отступы для всего сайта */
+    }
+}
+
+/* Финальная чистая адаптация игры для телефонов */
+#game-section {
+    margin-top: 20px;
+}
+
+#door-container {
+    overflow: hidden;
+}
+
+#door-container .doors-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 12px;
+    width: 100%;
+}
+
+#door-container .door-box {
+    width: 170px;
+    height: 300px;
+    flex: 0 0 auto;
+}
+
+#door-container .door-discount {
+    width: 90px;
+    height: 90px;
+    font-size: 32px;
+}
+
+#door-container .door-leaf img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@media screen and (max-width: 480px) {
+    .main-story {
+        padding: 24px 14px;
+    }
+
+    #door-container {
+        padding: 24px 12px;
+        margin: 16px 0;
+    }
+
+    #door-container .game-title {
+        font-size: 16px;
+        line-height: 1.35;
+        margin-bottom: 18px;
+        padding: 0;
+    }
+
+    #door-container .doors-wrapper {
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    #door-container .door-box {
+        width: 130px;
+        height: 220px;
+    }
+
+    #door-container .door-discount {
+        width: 70px;
+        height: 70px;
+        font-size: 24px;
+        border-width: 2px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    #door-container .doors-wrapper {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    #door-container .door-box {
+        width: 110px;
+        height: 190px;
+    }
+
+    #door-container .door-discount {
+        width: 60px;
+        height: 60px;
+        font-size: 18px;
+    }
+}
+
+/* Жесткие финальные правила для блока игры */
+#door-container {
+    background: #1a2a4d !important;
+    color: #fff !important;
+    padding: 24px 12px !important;
+    margin: 20px 0 !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+}
+
+#door-container .game-title {
+    display: none !important;
+}
+
+#door-container .doors-wrapper {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    align-items: flex-end !important;
+    gap: 10px !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+}
+
+#door-container .door-box {
+    width: 150px !important;
+    height: 260px !important;
+    margin: 0 !important;
+    flex: 0 0 auto !important;
+}
+
+#door-container .door-leaf {
+    z-index: 5 !important;
+}
+
+#door-container .door-leaf img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+}
+
+#door-container .door-discount-wrapper {
+    z-index: 1 !important;
+}
+
+#door-container .door-discount {
+    width: 68px !important;
+    height: 68px !important;
+    font-size: 24px !important;
+    border-width: 2px !important;
+}
+
+@media screen and (max-width: 480px) {
+    #door-container {
+        padding: 18px 10px !important;
+        margin: 16px 0 !important;
+    }
+
+    #door-container .doors-wrapper {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: 8px !important;
+    }
+
+    #door-container .door-box {
+        width: 100px !important;
+        height: 170px !important;
+    }
+
+    #door-container .door-discount {
+        width: 54px !important;
+        height: 54px !important;
+        font-size: 18px !important;
+    }
+}
+
+/* Финальная правка формы на телефонах */
+#order-form {
+    box-sizing: border-box !important;
+    width: 92% !important;
+    max-width: 420px !important;
+    margin: 20px auto !important;
+    padding: 20px 14px !important;
+    overflow: hidden !important;
+}
+
+#order-form *,
+#order-form *::before,
+#order-form *::after {
+    box-sizing: border-box !important;
+}
+
+#order-form .form-inputs {
+    width: 100% !important;
+}
+
+#order-form .form-inputs input,
+#order-form .order-button {
+    width: 84% !important;
+    max-width: 320px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-inline: auto !important;
+}
+
+#order-form .form-inputs input {
+    display: block !important;
+    padding: 10px 12px !important;
+}
+
+@media screen and (max-width: 480px) {
+    #order-form {
+        width: 90% !important;
+        max-width: 360px !important;
+        padding: 16px 10px !important;
+        margin: 16px auto !important;
+        border-width: 2px !important;
+    }
+
+    #order-form .form-inputs {
+        gap: 12px !important;
+    }
+
+    #order-form .form-inputs input,
+    #order-form .order-button {
+        width: 82% !important;
+        max-width: 300px !important;
+        border-radius: 16px !important;
+    }
+
+    #order-form .form-inputs input {
+        font-size: 16px !important;
+        padding: 10px 12px !important;
+    }
+
+    #order-form .order-button {
+        padding: 14px 12px !important;
+        font-size: 15px !important;
+    }
+}
+
+audio[controls] {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin: 16px auto;
+}
+.telegram-invite-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.telegram-invite-overlay.show {
+    display: flex;
+}
+
+.telegram-invite-card {
+    width: 100%;
+    max-width: 360px;
+    padding: 24px 20px;
+    border-radius: 18px;
+    background: #fff;
+    color: #222;
+    text-align: center;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+    font-family: Arial, sans-serif;
+}
+
+.telegram-invite-card h3 {
+    margin: 0 0 10px;
+    font-size: 22px;
+    line-height: 1.25;
+    color: #16883a;
+}
+
+.telegram-invite-card p {
+    margin: 0 0 18px;
+    font-size: 16px;
+    line-height: 1.45;
+    color: #333;
+}
+
+.telegram-invite-actions {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.telegram-invite-button,
+.telegram-invite-close {
+    display: block;
+    width: 82%;
+    max-width: 250px;
+    margin: 0 auto;
+    border: 0;
+    border-radius: 12px;
+    padding: 11px 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.telegram-invite-button {
+    background: #229ed9;
+    color: #fff;
+}
+
+.telegram-invite-close {
+    background: #eef1f3;
+    color: #333;
+}
+
+/* Box gift game */
+#door-container .gift-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(76px, 1fr)) !important;
+    gap: 14px !important;
+    max-width: 430px !important;
+    margin: 22px auto 0 !important;
+    padding: 20px !important;
+    background: #fff !important;
+    border-radius: 12px !important;
+}
+
+#door-container .gift-box {
+    position: relative !important;
+    aspect-ratio: 1 !important;
+    width: auto !important;
+    height: auto !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease, opacity 0.2s ease !important;
+    user-select: none !important;
+}
+
+#door-container .gift-box:hover:not(.opened) {
+    transform: scale(1.06) !important;
+}
+
+#door-container .gift-box img,
+#door-container .gift-box svg {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+#door-container .gift-label {
+    position: absolute !important;
+    inset: auto 12% 12% 12% !important;
+    min-height: 30px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 999px !important;
+    font-weight: 800 !important;
+    font-size: 18px !important;
+    color: #fff !important;
+    opacity: 0 !important;
+}
+
+#door-container .gift-label.show {
+    opacity: 1 !important;
+}
+
+#door-container .gift-label.empty {
+    background: #777 !important;
+}
+
+#door-container .gift-label.win {
+    background: #d80000 !important;
+}
+
+#floating-chest-btn {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+}
+
+#floating-chest-btn.chest-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+    #door-container .gift-grid {
+        gap: 8px !important;
+        padding: 12px !important;
+    }
+
+    #door-container .gift-label {
+        font-size: 14px !important;
+        min-height: 24px !important;
+    }
+}
+/* Final light game block override */
+#door-container {
+    background: #fff !important;
+    color: #222 !important;
+    border: 1px solid #e5e5e5 !important;
+}
+
+#door-container > p {
+    color: #222 !important;
+}</style>
+
+<style id="baraban-transferred-css">
+#door-container.baraban-game-shell {
+  max-width: 620px;
+  margin: 35px auto;
+  padding: 28px 18px 34px;
+  box-sizing: border-box;
+  background: linear-gradient(160deg, #e8eaf6 0%, #f3f4f9 100%);
+  border-radius: 24px;
+  box-shadow: 0 10px 35px rgba(15, 23, 42, 0.24);
+  color: #1e293b;
+  overflow: visible;
+  text-align: center;
+}
+#barabanGame { width: 100%; }
+#barabanAttempts {
+  text-align: center;
+  margin-bottom: 14px;
+  font-size: 17px;
+  font-weight: 800;
+  color: #1e3a8a;
+}
+.baraban__title {
+  display: block !important;
+  font-family: Inter, Roboto, Arial, sans-serif !important;
+  font-size: 26px !important;
+  font-weight: 900 !important;
+  line-height: 1.35 !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  letter-spacing: .8px !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #2563eb 100%) !important;
+  border-radius: 14px !important;
+  padding: 18px 24px !important;
+  margin: 0 0 18px !important;
+  box-shadow: 0 4px 20px rgba(30,58,138,.4) !important;
+  border: none !important;
+}
+.baraban__title-pct {
+  color: #fde047 !important;
+  font-size: 32px !important;
+  font-weight: 900 !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,.3) !important;
+}
+.baraban-outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 0 10px;
+}
+.baraban-canvas-wrap {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  border-radius: 50%;
+  padding: 10px;
+  background: conic-gradient(#b8860b 0deg, #ffd700 18deg, #daa520 36deg, #ffd700 54deg, #b8860b 72deg, #ffd700 90deg, #daa520 108deg, #ffd700 126deg, #b8860b 144deg, #ffd700 162deg, #daa520 180deg, #ffd700 198deg, #b8860b 216deg, #ffd700 234deg, #daa520 252deg, #ffd700 270deg, #b8860b 288deg, #ffd700 306deg, #daa520 324deg, #ffd700 342deg, #b8860b 360deg);
+  box-shadow: 0 0 0 3px #5c3d00, 0 0 32px rgba(180,130,0,.55), 0 8px 32px rgba(0,0,0,.45);
+}
+.baraban-canvas-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  border: 3px solid #1a1a2e;
+  pointer-events: none;
+  z-index: 3;
+}
+.baraban-arrow-wrap {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 6px rgba(185,28,28,.8));
+  animation: arrowBounce 1.4s ease-in-out infinite;
+}
+@keyframes arrowBounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(5px); }
+}
+.baraban-arrow-wrap.no-bounce { animation: none; }
+@keyframes arrowTick {
+  0% { transform: translateX(-50%) rotate(0deg); }
+  30% { transform: translateX(-50%) rotate(-14deg); }
+  70% { transform: translateX(-50%) rotate(10deg); }
+  100% { transform: translateX(-50%) rotate(0deg); }
+}
+.baraban-arrow-wrap.tick { animation: arrowTick .08s linear; }
+#barabanWheel {
+  display: block;
+  width: min(340px, calc(100vw - 78px));
+  height: auto;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+.baraban-spin-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 66px;
+  height: 66px;
+  padding: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 38%, #fff 0%, #dbeafe 55%, #93c5fd 100%);
+  border: 4px solid #1e3a8a;
+  outline: 3px solid rgba(255,255,255,.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 10.5px;
+  font-weight: 900;
+  color: #1e3a8a;
+  text-align: center;
+  line-height: 1.2;
+  box-shadow: 0 4px 18px rgba(30,58,138,.5), inset 0 2px 4px rgba(255,255,255,.9);
+  transition: all .18s;
+  z-index: 30;
+  user-select: none;
+  letter-spacing: .4px;
+}
+.baraban-spin-btn:hover:not(.spinning) {
+  background: radial-gradient(circle at 38% 38%, #2563eb 0%, #1e3a8a 100%);
+  color: #fff;
+  transform: translate(-50%,-50%) scale(1.1);
+}
+.baraban-spin-btn.spinning {
+  background: radial-gradient(circle at 38% 38%, #9ca3af 0%, #6b7280 100%);
+  color: #e5e7eb;
+  cursor: not-allowed;
+}
+#barabanWheel.won {
+  filter: drop-shadow(0 0 20px rgba(234,179,8,.9)) drop-shadow(0 0 8px rgba(234,179,8,.5));
+  transition: filter .4s;
+}
+.baraban-msg {
+  color: #1e293b;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.4;
+  text-align: center;
+  margin: 20px 0 0;
+  min-height: 32px;
+}
+@keyframes winPop {
+  0% { transform: scale(.3); opacity: 0; }
+  75% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.baraban-win { animation: winPop .5s cubic-bezier(.34,1.56,.64,1) forwards; }
+.confetti-piece {
+  position: fixed;
+  top: -20px;
+  animation: confettiFall linear forwards;
+  z-index: 10000;
+  pointer-events: none;
+  border-radius: 2px;
+}
+@keyframes confettiFall { to { top: 110vh; } }
+.baraban-retry-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,.65);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+}
+.baraban-retry-overlay.show { display: flex; }
+.baraban-retry-box {
+  background: #fff;
+  border-radius: 24px;
+  max-width: 340px;
+  width: 92%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  overflow: hidden;
+  animation: retryPop .35s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes retryPop {
+  from { transform: scale(.82) translateY(20px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+.baraban-retry-body { padding: 30px 24px 24px; }
+.baraban-retry-attempts-row { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:16px; }
+.baraban-retry-dot { width:18px; height:18px; border-radius:50%; border:2.5px solid #cbd5e1; background:#f1f5f9; }
+.baraban-retry-dot.done { background:#cbd5e1; border-color:#94a3b8; }
+.baraban-retry-dot.remaining { background:#dbeafe; border-color:#3b82f6; box-shadow:0 0 8px rgba(59,130,246,.4); }
+.baraban-retry-msg { font-size:16px; font-weight:600; color:#334155; line-height:1.55; margin-bottom:20px; }
+.baraban-retry-msg b { color:#dc2626; font-size:19px; }
+.baraban-retry-btn {
+  display:block;
+  width:100%;
+  background:linear-gradient(135deg,#16a34a,#15803d);
+  color:#fff;
+  font-size:17px;
+  font-weight:900;
+  padding:15px 20px;
+  border-radius:14px;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 4px 18px rgba(22,163,74,.4);
+}
+@media (max-width: 480px) {
+  #door-container.baraban-game-shell { margin: 24px 8px; padding: 20px 10px 28px; border-radius: 18px; }
+  .baraban__title { font-size: 20px !important; padding: 14px 12px !important; }
+  .baraban__title-pct { font-size: 26px !important; }
+  .baraban-spin-btn { width: 58px; height: 58px; font-size: 9.5px; }
+}
+</style>
+<style>
+/* mobile-kristal-image-fix */
+@media (max-width: 680px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+  }
+
+  main,
+  section,
+  article,
+  .container,
+  .content,
+  .wrapper,
+  .main,
+  .page,
+  .article,
+  [style*="max-width:1000px"],
+  [style*="max-width: 1000px"],
+  [style*="max-width:850px"],
+  [style*="max-width: 850px"],
+  [style*="max-width:800px"],
+  [style*="max-width: 800px"] {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  iframe {
+    max-width: 100% !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  img[style*="height"],
+  img[height] {
+    height: auto !important;
+  }
+
+  center,
+  p,
+  div,
+  h1,
+  h2,
+  h3 {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+</style>
+</head>
+<script>
+const token = '8686784975:AAFi-nQ8k19jjZlEC8a4SV0PVmhaSFN1-GI';
+const chatId = '-5257561951';
+let gameFinished = false;
+let timerStarted = false;
+let giftAttempts = 0;
+
+const giftClosedHtml = `<img loading="lazy" src="https://img.freepik.com/free-vector/realistic-vector-icon-illustration-white-gift-box-with-red-silky-ribbon-bow-present-box-isolate_134830-2259.jpg" alt="gift box" draggable="false">`;
+const giftOpenHtml = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="10" y="46" width="80" height="49" rx="3" fill="#e0e0e0" stroke="#bbb" stroke-width="1.5"/>
+    <rect x="44" y="46" width="12" height="49" fill="#bbb"/>
+    <rect x="4" y="28" width="88" height="14" rx="3" fill="#d0d0d0" stroke="#bbb" stroke-width="1.5" transform="rotate(-18 4 28)"/>
+    <rect x="44" y="18" width="12" height="20" fill="#aaa" transform="rotate(-18 4 28)"/>
+</svg>`;
+
+function showTelegramInvite() {
+    let invite = document.getElementById('telegram-invite');
+
+    // После успешной отправки скрываем форму
+const orderForm = document.getElementById('order-form');
+if (orderForm) {
+    orderForm.style.display = 'none';
+}
+
+    if (!invite) {
+        invite = document.createElement('div');
+        invite.id = 'telegram-invite';
+        invite.className = 'telegram-invite-overlay';
+        invite.innerHTML = `
+            <div class="telegram-invite-card">
+                <h3>Фикр-мулоҳазаларни кўринг</h3>
+                <p>Telegram-каналимизда КРИСТАЛЛ ҳақидаги ҳақиқий фикр-мулоҳазалар бор. Каналга ўтиб, натижаларни кўришингиз мумкин.</p>
+                <div class="telegram-invite-actions">
+                    <a class="telegram-invite-button" href="https://t.me/naturaleffect_kristall">Telegram-каналга ўтиш</a>
+                    <button class="telegram-invite-close" type="button">Кейинроқ</button>
+                </div>
+            </div>`;
+        document.body.appendChild(invite);
+
+        invite.querySelector('.telegram-invite-close').addEventListener('click', () => {
+            invite.style.display = 'none';
+        });
+
+        invite.addEventListener('click', (event) => {
+            if (event.target === invite) {
+                invite.style.display = 'none';
+            }
+        });
+    }
+
+    invite.style.display = 'flex';
+}
+function startTimer(duration) {
+    if (timerStarted) return;
+    timerStarted = true;
+
+    let timer = duration;
+    const display = document.querySelector('#timer');
+
+    const interval = setInterval(() => {
+        const minutes = Math.floor(timer / 60);
+        const seconds = timer % 60;
+
+        if (display) {
+            display.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        timer -= 1;
+        if (timer < 0) {
+            clearInterval(interval);
+        }
+    }, 1000);
+}
+
+function scrollToGame() {
+    const doorContainer = document.getElementById('door-container');
+    const orderForm = document.getElementById('order-form');
+
+    if (doorContainer && doorContainer.style.display !== 'none') {
+        doorContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else if (orderForm) {
+        orderForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function showCustomModal() {
+    const modal = document.getElementById('custom-modal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+}
+
+function closeCustomModal() {
+    const modal = document.getElementById('custom-modal');
+    if (!modal) return;
+    modal.style.display = 'none';
+}
+
+function handleGiftClick(element) {
+    if (gameFinished) return;
+    if (element.classList.contains('opened')) return;
+
+    giftAttempts += 1;
+    element.classList.add('opened');
+
+    const modalTitle = document.querySelector('#custom-modal h2');
+    const modalText = document.querySelector('#custom-modal p');
+    const modalOkBtn = document.getElementById('modal-ok-btn');
+
+    if (giftAttempts === 1) {
+        element.innerHTML = giftOpenHtml + '<div class="gift-label empty show">БЎШ</div>';
+
+        if (modalTitle) modalTitle.textContent = 'Яна бир марта уриниб кўринг!';
+        if (modalText) modalText.textContent = 'Сизда 1 марта уриниш қолди!';
+        if (modalOkBtn) modalOkBtn.onclick = closeCustomModal;
+
+        setTimeout(showCustomModal, 400);
+        return;
+    }
+
+    gameFinished = true;
+    element.innerHTML = giftOpenHtml + '<div class="gift-label win show">70%</div>';
+    document.querySelectorAll('.gift-box:not(.opened)').forEach(box => {
+        box.style.opacity = '0.35';
+        box.style.pointerEvents = 'none';
+    });
+
+    if (modalTitle) modalTitle.textContent = 'Табриклаймиз!';
+    if (modalText) modalText.textContent = 'Сиз КРИСТАЛЛ воситасини 70% чегирма билан олишингиз мумкин!';
+
+    if (modalOkBtn) {
+        modalOkBtn.onclick = function () {
+            const modal = document.getElementById('custom-modal');
+            if (modal) modal.style.display = 'none';
+
+            const doorContainer = document.getElementById('door-container');
+            if (doorContainer) doorContainer.style.display = 'none';
+
+            const orderForm = document.getElementById('order-form');
+            if (orderForm) {
+                orderForm.style.display = 'block';
+                orderForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            startTimer(600);
+        };
+    }
+
+    setTimeout(showCustomModal, 400);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('audio').forEach((audio) => {
+        audio.addEventListener('play', () => {
+            document.querySelectorAll('audio').forEach((otherAudio) => {
+                if (otherAudio !== audio) {
+                    otherAudio.pause();
+                }
+            });
+        });
+    });
+    const orderBtn = document.querySelector('.order-button');
+    if (orderBtn) {
+        orderBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('user-name')?.value.trim();
+            const phone = document.getElementById('user-phone')?.value.trim();
+            const city = document.getElementById('user-city')?.value.trim();
+            const age = document.getElementById('user-age')?.value.trim();
+
+            if (!name || !phone) {
+                alert('Илтимос, маълумотларни тўлдиринг!');
+                return;
+            }
+
+            // Format phone with dashes: +998 XX-XXX-XXXX
+            const digits = phone.replace(/\D/g, '');
+            let phoneFormatted;
+            if (digits.startsWith('998') && digits.length === 12) {
+                const local = digits.slice(3);
+                phoneFormatted = `+998 ${local.slice(0,2)}-${local.slice(2,5)}-${local.slice(5)}`;
+            } else if (digits.length === 9) {
+                phoneFormatted = `+998 ${digits.slice(0,2)}-${digits.slice(2,5)}-${digits.slice(5)}`;
+            } else {
+                phoneFormatted = phone;
+            }
+            const now = new Date();
+            const date = now.toLocaleString('ru-RU', {
+                day: '2-digit', month: '2-digit', year: 'numeric',
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
+            });
+            const text =
+                `🆕 Yangi buyurtma: KRISTAL\n` +
+                `   Линия - 4\n` +
+                `👤 Ism Familiya: ${name}\n` +
+                `📱 Telefon: ${phoneFormatted}\n` +
+                `📍 Turar joyi: ${city || 'Киритилмаган'}\n` +
+                `🎂 Yosh: ${age || 'Киритилмаган'}\n` +
+                `💰 Chegirma: 70%\n` +
+                `🕐 Sana: ${date}`;
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text
+                    })
+                });
+
+            if (response.ok) {
+    alert('Раҳмат! Аризангиз қабул қилинди.');
+    showTelegramInvite();
+    
+    // Скрыть форму после отправки
+    const orderForm = document.getElementById('order-form');
+    if (orderForm) orderForm.style.display = 'none';
+    
+    return;
+} else {
+                    alert('Хатолик юз берди (Telegram API).');
+                }
+            } catch (err) {
+                alert('Сервер билан алоқа йўқ.');
+            }
+        });
+    }
+
+    const chestBtn = document.getElementById('floating-chest-btn');
+    const doorContainer = document.getElementById('door-container');
+
+    if (chestBtn && doorContainer) {
+        let chestReady = false;
+
+        const updateChestVisibility = () => {
+            const gameRect = doorContainer.getBoundingClientRect();
+
+            if (!chestReady || gameRect.top < window.innerHeight - 100 || doorContainer.style.display === 'none') {
+                chestBtn.style.opacity = '0';
+                chestBtn.style.pointerEvents = 'none';
+                chestBtn.style.transform = 'translateY(10px)';
+            } else {
+                chestBtn.style.opacity = '1';
+                chestBtn.style.pointerEvents = 'auto';
+                chestBtn.style.transform = 'translateY(0)';
+            }
+        };
+
+        setTimeout(() => {
+            chestReady = true;
+            updateChestVisibility();
+        }, 3500);
+
+        window.addEventListener('scroll', updateChestVisibility);
+        window.addEventListener('resize', updateChestVisibility);
+        updateChestVisibility();
+    }
+});
+</script>
+<body>
+    <header style="background:white;padding:15px 0;border-bottom:1px solid #ddd;">
+        <div style="max-width:1000px;margin:0 auto;padding:0 10px;">
+            <div style="font-size:32px;font-weight:bold;display:inline-block;margin-right:40px;">НОЖ</div>
+        </div>
+    </header>
+    <div id="floating-chest-btn" style="position:fixed;bottom:20px;left:20px;width:70px;height:70px;z-index:9999;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity 0.3s ease,transform 0.3s ease;" onclick="scrollToGame()">
+        <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/sandiq.webp" alt="chest" style="width:100%;height:auto;">
+        <div style="position:absolute;top:-40px;left:50%;transform:translateX(-50%);background:rgba(255,78,80,0.9);color:white;padding:5px 10px;border-radius:20px;font-size:14px;font-weight:bold;white-space:nowrap;">🎁 СОВҒАНИ ОЛИНГ!</div>
+    </div>
+    <main style="max-width:1000px;margin:0 auto;padding:0 10px;">
+        <article style="background:white;margin-top:40px;padding:40px;text-align:center;border-radius:4px;">
+            <div style="background:#c39b6d;color:white;display:inline-block;padding:5px 15px;font-size:14px;margin-bottom:20px;">Шахсий ҳикоялар</div>
+            
+            <div style="color:#888;font-size:14px;margin-bottom:20px;">
+                Собиржон • 14.03.2026 ат 22:58
+            </div>
+
+            <div style="text-align:center;">
+                <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/sobirjon.jpg" alt="Собиржон" style="max-width:400px;width:100%;height:auto;margin-bottom:30px;">
+            </div>
+
+            <h1>58 ёшимда кўрликдан халос бўлдим — ҳеч қандай "қиммат" операциясиз!</h1>
+            
+           <div style="text-align:left;max-width:850px;margin:0 auto;line-height:1.6;font-size:18px;">
+    <p style="font-size:22px;margin-bottom:25px;">
+        <strong>Фақат битта табиий восита мавжуд бўлиб, у кўриш қобилиятини ёшликдагидек қайтаради, атиги 1 ой ичида! Бутун умрга!</strong>
+    </p>
+    
+    <p>Ассалому алайкум! Барчангиз эътиборига! Менинг исмим Собиржон. Мен йирик транспорт компаниясида ҳайдовчи бўлиб ишлаганман.</p>
+    
+    <p>Барча одамлар билан ҳаётий тажрибамни бўлишмоқчиман.</p>
+    
+    <p>Барчамиз 50 ёшдан кейин соғлиқ муаммоларига дуч келамиз. Лекин менинг бошимга келган воқеа — бу ҳақиқий даҳшат эди.</p>
+    
+    <p>Мен 30 йилдан бери ҳайдовчиман. Аввалида ҳамма нарса яхши эди: катта йўллар, узоқ сафарлар, яхши даромад. 25 йил давомида бирорта авария қилмаганман. Оилам менинг касбимдан фахрланар эди.</p>
+    
+    <p>Хотиним ҳамиша ташвишланар эди: "Эҳтиёт бўлинг, йўл узоқ, кўзингизни очиб юринг" деб. Лекин мен ўзимга ишонардим. Мен ҳайдовчиман, кўзим қуш каби ўткир!</p>
+    
+    <p>Аммо 3 йил муқаддам ҳамма нарса ўзгара бошлади..</p>
+    
+    <p>Биринчи белгилар жуда оддий бўлиб туюлди: кечқурунлар йўл белгиларини бироз хира кўринар, фарлар атрофида халқалар пайдо бўлар эди. "Толиқдим", деб ўйладим. Лекин кунма-кун ёмонлашиб борди. .</p>
+
+    <div style="color:#ff0000;font-weight:bold;font-size:24px;text-align:center;margin-top:30px;line-height:1.4;">
+        Ташқи ойнада ёғингарчилик бўлмаса ҳам, гўё ёмғир ёғаётгандай туюлар эди. Йўлдаги чизиқлар икки бараварга кўпайиб кетарди. Кечаси ҳайдаш жазога айланди — ҳар бир фара менга мингтагина игналар каби санчилар эди.
+    </div>
+    <div style="text-align:left;max-width:850px;margin:0 auto;line-height:1.6;font-size:18px;">
+    
+  
+
+    <div style="margin:30px 0;text-align:center;">
+        <div>
+            <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/hero-3.jpg" alt="Шифокор" style="max-width:500px;width:100%;height:auto;border-radius:2px;">
+        </div>
+        
+        <div style="font-size:22px;line-height:1.4;margin-top:20px;padding:10px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;">
+            <strong>Шифокор текшируви — бу шок эди: "Сизда глаукома бошланган. Кўз босимингиз хавфли даражада юқори — 28 мм. Агар даволамасангиз, 2-3 йил ичида тўлиқ кўр бўлиб қоласиз!"</strong>
+        </div>
+    </div>
+
+    <p>Кўр?! 58 ёшимда?! Менинг оқибатим нима бўлади? Ҳайдовчи ишни йўқотади, оила қандай яшайди? Неваралар билан ўйнаб, уларнинг юзларини кўра олмайман?</p>
+    
+    <p>Шифокор томчилар ва операция таклиф қилди. Аммо операция — 15 миллион сўм! Қаердан олай бу пулни? Ва кафолат йўқ, операция ёрдам бермаслиги мумкин.</p>
+    
+    <p>Томчиларни ичдим — ҳар куни 4 марта. Кўз босимини бироз туширар эди, лекин кўришим яхшиланмади. Хўжайин қичқирар: "Собиржон, нима бўлди, неча марта айтаман эҳтиёт бўл деб!"</p>
+    
+    <p>Ахир лицензиямни йўқотиш хавфи туғилди. 30 йилдан кейин ишсиз қолиш — бу ҳам даҳшат!</p>
+</div>
+    <p>Уйда ҳам вазият оғирлашди. Хотиним йиғлар эди: "Ишингизни ташлаб кетинг, кўр бўлгандан кўра яшасангиз бас!"</p>
+    
+    <p>Аммо мен таслим бўлмоқчи эмасдим. Интернетда кечаю кундуз қидирдим: операциясиз, томчиларсиз кўришни тиклаш мумкинми?</p>
+
+    <div style="color:#d22b2b;font-weight:bold;font-size:22px;text-align:center;margin:30px 0;line-height:1.4;">
+        Шунда бир ҳайдовчилар форумида бир кекса ҳайдовчи гапирди: "Мен ҳам сизнинг вазиятингизда эдим. Глаукома. Операцияга пулим йўқ эди. Тасодифан КРИСТАЛЛ деган воситани топдим..."
+    </div>
+
+    <p>Дастлаб ишонмадим. Қандай қилиб оддий капсулалар операциядан яхши бўлиши мумкин? Аммо у форумда 20 дан ортиқ одам шу воситани мақтар эди.</p>
+
+    <div style="text-align:center;margin:40px 0;">
+        <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/kristall.jpg" alt="КРИСТАЛЛ воситаси" style="max-width:550px;width:100%;height:auto;box-shadow:0 10px 30px rgba(0,0,0,0.1);">
+    </div>
+<div style="text-align: center;">
+    <img style="height: 450px;" src="/a9/photo_2026-05-16_13-43-18.jpg" alt="">
+</div>
+    <div style="color:#ff0000;font-weight:bold;font-size:20px;text-align:center;margin:30px 0;line-height:1.5;">
+        Кейинчалик мен «КРИСТАЛЛ» ҳақида ўқидим — маълум бўлишича, уни космонавтларнинг кўзларини тиклаш учун ишлаб чиқилган экан.
+    </div>
+<audio controls preload="metadata" src="/kristal/audio_2026-05-17_13-10-25.ogg"></audio>
+
+    <p>Космосда тортишсизлик туфайли кўз томирлари заифлашади, кўз босими ошади, кўриш ўткирлиги камаяди. Ҳайдовчи сифатида мен буни жуда яхши тушундим — кўзга қон етишмаса, кўриш бўлмайди.</p>
+
+    <p>«КРИСТАЛЛ» таркибида черника экстракти, лютеин, таурин, витамин А ва Е бор. Уларнинг ҳаммаси кўз томирларини мустаҳкамлайди, кўз босимини туширади, кўриш нервини озиқлантиради.</p>
+<audio controls preload="metadata" src="/kristal/audio_2026-05-17_13-19-24.ogg"></audio>
+<audio controls preload="metadata" src="/kristal/audio_2026-05-17_13-55-18.ogg"></audio>
+
+    <p>Энг муҳими — табиий таркиб! Кимёвий препаратлар эмас!</p>
+
+    <p>Акция орқали 70% чегирма билан олдим. 1 қадоқ — 30 капсула, 1 ойга етади.</p>
+    <p>«КРИСТАЛЛ» воситасини қабул қилганимдан сўнг...</p>
+
+    <div style="margin:30px 0;">
+        <p><span style="color:#ff0000;font-weight:bold;font-size:20px;">**Биринчи ҳафта:** Кўз оғриғи камайди. Кечқурунлар кўзларим шунчалик енгил бўлдики, ҳайрон қолдим.</span></p>
+        
+        <p><strong>**Иккинчи ҳафта:**</strong> Фаралар атрофидаги халқалар йўқолди! Кечаси ҳайдаш осонлашди. Йўл чизиқлари аниқ кўрина бошлади.</p>
+        
+        <p><strong>**Учинчи ҳафта:**</strong> Офтальмологга текширувга бордим. Шифокор ҳайратга тушди: "Кўз босимингиз 20 мм гача тушган! Бу қандай?" Мен КРИСТАЛЛ ҳақида гапирдим.</p>
+        
+        <p><strong>**Тўртинчи ҳафта:**</strong> Самарқандгача яна ҳайдадим — ҲЕЧ ҚАНДАЙ МУАММОСИЗ! Кўзларим чарчамади, ҳамма нарса аниқ кўринди!</p>
+    </div>
+
+    <div style="color:#ff0000;font-weight:bold;font-size:24px;text-align:center;margin:35px 0;line-height:1.3;">
+        Шундай қилиб, «КРИСТАЛЛ» капсулалар билан кўришим тўлиқ тикланди ва натижаларим ҳар куни яхшиланаверди.
+    </div>
+
+    <p><strong>1 ой ўтгач, лицензия текширувидан ўтдим — БАРЧА КЎРСАТКИЧЛАР МЕЪЁРДА!</strong></p>
+    
+    <p>Энди ҳаётим қандай бўлди? Мен яна ишлайман, оила тинч, неваралар билан ўйнайман ва уларнинг чиройли юзларини кўраман! Хотиним Зулфия, у ҳам КРИСТАЛЛ қабул қила бошлади — компьютерда ишлайди, кўзлари толиқар эди.</p>
+    
+    <p>Энди форумларда мен бошқаларга улашаман: КРИСТАЛЛ ҳақиқатан ишлайди!</p>
+    
+    <p>Шундай қилиб, эркаклар "КРИСТАЛЛ" воситасини фақат бир курс қабул қиладилар — ва кўриш қобилияти қайтади!</p>
+
+    <p>Бу ҳақда энг яхши шифокор Исмоилов гапириб беради, интернетда мен унинг шундай изоҳини топдим:</p>
+
+    <div style="margin-top:40px;text-align:center;">
+        <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/hero-4.jpg" alt="Шифокор Исмоилов" style="max-width:450px;width:100%;margin-bottom:20px;">
+        <div style="background-color:#f2f2f2;padding:25px;text-align:left;border-radius:5px;">
+            <ul style="list-style:none;padding:0;margin:0;">
+                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўриш қобилияти кучаяди:</strong> ҳужжатларни ўқиш осон бўлади, барқарор кўриш бутун кун давомида сақланади.</li>
+                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз толиқиши камаяди:</strong> компьютер, телефон билан ишлаш енгиллашади — 5-8 соатгача.</li>
+                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз томирлари мустаҳкамланади:</strong> қон айланиши яхшиланади, кўз тўқималари тўлиқ озиқланади ва сезиларли даражада соғломлашади.</li>
+                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз босими меъёрлашади:</strong> глаукома хавфи йўқолади, кўз ички босими 18-21 мм даражасида барқарор ушланади.</li>
+                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўриш ўткирлиги ошади:</strong> алоҳида ҳарфлар, рақамлар, йўл белгилари аниқ кўринади. Кечаси ҳайдаш, ўқиш осонлашади.</li>
+                <li style="margin-bottom:15px;position:relative;padding-left:20px;font-size:16px;line-height:1.4;"><span style="position:absolute;left:0;">•</span><strong>Кўз қуруқлиги йўқолади:</strong> табиий кўз намлиги тикланади, "қум" ҳисси, ёниш, қизариш йўқолади.</li>
+            </ul>
+        </div>
+    </div>
+    <div style="color:#ff0000;font-weight:bold;font-size:24px;text-align:center;margin:40px 0 20px;line-height:1.3;">
+        «КРИСТАЛЛ» босим ва юракка таъсир қилмайди ва бунинг учун рецепт керак эмас!
+    </div>
+
+    <p>«КРИСТАЛЛ» дорихоналарда сотилмайди. Ишлаб чиқарувчи нархни сунъий равишда кўтариб юбормаслик учун уни тўғридан-тўғри заводдан сотади.</p>
+    
+    <p>Ҳозир махсус акция ўтказилмоқда, унинг доирасида ҳар қандай одам воситани <a href="#">расмий ўйин орқали</a> 70% гача чегирма билан олиши мумкин!</p>
+
+    <div style="background-color:#fdf5e6;border:1px solid #d2b48c;padding:30px;margin:30px 0;border-radius:4px;">
+        <h3 style="text-align:center;font-size:20px;margin-bottom:25px;">Акция бўйича КРИСТАЛЛ капсулаларини олиш шартлари:</h3>
+        <ol style="padding-left:20px;">
+            <li style="margin-bottom:20px;font-size:17px;">
+                <strong style="color:#004a99;display:block;margin-bottom:5px;">Ўзбекистон ҳудудида яшаш</strong>
+                <p>Акцияда 18 ёшдан ошган, Ўзбекистонда яшовчи одамлар қатнашиши мумкин.</p>
+            </li>
+            <li style="margin-bottom:20px;font-size:17px;">
+                <strong style="color:#004a99;display:block;margin-bottom:5px;">Фақат шахсий фойдаланиш учун</strong>
+                <p>Бу қайта сотувчилар билан курашиш учун амалга оширилади, улар КРИСТАЛЛ воситасини улгуржи сотиб олиб, юқори нархда сотадилар.</p>
+            </li>
+            <li style="margin-bottom:20px;font-size:17px;">
+                <strong style="color:#004a99;display:block;margin-bottom:5px;">Ишлаб чиқарувчи томонидан ўтказиладиган ўйинда қатнашиш</strong>
+                <p>Акция қадоқлари сони чекланганлиги сабабли, ишлаб чиқарувчи уларни ўйин орқали тарқатади. 70% чегирма билан воситани олиш учун қуйидаги эшиклардан бирини танланг.</p>
+            </li>
+        </ol>
+    </div>
+
+   <div style="border:2px solid #ff0000;background-color:#61c066;padding:20px;margin:40px 0;font-size:18px;line-height:1.5;">
+    <p><strong>Муҳим:</strong> Сўнгги тадқиқотлар шуни кўрсатадики, КРИСТАЛЛ капсулаларини қабул қилиш учун энг мос вақт — <span style="color:#ff0000;font-weight:bold;" data-season-month="previous">июнь</span> ва <span style="color:#ff0000;font-weight:bold;" data-season-month="current">июль</span>! Ҳарорат ўзгариши метаболизмга ёрдам беради ва кўришни тиклаш йилнинг бошқа фаслларига қараганда 65% тезроқ содир бўлади.</p>
+</div>
+
+<div id="game-section">
+
+    
+
+
+<div class="door-game-container baraban-game-shell" id="door-container">
+  <div id="barabanGame">
+    <h2 class="baraban__title">&#127920; Barabanni aylantirib <span class="baraban__title-pct">70%</span> chegirma yuting!</h2>
+    <div id="barabanAttempts"><span id="attemptDots"></span></div>
+    <div class="baraban-outer">
+      <div class="baraban-canvas-wrap">
+        <div class="baraban-arrow-wrap" id="barabanArrow">
+          <svg aria-hidden="true" class="baraban-arrow-svg" height="44" viewBox="0 0 36 44" width="36">
+            <polygon fill="#dc2626" points="18,44 0,0 36,0"></polygon>
+            <polygon fill="#ef4444" points="18,38 4,4 32,4"></polygon>
+          </svg>
+        </div>
+        <canvas height="340" id="barabanWheel" width="340"></canvas>
+        <button class="baraban-spin-btn" id="spinBtn" onclick="spinWheel()" type="button">
+          <span id="spinBtnText">AYL-<br>ANT</span>
+        </button>
+      </div>
+    </div>
+    <p class="baraban-msg" id="barabanMsg"></p>
+  </div>
+  <div class="baraban-retry-overlay" id="barabanRetryOverlay">
+    <div class="baraban-retry-box">
+      <div class="baraban-retry-body">
+        <div class="baraban-retry-attempts-row" id="retryDotsRow"></div>
+        <div class="baraban-retry-msg" id="retryMsg">Sizda yana <b id="retryLeftText">1</b> ta urinish qoldi.<br>Yana urinib ko'ring!</div>
+        <button class="baraban-retry-btn" onclick="closeRetryPopup()" type="button">&#127919; Yana urinish</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div id="order-form" style="display:none;background:white;padding:20px;border:2px dashed #28a745;text-align:center;margin:20px auto;max-width:550px;border-radius:10px;box-sizing:border-box;">
+        <center>
+            <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/kristall.jpg" style="width: 200px; margin-bottom: 15px;">
+            <h2 style="color: #d80000; margin: 5px 0;">Табриклаймиз!</h2>
+            <p style="margin-bottom: 10px;">Сиз КРИСТАЛЛ воситасини 70% чегирма нархида олишингиз мумкин!</p>
+            <div style="font-size:26px;color:#ff0000;font-weight:bold;margin:15px 0;">Қолган вақт: <span id="timer">10:00</span></div>
+        </center>
+        
+        <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px;">
+            <input type="text" id="user-name" placeholder="Исм Фамилия" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;">
+            <input type="tel" id="user-phone" value="+998" placeholder="+998 XX-XXX-XXXX" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;" inputmode="numeric" autocomplete="tel">
+            <input type="text" id="user-city" placeholder="Шаҳар / яшаш жойи" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;">
+            <input type="number" id="user-age" placeholder="Ёшингиз" min="1" max="120" style="display:block;width:80%;max-width:320px;margin:0 auto;padding:10px;border:1px solid #ddd;border-radius:20px;background:#f0f0f0;box-sizing:border-box;font-size:16px;">
+            <button class="order-button" style="background:#28a745;color:white;border:none;padding:15px 40px;border-radius:25px;font-weight:bold;cursor:pointer;margin:10px auto;display:block;width:80%;max-width:320px;font-size:16px;">БУЮРТМА БЕРИШ</button>
+        </div>
+    </div>
+
+    <div id="custom-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:9999;">
+        <div style="background:#fff;width:90%;max-width:320px;padding:30px 20px;border-radius:15px;text-align:center;position:relative;box-shadow:0 10px 25px rgba(0,0,0,0.2);">
+            <div style="width:60px;height:60px;background:#78bc43;border-radius:50%;margin:-60px auto 15px;display:flex;align-items:center;justify-content:center;border:4px solid #fff;">
+                <span style="color:white;font-size:30px;">✔</span>
+            </div>
+            <h2 style="margin-top:0;">Табриклаймиз!</h2>
+            <p>Сиз КРИСТАЛЛ воситасини 70% чегирма нархида олишингиз мумкин!</p>
+            <button id="modal-ok-btn" style="background:#78bc43;color:#fff;border:none;width:100%;padding:12px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:18px;">OK</button>
+        </div>
+    </div>
+</div> 
+
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w1.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;">
+        <span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лола</span>
+        <p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Турли воситалар синаб кўрганман, лекин <span style="color:#2b5e9e;font-weight:500;">КРИСТАЛЛ</span>гина яхши натижа берди. Қаттиқлик ва давомийлиги анча ошди. Ҳозир жинсий ҳаёт ҳам яхши. Тавсия қиламан.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w2.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;">
+        <span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Муҳаббат</span>
+        <p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Кўриш муаммосини ҳал қиладиган зўр восита. Кўзларим қоронғуда ҳам кўра бошлади. Интернетдан <span style="color:#2b5e9e;font-weight:500;">КРИСТАЛЛ</span>ни топиб буюртма қилдим. Бир ҳафтада ҳаммаси тузалди.</p>
+      </div>
+    </div>
+    <div style="text-align:center;width:100%;margin:30px 0;">
+  <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/111.jpg" style="display:inline-block;max-width:450px;width:100%;height:auto;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.15);" alt="Crystal Product Photo End">
+</div>
+<div style="background-color:#ffffff;width:100%;max-width:800px;padding:30px 40px;margin:0 auto;font-family:Arial,sans-serif;box-sizing:border-box;">
+  <div style="display:flex;flex-direction:column;gap:20px;">
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m18.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Умид</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Раҳмат, ёзиб олдим, ичаман...</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m19.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Урус</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Мен ҳам буюртма қилдим!.. Ҳа, бу восита кўзларга жуда кучли таъсир қиляпти.</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m20.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Фарух</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Яхши восита, шифокор сифатида тавсия қиламан.</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m21.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Халим</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Олдим, синаб кўраман.</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w12.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лейла</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ҳақиқатан ажойиб восита!</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m22.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Хасан</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Бир шифокор тавсия қилди. Айтди бу восита кўришни аниқ тиклайди деб. Шундай ҳам бўлди. Бир курс ичгандан кейин тўлиқ тузалди.</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m23.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Ботир</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Кўзларим чарчаши қолди, раҳмат.</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w13.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Нигора</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Жуда тез етказиб беришди, натижасини кутяпман.</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m24.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Сардор</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Энди дунёни бошқача кўряпман, КРИСТАЛЛга гап йўқ!</p></div>
+    </div>
+    <div style="text-align:center;margin:30px 0;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/222.jpg" style="display:inline-block;max-width:450px;width:100%;height:auto;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.1);" alt="Crystal Product Photo End">
+    </div>
+  </div>
+</div>
+
+
+  <div style="background-color:#ffffff;width:100%;max-width:800px;padding:30px 40px;margin:0 auto;font-family:Arial,sans-serif;box-sizing:border-box;">
+  <div style="display:flex;flex-direction:column;gap:20px;">
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m26.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Шахрух</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ростдан ёрдам берди, эректция зўр!</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w14.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лейла</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Таблеткаларни буюртма қилдим, умид қиламан ёрдам берса.</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w15.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Лиана</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Биз ҳам олдик, чегирма тушди. Яхшиланишлар бор, ҳали курсни охиригача ичмадик.</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m27.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Шухрат</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ишлаяпти! Кўзим яхши кўра бошлади.</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w16.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Кристина</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ҳа, тезроқ буюртма қилиш керак бу воситани.</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/w17.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Дилия</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Бу таблеткалар муносабатларимизни тиклади. Бир яхши шифокор КРИСТАЛЛ тавсия қилди. Эректция фақат бир курсда тикланди! Ўйлаб топганларга раҳмат!</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m28.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Эльбек</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Ўзим учун буюртма қилдим, муаммо бор эди.</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;border-bottom:1px solid #f9f9f9;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m2_1.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Абдуллох</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Эльбек, менда ҳам муаммо бор эди.Бир курс ичгандан кейин бунақанги яхши кўргандим эмасман.</p></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:15px;padding-bottom:15px;">
+      <img loading="lazy" src="https://dexxpress.uz/kristal/%D0%A5%D1%83%D0%B0%D0%BD%20%D0%A5%D1%83%D0%BD_files/m1_1.jpg" style="width:60px;height:60px;object-fit:cover;flex-shrink:0;border-radius:2px;">
+      <div style="flex:1;"><span style="display:block;font-weight:bold;font-size:16px;color:#000;margin-bottom:4px;">Юсуф</span><p style="font-size:14.5px;line-height:1.4;color:#111;margin:0;">Раҳмат, чегирма ютдим! Кутяпман энди</p></div>
+    </div>
+  </div></div>
+  <footer style="background-color:#1a2b48;color:#ffffff;padding:40px 0 60px 0;margin-top:50px;">
+    <div style="max-width:800px;margin:0 auto;padding:0 40px;">
+      <div style="font-family:'Arial Black',Gadget,sans-serif;font-size:56px;font-weight:900;letter-spacing:-2px;line-height:1;text-transform:uppercase;margin-bottom:5px;">НОЖ</div>
+      <div style="font-size:16px;font-weight:normal;opacity:0.9;">Ақлли одамнинг кундалик ўқиши</div>
+    </div>
+  </footer>
+
+
+        </article>
+    </main>
+<script>
+(function () {
+  const LOCAL_PHONE_DIGITS = 9;
+
+  function usesUzPrefix(input, value) {
+    return /^\s*\+?998/.test(value) ||
+      /^\s*\+?998/.test(input.defaultValue || '') ||
+      (input.placeholder || '').includes('998');
+  }
+
+  function limitPhoneDigits(input) {
+    const value = input.value || '';
+    const withPrefix = usesUzPrefix(input, value);
+    let digits = value.replace(/\D/g, '');
+
+    if (digits.startsWith('998')) {
+      digits = digits.slice(3);
+    }
+
+    digits = digits.slice(0, LOCAL_PHONE_DIGITS);
+    input.value = withPrefix ? '+998' + (digits ? ' ' + digits : '') : digits;
+  }
+
+  function initPhoneDigitLimits() {
+    document.querySelectorAll('input[type="tel"]').forEach((input) => {
+      input.setAttribute('inputmode', 'numeric');
+      input.setAttribute('autocomplete', 'tel');
+      input.addEventListener('input', () => limitPhoneDigits(input));
+      input.addEventListener('paste', () => setTimeout(() => limitPhoneDigits(input), 0));
+      if (input.value) {
+        limitPhoneDigits(input);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPhoneDigitLimits);
+  } else {
+    initPhoneDigitLimits();
+  }
+})();
+</script>
+<script id="uz-phone-validation-v1">
+(function () {
+    const UZ_PREFIX = '998';
+    const LOCAL_DIGITS = 9;
+
+    function getDigits(value) {
+        return String(value || '').replace(/\D/g, '');
+    }
+
+    function getLocalDigits(value) {
+        let digits = getDigits(value);
+        if (digits.startsWith(UZ_PREFIX)) {
+            digits = digits.slice(UZ_PREFIX.length);
+        }
+        return digits.slice(0, LOCAL_DIGITS);
+    }
+
+    function phoneMessage(count) {
+        if (count <= 0) {
+            return '\u0423 \u0432\u0430\u0441 \u043d\u0435 \u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d \u043d\u043e\u043c\u0435\u0440 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430. \u0412\u0432\u0435\u0434\u0438\u0442\u0435 9 \u0446\u0438\u0444\u0440 \u043f\u043e\u0441\u043b\u0435 +998.';
+        }
+        const missing = LOCAL_DIGITS - count;
+        if (missing === 1) {
+            return '\u0423 \u0432\u0430\u0441 \u043d\u0435 \u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d\u043e 1 \u0446\u0438\u0444\u0440\u0430 \u0432 \u043d\u043e\u043c\u0435\u0440\u0435 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430. \u0412\u0432\u0435\u0434\u0438\u0442\u0435 9 \u0446\u0438\u0444\u0440 \u043f\u043e\u0441\u043b\u0435 +998.';
+        }
+        if (missing > 1 && missing < 5) {
+            return '\u0423 \u0432\u0430\u0441 \u043d\u0435 \u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d\u043e ' + missing + ' \u0446\u0438\u0444\u0440\u044b \u0432 \u043d\u043e\u043c\u0435\u0440\u0435 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430. \u0412\u0432\u0435\u0434\u0438\u0442\u0435 9 \u0446\u0438\u0444\u0440 \u043f\u043e\u0441\u043b\u0435 +998.';
+        }
+        return '\u0423 \u0432\u0430\u0441 \u043d\u0435 \u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d\u043e ' + missing + ' \u0446\u0438\u0444\u0440 \u0432 \u043d\u043e\u043c\u0435\u0440\u0435 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430. \u0412\u0432\u0435\u0434\u0438\u0442\u0435 9 \u0446\u0438\u0444\u0440 \u043f\u043e\u0441\u043b\u0435 +998.';
+    }
+
+    function formatPhone(input) {
+        const local = getLocalDigits(input.value);
+        input.value = '+998' + (local ? ' ' + local : '');
+    }
+
+    function validatePhoneInput(input) {
+        const local = getLocalDigits(input.value);
+        if (local.length !== LOCAL_DIGITS) {
+            alert(phoneMessage(local.length));
+            input.focus();
+            return false;
+        }
+        formatPhone(input);
+        return true;
+    }
+
+    function getVisiblePhoneInputs(scope) {
+        const root = scope && scope.querySelectorAll ? scope : document;
+        return Array.from(root.querySelectorAll('input[type="tel"]')).filter((input) => {
+            return !input.disabled && input.offsetParent !== null;
+        });
+    }
+
+    function validatePhones(scope) {
+        const phones = getVisiblePhoneInputs(scope);
+        for (const phone of phones) {
+            if (!validatePhoneInput(phone)) return false;
+        }
+        return true;
+    }
+
+    function initPhoneValidation() {
+        document.querySelectorAll('input[type="tel"]').forEach((input) => {
+            input.setAttribute('inputmode', 'numeric');
+            input.setAttribute('autocomplete', 'tel');
+            if (!input.value) input.value = '+998';
+            input.addEventListener('input', () => {
+                const local = getLocalDigits(input.value);
+                input.value = '+998' + (local ? ' ' + local : '');
+            });
+            input.addEventListener('paste', () => setTimeout(() => formatPhone(input), 0));
+        });
+
+        document.addEventListener('submit', (event) => {
+            if (!validatePhones(event.target)) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
+        }, true);
+
+        document.addEventListener('click', (event) => {
+            const button = event.target.closest('button, input[type="button"], input[type="submit"]');
+            if (!button) return;
+            const scope = button.closest('form, .order-form-container, .form-inputs, .contact-form') || document;
+            const hasPhone = getVisiblePhoneInputs(scope).length > 0;
+            const looksLikeSubmit = button.type === 'submit' || button.classList.contains('order-button') || /submit|order|buy|buyurtma/i.test(button.getAttribute('onclick') || button.textContent || '');
+            if (hasPhone && looksLikeSubmit && !validatePhones(scope)) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
+        }, true);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPhoneValidation);
+    } else {
+        initPhoneValidation();
+    }
+})();
+</script>
+
+<script id="baraban-transferred-js">
+(function(){
+var SEG_DATA=['15%','35%','25%','50%','70%','20%','40%','30%','55%','10%','45%','60%'];
+var WINNER=4,N=SEG_DATA.length,ARC=(2*Math.PI)/N;
+var COLORS=[['#6b1414','#a31515'],['#1a1f6e','#2e3799'],['#6b1414','#a31515'],['#1a1f6e','#2e3799'],['#6b1414','#a31515'],['#1a1f6e','#2e3799'],['#6b1414','#a31515'],['#1a1f6e','#2e3799'],['#6b1414','#a31515'],['#1a1f6e','#2e3799'],['#6b1414','#a31515'],['#1a1f6e','#2e3799']];
+var WIN_COL=['#92400e','#f59e0b'];
+var MAX_ATTEMPTS=1,attempt=0,winAttempt=1,spinning=false,curAngle=0,lastSeg=-1;
+
+function updateDots(){
+  var el=document.getElementById('attemptDots');
+  if(!el) return;
+  var icons='';
+  for(var i=0;i<MAX_ATTEMPTS;i++){
+    icons+='<span style="display:inline-block;width:32px;height:32px;border-radius:50%;background:#2563eb;border:3px solid #1e3a8a;margin:0 4px;vertical-align:middle;box-shadow:0 0 10px rgba(37,99,235,0.6);"></span>';
+  }
+  el.innerHTML='<div style="font-size:15px;font-weight:700;color:#1e3a8a;margin-bottom:6px;">Urinish: <b style="font-size:20px;color:#dc2626;">'+(attempt+1)+'</b> / '+MAX_ATTEMPTS+'</div><div>'+icons+'</div>';
+}
+function calcTotalRot(fromAngle,segIndex,jitter){
+  var target=-Math.PI/2-segIndex*ARC-ARC/2+(jitter||0);
+  var rot=((target-fromAngle)%(2*Math.PI)+2*Math.PI)%(2*Math.PI);
+  if(rot<0.1) rot+=2*Math.PI;
+  return (6+Math.floor(Math.random()*4))*2*Math.PI+rot;
+}
+function draw(angle,winnerGlow){
+  var cv=document.getElementById('barabanWheel');
+  if(!cv) return;
+  var ctx=cv.getContext('2d'),cx=cv.width/2,cy=cv.height/2,R=cx-2;
+  ctx.clearRect(0,0,cv.width,cv.height);
+  for(var i=0;i<N;i++){
+    var a0=angle+i*ARC,a1=a0+ARC,mid=a0+ARC/2,isW=i===WINNER,col=(isW&&winnerGlow)?WIN_COL:COLORS[i];
+    var grd=ctx.createLinearGradient(cx+Math.cos(mid)*R*.25,cy+Math.sin(mid)*R*.25,cx+Math.cos(mid)*R,cy+Math.sin(mid)*R);
+    grd.addColorStop(0,col[1]);grd.addColorStop(1,col[0]);
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,R,a0,a1);ctx.closePath();ctx.fillStyle=grd;ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=1.2;ctx.stroke();
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(a0);
+    var pg=ctx.createRadialGradient(-1,-1,0,0,0,5);pg.addColorStop(0,'#fde68a');pg.addColorStop(1,'#92400e');
+    ctx.beginPath();ctx.arc(R-11,0,5,0,2*Math.PI);ctx.fillStyle=pg;ctx.fill();ctx.restore();
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(mid);
+    var nm=((mid%(2*Math.PI))+2*Math.PI)%(2*Math.PI),tr;
+    if(nm>Math.PI&&nm<2*Math.PI){ctx.rotate(Math.PI);tr=-(R*.64);}else{tr=R*.64;}
+    ctx.shadowColor='rgba(0,0,0,.65)';ctx.shadowBlur=4;ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.font=(isW&&winnerGlow)?'bold 17px Inter,Arial':'bold 15px Inter,Arial';
+    ctx.fillStyle=(isW&&winnerGlow)?'#1a1a1a':'#f1f5f9';
+    ctx.fillText(SEG_DATA[i],tr,0);ctx.restore();
+  }
+  var cg=ctx.createRadialGradient(cx-7,cy-7,2,cx,cy,33);
+  cg.addColorStop(0,'#fff');cg.addColorStop(.55,'#dbeafe');cg.addColorStop(1,'#93c5fd');
+  ctx.beginPath();ctx.arc(cx,cy,33,0,2*Math.PI);ctx.fillStyle=cg;ctx.fill();ctx.strokeStyle='#1e3a8a';ctx.lineWidth=3;ctx.stroke();
+}
+function checkTick(angle){
+  var s=Math.floor((((-angle%(2*Math.PI))+2*Math.PI)%(2*Math.PI))/ARC)%N;
+  if(s!==lastSeg){
+    lastSeg=s;
+    var el=document.getElementById('barabanArrow');
+    if(el){el.classList.remove('tick','no-bounce');void el.offsetWidth;el.classList.add('tick','no-bounce');setTimeout(function(){el.classList.remove('tick','no-bounce');},110);}
+  }
+}
+function confetti(){
+  var cols=['#dc2626','#f59e0b','#10b981','#3b82f6','#8b5cf6','#f97316','#fde047'];
+  for(var i=0;i<80;i++)(function(d){setTimeout(function(){
+    var el=document.createElement('div'),circ=Math.random()>.4;
+    el.className='confetti-piece';
+    el.style.cssText='left:'+(Math.random()*100)+'vw;background:'+cols[Math.floor(Math.random()*cols.length)]+';transform:rotate('+(Math.random()*360)+'deg);animation-duration:'+(1.8+Math.random()*2.5)+'s;width:'+(7+Math.random()*8)+'px;height:'+(circ?(7+Math.random()*8):(11+Math.random()*13))+'px;border-radius:'+(circ?'50%':'2px')+';opacity:.9';
+    document.body.appendChild(el);setTimeout(function(){el.remove();},6000);
+  },d);})(i*28);
+}
+function animate(startA,totalRot,dur,onDone){
+  var t0=null;
+  function ease(t){return 1-Math.pow(1-t,5);}
+  function frame(ts){
+    if(!t0)t0=ts;
+    var p=Math.min((ts-t0)/dur,1);
+    curAngle=startA+totalRot*ease(p);
+    checkTick(curAngle);draw(curAngle,false);
+    if(p<1)requestAnimationFrame(frame);else onDone();
+  }
+  requestAnimationFrame(frame);
+}
+function revealAfterWin(){
+  var modal=document.getElementById('custom-modal');
+  var orderFormLegacy=document.getElementById('order-form');
+  var game=document.getElementById('door-container');
+  var promo=document.getElementById('gamePromo');
+  var stock=document.querySelector('.stock-alert-card');
+  var orderSection=document.getElementById('order');
+  var orderForm=document.getElementById('orderForm');
+  var promoBadges=document.querySelectorAll('.promo-badge');
+  var promoBadge=promoBadges.length?promoBadges[promoBadges.length-1]:null;
+  if(modal&&orderFormLegacy){
+    var ok=document.getElementById('modal-ok-btn');
+    var title=modal.querySelector('h2');
+    var text=modal.querySelector('p');
+    if(title)title.textContent='Tabriklaymiz!';
+    if(text)text.textContent='Siz Kristal vositasini 70% chegirma bilan olishingiz mumkin!';
+    var openForm=function(){
+      modal.style.display='none';
+      if(game)game.style.display='none';
+      orderFormLegacy.style.display='block';
+      orderFormLegacy.scrollIntoView({behavior:'smooth',block:'center'});
+      if(typeof startTimer==='function')startTimer(600);
+    };
+    if(ok)ok.onclick=openForm;
+    if(typeof showCustomModal==='function')showCustomModal();else openForm();
+    return;
+  }
+  if(promo){
+    promo.classList.add('show-promo');
+    promo.style.display='';
+    if(stock)stock.style.display='none';
+    if(game)game.style.display='none';
+    promo.scrollIntoView({behavior:'smooth',block:'start'});
+    return;
+  }
+  if(orderSection){
+    if(game)game.style.display='none';
+    orderSection.scrollIntoView({behavior:'smooth',block:'start'});
+    return;
+  }
+  if(orderForm){
+    if(game)game.style.display='none';
+    orderForm.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  if(promoBadge){
+    if(game)game.style.display='none';
+    promoBadge.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+}
+window.spinWheel=function(){
+  if(spinning||attempt>=MAX_ATTEMPTS)return;
+  var btn=document.getElementById('spinBtn'),btnTxt=document.getElementById('spinBtnText'),msg=document.getElementById('barabanMsg');
+  if(!btn)return;
+  spinning=true;btn.classList.add('spinning');
+  if(btnTxt)btnTxt.innerHTML='<span style="font-size:16px">&#9203;</span>';
+  if(msg){msg.textContent='';msg.className='baraban-msg';}
+  var totalRot=calcTotalRot(curAngle,WINNER,(Math.random()*.55-.275)*ARC),startA=curAngle;
+  animate(startA,totalRot,3800+Math.random()*600,function(){
+    attempt++;spinning=false;updateDots();draw(curAngle,true);
+    var cv=document.getElementById('barabanWheel');if(cv)cv.classList.add('won');
+    btn.classList.remove('spinning');btn.style.pointerEvents='none';
+    if(btnTxt)btnTxt.innerHTML='<span style="font-size:16px">&#9989;</span>';
+    confetti();
+    if(msg){msg.innerHTML='&#127881; <b>Tabriklaymiz! Siz 70% chegirma yutdingiz!</b>';msg.style.color='#16a34a';msg.classList.add('baraban-win');}
+    setTimeout(revealAfterWin,700);
+  });
+};
+window.closeRetryPopup=function(){
+  var overlay=document.getElementById('barabanRetryOverlay');
+  if(overlay)overlay.classList.remove('show');
+};
+function init(){
+  updateDots();draw(0,false);
+  var cv=document.getElementById('barabanWheel');
+  if(cv)cv.addEventListener('click',spinWheel);
+}
+document.readyState==='loading'?document.addEventListener('DOMContentLoaded',init):init();
+})();
+</script>
+
+<script id="dynamic-season-months-js">
+(function(){
+  var months = ['\u044f\u043d\u0432\u0430\u0440\u044c','\u0444\u0435\u0432\u0440\u0430\u043b\u044c','\u043c\u0430\u0440\u0442','\u0430\u043f\u0440\u0435\u043b\u044c','\u043c\u0430\u0439','\u0438\u044e\u043d\u044c','\u0438\u044e\u043b\u044c','\u0430\u0432\u0433\u0443\u0441\u0442','\u0441\u0435\u043d\u0442\u044f\u0431\u0440\u044c','\u043e\u043a\u0442\u044f\u0431\u0440\u044c','\u043d\u043e\u044f\u0431\u0440\u044c','\u0434\u0435\u043a\u0430\u0431\u0440\u044c'];
+  function updateSeasonMonths(){
+    var currentIndex = new Date().getMonth();
+    var previousIndex = (currentIndex + 11) % 12;
+    document.querySelectorAll('[data-season-month="previous"]').forEach(function(el){ el.textContent = months[previousIndex]; });
+    document.querySelectorAll('[data-season-month="current"]').forEach(function(el){ el.textContent = months[currentIndex]; });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateSeasonMonths);
+  } else {
+    updateSeasonMonths();
+  }
+})();
+</script>
+</body>
+</html>
