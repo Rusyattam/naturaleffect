@@ -1,12 +1,4 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>МИГРА Портал - миграционные услуги</title>
-  <meta name="description" content="Демо-сайт миграционной службы: услуги, документы, онлайн-заявка и обращения.">
-  <style>
-    :root{--yellow:#ffe100;--dark:#101828;--blue:#253a6a;--text:#111827;--muted:#667085;--line:#e7edf3;--bg:#f4f7f9;--green:#18a058;--shadow:0 18px 55px rgba(16,24,40,.12);--container:1180px}
+<!doctype html> <html lang="ru"> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <title>МИГРА Портал - миграционные услуги</title> <meta name="description" content="Демо-сайт миграционной службы: услуги, документы, онлайн-заявка и обращения."> <style> :root{--yellow:#ffe100;--dark:#101828;--blue:#253a6a;--text:#111827;--muted:#667085;--line:#e7edf3;--bg:#f4f7f9;--green:#18a058;--shadow:0 18px 55px rgba(16,24,40,.12);--container:1180px}
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--text);line-height:1.55;background:#fff;overflow-x:hidden}
@@ -73,114 +65,7 @@
       h1{font-size:34px;letter-spacing:0}.stats,.form-grid{grid-template-columns:1fr}
       section{padding:44px 0}.card,.step,.contact-card{border-radius:20px;padding:18px}.btn{width:100%}
       textarea,.form-grid .btn,[data-form-status]{grid-column:auto}
-    }
-  </style>
-</head>
-<body>
-  <div class="topline">
-    <div class="container">
-      <a href="tel:+79836620000">+7 983 662-00-00</a>
-      <span>Call-центр: 09:00-18:00</span>
-    </div>
-  </div>
-
-  <header class="header">
-    <div class="container nav">
-      <a class="logo" href="#top" aria-label="МИГРА Портал">
-        <span class="logo-mark">✓</span>
-        <span><b>МИГРА Портал</b><span>электронные миграционные услуги</span></span>
-      </a>
-      <nav class="menu" id="menu">
-        <a href="#services">Услуги</a>
-        <a href="#workflow">Как работает</a>
-        <a href="#contact">Обращение</a>
-      </nav>
-      <a class="btn" href="#contact">Подать заявку</a>
-      <button class="burger" id="burger" aria-label="Открыть меню"><span></span><span></span><span></span></button>
-    </div>
-  </header>
-
-  <main id="top">
-    <section class="hero">
-      <div class="container">
-        <div class="badge"><span class="dot"></span> Единое окно миграционных услуг</div>
-        <h1>Оформляйте миграционные документы онлайн</h1>
-        <a class="btn" href="#contact">Начать оформление</a>
-        <div class="stats">
-          <div class="stat"><strong>24/7</strong><span>онлайн доступ к заявкам</span></div>
-          <div class="stat"><strong>12+</strong><span>популярных услуг</span></div>
-          <div class="stat"><strong>3 мин</strong><span>быстрый подбор документов</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="soft">
-      <div class="container">
-        <div class="section-head">
-          <div><div class="eyebrow">Популярные услуги</div><h2>Все нужное в одном портале</h2></div>
-          <p>Карточки можно заменить на реальные услуги вашей миграционной службы.</p>
-        </div>
-        <div class="grid">
-          <a class="card service-card" href="#contact" data-title="Продление визы"><div class="icon">✈</div><h3>Продление визы</h3><p>Подача заявки, проверка оснований и уведомление о решении.</p></a>
-          <a class="card service-card" href="#contact" data-title="Временная регистрация"><div class="icon">⌂</div><h3>Временная регистрация</h3><p>Информация по оформлению пребывания и месту проживания.</p></a>
-          <a class="card service-card" href="#contact" data-title="Проверка ограничений"><div class="icon">⌕</div><h3>Проверка ограничений</h3><p>Предварительная проверка статуса и уведомлений.</p></a>
-        </div>
-      </div>
-    </section>
-
-    <section id="workflow">
-      <div class="container">
-        <div class="section-head">
-          <div><div class="eyebrow">Как это работает</div><h2>Путь заявителя за 2 шага</h2></div>
-          <p>Короткий сценарий без лишних экранов быстрее ведет пользователя к заявке.</p>
-        </div>
-        <div class="workflow">
-          <div class="step"><h3>Выберите услугу</h3><p>Заявитель находит нужный раздел через меню или карточки услуг.</p></div>
-          <div class="step"><h3>Заполните данные</h3><p>Форма собирает контакты, тип услуги и краткое описание ситуации.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="contact">
-      <div class="container contact-grid">
-        <div>
-          <div class="eyebrow">Обращение</div>
-          <h2>Оставьте заявку</h2>
-          <p>После отправки данные уйдут в Telegram, а форма скроется.</p>
-        </div>
-        <form class="contact-card" id="contactForm" action="./telegram-contact.php" method="post">
-          <div class="form-grid">
-            <input required name="name" placeholder="Ваше имя" autocomplete="name">
-            <input required name="phone" type="tel" inputmode="tel" maxlength="17" placeholder="+998 __ ___ __ __" autocomplete="tel">
-            <input required name="address" placeholder="Где живете" autocomplete="address-level1">
-            <input required name="age" type="number" inputmode="numeric" min="1" max="120" placeholder="Возраст">
-            <select name="service">
-              <option>Выберите услугу</option>
-              <option>Продление визы</option>
-              <option>Временная регистрация</option>
-              <option>Проверка ограничений</option>
-              <option>Вид на жительство</option>
-            </select>
-            <textarea name="message" placeholder="Комментарий или вопрос"></textarea>
-            <button class="btn" type="submit">Отправить обращение</button>
-            <div data-form-status aria-live="polite"></div>
-          </div>
-        </form>
-        <div class="contact-card" id="contactSuccess" hidden>
-          <h3>Заявка принята</h3>
-          <p>Спасибо! Данные отправлены в Telegram. Мы свяжемся с вами в ближайшее время.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">© 2026 МИГРА Портал. Демо-макет.</div>
-  </footer>
-  <div class="toast" id="toast"></div>
-
-  <script>
-    const $ = (selector, root = document) => root.querySelector(selector);
+    } </style> </head> <body> <div class="topline"> <div class="container"> <a href="tel:+79694913832">+7 969 491-38-32</a> <span>Call-центр: 09:00-18:00</span> </div> </div> <header class="header"> <div class="container nav"> <a class="logo" href="#top" aria-label="МИГРА Портал"> <span class="logo-mark">✓</span> <span><b>МИГРА Портал</b><span>электронные миграционные услуги</span></span> </a> <nav class="menu" id="menu"> <a href="#services">Услуги</a> <a href="#workflow">Как работает</a> <a href="#contact">Обращение</a> </nav> <a class="btn" href="#contact">Подать заявку</a> <button class="burger" id="burger" aria-label="Открыть меню"><span></span><span></span><span></span></button> </div> </header> <main id="top"> <section class="hero"> <div class="container"> <div class="badge"><span class="dot"></span> Единое окно миграционных услуг</div> <h1>Оформляйте миграционные документы онлайн</h1> <a class="btn" href="#contact">Начать оформление</a> <div class="stats"> <div class="stat"><strong>24/7</strong><span>онлайн доступ к заявкам</span></div> <div class="stat"><strong>12+</strong><span>популярных услуг</span></div> <div class="stat"><strong>3 мин</strong><span>быстрый подбор документов</span></div> </div> </div> </section> <section id="services" class="soft"> <div class="container"> <div class="section-head"> <div><div class="eyebrow">Популярные услуги</div><h2>Все нужное в одном портале</h2></div> <p>Карточки можно заменить на реальные услуги вашей миграционной службы.</p> </div> <div class="grid"> <a class="card service-card" href="#contact" data-title="Продление визы"><div class="icon">✈</div><h3>Продление визы</h3><p>Подача заявки, проверка оснований и уведомление о решении.</p></a> <a class="card service-card" href="#contact" data-title="Временная регистрация"><div class="icon">⌂</div><h3>Временная регистрация</h3><p>Информация по оформлению пребывания и месту проживания.</p></a> <a class="card service-card" href="#contact" data-title="Проверка ограничений"><div class="icon">⌕</div><h3>Проверка ограничений</h3><p>Предварительная проверка статуса и уведомлений.</p></a> </div> </div> </section> <section id="workflow"> <div class="container"> <div class="section-head"> <div><div class="eyebrow">Как это работает</div><h2>Путь заявителя за 2 шага</h2></div> <p>Короткий сценарий без лишних экранов быстрее ведет пользователя к заявке.</p> </div> <div class="workflow"> <div class="step"><h3>Выберите услугу</h3><p>Заявитель находит нужный раздел через меню или карточки услуг.</p></div> <div class="step"><h3>Заполните данные</h3><p>Форма собирает контакты, тип услуги и краткое описание ситуации.</p></div> </div> </div> </section> <section id="contact" class="contact"> <div class="container contact-grid"> <div> <div class="eyebrow">Обращение</div> <h2>Оставьте заявку</h2> <p>После отправки данные уйдут в Telegram, а форма скроется.</p> </div> <form class="contact-card" id="contactForm" action="./telegram-contact.php" method="post"> <div class="form-grid"> <input required name="name" placeholder="Ваше имя" autocomplete="name"> <input required name="phone" type="tel" inputmode="tel" maxlength="17" placeholder="+998 __ ___ __ __" autocomplete="tel"> <input required name="address" placeholder="Где живете" autocomplete="address-level1"> <input required name="age" type="number" inputmode="numeric" min="1" max="120" placeholder="Возраст"> <select name="service"> <option>Выберите услугу</option> <option>Продление визы</option> <option>Временная регистрация</option> <option>Проверка ограничений</option> <option>Вид на жительство</option> </select> <textarea name="message" placeholder="Комментарий или вопрос"></textarea> <button class="btn" type="submit">Отправить обращение</button> <div data-form-status aria-live="polite"></div> </div> </form> <div class="contact-card" id="contactSuccess" hidden> <h3>Заявка принята</h3> <p>Спасибо! Данные отправлены в Telegram. Мы свяжемся с вами в ближайшее время.</p> </div> </div> </section> </main> <footer> <div class="container">© 2026 МИГРА Портал. Демо-макет.</div> </footer> <div class="toast" id="toast"></div> <script> const $ = (selector, root = document) => root.querySelector(selector);
     const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
     const burger = $('#burger');
     const menu = $('#menu');
@@ -269,7 +154,4 @@
         button.disabled = false;
         button.textContent = oldText;
       }
-    });
-  </script>
-</body>
-</html>
+    }); </script> </body> </html> 
