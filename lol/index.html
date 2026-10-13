@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Моя музыка</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      color: #fff;
+      font-family: system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 50% 45%, #35234b 0%, #171323 42%, #0b0a10 100%);
+    }
+
+    main {
+      display: grid;
+      justify-items: center;
+      gap: 28px;
+      text-align: center;
+    }
+
+    .disc {
+      width: min(68vw, 300px, 34vh);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border: 1px solid rgb(255 255 255 / 24%);
+      border-radius: 50%;
+      color: #fff;
+      background: radial-gradient(circle at 35% 30%, #b17bcb, #704c9c 45%, #352746 78%);
+      box-shadow: 0 0 70px rgb(177 123 203 / 30%), inset 0 0 35px rgb(255 255 255 / 12%);
+      cursor: pointer;
+      transition: transform 250ms ease, box-shadow 250ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .disc:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 100px rgb(177 123 203 / 46%), inset 0 0 35px rgb(255 255 255 / 16%);
+    }
+
+    .disc:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 8px;
+    }
+
+    .disc.playing {
+      animation: spin 12s linear infinite;
+      will-change: transform;
+    }
+
+    .disc-icon {
+      width: 0;
+      height: 0;
+      margin-left: 12px;
+      border-top: 28px solid transparent;
+      border-bottom: 28px solid transparent;
+      border-left: 42px solid #fff;
+      filter: drop-shadow(0 2px 8px rgb(0 0 0 / 25%));
+    }
+
+    .playing .disc-icon {
+      width: 34px;
+      height: 42px;
+      margin: 0;
+      border: 0;
+      background: linear-gradient(to right, #fff 0 11px, transparent 11px 23px, #fff 23px 34px);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.25rem, 4vw, 1.75rem);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    p {
+      margin: -18px 0 0;
+      color: rgb(255 255 255 / 65%);
+      font-size: 0.95rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <button class="disc" id="playButton" type="button" aria-label="Включить песню" aria-pressed="false">
+      <span class="disc-icon" aria-hidden="true"></span>
+    </button>
+    <h1>Нажми, чтобы слушать</h1>
+    <p id="status" aria-live="polite">Ночь — Мияги</p>
+  </main>
+
+  <audio id="song" src="Ночь%20%20%20Мияги.mp3" preload="none" playsinline></audio>
+
+  <script>
+    const song = document.getElementById("song");
+    const playButton = document.getElementById("playButton");
+    const status = document.getElementById("status");
+    song.volume = 1;
+
+    function updatePlaybackState(isPlaying) {
+      playButton.classList.toggle("playing", isPlaying);
+      playButton.setAttribute("aria-pressed", String(isPlaying));
+      playButton.setAttribute("aria-label", isPlaying ? "Поставить песню на паузу" : "Включить песню");
+      status.textContent = isPlaying ? "Ночь — Мияги · играет" : "Ночь — Мияги";
+      if ("mediaSession" in navigator) {
+        navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
+      }
+    }
+
+    async function playSong() {
+      try {
+        await song.play();
+      } catch (error) {
+        status.textContent = "Не удалось воспроизвести песню. Проверьте MP3-файл и поддержку формата в браузере.";
+        console.error("Не удалось воспроизвести песню:", error);
+      }
+    }
+
+    playButton.addEventListener("click", () => {
+      if (song.paused) {
+        playSong();
+      } else {
+        song.pause();
+      }
+    });
+
+    song.addEventListener("play", () => updatePlaybackState(true));
+    song.addEventListener("pause", () => updatePlaybackState(false));
+    song.addEventListener("ended", () => updatePlaybackState(false));
+    song.addEventListener("error", () => {
+      status.textContent = "Не удалось загрузить MP3-файл. Проверьте, что он лежит рядом со страницей.";
+    });
+
+    if ("mediaSession" in navigator && "MediaMetadata" in window) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: "Ночь",
+        artist: "Мияги"
+      });
+      try {
+        navigator.mediaSession.setActionHandler("play", playSong);
+        navigator.mediaSession.setActionHandler("pause", () => song.pause());
+      } catch (error) {
+        console.warn("Системные медиакнопки не поддерживаются браузером:", error);
+      }
+    }
+  </script>
+</body>
+</html>
